@@ -1,0 +1,13 @@
+-fuggonyelhuzo motor (esetleg fenyszenzorral)
+-android app
+-ha szol az ebresztoora, kavet foz
+-ajtomagnes (+ablak)
+-teve (media center, amin lehet netezni is) - taviranyito, joystick
+-weboldal frontend Balint + backend David django
+-megoldani a streamelest
+-fan (nem jut eszembe h mondjak magyarul) ja ventillator :D esetleg homerseklet alapjan
+-humidity and temperature senzor
+-szerzorok: temperature, humidity, light (photoresistor), magneses szenzor, infra receiver, 
+-Balint szetbassza a szobajat :> :))) + website frontend
+-David backend + szerver 
+-Lilla python + android frontend + szenzorok tesztelese arduinon
