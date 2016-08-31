@@ -1,0 +1,12 @@
+Servo(rpi):
+	#2 5v
+	#6 GND
+	#11 SIG
+Lamp:
+	#2 SIG
+Temp:
+	#19 A5
+Light:
+	#18 A4
+Sound:
+	#17 A3	
