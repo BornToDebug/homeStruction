@@ -16,11 +16,11 @@ you can copy paste most of it, this is already done on Balint's RPi
                                                                              //recomended pass ^^, since the server uses it.
         exit;
 
-    //import mysql database
+3) Import mysql database
     mysql -u homestruction -p < database.sql
         <enter homestruction password>
 
-3) running webserver:
+4) Running webserver:
     cd homeStruction/website
     python manage.py runserver
         //it can be can be accessed in browser at localhost:8000
@@ -28,9 +28,20 @@ you can copy paste most of it, this is already done on Balint's RPi
     check out localhost:8000/admin - username and pass given above
               localhost:8000/data/temperature - displays 10 latest records
 
-4) how to insert data into the database:
+5) How to insert data into the database:
     mysql command line tool -- mysql -u homestruction -p
     admin page on website
     insertInDBtest.py can insert a temperature record
 
-if stuck message me!!
+6) How to export database in a file:
+    mysqldump -u homestruction -p homestruction> database.sql
+
+Useful links:
+basic MySQL:
+    https://www.digitalocean.com/community/tutorials/a-basic-mysql-tutorial
+Django documentation:
+    https://docs.djangoproject.com/en/1.10/
+Google:
+    google.com
+    
+If stuck message me!
