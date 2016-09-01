@@ -1,0 +1,36 @@
+MySQL and Django setup for this project:
+you can copy paste most of it, this is already done on Balint's RPi
+
+1) Download necessary packages:
+    sudo apt-get install mysql-server mysql-client
+    sudo apt-get install python-mysqldb
+    sudo pip install django
+
+2) Configure tools:
+    mysql_secure_installation  //set root password!
+    log in to mysql:
+    mysql -u root -p
+        <enter root password>
+        CREATE DATABASE homestruction;
+        GRANT ALL PRIVILEGES ON homestruction.* TO 'homestruction'@'localhost' IDENTIFIED BY 'homeStruction1!';
+                                                                             //recomended pass ^^, since the server uses it.
+        exit;
+
+    //import mysql database
+    mysql -u homestruction -p < database.sql
+        <enter homestruction password>
+
+3) running webserver:
+    cd homeStruction/website
+    python manage.py runserver
+        //it can be can be accessed in browser at localhost:8000
+        //for RPi run python manage.py runserver 0.0.0.0:8000 -> website accessible at <RPi's IP address>:8000
+    check out localhost:8000/admin - username and pass given above
+              localhost:8000/data/temperature - displays 10 latest records
+
+4) how to insert data into the database:
+    mysql command line tool -- mysql -u homestruction -p
+    admin page on website
+    insertInDBtest.py can insert a temperature record
+
+if stuck message me!!
