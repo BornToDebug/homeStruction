@@ -1,0 +1,18 @@
+{% if query_results %}
+    <table>
+        <tr>
+            <td>id</td>
+            <td>temperature</td>
+            <td>time</td>
+        </tr>
+        {% for item in query_results %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.value }}</td>
+                <td>{{ item.time_recorded }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No records found</p>
+{% endif %}
