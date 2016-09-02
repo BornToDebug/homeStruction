@@ -10,3 +10,9 @@ Light:
 	#18 A4
 Sound:
 	#17 A3	
+Door:
+	4
+Window:
+	7
+Infrared Reciever:
+	GPIO16
