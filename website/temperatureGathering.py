@@ -20,10 +20,11 @@ except:
 tempavg = 0
 for i in range(0, 10):
     sensorValue = a.analogRead(sensor)
-    temperature = (sensorValue / 1023) * powervoltage * 100
+    temperature = (sensorValue / 1023.0) * powervoltage * 100
     # print("%d: %2.2f" % (i, temperature))
     tempavg += temperature
 
 # sleep(.2)
 tempavg /= 10.0
+print("%f" % tempavg)
 Temperature.objects.create(value=tempavg, time_recorded=timezone.now())

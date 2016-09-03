@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ~/sketchbook/libraries/nanpy-firmware/Nanpy
+
+make
+
+sudo make upload
+
+cd ~/homeStruction/sensors_and_control
