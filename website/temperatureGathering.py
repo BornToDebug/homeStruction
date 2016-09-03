@@ -1,6 +1,5 @@
 import django
 import os
-from project.models import Temperature
 from django.utils import timezone
 from nanpy import (ArduinoApi, SerialManager)
 
@@ -8,6 +7,7 @@ from nanpy import (ArduinoApi, SerialManager)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "homeStruction.settings")
 django.setup()
 
+from project.models import Temperature
 sensor = 19
 powervoltage = 5
 
