@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '/home/projekt/homeStruction/website')
 import django
 import os
 from django.utils import timezone
@@ -6,6 +8,7 @@ from nanpy import (ArduinoApi, SerialManager)
 # Initial setup required
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "homeStruction.settings")
 django.setup()
+
 
 from project.models import Temperature
 sensor = 19
@@ -27,4 +30,5 @@ for i in range(0, 10):
 # sleep(.2)
 tempavg /= 10.0
 print("%f" % tempavg)
+print timezone.now()
 Temperature.objects.create(value=tempavg, time_recorded=timezone.now())
