@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import Temperature
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class TemperatureView(generic.ListView):
+class TemperatureView(LoginRequiredMixin, generic.ListView):
     template_name = 'project/index.html'
     context_object_name = 'query_results'
+
+    login_url = '/login/'
 
     def get_queryset(self):
         """
