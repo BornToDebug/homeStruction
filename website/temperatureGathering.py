@@ -32,15 +32,19 @@ while not connected and nrOfTries < 5:
         log.write('Failed! Trying to reconnect' + str(nrOfTries))
         sleep(1)
 
-tempavg = 0
-for i in range(0, 10):
-    sensorValue = a.analogRead(sensor)
-    temperature = (sensorValue / 1023.0) * powervoltage * 100
-    # print("%d: %2.2f" % (i, temperature))
-    tempavg += temperature
+if connected:
+    tempavg = 0
+    for i in range(0, 10):
+        sensorValue = a.analogRead(sensor)
+        temperature = (sensorValue / 1023.0) * powervoltage * 100
+        # print("%d: %2.2f" % (i, temperature))
+        tempavg += temperature
 
-# sleep(.2)
-tempavg /= 10.0
-print("%f" % tempavg)
-print timezone.now()
-Temperature.objects.create(value=tempavg, time_recorded=timezone.now())
+    # sleep(.2)
+    tempavg /= 10.0
+    print("%f" % tempavg)
+    print timezone.now()
+    Temperature.objects.create(value=tempavg, time_recorded=timezone.now())
+else:
+    log.write('could NOT connect! aborting...')
+log.close()
