@@ -4,6 +4,8 @@ import django
 import os
 from django.utils import timezone
 from nanpy import (ArduinoApi, SerialManager)
+from time import sleep
+from subprocess import call
 
 # Initial setup required
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "homeStruction.settings")
@@ -14,11 +16,21 @@ from project.models import Temperature
 sensor = 19
 powervoltage = 5
 
-try:
-    connection = SerialManager()
-    a = ArduinoApi(connection=connection)
-except:
-    print("Could not connect to Arduino")
+connected = False
+nrOfTries = 0
+logFile = open('errors.log', 'a')
+log.write('Trying to connect:' + timezone.now())
+
+while not connected and nrOfTries < 5:
+    nrOfTries += 1
+    try:
+        connection = SerialManager()
+        a = ArduinoApi(connection=connection)
+        connected = True
+    except:
+        call['/home/project/homeStruction/website/nanpyupdate']
+        log.write('Failed! Trying to reconnect' + str(nrOfTries))
+        sleep(1)
 
 tempavg = 0
 for i in range(0, 10):
