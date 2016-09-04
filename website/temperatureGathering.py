@@ -18,7 +18,7 @@ powervoltage = 5
 
 connected = False
 nrOfTries = 0
-logFile = open('errors.log', 'a')
+log = open('errors.log', 'a')
 log.write('Trying to connect:' + timezone.now())
 
 while not connected and nrOfTries < 5:
