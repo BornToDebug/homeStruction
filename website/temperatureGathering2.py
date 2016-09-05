@@ -13,14 +13,44 @@ django.setup()
 
 from project.models import Temperature
 
-#Reading the temperature
+#Initialize serial connection
+#ser = serial.Serial('/dev/ttyACM0', 9600)
+
+def portIsUsable():
+	try:
+		ser = serial.Serial('/dev/ttyACM0', 9600)
+		return True
+	except:
+		return False
+
+while not(portIsUsable()):
+        sleep(4)
 ser = serial.Serial('/dev/ttyACM0', 9600)
-sleep(1)
-ser.write('20')
-sleep(4)
-temperature = float(ser.readline())
+
+#Function to return datatype
+def data(port):
+	print "in data"
+	ser.write(port)
+	sleep(3)
+	mystring = ser.readline()
+	print mystring
+	words = mystring.split()
+	return words
+
+words = data('20')
+print words
+#While something else is displayed in the serial, try again
+while words[0] != 'temp':
+	words = data('20')
+	print words
+print "got type"
+temperature = float(words[1])
+print "ready to print"
+#Print data
 print temperature
 print timezone.now()
+#Update database
 Temperature.objects.create(value=temperature, time_recorded=timezone.now())
 
-
+#Close serial communication
+ser.close()

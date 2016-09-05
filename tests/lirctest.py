@@ -3,4 +3,9 @@ import lirc
 sockid = lirc.init("myprogram")
 
 while True:
-	print(lirc.nextcode())
+	code = lirc.nextcode()
+	if code == ["one"]:
+		print "1"
+	else:
+		print code
+lirc.deinit()
