@@ -4,6 +4,6 @@ cd ~/sketchbook/libraries/nanpy-firmware/Nanpy
 
 make
 
-sudo make upload
+make upload
 
 cd ~/homeStruction/website

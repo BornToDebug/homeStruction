@@ -28,7 +28,7 @@ while not connected and nrOfTries < 5:
         a = ArduinoApi(connection=connection)
         connected = True
     except:
-        call['/home/project/homeStruction/website/nanpyupdate']
+        call(["/home/project/homeStruction/website/nanpyupdate"])
         log.write('Failed! Trying to reconnect' + str(nrOfTries))
         sleep(1)
 
