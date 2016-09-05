@@ -1,34 +1,38 @@
 const int relay = 2;
 int n = 0;
-int temp = 0;
-float temperature = 0;
-float referencevoltage;
+float referencevoltage = 5.0;
+//float temp = 0;
+//float temperature = 0;
 int light = 0;
-int sound = 0;
-
 void setup()
 {
   pinMode(relay, OUTPUT);
   digitalWrite(relay, LOW);
   Serial.begin(9600);
-  analogReference(INTERNAL);
-  referencevoltage = 1.1;
+  //analogReference(INTERNAL);
+  referencevoltage = 5;
 }
 
 void loop()
 {
+  float temp = 0;
+  for(int i=0; i<100; i++)
+  {
+    temp += analogRead(A5);
+  }
+  float temperature = (temp*referencevoltage)/1023.0 - 4;
+  //Serial.println(temperature);
+  light = analogRead(A4);
   if(Serial.available())
   {
     n = Serial.parseInt();
-    command(n);
+    command(n, temperature);
   }
-  temp = analogRead(A5);
-  temperature = (temp*referencevoltage*100)/1023 - 4;
-  light = analogRead(A4);
-  delay(100);
+
+  delay(500);
 }
 
-void command(int n)
+void command(int n, float temperature)
 {
   switch(n)
   {
