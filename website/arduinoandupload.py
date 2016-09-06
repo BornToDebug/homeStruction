@@ -38,7 +38,7 @@ def execute(icode, itemperature, ilight, ilampstatus, idoorstatus, iwindowstatus
 		print itemperature
 	if icode == ["eight"]:
 		#Print light
-		print ilampstatus
+		print ilight
 	if icode == ["door"]:
 		#Print the door status
 		print idoorstatus
@@ -59,11 +59,15 @@ magic = False
 
 #Main loop, works until we don't exit it
 while code != ["exit"]:
-	#Set executed to False
-	executed = False
+	now = datetime.datetime.now()
+
+	#Send request to update the data
+	ser.write('3');
+	#Wait for it to be generated
+	sleep(2)
 	#Read the big chunk of data
 	bigchunk = ser.readline()
-	sleep(1)
+	#sleep(1)
 	#DEBUG: 
 	print bigchunk
 	#Process the data
@@ -73,24 +77,22 @@ while code != ["exit"]:
 	lampstatus = int(words[2])
 	doorstatus = int(words[3])
 	windowstatus = int(words[4])
+	#Execute the command in the first place
+	execute(code, temperature, light, lampstatus, doorstatus, windowstatus)
 	#If it is the 0th, 5th, 10th, 15th, ... , 50th, 55th minute 
+	print now.minute
+	print magic
 	if now.minute in [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 55]:
-		if not(magic):
+		if magic == False:
+			#Uploading, wait
+			print "Please wait"
 			#Upload the temperature to the database
 			Temperature.objects.create(value=temperature, time_recorded=timezone.now())
 			#Change the value of the magic variable to True
 			magic = True
-		else:
-			#Even if we are in these minutes, but we have already updated the database, we must execute the nextcode
-			execute(code, temperature, light, lampstatus, doorstatus, windowstatus)
-			executed = True
 	#Else , if we are not in those minutes, change the magic variable to False
 	else:
 		magic = False
-	#Execute the command represented by the nextcode, if it wasn't already executed
-	if not(executed):
-		execute(code, temperature, light, lampstatus, doorstatus, windowstatus)
-
 	#Prompt for nextcode
 	print "> "
 	code = lirc.nextcode()

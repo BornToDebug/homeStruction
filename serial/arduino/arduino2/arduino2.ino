@@ -37,7 +37,7 @@ void loop()
       case 2:
       digitalWrite(relay, LOW);
       break;
-      /*case 3:
+      case 3:
       Serial.print(temperature);
       Serial.print(" ");
       Serial.print(light);
@@ -47,13 +47,13 @@ void loop()
       Serial.print(doorstatus);
       Serial.print(" ");
       Serial.println(windowstatus);
-      break;*/
+      break;
       default:
       break;
     }
   }
   
-      Serial.print(temperature);
+      /*Serial.print(temperature);
       Serial.print(" ");
       Serial.print(light);
       Serial.print(" ");
@@ -62,7 +62,7 @@ void loop()
       Serial.print(doorstatus);
       Serial.print(" ");
       Serial.println(windowstatus);
-  delay(500);
+  delay(10000);*/
 }
   
   
