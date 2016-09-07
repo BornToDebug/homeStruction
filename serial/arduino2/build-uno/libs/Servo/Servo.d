@@ -1,4 +1,5 @@
-build-uno/arduino2.o: arduino2.ino \
+build-uno/libs/Servo/Servo.o: \
+ /usr/share/arduino/libraries/Servo/Servo.cpp \
  /usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/binary.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/WCharacter.h \
