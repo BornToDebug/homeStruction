@@ -19,7 +19,7 @@ ser = serial.Serial('/dev/ttyACM0', 9600);
 #Send request to update the data
 ser.write('3');
 #Wait for it to be generated
-sleep(2)
+sleep(3)
 #Read the big chunk of data
 bigchunk = ser.readline()
 #sleep(1)
@@ -30,8 +30,9 @@ words = bigchunk.split()
 temperature = float(words[0])
 light = int(words[1])
 #lampstatus = int(words[2])
-#doorstatus = int(words[3])
-#windowstatus = int(words[4])
+#lampstatus2 = int(words[3])
+#doorstatus = int(words[4])
+#windowstatus = int(words[5])
 Temperature.objects.create(value=temperature, time_recorded=timezone.now())
 ser.close()
 

@@ -1,0 +1,5 @@
+> 
+Traceback (most recent call last):
+  File "controlbasic.py", line 8, in <module>
+    code = lirc.nextcode()
+
