@@ -57,7 +57,7 @@ ROOT_URLCONF = 'homeStruction.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/'],
+        'DIRS': ['/home/david/git/homeStruction/website/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
