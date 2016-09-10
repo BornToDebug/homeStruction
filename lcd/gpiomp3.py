@@ -2,7 +2,7 @@ import os
 import subprocess
 from time import sleep
 import RPi.GPIO as GPIO
-import signal
+import alsaaudio
 
 def get_files(root):
 	files = []
@@ -46,6 +46,10 @@ GPIO.setup(b_volup, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 song = 0
 enterwhile = 0
 playing = 0
+m = alsaaudio.Mixer('PCM')
+vol = m.getvolume()
+vol = int(vol[0])
+print "volume: %d\n" % vol
 #FUNCTION DECLARATIONS
 def switch_while(channel):
 	global enterwhile
@@ -84,24 +88,59 @@ def nextsong(channel):
 		else:
 			song = song + 1
 		playing = 0
+def volumeup(channel):
+	global vol
+	vol = m.getvolume()
+	vol = int(vol[0])
+	if vol == 0:
+		m.setvolume(65)
+		print "volume: 65\n"
+	else:
+		if vol < 100:
+			vol = vol + 5
+			m.setvolume(vol)
+			print "volume: %d\n" % vol
+		else:
+			print "volume: MAX\n"
 
-
+def volumedown(channel):
+	global vol
+	vol = m.getvolume()
+	vol = int(vol[0])
+	if vol > 65:
+		vol = vol - 5
+		m.setvolume(vol)
+		print "volume: %d\n" % vol
+	else:
+		if vol != 0:
+			m.setvolume(0)
+		print "volume: MUTED\n"
+	
 GPIO.add_event_detect(b_onoff, GPIO.FALLING, callback=switch_while, bouncetime=300)
 GPIO.add_event_detect(b_playpause, GPIO.FALLING, callback=pause, bouncetime=300)
 GPIO.add_event_detect(b_previous, GPIO.FALLING, callback=previoussong, bouncetime=300)
 GPIO.add_event_detect(b_next, GPIO.FALLING, callback=nextsong, bouncetime=300)
+GPIO.add_event_detect(b_voldown, GPIO.FALLING, callback=volumedown, bouncetime=300)
+GPIO.add_event_detect(b_volup, GPIO.FALLING, callback=volumeup, bouncetime=300)
 while True:
+	print playing
 	if enterwhile == 1:
 		printtitle(buffer[song])
 		print "entered while"
 		if playing == 0:
-			p = subprocess.Popen(["omxplayer", buffer[song]], stdin=subprocess.PIPE)
+			p = subprocess.Popen(["mplayer", buffer[song]], stdin=subprocess.PIPE)
+		print p.poll()
 		if p.poll() != 0:
+			print "ppoll None"
 			playing = 1
 		else:
-			subprocess.call("pkill omx", shell=True)
+#			subprocess.call("pkill omx", shell=True)
+			print "on else"
 			playing = 0
-			song = song + 1
+			if song == listlength - 1:
+				song = 0
+			else:
+				song = song + 1
 	else:
 		print "did not enter while"
 		if 'p' in vars() or 'p' in globals():
