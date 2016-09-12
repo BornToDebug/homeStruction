@@ -1,15 +1,15 @@
 import RPi.GPIO as GPIO
 from time import strftime
 
-door = 25
-window = 12
+doorpin = 25
+windowpin = 12
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(door, GPIO.IN)
-GPIO.setup(window, GPIO.IN)
+GPIO.setup(doorpin, GPIO.IN)
+GPIO.setup(windowpin, GPIO.IN)
 
 def door(channel):
-	if GPIO.input(25) == 1:
+	if GPIO.input(doorpin) == 1:
 		#UPDATE DATABASE
 		print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR closed"
 	else:
@@ -17,15 +17,15 @@ def door(channel):
 		print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR opened"
 
 def window(channel):
-	if GPIO.input(12) == 1:
+	if GPIO.input(windowpin) == 1:
 		#UPDATE DATABASE
 		print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW closed"
 	else:
 		#UPDATE DATABASE
 		print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW opened"
 
-GPIO.add_event_detect(25, GPIO.BOTH, callback=door, bouncetime=300)
-GPIO.add_event_detect(12, GPIO.BOTH, callback=window, bouncetime=300)
+GPIO.add_event_detect(doorpin, GPIO.BOTH, callback=door, bouncetime=300)
+GPIO.add_event_detect(windowpin, GPIO.BOTH, callback=window, bouncetime=300)
 
 
 try:
