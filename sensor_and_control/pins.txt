@@ -1,18 +1,27 @@
-Servo(rpi):
-	#2 5v
-	#6 GND
-	#11 SIG
-Lamp:
-	#2 SIG
-Temp:
-	#19 A5
-Light:
-	#18 A4
-Sound:
-	#17 A3	
-Door:
-	4
-Window:
-	7
+arduino:
+relay = 2
+relay2 = 3
+doorservo = 9
+temp = A5 and separate GND!
+light = A4
+
+ 
+Raspi:
+BCM
+b_onoff = 22
+b_playpause = 17
+b_previous = 18
+b_next = 27
+b_voldown = 23
+b_volup = 24
+BCM
+lcd_rs = 20
+lcd_en = 5
+lcd_d4 = 6
+lcd_d5 = 13
+lcd_d6 = 19
+lcd_d7 = 26
+lcd_backlight = 21
+
 Infrared Reciever:
 	GPIO16
