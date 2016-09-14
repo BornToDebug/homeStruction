@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class TemperatureView(LoginRequiredMixin, generic.ListView):
-    template_name = 'project/index.html'
+    template_name = 'project/temperature.html'
     context_object_name = 'query_results'
 
     login_url = '/login/'
