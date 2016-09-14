@@ -77,7 +77,7 @@ def printtitle(string):
 	return title
 
 
-buffer = get_files("/mnt/Music")
+buffer = get_files("/mnt/Stick/Music")
 
 #The length of the list is the length of buffer 
 listlength = len(buffer)
