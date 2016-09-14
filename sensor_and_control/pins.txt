@@ -22,6 +22,8 @@ lcd_d5 = 13
 lcd_d6 = 19
 lcd_d7 = 26
 lcd_backlight = 21
-
+BCM:
+door = 25
+window = 12
 Infrared Reciever:
 	GPIO16
