@@ -30,7 +30,7 @@ CSRF_COOKIE_SECURE = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = settings_secret.SECRET_KEY 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #always
+DEBUG = True #always
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '89.120.180.139', '192.168.1.*']
 
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'homeStruction.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/home/projekt/homeStruction/website/templates/'],
+        'DIRS': [BASE_DIR + '/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,4 +132,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/projekt/homeStruction/website/static/'
+STATIC_ROOT = BASE_DIR + '/static/'

@@ -15,3 +15,6 @@ class TemperatureView(LoginRequiredMixin, generic.ListView):
         Should return the latest 10 temperature records
         """
         return Temperature.objects.order_by('-time_recorded')[:10]
+
+class StartView(generic.TemplateView):
+    template_name = 'project/base.html'
