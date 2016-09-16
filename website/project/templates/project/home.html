@@ -1,4 +1,5 @@
 {% extends 'project/base.html' %}
+{% load static %}
 {% block content %}
 <!-- actual content -->
             <div id="content">
@@ -23,19 +24,19 @@
                             <!-- Carousel Images -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static "project/fto/assets/img/slideshow/graph.jpg" %}">
                                 </div>
                                 <div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static "project/fto/assets/img/slideshow/graph.jpg" %}">
                                 </div>
                                 <div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static "project/fto/assets/img/slideshow/graph.jpg" %}">
                                 </div>
                                 <div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static "project/fto/assets/img/slideshow/graph.jpg" %}">
                                 </div>
 								<div class="item">
-									<img src="assets/img/haz3.png">
+									<img src="{% static "project/assets/img/haz3.png" %}">
 								</div>
                             </div>
                             <!-- End Carousel Images -->

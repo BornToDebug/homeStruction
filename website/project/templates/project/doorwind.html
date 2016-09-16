@@ -1,0 +1,27 @@
+{% extends 'project/base.html' %}
+{% block content %}
+<div id="daw">
+			<div id="door" name="door">
+				<h6>...Oops! You may have left the door open. Let's check it out and solve it.</h6>
+			  <div id="txtsw">
+				<h5>The door is: </h5><h6>OPEN/CLOSED.</h6>
+				<div class="opclswitch">
+					<input type="checkbox" name="opclswitch" class="opclswitch-checkbox" id="myopclswitch" checked>
+					<label class="opclswitch-label" for="myopclswitch">
+						<span class="opclswitch-inner"></span>
+						<span class="opclswitch-switch"></span>
+					</label>
+				</div>
+			  </div>	
+			</div>
+			<div id="window" name="window">
+				<h6>...You may be wondering whether you left the window open or not... Check it out!  </h6>
+				<div id="txtsw">
+				<h5>The window is: </h5><h6>OPEN/CLOSED.</h6>
+				
+			  </div>	
+			</div>
+		  </div>
+
+{% endblock content %}
+

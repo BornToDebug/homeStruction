@@ -1,0 +1,23 @@
+{% extends 'project/base.html' %}
+{% block content %}
+{% load static %}
+<div id="lght">
+			<h6>The luminosity in your room is:</h6><h5>200</h5>
+			<div class="item">
+				<img src="{% static "project/fto/assets/img/slideshow/graph.jpg" %}">
+            </div>
+			  <div id="txtsw">
+				<h3>The light is : </h3><h4>ON/OFF.</h4>
+				<div class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+					<label class="onoffswitch-label" for="myonoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+			  </div>
+		  
+		  </div>
+
+{% endblock content %}
+

@@ -1,0 +1,33 @@
+{% extends 'project/base.html' %}
+{% block content %}
+<div id="multimedia">
+			<div id="music" name="music">
+				<h6>...Need something to brighten up your day? Listen to your favourite music if you feel like.</h6>
+			  <div id="txtsw">
+				<h5>The music is : </h5><h6>ON/OFF.</h6>
+				<div class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+					<label class="onoffswitch-label" for="myonoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+			  </div>	
+			</div>
+			<div id="tv" name="tv">
+				<h6>...You may want to catch up with the latest news. Turn the TV on.  </h6>
+				<div id="txtsw">
+				<h5>The TV is: </h5><h6>ON/OFF.</h6>
+				<div class="onoffswitch">
+					<input type="checkbox" name="onoff2switch" class="onoff2switch-checkbox" id="myonoff2switch" checked>
+					<label class="onoff2switch-label" for="myonoff2switch">
+						<span class="onoff2switch-inner"></span>
+						<span class="onoff2switch-switch"></span>
+					</label>
+				</div>
+			  </div>	
+			</div>
+		  
+
+{% endblock content %}
+
