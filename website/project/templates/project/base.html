@@ -42,6 +42,7 @@
 		<link href='{% static "project/googlefonts/roboto_condensed.css" %}' rel='stylesheet' type='text/css'>
 		<link href='{% static "project/googlefonts/roboto.css" %}' rel='stylesheet' type='text/css'>
     </head>
+	<!-- ========== HEADER =========== -->
 	<body>
 	  <div id="basic">
 	  
@@ -51,29 +52,29 @@
                         <div class="text-center visible-lg">
                             <ul id="hornavmenu" class="nav navbar-nav">
                                 <li>
-                                    <a href="home.html" class="fa-home">Home</a>
+									<a href="{% url "project:home" %}" class="fa-home">Home</a>
                                 </li>
                                 <li>
-                                    <a href="doorwind.html" class="fa-lock">Doors and Windows</a>
+									<a href="{% url "project:doorwind" %}" class="fa-lock">Doors and Windows</a>
                                     
                                 </li>
                                 <li>
-                                    <a href="mult.html" class="fa-music">Multimedia</a>
+									<a href="{% url "project:mult" %}" class="fa-music">Multimedia</a>
                                     
 								</li>	
                                 <li>
-                                    <a href="light.html" class="fa-lightbulb-o">Light</a>
+									<a href="{% url "project:light" %}" class="fa-lightbulb-o">Light</a>
                                     
                                 </li>
                                 <li>
-                                    <a href="temp.html" class="fa-sun-o">Temperature</a>
+									<a href="{% url "project:temp" %}" class="fa-sun-o">Temperature</a>
                                     
                                 </li>
                                 <li>
-                                    <a href="alarm.html" class="fa-bell">Alarm</a>
+									<a href="{% url "project:alarm" %}" class="fa-bell">Alarm</a>
                                 </li>
 								<li>
-									<a href="live.html" class="fa-desktop">Live Stream</a>
+									<a href="{% url "project:live" %}" class="fa-desktop">Live Stream</a>
 								</li>
 								<li>
 									<span class="fa-facebook-square">Contact</span>
@@ -97,10 +98,9 @@
                 </div>
             </div>
 	      </div>
-		 
-		  <div id="main">
-		  
-		  </div>
+		  <!-- CONTENT -->		 
+		{% block content %}
+	  	{% endblock content %}
 		  <!-- ========== ABOUT SECTION ========== -->
 	<section id="about" name="about"></section>
 	<div id="f">

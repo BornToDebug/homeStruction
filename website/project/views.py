@@ -18,3 +18,25 @@ class TemperatureView(LoginRequiredMixin, generic.ListView):
 
 class StartView(generic.TemplateView):
     template_name = 'project/base.html'
+
+class HomeView(generic.TemplateView):
+    template_name = 'project/home.html'
+
+class AlarmView(generic.TemplateView):
+    template_name = 'project/alarm.html'
+
+class DoorAndWindowView(generic.TemplateView):
+    template_name = 'project/doorwind.html'
+
+class MultimediaView(generic.TemplateView):
+    template_name = 'project/mult.html'
+
+class LightView(generic.TemplateView):
+    template_name = 'project/light.html'
+
+class LiveView(generic.TemplateView):
+    template_name = 'project/live.html'
+
+class ContactView(generic.TemplateView):
+    template_name = 'project/contact.html'
+
