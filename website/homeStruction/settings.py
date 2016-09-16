@@ -33,8 +33,9 @@ DEBUG = False  #always
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '89.120.180.139', '192.168.1.5']
 
-LOGIN_REDIRECT_URL = '/data/temperature'
+LOGIN_REDIRECT_URL = ''
 
+LOGIN_URL = '/login/'
 
 # Application definition
 

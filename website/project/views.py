@@ -16,27 +16,27 @@ class TemperatureView(LoginRequiredMixin, generic.ListView):
         """
         return Temperature.objects.order_by('-time_recorded')[:10]
 
-class StartView(generic.TemplateView):
+class StartView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/base.html'
 
-class HomeView(generic.TemplateView):
+class HomeView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/home.html'
 
-class AlarmView(generic.TemplateView):
+class AlarmView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/alarm.html'
 
-class DoorAndWindowView(generic.TemplateView):
+class DoorAndWindowView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/doorwind.html'
 
-class MultimediaView(generic.TemplateView):
+class MultimediaView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/mult.html'
 
-class LightView(generic.TemplateView):
+class LightView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/light.html'
 
-class LiveView(generic.TemplateView):
+class LiveView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/live.html'
 
-class ContactView(generic.TemplateView):
+class ContactView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/contact.html'
 
