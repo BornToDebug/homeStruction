@@ -5,8 +5,9 @@ from . import views
 app_name = 'project'
 
 urlpatterns = [
-    url(r'^temperature$', views.TemperatureView.as_view(), name='temperature'),
+    url(r'^temp$', views.TemperatureView.as_view(), name='temp'),
     url(r'^start$', views.StartView.as_view(), name='start'),
+    url(r'^home$', views.HomeView.as_view(), name='home'),
     url(r'^alarm$', views.AlarmView.as_view(), name='alarm'),
     url(r'^doorwind$', views.DoorAndWindowView.as_view(), name='doorwind'),
     url(r'^mult$', views.MultimediaView.as_view(), name='mult'),
