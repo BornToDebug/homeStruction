@@ -20,9 +20,8 @@ SECURE_BROWSER_XSS_FILTER = True
 CSRF_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_DOMAIN = 'localhost'
 # SESSION_COOKIE_SECURE = True
-# for whatever fucking reason it works only in this configuration
+# for whatever fucking reason it works only with this configuration
 
-CSRF_COOKIE_SECURE = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -30,9 +29,9 @@ CSRF_COOKIE_SECURE = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = settings_secret.SECRET_KEY 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True #always
+DEBUG = False #always
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '89.120.180.139', '192.168.1.*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '89.120.180.139', '192.168.1.5']
 
 LOGIN_REDIRECT_URL = '/data/temperature'
 

@@ -1,6 +1,6 @@
 #include <Servo.h>
 
-const int relay = 2;
+const int relay = 13;
 const int relay2 = 3;
 const int window = 7;
 const int door = 4;
