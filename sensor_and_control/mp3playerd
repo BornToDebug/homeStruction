@@ -4,14 +4,14 @@
 # how to write SysVinit scripts to 'daemonize' programs.
 #
 # The daemon's name (to ensure uniqueness and for stop, restart and status)
-name="mp3player"
+name="mp3playerd"
 # The path of the client executable
-command="python /home/projekt/homeStruction/lcd/gpiomp3.py"  
+command="/home/projekt/homeStruction/lcd/gpiomp3.py"  
 # Any command line arguments for the client executable
 command_args=""  
 # The path of the daemon executable
 daemon="/usr/bin/daemon"
-
+echo 'asdf'
 [ -x "$daemon" ] || exit 0
 [ -x "$command" ] || exit 0
 
