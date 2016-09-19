@@ -8,8 +8,6 @@ class TemperatureView(LoginRequiredMixin, generic.ListView):
     template_name = 'project/temperature.html'
     context_object_name = 'query_results'
 
-    login_url = '/login/'
-
     def get_queryset(self):
         """
         Should return the latest 10 temperature records
