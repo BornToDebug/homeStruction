@@ -114,25 +114,45 @@
             </div>
 	      </div>
 		  
-		  <div id="clock" class="light">
-			<div class="display">
-				<div class="weekdays"></div>
-				<div class="ampm"></div>
-				<div class="alarm"></div>
-				<div class="digits"></div>
-		    </div>
+		  <div id="lght">
+			
+			  <div id="txtsw">
+				<h3>The alarm is : </h3><h4>ON/OFF.</h4>
+				<div class="onoffswitch">
+					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+					<label class="onoffswitch-label" for="myonoffswitch">
+						<span class="onoffswitch-inner"></span>
+						<span class="onoffswitch-switch"></span>
+					</label>
+				</div>
+			  </div>
+			  <div id="settime">
+				<form>
+					Select a time:
+					<input type="text" name="timepicker" class="timepicker"/>
+					<input type="submit" class="set" value="Set">
+				</form>
+			  </div>
+			  
+			  
+			  <h3>Repeat:</h3>
+			  <div id="repeat">
+			  <form>
+					<input type="radio" name="repetition" value="never"> Never<br>
+					<input type="radio" name="repetition" value="monday"> Monday<br>
+					<input type="radio" name="repetition" value="tuesday"> Tuesday <br>
+					<input type="radio" name="repetition" value="wednesday"> Wednesday <br>
+					<input type="radio" name="repetition" value="thursday"> Thursday<br>
+					<input type="radio" name="repetition" value="friday"> Friday<br>
+					<input type="radio" name="repetition" value="saturday"> Saturday<br>
+					<input type="radio" name="repetition" value="sunday"> Sunday<br>
+					<input type="radio" name="repetition" value="daily"> Daily<br>
+					<input type="radio" name="repetition" value="weekly"> Weekly<br>
+					<input type="radio" name="repetition" value="monthly"> Monthly<br>
+					<input type="submit" class="set" value="Set">
+			  </form>
+			 </div>	
 		  </div>
-		  
-		  <div class="zero">
-				<span class="d1"></span>
-				<span class="d2"></span>
-				<span class="d3"></span>
-				<span class="d4"></span>
-				<span class="d5"></span>
-				<span class="d6"></span>
-				<span class="d7"></span>
-		  </div>
-
 		  <!-- ========== ABOUT SECTION ========== -->
 	<section id="about" name="about"></section>
 	<div id="f">
@@ -174,10 +194,11 @@
 			<script src="assets/js/bootstrap.min.js"></script>
 			<script src="assets/js/smoothscroll.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+			<script type="text/javascript" src="src/wickedpicker.js"></script>
             <script type="text/javascript" src="fto/assets/js/jquery.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="fto/assets/js/bootstrap.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="fto/assets/js/scripts.js"></script>
-			<script type="text/javascript" src="fto/assets/js/style.js"></script>
             <!-- Isotope - Portfolio Sorting -->
             <script type="text/javascript" src="fto/assets/js/jquery.isotope.js" type="text/javascript"></script>
             <!-- Mobile Menu - Slicknav -->
