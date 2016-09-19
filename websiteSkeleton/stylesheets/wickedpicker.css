@@ -6,11 +6,14 @@
   box-shadow: 0 0 0 1px rgba(14, 41, 57, 0.12), 0 2px 5px rgba(14, 41, 57, 0.44), inset 0 -1px 2px rgba(14, 41, 57, 0.15);
   background: #fefefe;
   margin: 0 auto;
-  border-radius: 0.1px;
+  border-radius: 5px;
+  margin-bottom:20px;
   width: 270px;
-  height: 130px;
+  height: 180px;
   font-size: 14px;
-  display: none; }
+  display: none;
+
+  }
   .wickedpicker__title {
     background-image: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
     background-image: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 100%);
@@ -19,8 +22,11 @@
     margin: 0 auto;
     border-bottom: 1px solid #e5e5e5;
     padding: 12px 11px 10px 15px;
-    color: #4C4C4C;
-    font-size: inherit; }
+    color:#3d5c5c ;
+    font-size: 18px;
+	
+	font-family:'Oswald', sans-serif;
+	}
   .wickedpicker__close {
     -webkit-transform: translateY(-25%);
     -moz-transform: translateY(-25%);
@@ -29,7 +35,7 @@
     transform: translateY(-25%);
     position: absolute;
     top: 25%;
-    right: 10px;
+    right: 12px;
     color: #34495e;
     cursor: pointer; }
     .wickedpicker__close:before {
@@ -46,24 +52,28 @@
       width: 35px;
       letter-spacing: 1.3px; }
       .wickedpicker__controls__control-up, .wickedpicker__controls__control-down {
-        color: #34495e;
+        color: #3d5c5c;
         position: relative;
         display: block;
         margin: 3px auto;
-        font-size: 18px;
+        font-size: 20px;
         cursor: pointer; }
       .wickedpicker__controls__control-up:before {
         content: '\e800'; }
       .wickedpicker__controls__control-down:after {
         content: '\e801'; }
       .wickedpicker__controls__control--separator {
-        width: 5px; }
+        width: 20px; }
 
 .text-center, .wickedpicker__title, .wickedpicker__controls, .wickedpicker__controls__control, .wickedpicker__controls__control--separator, .wickedpicker__controls__control-up, .wickedpicker__controls__control-down {
-  text-align: center; }
+  text-align: center; 
+  font-family:'Oswald',sans-serif;
+  font-size:20px;
+ ;
+  }
 
 .hover-state {
-  color: #3498db; }
+  color:  #c2d6d6; }
 
 @font-face {
   font-family: 'fontello';
@@ -103,6 +113,7 @@
     transform: translateY(-50%);
     font-weight: bold;
     font-size: 0.8em;
+	font-family:'Oswald',sans-serif;
     padding: 0 0.3em 0.2em;
     line-height: 1;
     color: #bababa;

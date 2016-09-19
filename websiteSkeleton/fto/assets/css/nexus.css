@@ -60,7 +60,7 @@ body {
   height: 0px;
 }
 #container_spacer3 {
-  height: 10px;
+  height: 6px;
 }
 
 .is-sticky #hornav {
@@ -639,7 +639,7 @@ h1.logo-text a {
   margin-bottom:80px;
 }
 #hornav ul > li {
-  margin: 10px 10px;
+  margin: 5px 5px;
 }
 #hornav ul > li > a,
 #hornav ul > li > span {
@@ -1608,58 +1608,126 @@ a.slicknav_item [class*=" fa-"] {
 } 
 /*-----------------------------------------------------------------------------------*/
 /*The other part of the alarm*/
-#clock .digits div.zero .d1,
-#clock .digits div.zero .d3,
-#clock .digits div.zero .d4,
-#clock .digits div.zero .d5,
-#clock .digits div.zero .d6,
-#clock .digits div.zero .d7{
-	opacity:1;
-}
-#settime{
-	margin-top:100px;
+
+	
+
+
+#clock{
+	margin-top:20px;
 	font-size:30px;
 	font-family:'Oswald', sans-serif;
 	font-weight:bold;
-	color:#ccc;
+	color:#cccccc;
+}
+#timepicker{
+	font-size:30px;
+}
+#rep{
+	margin-top:30px;
+	 background-color:#3d5c5c;
+	 width:700px;
+	 margin-left:320px;
+	 font-size:25px;
+	 font-family:'Oswald', sans-serif;
+	 color: #cccccc;
+	 border-radius:5px;
+}
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+  margin-bottom:30px;
+ 
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  margin-top:20px;
+  margin-bottom:40px;
+  margin-left:30px;
+  
 }
 
-input[type=submit] {
-    padding:5px 15px; 
-    background:#999999; 
-    border:0 none;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-	font-weight:normal;
-	
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: 6px;
+  width: 20px; height: 20px;
+  border: 1px solid #3d5c5c;
+  background: #3d5c5c;
+  border-radius: 7px;
+  box-shadow: inset 1px 3px 5px #1f2e2e;
 }
-#repeat input[type=submit] {
-    padding:5px 15px; 
-    background:#ccc; 
-    border:0 none;
-    cursor:pointer;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-	font-weight:normal;
-	margin-left:170px;
-	color:#999999;
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: 0px; left: 4px;
+  font-size: 20px;
+  line-height: 0.8;
+  color: #00cc99;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px dotted #3d5c5c;
 }
 
-#repeat{
-	text-align:left; 
-	background-color:#999999;
-	 min-height:200px;
-	 position:relative;
-	 border-radius:10px;
-	 width:800px;
-	margin-left:275px;
-	font-size:25px;
-	font-family:'Oswald',sans-serif;
-	color:#196666;
-	padding-left:350px;
-	padding-top:20px;
-	padding-bottom:20px;
+/* hover style just for information */
+label:hover:before {
+  border: 3px solid #00cc99!important;
+   width: 15px; height: 15px;
+}
+
+
+
+
+
+
+
+/* Useless styles, just for demo design */
+
+
+.txtcenter {
+  margin-top: 4em;
+  font-size: .9em;
+  text-align: center;
+  color: #aaa;
+}
+.copy {
+ margin-top: 2em; 
+}
+.copy a {
+ text-decoration: none;
+ color:  #00cc99;
 }
 /*-----------------------------------------------------------------------------------*/
 /* Portfolio */
