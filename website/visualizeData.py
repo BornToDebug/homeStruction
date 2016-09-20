@@ -28,7 +28,7 @@ print dates.date2num(dateTemp)
 
 cmap = (0, 0, 0)
 
-plt.plot(dateTemp, valueTemp, color=cmap)
+plt.plot(dateTemp, valueTemp, color=cmap, linewidth=2.0)
 plt.ylabel('temperature C'), plt.xlabel('time')
 plt.xticks(rotation='vertical')
 plt.subplots_adjust(bottom=.3)
