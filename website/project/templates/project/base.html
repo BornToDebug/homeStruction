@@ -46,12 +46,12 @@
 		<script src="{% static "project/extra/js/jquery-1.12.4.js"%}"></script>
         
 
-        <link rel="stylesheet" href="{ % static "project/extra/css/wickedpicker.css"%}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static "project/extra/css/wickedpicker.css"%}" rel="stylesheet">
         <script type="text/javascript" src="{% static "project/extra/js/wickedpicker.js"%}"></script>
 		<!-- Alarm - repeat part -->
 		 
 		
-		<link rel="stylesheet" href="{ % static "project/extra/css/jquery.mobile-1.4.5.min.css" %}">
+		<link rel="stylesheet" href="{% static "project/extra/css/jquery.mobile-1.4.5.min.css" %}">
     </head>
 	<!-- ========== HEADER =========== -->
 	<body>
@@ -106,7 +106,7 @@
 								
 								</ul>
 								<li>
-									<a href="" class="fa-power off"></a>
+									<a href="{% url "project: welcome2" %}" class="fa-power off"></a>
 								</li>
                         </div>
                     </div>
