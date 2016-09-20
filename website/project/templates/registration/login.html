@@ -38,11 +38,13 @@
 		<div class="image"><img src="{% static "project/assets/img/haz3.png" %}">
 	   </div><br>
 	  <h4>Welcome (back), Buddy!</h4>
-	  <div>
+	  <div >
 		 
 			{% if form.non_field_errors %}
 			{% for error in form.non_field_errors %}
-			    {{ error }}
+			<p  class="formaterror">
+			  <strong>  {{ error }}</strong>
+			</p>	
 			{% endfor %}
 			{% endif %}
 

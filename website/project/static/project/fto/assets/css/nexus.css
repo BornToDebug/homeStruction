@@ -3059,3 +3059,9 @@ ul.posts-list li {
   min-height: 40px;
   text-align: center;
 }
+
+/* ERROR MESSAGE - LOG IN */
+
+.formaterror{
+	color:blue;
+}
