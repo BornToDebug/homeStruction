@@ -1,43 +1,49 @@
 {% extends 'project/base.html' %}
 {% block content %}
-<div id="lght">
-			
-			  <div id="txtsw">
-				<h3>The alarm is : </h3><h4>ON/OFF.</h4>
-				<div class="onoffswitch">
-					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-					<label class="onoffswitch-label" for="myonoffswitch">
-						<span class="onoffswitch-inner"></span>
-						<span class="onoffswitch-switch"></span>
-					</label>
-				</div>
-			  </div>
-			  <div id="settime">
-				<form>
-					Select a time:
-					<input type="time" name="usr_time">
-					<input type="submit" class="set" value="Set">
-				</form>
-			  </div>
-			  
-			  
-			  <h3>Repeat:</h3>
-			  <div id="repeat">
-			  <form>
-					<input type="radio" name="repetition" value="never"> Never<br>
-					<input type="radio" name="repetition" value="monday"> Monday<br>
-					<input type="radio" name="repetition" value="tuesday"> Tuesday <br>
-					<input type="radio" name="repetition" value="wednesday"> Wednesday <br>
-					<input type="radio" name="repetition" value="thursday"> Thursday<br>
-					<input type="radio" name="repetition" value="friday"> Friday<br>
-					<input type="radio" name="repetition" value="saturday"> Saturday<br>
-					<input type="radio" name="repetition" value="sunday"> Sunday<br>
-					<input type="radio" name="repetition" value="daily"> Daily<br>
-					<input type="radio" name="repetition" value="weekly"> Weekly<br>
-					<input type="radio" name="repetition" value="monthly"> Monthly<br>
-					<input type="submit" class="set" value="Set">
-			  </form>
-			 </div>	
+<div id="lght">	
+	<div id="clock">
+		<label for="timepicker" style="color:#cccccc; font-size:30px;">Set the time:</label>
+        <input type="text" id="timepicker" name="timepicker" class="timepicker" style="font-size:28px;width:270px; text-align: center; color:#3d5c5c; border-radius:5px">
+		<!-- <label for="timepicker-two" style="color:#ffffff;">Time input 2:</label> -->
+		<!-- <input type="text" id="timepicker-two" name="timepicker-two" class="timepicker"> -->
+        <script type="text/javascript">
+            $('.timepicker').wickedpicker({now: '12:00', twentyFour: false, title:
+                    'Wake up at:', showSeconds: false});
+        //   $('.timepicker-24').wickedpicker({twentyFour: true});
+	
+        </script>
+	</div>
+		
+
+		
+	<h3>Repeat:</h3>
+	<form id="rep" action="#">
+  
+		<input type="checkbox" id="test1"/>
+		<label for="test1">Monday</label>
+  
+  
+		<input type="checkbox" id="test2"/>
+		<label for="test2">Tuesday</label>
+  
+  
+		<input type="checkbox" id="test3" />
+		<label for="test3">Wednesday</label><br>
+  
+    
+		<input type="checkbox" id="test4" />
+		<label for="test4">Thursday</label>
+	  
+		<input type="checkbox" id="test5" />
+		<label for="test5">Friday</label>
+	  
+		<input type="checkbox" id="test6" />
+		<label for="test6">Saturday</label>
+	  
+		<input type="checkbox" id="test7" />
+		<label for="test7">Sunday</label>
+		
+	</form>
 </div>
 {% endblock content %}
 
