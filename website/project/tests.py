@@ -29,3 +29,4 @@ class TemperatureViewTest(TestCase):
         print response.context['query_results']
 
         self.assertQuerysetEqual(response.context['query_results'], ['<Temperature: 27.0>'])
+

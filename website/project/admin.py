@@ -6,3 +6,4 @@ admin.site.register(Temperature)
 admin.site.register(Door)
 admin.site.register(Lamp)
 admin.site.register(Light)
+
