@@ -1,9 +1,9 @@
 #include <Servo.h>
 
-const int relay = 13;
+const int relay = 2;
 const int relay2 = 3;
-const int window = 7;
-const int door = 4;
+const int relay3 = 4;
+
 Servo myservo;
 int pos = 0;
 float referencevoltage = 5.0;
@@ -12,10 +12,10 @@ void setup()
 {
   pinMode(relay, OUTPUT);
   pinMode(relay2, OUTPUT);
+  pinMode(relay3, OUTPUT);
   digitalWrite(relay, LOW);
   digitalWrite(relay2, LOW);
-  pinMode(door, INPUT);
-  pinMode(window, INPUT);
+  digitalWrite(relay3, LOW);
   myservo.attach(9);
   myservo.write(0);
   Serial.begin(9600);
@@ -32,8 +32,7 @@ void loop()
   int light = analogRead(A4);
   int lampstatus = bitRead(PORTD, relay);
   int lampstatus2 = bitRead(PORTD, relay2);
-  int doorstatus = digitalRead(door);
-  int windowstatus = digitalRead(window);
+  int lampstatus3 = bitRead(PORTD, relay3);
   
   if(Serial.available())
   {
@@ -55,9 +54,9 @@ void loop()
       Serial.print(" ");
       Serial.print(lampstatus2);
       Serial.print(" ");
-      Serial.print(doorstatus);
+      Serial.print(lampstatus3);
       Serial.print(" ");
-      Serial.println(windowstatus);
+      Serial.print("\n");
       break;
       case 4:
       myservo.write(0);
@@ -70,6 +69,12 @@ void loop()
       break;
       case 8:
       digitalWrite(relay2, LOW);
+      break;
+      case 6:
+      digitalWrite(relay3, HIGH);
+      break;
+      case 9:
+      digitalWrite(relay3, LOW);
       break;
       default:
       break;

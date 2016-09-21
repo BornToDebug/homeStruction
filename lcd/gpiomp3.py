@@ -202,12 +202,12 @@ def volumedown(channel):
 		print "volume: MUTED\n"
 	
 #GPIO callback declarations
-GPIO.add_event_detect(b_onoff, GPIO.FALLING, callback=switch_while, bouncetime=300)
-GPIO.add_event_detect(b_playpause, GPIO.FALLING, callback=pause, bouncetime=300)
-GPIO.add_event_detect(b_previous, GPIO.FALLING, callback=previoussong, bouncetime=300)
-GPIO.add_event_detect(b_next, GPIO.FALLING, callback=nextsong, bouncetime=300)
-GPIO.add_event_detect(b_voldown, GPIO.FALLING, callback=volumedown, bouncetime=300)
-GPIO.add_event_detect(b_volup, GPIO.FALLING, callback=volumeup, bouncetime=300)
+GPIO.add_event_detect(b_onoff, GPIO.FALLING, callback=switch_while, bouncetime=500)
+GPIO.add_event_detect(b_playpause, GPIO.FALLING, callback=pause, bouncetime=500)
+GPIO.add_event_detect(b_previous, GPIO.FALLING, callback=previoussong, bouncetime=500)
+GPIO.add_event_detect(b_next, GPIO.FALLING, callback=nextsong, bouncetime=500)
+GPIO.add_event_detect(b_voldown, GPIO.FALLING, callback=volumedown, bouncetime=500)
+GPIO.add_event_detect(b_volup, GPIO.FALLING, callback=volumeup, bouncetime=500)
 
 #Main loop, requires only about 4% CPU usage because it sleeps 1s after every iteration
 while True:
