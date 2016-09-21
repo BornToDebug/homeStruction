@@ -2,6 +2,14 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Temperature
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework import viewsets
+from project.serializers import UserSerializer
+from django.contrib.auth.models import User
+
+class UserViewSet(viewsets.ModelViewSet):
+
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
 
 
 class TemperatureView(LoginRequiredMixin, generic.ListView):

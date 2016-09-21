@@ -29,10 +29,10 @@ CSRF_COOKIE_HTTPONLY = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = settings_secret.SECRET_KEY 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  #always
+DEBUG = True  #always
 
 ALLOWED_HOSTS = [
-        'localhost', '127.0.0.1', '89.120.180.139', '192.168.1.5', 'homestruction.servebeer.com'
+        'localhost','acs1.ddns.net', '127.0.0.1', '89.120.180.139', '192.168.1.5', 'homestruction.servebeer.com'
         ]
 
 LOGIN_REDIRECT_URL = ''
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'homeStruction.urls'
+
+REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+        'PAGE_SIZE': 10,
+        }
 
 TEMPLATES = [
     {
