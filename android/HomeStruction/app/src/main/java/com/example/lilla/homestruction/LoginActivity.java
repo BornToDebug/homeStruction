@@ -91,6 +91,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button forgotPass = (Button) findViewById(R.id.forgotten_pass);
+        forgotPass.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgottenPassword.class);
+                startActivity(intent);
+            }
+        });
+
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
@@ -169,15 +178,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(username)) {
-            mUsernameView.setError(getString(R.string.error_field_required));
+            mUsernameView.setError("This field is required");
             focusView = mUsernameView;
             cancel = true;
         } else if (!isUsernameValid(username)) {
-            mUsernameView.setError("This username is not valid");
+            mUsernameView.setError("This username is too short");
             focusView = mUsernameView;
             cancel = true;
         }
 
+        // TODO: find out how to stay logged in
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -192,12 +202,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isUsernameValid(String username) {
-        //TODO: Replace this with your own logic
         return username.length() > 4;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
