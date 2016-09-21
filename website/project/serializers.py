@@ -5,5 +5,5 @@ from models import Temperature
 class TemperatureSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Temperature
-        fields = ('time_recorded', 'valueasdf')
+        fields = ('time_recorded', 'value')
 
