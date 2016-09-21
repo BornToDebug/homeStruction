@@ -3,13 +3,12 @@ from django.views import generic
 from .models import Temperature
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import viewsets
-from project.serializers import UserSerializer
-from django.contrib.auth.models import User
+from project.serializers import TemperatureSerializer
 
-class UserViewSet(viewsets.ModelViewSet):
+class TemperatureViewSet(viewsets.ModelViewSet):
 
-    queryset = User.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    queryset = Temperature.objects.all().order_by('-time_recorded')
+    serializer_class = TemperatureSerializer
 
 
 class TemperatureView(LoginRequiredMixin, generic.ListView):

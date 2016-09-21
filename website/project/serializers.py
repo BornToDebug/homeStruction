@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
+from models import Temperature
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class TemperatureSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ('url','username', 'email', 'groups')
+        model = Temperature
+        fields = ('time_recorded', 'valueasdf')
 
