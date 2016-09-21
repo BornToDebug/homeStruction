@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hat4">
+
+    <Button
+        android:id="@+id/temperature"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Temperature"
+        android:textColor="#00ffff"
+        android:background="@drawable/border"
+        android:layout_margin="4dp"
+    />
+
+    <Button
+        android:id="@+id/multimedia"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:text="Music Player"
+        android:textColor="#00ffff"
+        android:background="@drawable/border"
+        android:layout_margin="4dp"
+        />
+
+    <Button
+        android:id="@+id/doors"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Doors"
+        android:textColor="#00ffff"
+        android:background="@drawable/border"
+        android:layout_margin="4dp"
+        />
+
+    <Button
+        android:id="@+id/windows"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Windows"
+        android:textColor="#00ffff"
+        android:background="@drawable/border"
+        android:layout_margin="4dp"
+        />
+
+    <Button
+        android:id="@+id/light"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Light"
+        android:textColor="#00ffff"
+        android:background="@drawable/border"
+        android:layout_margin="4dp"
+        />
+
+    <Button
+        android:id="@+id/alarm"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Alarm"
+        android:textColor="#00ffff"
+        android:background="@drawable/border"
+        android:layout_margin="4dp"
+        />
+
+</LinearLayout>

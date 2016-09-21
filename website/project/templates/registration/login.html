@@ -37,13 +37,13 @@
     <div class="login">
 		<div class="image"><img src="{% static "project/assets/img/haz3.png" %}">
 	   </div><br>
-	  <h4>Welcome (back), Buddy!</h4>
+	  <h4 style="margin-top:170px">Welcome (back), Buddy!</h4>
 	  <div >
 		 
 			{% if form.non_field_errors %}
 			{% for error in form.non_field_errors %}
-			<p  class="formaterror">
-			  <strong>  {{ error }}</strong>
+			<p  class="formaterror" style="color:#47d1d1; margin-top:20px;margin-right:auto; margin-left:auto; text-align:center; font-size:17px; font-family:'Oswald', sans-serif">
+			    {{ error }}
 			</p>	
 			{% endfor %}
 			{% endif %}
@@ -51,7 +51,7 @@
 		  	{{ form.username.errors }}
    			{{ form.password.errors }}
 	</div>
-	  <form class="login__form" action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+	  <form class="login__form" action="{{ app_path }}" method="post" id="login-form" style="margin-top:50px;">{% csrf_token %}
         <div class="login__row">
           <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
@@ -65,7 +65,7 @@
 		  <input id="id_password" name="password" type="password" required  class="login__input pass" placeholder="Password"/>
         </div>
     	<input type="hidden" name="next" value="{{ next }}" />
-		<input type="submit" value="Log in"/>
+		<input type="submit" value="Log in" style="font-family:'Oswald',sans-serif; color:white; width:80px;height:40px; margin-top:20px; margin-bottom:10px; background:#196666;border-radius:5px"/>
         <p class="login__signup">Forgot password? &nbsp;<a href="signup.html">Click here</a></p>
       </form>
 
