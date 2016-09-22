@@ -32,6 +32,10 @@ public class ForgottenPassword extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
+                        int ind = response.indexOf("value");
+                        ind = ind + 7;
+                        String temp = response.substring(ind, ind + 4);
+                        System.out.println(temp);
                         mTextView.setText(response);
                     }
                 }, new Response.ErrorListener() {

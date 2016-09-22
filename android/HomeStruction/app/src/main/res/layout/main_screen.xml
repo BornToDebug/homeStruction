@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Temperature"
+        android:text="      Temperature"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:gravity="left|center_vertical"
         android:textColor="#00ffff"
         android:background="@drawable/border"
         android:layout_margin="4dp"
@@ -23,38 +26,53 @@
         android:layout_weight="2"
         android:text="Music Player"
         android:textColor="#00ffff"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        android:gravity="top|center_horizontal"
         android:background="@drawable/border"
         android:layout_margin="4dp"
         />
 
-    <Button
+    <Switch
         android:id="@+id/doors"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Doors"
+        android:text="      Doors"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:gravity="left|center_vertical"
         android:textColor="#00ffff"
+        android:layout_marginRight="10dp"
         android:background="@drawable/border"
         android:layout_margin="4dp"
         />
 
-    <Button
+    <Switch
         android:id="@+id/windows"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Windows"
-        android:textColor="#00ffff"
         android:background="@drawable/border"
         android:layout_margin="4dp"
-        />
+        android:text="      Windows"
+        android:textAllCaps="false"
+        android:switchPadding="5dp"
+        android:textSize="18dp"
+        android:gravity="left|center_vertical"
+        android:layout_gravity="left"
+        android:textColor="#00ffff"/>
 
-    <Button
+
+    <Switch
         android:id="@+id/light"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Light"
+        android:text="      Light"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:gravity="left|center_vertical"
         android:textColor="#00ffff"
         android:background="@drawable/border"
         android:layout_margin="4dp"
@@ -65,7 +83,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Alarm"
+        android:text="      Alarm"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:gravity="left|center_vertical"
         android:textColor="#00ffff"
         android:background="@drawable/border"
         android:layout_margin="4dp"
