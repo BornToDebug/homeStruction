@@ -1,8 +1,10 @@
 package com.example.lilla.homestruction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,6 +31,14 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
+        if(SaveSharedPreference.getUserName(MainScreen.this).length() == 0)
+        {
+            Intent intent = new Intent(MainScreen.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        System.out.println(SaveSharedPreference.getUserName(MainScreen.this));
+
         final Button temperatureButton = (Button) findViewById(R.id.temperature);
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -49,7 +59,7 @@ public class MainScreen extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                temperatureButton.setText("     Temperature                                             xx.x");
+                temperatureButton.setText("     Temperature                                no data");
             }
         });
 // Add the request to the RequestQueue.
@@ -143,6 +153,9 @@ public class MainScreen extends AppCompatActivity {
             // Respond to the action bar's Up/Home button
             case R.id.sign_out:
                 System.out.println("Sign out button pressed");
+                SaveSharedPreference.setUserName(MainScreen.this, "");
+                Intent intent = new Intent(MainScreen.this, LoginActivity.class);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
