@@ -11,6 +11,6 @@ then
 else
 	echo 'mplayer not running'
 	find /mnt/Stick/Music -type f -name "*.mp3" > /home/projekt/homeStruction/newmp3/my_playlist
-	lxterminal --command mplayer -slave -ao alsa -mixer-channel PCM -novideo -volstep 3 -input file=/home/projekt/homeStruction/newmp3/mplayer.pipe -playlist  /home/projekt/homeStruction/newmp3/my_playlist -loop 0 >/home/projekt/homeStruction/newmp3/logfile &
+	mplayer -slave -ao alsa -mixer-channel PCM -novideo -volstep 3 -input file=/home/projekt/homeStruction/newmp3/mplayer.pipe -playlist  /home/projekt/homeStruction/newmp3/my_playlist -loop 0 >/home/projekt/homeStruction/newmp3/logfile &
 #	mplayer -playlist /home/projekt/homeStruction/newmp3/my_playlist 
 fi
