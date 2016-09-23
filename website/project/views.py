@@ -2,6 +2,13 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Temperature
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework import viewsets
+from project.serializers import TemperatureSerializer
+
+class TemperatureViewSet(viewsets.ModelViewSet):
+
+    queryset = Temperature.objects.all().order_by('-time_recorded')
+    serializer_class = TemperatureSerializer
 
 
 class TemperatureView(LoginRequiredMixin, generic.ListView):

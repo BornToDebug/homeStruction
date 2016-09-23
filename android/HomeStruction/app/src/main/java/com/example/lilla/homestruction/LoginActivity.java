@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "example:hello", "try:world"
+            "example:hello", "tryit:world"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -68,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+
+        System.out.println(SaveSharedPreference.getUserName(LoginActivity.this));
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
         populateAutoComplete();
 
@@ -88,6 +91,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        Button forgotPass = (Button) findViewById(R.id.forgotten_pass);
+        forgotPass.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgottenPassword.class);
+                startActivity(intent);
             }
         });
 
@@ -169,15 +181,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(username)) {
-            mUsernameView.setError(getString(R.string.error_field_required));
+            mUsernameView.setError("This field is required");
             focusView = mUsernameView;
             cancel = true;
         } else if (!isUsernameValid(username)) {
-            mUsernameView.setError("This username is not valid");
+            mUsernameView.setError("This username is too short");
             focusView = mUsernameView;
             cancel = true;
         }
 
+        // TODO: find out how to stay logged in
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -192,12 +205,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isUsernameValid(String username) {
-        //TODO: Replace this with your own logic
         return username.length() > 4;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
@@ -336,6 +347,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 System.out.println("Login successful!");
+                SaveSharedPreference.setUserName(LoginActivity.this, mUsername);
                 Intent intent = new Intent(LoginActivity.this, MainScreen.class);
                 startActivity(intent);
                 finish();

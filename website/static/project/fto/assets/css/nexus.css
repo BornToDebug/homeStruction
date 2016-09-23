@@ -50,6 +50,7 @@ body {
 #container_hornav {
   position: relative;
   top: 10px;
+
   
 }
 #container_slideshow {
@@ -75,6 +76,7 @@ body {
 .is-sticky #hornav ul#hornavmenu {
   background-color:#196666;
   z-index:20;
+  
 
   
 }
@@ -617,16 +619,21 @@ h1.logo-text a {
   padding-top:0px;
   padding-right: 0px;
   text-align: center;
-  width: 1100px;
+  width: 1500px;
   display:block;
   min-height:10px;
-  margin-left:75px;
+  
+    margin-left: auto;
+    margin-right: auto
+
  }
 #hornav .navbar-nav {
   float: none;
   position:center;
-  width:1200px;
+  width:1100px;
   min-height:40px;
+
+	
 }
 #hornav ul {
 	
@@ -637,9 +644,10 @@ h1.logo-text a {
   padding:10px 5px;
   min-height:50px;
   margin-bottom:80px;
+ 
 }
 #hornav ul > li {
-  margin: 5px 5px;
+  margin: -5px -5px;
 }
 #hornav ul > li > a,
 #hornav ul > li > span {
@@ -1076,6 +1084,7 @@ ul.menu ul {
 	font-weight:bold;
 	font-style:italic;
 	margin-top:40px;
+	
 
 	
 	 
@@ -1086,7 +1095,9 @@ ul.menu ul {
 	 position:relative;
 	 border-radius:10px;
 	 width:800px;
-	margin-left:275px;
+	 margin-right:auto;
+	margin-left:auto;
+	
 	 
  }
  #txtsw h5{
@@ -1107,6 +1118,7 @@ ul.menu ul {
  }
 .opclswitch {
     position: relative; width: 90px;
+	margin-right:auto;
 	margin-left:600px;
 	margin-top:-60px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
@@ -1445,8 +1457,8 @@ a.slicknav_item [class*=" fa-"] {
 	 position:relative;
 	 border-radius:10px;
 	 width:800px;
-	margin-left:275px;
-	 
+	margin-right:auto;
+	margin-left:auto;
  }
  #txtsw h5{
 	 color:#cccccc;
@@ -1579,7 +1591,8 @@ a.slicknav_item [class*=" fa-"] {
 	 padding-top:70px;
 	 background-color:#999999;
 	 width:685px;
-	 margin-left:332px;
+	 margin-left:auto;
+	 margin-right:auto;
 	 border-radius:5px 5px 5px 5px;
 	 padding-bottom:20px;
 	 padding-top:20px;
@@ -1590,7 +1603,7 @@ a.slicknav_item [class*=" fa-"] {
 }
 #lght h3{
 	color:#cccccc;
-	margin-right:400px;
+	padding-right:400px;
 	margin-top:50px;
 	padding-top:70px;
 	font-family:'Oswald', sans-serif;
@@ -1626,21 +1639,22 @@ a.slicknav_item [class*=" fa-"] {
 	margin-top:30px;
 	 background-color:#3d5c5c;
 	 width:700px;
-	 margin-left:320px;
+	  margin-left: auto;
+    margin-right: auto;
 	 font-size:25px;
 	 font-family:'Oswald', sans-serif;
 	 color: #cccccc;
 	 border-radius:5px;
 }
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
+.days:not(:checked),
+.days:checked {
   position: absolute;
   left: -9999px;
   margin-bottom:30px;
  
 }
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
+.days:not(:checked) + label,
+.days:checked + label {
   position: relative;
   padding-left: 25px;
   cursor: pointer;
@@ -1651,8 +1665,8 @@ a.slicknav_item [class*=" fa-"] {
 }
 
 /* checkbox aspect */
-[type="checkbox"]:not(:checked) + label:before,
-[type="checkbox"]:checked + label:before {
+.days:not(:checked) + label:before,
+.days:checked + label:before {
   content: '';
   position: absolute;
   left:0; top: 6px;
@@ -1663,8 +1677,8 @@ a.slicknav_item [class*=" fa-"] {
   box-shadow: inset 1px 3px 5px #1f2e2e;
 }
 /* checked mark aspect */
-[type="checkbox"]:not(:checked) + label:after,
-[type="checkbox"]:checked + label:after {
+.days:not(:checked) + label:after,
+.days:checked + label:after {
   content: '✔';
   position: absolute;
   top: 0px; left: 4px;
@@ -1674,30 +1688,30 @@ a.slicknav_item [class*=" fa-"] {
   transition: all .2s;
 }
 /* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
+.days:not(:checked) + label:after {
   opacity: 0;
   transform: scale(0);
 }
-[type="checkbox"]:checked + label:after {
+.days:checked + label:after {
   opacity: 1;
   transform: scale(1);
 }
 /* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
+.days:disabled:not(:checked) + label:before,
+.days:disabled:checked + label:before {
   box-shadow: none;
   border-color: #bbb;
   background-color: #ddd;
 }
-[type="checkbox"]:disabled:checked + label:after {
+.days:disabled:checked + label:after {
   color: #999;
 }
-[type="checkbox"]:disabled + label {
+.days:disabled + label {
   color: #aaa;
 }
 /* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
+.days:checked:focus + label:before,
+.days:not(:checked):focus + label:before {
   border: 1px dotted #3d5c5c;
 }
 
@@ -2627,7 +2641,8 @@ ul.social-icons li a:hover {
 	width:530px;
 	height:367px;
 	position:center;
-	margin-left:275px;
+	margin-left:auto;
+	margin-right:auto;
 	margin-top:-20px;
 	margin-bottom:40px;
 	background-color:grey;
@@ -3043,4 +3058,10 @@ ul.posts-list li {
   line-height: 40px;
   min-height: 40px;
   text-align: center;
+}
+
+/* ERROR MESSAGE - LOG IN */
+
+.formaterror{
+	color:blue;
 }
