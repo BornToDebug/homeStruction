@@ -1,0 +1,15 @@
+#!/bin/bash
+
+pidof mplayer >/dev/null
+
+if [[ $? -eq 0 ]]
+then 
+	echo 'mplayer running'
+	killall mplayer
+	rm /home/projekt/homeStruction/newmp3/my_playlist
+	rm /home/projekt/homeStruction/newmp3/logfile
+else
+	echo 'mplayer not running'
+	find /mnt/Stick/Music -type f -name "*.mp3" > /home/projekt/homeStruction/newmp3/my_playlist
+	mplayer -mixer-channel PCM -novideo -volstep 3 -input file=/home/projekt/homeStruction/newmp3/mplayer.pipe -playlist  /home/projekt/homeStruction/newmp3/my_playlist -loop 0 >/home/projekt/homeStruction/newmp3/logfile 
+fi

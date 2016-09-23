@@ -28,7 +28,7 @@ void loop()
   {
     temp += analogRead(A5);
   }
-  float temperature = (temp*referencevoltage)/1023.0 - 4;
+  float temperature = (temp*referencevoltage)/1023.0 - 2;
   int light = analogRead(A4);
   int lampstatus = bitRead(PORTD, relay);
   int lampstatus2 = bitRead(PORTD, relay2);
