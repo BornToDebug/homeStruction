@@ -1,3 +1,0 @@
-#!/bin/bash
-
-mplayer --slave '/mnt/Stick/Music/01. Crystals.mp3'

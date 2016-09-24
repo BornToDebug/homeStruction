@@ -1,0 +1,2 @@
+#!/bin/bash
+script -c 'mplayer -slave -ao alsa -mixer-channel PCM -novideo -volstep 3 -input file=/home/projekt/homeStruction/newmp3/mplayer.pipe -playlist  /home/projekt/homeStruction/newmp3/my_playlist -loop 0' -f /home/projekt/homeStruction/newmp3/logfile
