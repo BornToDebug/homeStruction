@@ -5,10 +5,12 @@ pidof mplayer >/dev/null
 if [[ $? -eq 0 ]]
 then 
 	echo 'mplayer running'
+	pkill -f display.py
 	killall mplayer
 	rm /home/projekt/homeStruction/newmp3/my_playlist
 	rm /home/projekt/homeStruction/newmp3/logfile
 #	kill /home/projekt/homeStruction/newmp3/display.py
+#	pkill -f display.py
 else
 	echo 'mplayer not running'
 	find /mnt/Stick/Music -type f -name "*.mp3" > /home/projekt/homeStruction/newmp3/my_playlist
