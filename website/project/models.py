@@ -12,7 +12,7 @@ class Temperature(models.Model):
     value = models.FloatField()
 
     def __str__(self):
-        return valueAndTimeToStr(self.value, self.time_recorded) 
+        return valueAndTimeToStr(self.value, self.time_recorded + timezone.timedelta(hours=3)) 
 
 
 class Lamp(models.Model):
@@ -20,20 +20,20 @@ class Lamp(models.Model):
     value = models.CharField(max_length=10)
 
     def __str__(self):
-        return valueAndTimeToStr(self.value, self.time_recorded) 
+        return valueAndTimeToStr(self.value, self.time_recorded + timezone.timedelta(hours=3)) 
 
 class Light(models.Model):
     time_recorded = models.DateTimeField('Time recorded', default=timezone.now)
     value = models.FloatField()
     
     def __str__(self):
-        return valueAndTimeToStr(self.value, self.time_recorded) 
+        return valueAndTimeToStr(self.value, self.time_recorded + timezone.timedelta(hours=3)) 
 
 class Door(models.Model):
     time_recorded = models.DateTimeField('Time recorded', default=timezone.now)
     value = models.CharField(max_length=10)
 
     def __str__(self):
-        return valueAndTimeToStr(self.value, self.time_recorded) 
+        return valueAndTimeToStr(self.value, self.time_recorded + timezone.timedelta(hours=3)) 
 
 

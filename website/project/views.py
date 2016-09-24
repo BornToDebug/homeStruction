@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import viewsets
 from project.serializers import TemperatureSerializer
 
+# REST framework viewset
 class TemperatureViewSet(viewsets.ModelViewSet):
 
     queryset = Temperature.objects.all().order_by('-time_recorded')
