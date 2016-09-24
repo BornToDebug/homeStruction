@@ -8,9 +8,11 @@ then
 	killall mplayer
 	rm /home/projekt/homeStruction/newmp3/my_playlist
 	rm /home/projekt/homeStruction/newmp3/logfile
+#	kill /home/projekt/homeStruction/newmp3/display.py
 else
 	echo 'mplayer not running'
 	find /mnt/Stick/Music -type f -name "*.mp3" > /home/projekt/homeStruction/newmp3/my_playlist
+	
 	lxterminal -e /home/projekt/homeStruction/newmp3/runit &
 #	mplayer -playlist /home/projekt/homeStruction/newmp3/my_playlist 
 fi
