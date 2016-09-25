@@ -1,4 +1,4 @@
-package com.example.lilla.homestruction.bean;
+package com.lilla.homestruction.bean;
 
 import com.google.gson.annotations.Expose;
 

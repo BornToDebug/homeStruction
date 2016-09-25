@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "com.example.lilla.homestruction"
+        applicationId "com.lilla.homestruction"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1

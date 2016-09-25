@@ -1,7 +1,7 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
-import com.example.lilla.homestruction.bean.TemperatureResponse;
-import com.example.lilla.homestruction.bean.TokenResponse;
+import com.lilla.homestruction.bean.TemperatureResponse;
+import com.lilla.homestruction.bean.TokenResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

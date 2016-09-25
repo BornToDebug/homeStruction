@@ -1,4 +1,4 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.lilla.homestruction.bean.TokenResponse;
+import com.lilla.homestruction.bean.TokenResponse;
 
 import java.util.ArrayList;
 import java.util.List;

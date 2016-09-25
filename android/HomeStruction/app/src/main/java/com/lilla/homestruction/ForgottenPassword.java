@@ -1,4 +1,4 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

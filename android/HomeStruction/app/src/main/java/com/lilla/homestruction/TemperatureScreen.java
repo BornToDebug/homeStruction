@@ -1,4 +1,4 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
 import android.graphics.Matrix;
 import android.os.Bundle;
