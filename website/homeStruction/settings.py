@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
         'localhost','acs1.ddns.net', '127.0.0.1', '89.120.180.139', '192.168.1.5', 'homestruction.servebeer.com'
         ]
 
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
