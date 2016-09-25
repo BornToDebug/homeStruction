@@ -5,10 +5,11 @@ from subprocess import call
 import string
 import alsaaudio
 
-sleep(2)
+#Wait 1 sec to be sure that logfile has been created
+sleep(1)
 f = open('/home/projekt/homeStruction/newmp3/logfile', 'r')
-#f2 = open('/home/projekt/homeStruction/newmp3/titlelog', 'w')
 
+#Pins used by the lcd display
 lcd_rs = 20
 lcd_en = 5
 lcd_d4 = 6
@@ -21,8 +22,12 @@ lcd_columns = 16
 lcd_rows = 2
 
 lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
+
+
+
 class SongInfo(object):
 
+	#Variables required for scrolling longer titles
 	movements = 0
 	i = 0
 
@@ -34,20 +39,24 @@ class SongInfo(object):
 		self.pause = None
 		self.time = None
 
+	#Sending requests for info
 	@staticmethod
 	def requests():
+		call('echo get_file_name > /home/projekt/homeStruction/newmp3/mplayer.pipe', shell=True)
+		sleep(.1)
 		call('echo get_percent_pos > /home/projekt/homeStruction/newmp3/mplayer.pipe', shell=True)
-		sleep(.2)
+		sleep(.1)
 		call('echo get_property pause > /home/projekt/homeStruction/newmp3/mplayer.pipe', shell=True)
-		sleep(.2)
-
+		sleep(.1)
+	
+	#Updating title, position, pause status and time
 	def update(self, fileobj):
 		SongInfo.requests()		
 		content = fileobj.read()
 		for item in content.split("\n"):
-			if "Title" in item:
-                                temp = item.split("Title: ")[-1].strip("\n")
-                                self.title = "".join(filter(lambda x: x in string.printable, temp))
+			if "ANS_FILENAME" in item:
+                                temp = item.split("ANS_FILENAME=")[-1].strip()
+				self.title = temp.replace("'", "")
 			if "ANS_PERCENT_POS" in item:
 				temp = item.split("ANS_PERCENT_POSITION=")[-1].strip("\r\n")
 				self.position = int(temp)
@@ -59,10 +68,10 @@ class SongInfo(object):
 		del m
 		self.time = strftime("%H:%M")	
 	
+	#Returning the string to be displayed on the first row of the display
 	def first_line(self):
 		if self.prevtitle != self.title:
 			self.prevtitle = self.title
-			print "LENGTH = %d" % len(self.prevtitle)
 			if len(self.prevtitle) <= lcd_columns:
 				SongInfo.movements = 0
 			else:
@@ -70,32 +79,26 @@ class SongInfo(object):
 				SongInfo.i = 0
 		if SongInfo.movements == 0:
 			return self.prevtitle
+		#For titles longer than 16 characters, it has to return a part of that, each time shifted left by one character
 		else:
 			if SongInfo.i == SongInfo.movements:
 				SongInfo.i = 0
 			SongInfo.i += 1
 			return self.prevtitle[(SongInfo.i-1):(SongInfo.i - 1 + lcd_columns)]
 		
+#Handler to turn off display when we exit the player
 def handler(signal, frame):
-#	global f2
-#	f2.close()
 	lcd.clear()
 	lcd.set_backlight(1)
-	
 
+#Catching the signal
 signal.signal(signal.SIGTERM, handler)
 
-#back = True
 lcd.set_backlight(0)
 info = SongInfo()
-#f2.write('test\n')
-#i = 0
+
+#The rest is only printing
 while True:
-#	lcd.set_backlight(back)
-#	back = not(back)
-#	info.updatetitle(f)
-#	f2.write(info.title)
-#	f2.write('\n')
 	info.update(f)
 	lcd.clear()
 	lcd.message("%s" % info.first_line())
