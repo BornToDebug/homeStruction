@@ -31,8 +31,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.lilla.homestruction.bean.TokenResponse;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -66,6 +72,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!TextUtils.isEmpty(SaveSharedPreference.getToken(this))) {
+            startMainScreen();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -166,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String username = mUsernameView.getText().toString();
+        final String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -190,7 +199,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
-        // TODO: find out how to stay logged in
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -198,10 +206,36 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            WebService webService = RetrofitManager.createService(WebService.class);
+            Call<TokenResponse> getTokenCall = webService.getLoginToken(username, password);
             showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
-            mAuthTask.execute((Void) null);
+            getTokenCall.enqueue(new Callback<TokenResponse>() {
+                @Override
+                public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                    showProgress(false);
+                    if (response.body() == null) {
+                        System.out.println("Error");
+                    } else {
+                        System.out.println("ddd " + response.body().getToken());
+                        SaveSharedPreference.setToken(LoginActivity.this, response.body().getToken());
+                        SaveSharedPreference.setUserName(LoginActivity.this, username);
+                        startMainScreen();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<TokenResponse> call, Throwable t) {
+                    showProgress(false);
+                    System.out.println("Error: " + t.getMessage());
+                }
+            });
         }
+    }
+
+    private void startMainScreen() {
+        Intent intent = new Intent(LoginActivity.this, MainScreen.class);
+        startActivity(intent);
     }
 
     private boolean isUsernameValid(String username) {
@@ -308,6 +342,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+        //TODO: try login with token
+
         private final String mUsername;
         private final String mPassword;
 
@@ -321,7 +357,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                // Simulate network access.
+                // Simulate network access.f
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
@@ -363,6 +399,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+
+        //TODO: ha megnyomom a back buttont ne menjen a main screenre
+
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
 
