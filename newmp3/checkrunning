@@ -5,7 +5,7 @@ pidof mplayer >/dev/null
 if [[ $? -eq 0 ]]
 then 
 	echo 'mplayer running'
-	pkill -f display.py
+	pkill -f newdisplay.py
 	killall mplayer
 	rm /home/projekt/homeStruction/newmp3/my_playlist
 	rm /home/projekt/homeStruction/newmp3/logfile
