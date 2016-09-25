@@ -1,15 +1,7 @@
 package com.lilla.homestruction;
 
-import android.graphics.Matrix;
 import android.os.Bundle;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ScaleGestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.widget.ImageView;
 
 /**
  * Created by lilla on 22/09/16.

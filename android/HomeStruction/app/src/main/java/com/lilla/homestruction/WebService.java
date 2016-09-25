@@ -14,9 +14,11 @@ import retrofit2.http.POST;
  */
 
 public interface WebService {
+    //Webservice for temperatures
     @GET("/api/temp/?page=1")
     Call<TemperatureResponse> getTemperatures();
 
+    //Webservice for login
     @FormUrlEncoded
     @POST("/api-token-auth/")
     Call<TokenResponse> getLoginToken(@Field("username") String username, @Field("password") String password);

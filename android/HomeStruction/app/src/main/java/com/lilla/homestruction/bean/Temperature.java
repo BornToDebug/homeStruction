@@ -9,7 +9,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Temperature {
 
-
     @Expose
     @SerializedName("time_recorded")
     private String timeRecorded;
