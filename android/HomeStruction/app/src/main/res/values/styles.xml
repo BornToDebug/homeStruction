@@ -15,5 +15,9 @@
     <style name="DialogTheme" parent="Base.Theme.AppCompat.Dialog">
     </style>
 
+    <style name="ScrollBarTheme" parent="AppTheme">
+        <item name="colorPrimary">@android:color/background_light</item>
+    </style>
+
 
 </resources>

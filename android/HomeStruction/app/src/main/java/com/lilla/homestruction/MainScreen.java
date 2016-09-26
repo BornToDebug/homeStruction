@@ -106,6 +106,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.light).setOnClickListener(this);
         findViewById(R.id.alarm).setOnClickListener(this);
         findViewById(R.id.alarm_switch).setOnClickListener(this);
+        findViewById(R.id.songs).setOnClickListener(this);
+        findViewById(R.id.previous).setOnClickListener(this);
+        findViewById(R.id.play).setOnClickListener(this);
+        findViewById(R.id.pause).setOnClickListener(this);
+        findViewById(R.id.next).setOnClickListener(this);
+        findViewById(R.id.shuffle).setOnClickListener(this);
 
 //        final Button multimediaButton = (Button) findViewById(R.id.multimedia);
 //        multimediaButton.setOnClickListener(new View.OnClickListener() {
@@ -285,6 +291,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                     }
                                 }
 
+                                System.out.println("SET alarm");
+
 
                             }
                         }, mHour, mMinute, true);
@@ -295,7 +303,27 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
                 if (!alarmSwitch.isChecked()){
                     alarmSwitch.setText("");
+                    System.out.println("RESET alarm!");
                 }
+                break;
+            case R.id.songs:
+                System.out.println("Songs button pressed");
+                break;
+            case R.id.previous:
+                System.out.println("Previous button pressed");
+                break;
+            case R.id.play:
+                System.out.println("Play button pressed");
+                break;
+            case R.id.pause:
+                System.out.println("Pause button pressed");
+                break;
+            case R.id.next:
+                System.out.println("Next button pressed");
+                break;
+            case R.id.shuffle:
+                System.out.println("Shuffle button pressed");
+                break;
         }
     }
 }

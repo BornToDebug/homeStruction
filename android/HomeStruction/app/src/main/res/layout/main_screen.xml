@@ -70,6 +70,91 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/now_playing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Now playing: "
+            android:textSize="16dp"
+            android:textColor="#00ffff"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/songs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/songs"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"
+                />
+
+            <ImageButton
+                android:id="@+id/previous"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/previous"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/play"
+                    android:background="@android:color/transparent"
+                    android:layout_margin="5dp"/>
+
+                <ImageButton
+                    android:id="@+id/pause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/pause"
+                    android:background="@android:color/transparent"
+                    android:layout_margin="10dp"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
+
+            <ImageButton
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/next"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"/>
+
+            <ImageButton
+                android:id="@+id/shuffle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shuffle"
+                android:background="@android:color/transparent"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:theme="@style/ScrollBarTheme"
+            android:textColorSecondaryInverseNoDisable="@color/colorAccent"/>
+
     </RelativeLayout>
 
     <RelativeLayout
