@@ -1,4 +1,4 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
 import android.app.AlarmManager;
 import android.app.TimePickerDialog;
@@ -20,8 +20,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.lilla.homestruction.bean.Temperature;
-import com.example.lilla.homestruction.bean.TemperatureResponse;
+import com.lilla.homestruction.bean.Temperature;
+import com.lilla.homestruction.bean.TemperatureResponse;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;

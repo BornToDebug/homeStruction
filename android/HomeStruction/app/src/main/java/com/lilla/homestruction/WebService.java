@@ -1,7 +1,7 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
-import com.example.lilla.homestruction.bean.TemperatureResponse;
-import com.example.lilla.homestruction.bean.TokenResponse;
+import com.lilla.homestruction.bean.TemperatureResponse;
+import com.lilla.homestruction.bean.TokenResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,9 +14,11 @@ import retrofit2.http.POST;
  */
 
 public interface WebService {
+    //Webservice for temperatures
     @GET("/api/temp/?page=1")
     Call<TemperatureResponse> getTemperatures();
 
+    //Webservice for login
     @FormUrlEncoded
     @POST("/api-token-auth/")
     Call<TokenResponse> getLoginToken(@Field("username") String username, @Field("password") String password);

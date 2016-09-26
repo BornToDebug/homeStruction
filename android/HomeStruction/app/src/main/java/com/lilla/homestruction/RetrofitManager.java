@@ -1,4 +1,4 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
 import java.io.IOException;
 
@@ -6,7 +6,6 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -51,5 +50,4 @@ public class RetrofitManager {
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
     }
-
 }

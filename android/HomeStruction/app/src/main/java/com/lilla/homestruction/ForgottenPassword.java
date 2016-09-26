@@ -1,20 +1,8 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 /**
  * Created by lilla on 21/09/16.
@@ -26,6 +14,8 @@ public class ForgottenPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgotten_password);
         final TextView mTextView = (TextView) findViewById(R.id.txtDisplay);
+
+        //TODO forgotten password screen (question + answer)
 //
 // Instantiate the RequestQueue.
 //        RequestQueue queue = Volley.newRequestQueue(this);
@@ -51,9 +41,6 @@ public class ForgottenPassword extends AppCompatActivity {
 //        });
 //// Add the request to the RequestQueue.
 //        queue.add(stringRequest);
-
-        //TODO retrofit is not working, fix it!
-
 
     }
 }

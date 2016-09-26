@@ -1,4 +1,4 @@
-package com.example.lilla.homestruction.bean;
+package com.lilla.homestruction.bean;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Temperature {
-
 
     @Expose
     @SerializedName("time_recorded")
