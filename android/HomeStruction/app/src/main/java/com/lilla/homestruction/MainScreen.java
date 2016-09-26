@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -105,116 +106,121 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
 
         findViewById(R.id.temperature).setOnClickListener(this);
+        findViewById(R.id.multimedia).setOnClickListener(this);
+        findViewById(R.id.doors).setOnClickListener(this);
+        findViewById(R.id.windows).setOnClickListener(this);
+        findViewById(R.id.light).setOnClickListener(this);
+        findViewById(R.id.alarm).setOnClickListener(this);
 
-        final Button multimediaButton = (Button) findViewById(R.id.multimedia);
-        multimediaButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View view) {
+//        final Button multimediaButton = (Button) findViewById(R.id.multimedia);
+//        multimediaButton.setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//            @Override
+//            public void onClick(View view) {
+//
+//                System.out.println("Multimedia button clicked");
+//
+//                //TODO solve the ripple effect
+//                //TODO make a music player (with buttons and song titles)
+//
+//
+//                ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
+//                    @Override
+//                    public void getOutline(View view, Outline outline) {
+//                        int width = multimediaButton.getWidth();
+//                        int height = multimediaButton.getHeight();
+//                        // Or read size directly from the view's width/height
+//                        outline.setRoundRect(0, 0, width, height, R.dimen.radius);
+//                    }
+//                };
+//                multimediaButton.setOutlineProvider(viewOutlineProvider);
+//                multimediaButton.setClipToOutline(true);
+//                int[] attrs = new int[]{R.attr.selectableItemBackground};
+//                TypedArray typedArray = MainScreen.this.obtainStyledAttributes(attrs);
+//                int backgroundResource = typedArray.getResourceId(0, 0);
+//                view.setBackgroundResource(backgroundResource);
+//            }
+//        });
 
-                System.out.println("Multimedia button clicked");
+//        Switch doorsButton = (Switch) findViewById(R.id.doors);
+//        doorsButton.setChecked(false);
+//        doorsButton.setOnClickListener(new View.OnClickListener() {
+//            boolean doorState = false;
+//
+//            @Override
+//            public void onClick(View view) {
+//                System.out.println("Doors button clicked");
+//                doorState = !doorState;
+//                if (doorState) {
+//                    System.out.println("The door is open");
+//                } else {
+//                    System.out.println("The door is closed");
+//                }
+//            }
+//        });
 
-                //TODO solve the ripple effect
-                //TODO make a music player (with buttons and song titles)
+//        Switch windowsButton = (Switch) findViewById(R.id.windows);
+//        windowsButton.setChecked(false);
+//
+//        windowsButton.setOnClickListener(new View.OnClickListener() {
+//            boolean windowState = false;
+//
+//            @Override
+//            public void onClick(View view) {
+//                System.out.println("Windows button clicked");
+//                windowState = !windowState;
+//                if (windowState) {
+//                    System.out.println("The window is open");
+//                } else {
+//                    System.out.println("The window is closed");
+//                }
+//            }
+//        });
 
+//        Switch lightButton = (Switch) findViewById(R.id.light);
+//        lightButton.setChecked(false);
+//        lightButton.setOnClickListener(new View.OnClickListener() {
+//            boolean lightState = false;
+//
+//            @Override
+//            public void onClick(View view) {
+//                System.out.println("Light button clicked");
+//                lightState = !lightState;
+//                if (lightState) {
+//                    System.out.println("The light is on");
+//                } else {
+//                    System.out.println("The light is off");
+//                }
+//            }
+//        });
 
-                ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
-                    @Override
-                    public void getOutline(View view, Outline outline) {
-                        int width = multimediaButton.getWidth();
-                        int height = multimediaButton.getHeight();
-                        // Or read size directly from the view's width/height
-                        outline.setRoundRect(0, 0, width, height, R.dimen.radius);
-                    }
-                };
-                multimediaButton.setOutlineProvider(viewOutlineProvider);
-                multimediaButton.setClipToOutline(true);
-                int[] attrs = new int[]{R.attr.selectableItemBackground};
-                TypedArray typedArray = MainScreen.this.obtainStyledAttributes(attrs);
-                int backgroundResource = typedArray.getResourceId(0, 0);
-                view.setBackgroundResource(backgroundResource);
-            }
-        });
-
-        Switch doorsButton = (Switch) findViewById(R.id.doors);
-        doorsButton.setChecked(false);
-        doorsButton.setOnClickListener(new View.OnClickListener() {
-            boolean doorState = false;
-
-            @Override
-            public void onClick(View view) {
-                System.out.println("Doors button clicked");
-                doorState = !doorState;
-                if (doorState) {
-                    System.out.println("The door is open");
-                } else {
-                    System.out.println("The door is closed");
-                }
-            }
-        });
-
-        Switch windowsButton = (Switch) findViewById(R.id.windows);
-        windowsButton.setChecked(false);
-
-        windowsButton.setOnClickListener(new View.OnClickListener() {
-            boolean windowState = false;
-
-            @Override
-            public void onClick(View view) {
-                System.out.println("Windows button clicked");
-                windowState = !windowState;
-                if (windowState) {
-                    System.out.println("The window is open");
-                } else {
-                    System.out.println("The window is closed");
-                }
-            }
-        });
-
-        Switch lightButton = (Switch) findViewById(R.id.light);
-        lightButton.setChecked(false);
-        lightButton.setOnClickListener(new View.OnClickListener() {
-            boolean lightState = false;
-
-            @Override
-            public void onClick(View view) {
-                System.out.println("Light button clicked");
-                lightState = !lightState;
-                if (lightState) {
-                    System.out.println("The light is on");
-                } else {
-                    System.out.println("The light is off");
-                }
-            }
-        });
-
-        final Switch alarmButton = (Switch) findViewById(R.id.alarm);
-        alarmButton.setChecked(false);
-        alarmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-
-            //TODO make a TimePicker!
-            public void onClick(View view) {
-                System.out.println("Alarm button clicked");
-                if (alarmButton.isChecked()) {
-                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                    final Calendar calendar = Calendar.getInstance();
-                    //final TimePicker timePicker = (TimePicker) findViewById(R.id.time_picker);
-
-                    TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
-                        @Override
-                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                            //timePicker.setHour(hourOfDay);
-                            //timePicker.setMinute(minute);
-
-                        }
-                    };
-                    //TODO: nem tudom kicserelni a szineit a timepickernek mert luzer vagyok
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(MainScreen.this, R.style.DialogTheme, timePickerListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
-                    timePickerDialog.show();
-                }
-            }
-        });
+//        final Switch alarmButton = (Switch) findViewById(R.id.alarm);
+//        alarmButton.setChecked(false);
+//        alarmButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//
+//            //TODO make a TimePicker!
+//            public void onClick(View view) {
+//                System.out.println("Alarm button clicked");
+//                if (alarmButton.isChecked()) {
+//                    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+//                    final Calendar calendar = Calendar.getInstance();
+//                    //final TimePicker timePicker = (TimePicker) findViewById(R.id.time_picker);
+//
+//                    TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+//                        @Override
+//                        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                            //timePicker.setHour(hourOfDay);
+//                            //timePicker.setMinute(minute);
+//
+//                        }
+//                    };
+//                    //TODO: nem tudom kicserelni a szineit a timepickernek mert luzer vagyok
+//                    TimePickerDialog timePickerDialog = new TimePickerDialog(MainScreen.this, R.style.DialogTheme, timePickerListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+//                    timePickerDialog.show();
+//                }
+//            }
+//        });
 
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -309,6 +315,45 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("Temperature button clicked");
                 Intent intent = new Intent(MainScreen.this, TemperatureScreen.class);
                 startActivity(intent);
+                break;
+            case R.id.multimedia:
+                System.out.println("Multimedia button clicked");
+
+                //TODO solve the ripple effect
+                //TODO make a music player (with buttons and song titles)
+                break;
+            case R.id.doors:
+                System.out.println("Doors button clicked");
+                break;
+            case R.id.windows:
+                System.out.println("Windows button clicked");
+                break;
+            case R.id.light:
+                System.out.println("Light button clicked");
+                break;
+            case R.id.alarm:
+                System.out.println("Alarm button clicked");
+                Switch alarmSwitch = (Switch) findViewById(R.id.alarm_switch);
+
+                if (!alarmSwitch.isChecked()) {
+                    alarmSwitch.toggle();
+                }
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                final Calendar calendar = Calendar.getInstance();
+                //final TimePicker timePicker = (TimePicker) findViewById(R.id.time_picker);
+
+                TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        //timePicker.setHour(hourOfDay);
+                        //timePicker.setMinute(minute);
+
+                    }
+                };
+                //TODO: nem tudom kicserelni a szineit a timepickernek mert luzer vagyok
+                TimePickerDialog timePickerDialog = new TimePickerDialog(MainScreen.this, R.style.DialogTheme, timePickerListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+                timePickerDialog.show();
                 break;
         }
     }
