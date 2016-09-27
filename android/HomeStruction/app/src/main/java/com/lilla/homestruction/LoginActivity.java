@@ -214,7 +214,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     showProgress(false);
                     if (response.body() == null) {
                         System.out.println("Error");
-                        mPasswordView.setError("Password is not correct");
+                        mPasswordView.setError("Incorrect login credentials");
+                        mPasswordView.requestFocus();
+
                     } else {
                         System.out.println("ddd " + response.body().getToken());
                         SaveSharedPreference.setToken(LoginActivity.this, response.body().getToken());
