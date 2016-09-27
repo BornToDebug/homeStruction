@@ -16,8 +16,8 @@ void setup()
   digitalWrite(relay, LOW);
   digitalWrite(relay2, LOW);
   digitalWrite(relay3, LOW);
-  myservo.attach(9);
-  myservo.write(0);
+  //myservo.attach(9);
+  //myservo.write(0);
   Serial.begin(9600);
 }
 
@@ -60,10 +60,16 @@ void loop()
       Serial.print("\n");
       break;
       case 4:
-      myservo.write(0);
+      myservo.attach(9);
+      myservo.write(10);
+      delay(500);
+      myservo.detach();
       break;
       case 5:
-      myservo.write(90);
+      myservo.attach(9);
+      myservo.write(60);
+      delay(500);
+      myservo.detach();
       break;
       case 7:
       digitalWrite(relay2, HIGH);
