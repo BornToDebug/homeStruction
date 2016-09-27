@@ -23,6 +23,10 @@ from rest_framework.authtoken import views as tokenview
 
 router = routers.DefaultRouter()
 router.register(r'temp', views.TemperatureViewSet)
+router.register(r'lamp', views.LampViewSet)
+router.register(r'light', views.LightViewSet)
+router.register(r'door', views.DoorViewSet)
+router.register(r'window', views.WindowViewSet)
 
 urlpatterns = [
     url(r'^login/$', authviews.login, name='login'),

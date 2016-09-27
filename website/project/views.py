@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Temperature
+from .models import Temperature, Light, Lamp, Door, Window
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import viewsets
-from project.serializers import TemperatureSerializer
+from project.serializers import TemperatureSerializer, LightSerializer, LampSerializer, DoorSerializer, WindowSerializer
 
 # REST framework viewset
 class TemperatureViewSet(viewsets.ModelViewSet):
@@ -11,7 +11,28 @@ class TemperatureViewSet(viewsets.ModelViewSet):
     queryset = Temperature.objects.all().order_by('-time_recorded')
     serializer_class = TemperatureSerializer
 
+class LightViewSet(viewsets.ModelViewSet):
 
+    queryset = Light.objects.all().order_by('-time_recorded')
+    serializer_class = LightSerializer
+
+class LampViewSet(viewsets.ModelViewSet):
+
+    queryset = Lamp.objects.all().order_by('-time_recorded')
+    serializer_class = LampSerializer
+
+class DoorViewSet(viewsets.ModelViewSet):
+
+    queryset = Door.objects.all().order_by('-time_recorded')
+    serializer_class = DoorSerializer
+
+class WindowViewSet(viewsets.ModelViewSet):
+
+    queryset = Window.objects.all().order_by('-time_recorded')
+    serializer_class = WindowSerializer
+
+
+# Website views
 class TemperatureView(LoginRequiredMixin, generic.ListView):
     template_name = 'project/temperature.html'
     context_object_name = 'query_results'
