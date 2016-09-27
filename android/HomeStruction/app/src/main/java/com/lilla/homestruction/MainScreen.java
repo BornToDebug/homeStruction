@@ -117,6 +117,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.shuffle).setOnClickListener(this);
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
+        final TextView volume = (TextView) findViewById(R.id.volume);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
@@ -134,7 +135,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onProgressChanged(SeekBar bar,
                                           int paramInt, boolean paramBoolean)
             {
-                System.out.println("" + paramInt + "%"); // here in textView the percent will be shown
+                volume.setText("" + paramInt + "%"); // here in textView the percent will be shown
             }
         });
 
