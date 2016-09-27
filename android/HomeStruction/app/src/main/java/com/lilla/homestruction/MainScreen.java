@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -114,6 +115,28 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.pause).setOnClickListener(this);
         findViewById(R.id.next).setOnClickListener(this);
         findViewById(R.id.shuffle).setOnClickListener(this);
+
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+
+            public void onStopTrackingTouch(SeekBar bar)
+            {
+                int value = bar.getProgress(); // the value of the seekBar progress
+            }
+
+            public void onStartTrackingTouch(SeekBar bar)
+            {
+
+            }
+
+            public void onProgressChanged(SeekBar bar,
+                                          int paramInt, boolean paramBoolean)
+            {
+                System.out.println("" + paramInt + "%"); // here in textView the percent will be shown
+            }
+        });
 
 //        final Button multimediaButton = (Button) findViewById(R.id.multimedia);
 //        multimediaButton.setOnClickListener(new View.OnClickListener() {
@@ -334,6 +357,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("Shuffle button pressed");
                 break;
         }
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
 
