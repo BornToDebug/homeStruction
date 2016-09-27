@@ -25,8 +25,8 @@ router = routers.DefaultRouter()
 router.register(r'temp', views.TemperatureViewSet)
 
 urlpatterns = [
-    url(r'^login/$', authviews.login),
-    url(r'^logout/$', authviews.logout),
+    url(r'^login/$', authviews.login, name='login'),
+    url(r'^logout/$', authviews.logout, name='logout'),
     url(r'', include('project.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
