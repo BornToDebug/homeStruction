@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -231,6 +233,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         final Switch alarmSwitch = (Switch) findViewById(R.id.alarm_switch);
+        ImageButton play = (ImageButton) findViewById(R.id.play);
+        ImageButton pause = (ImageButton) findViewById(R.id.pause);
 
         switch (v.getId()){
             case R.id.temperature:
@@ -314,9 +318,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.play:
                 System.out.println("Play button pressed");
+                play.setVisibility(View.INVISIBLE);
+                pause.setVisibility(View.VISIBLE);
                 break;
             case R.id.pause:
                 System.out.println("Pause button pressed");
+                play.setVisibility(View.VISIBLE);
+                pause.setVisibility(View.INVISIBLE);
+                //THIS IS FUCKING AWESOME!!! :D
                 break;
             case R.id.next:
                 System.out.println("Next button pressed");

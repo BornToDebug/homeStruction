@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitManager {
 
-    private static final String BASE_URL = "http://acs1.ddns.net:2080/";
+    private static final String BASE_URL = "http://homestruction.servebeer.com";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

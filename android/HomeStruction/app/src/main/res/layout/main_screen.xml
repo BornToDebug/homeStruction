@@ -122,8 +122,9 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/pause"
                     android:background="@android:color/transparent"
-                    android:layout_margin="10dp"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:layout_alignTop="@+id/play"
+                    android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
 
