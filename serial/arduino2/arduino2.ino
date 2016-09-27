@@ -56,6 +56,7 @@ void loop()
       Serial.print(" ");
       Serial.print(lampstatus3);
       Serial.print(" ");
+      Serial.print(myservo.read());
       Serial.print("\n");
       break;
       case 4:

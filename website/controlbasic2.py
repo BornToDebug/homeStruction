@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(o, '/home/projekt/homeStruction/website')
+sys.path.insert(0, '/home/projekt/homeStruction/website')
 import serial
 from time import sleep
 import re
@@ -15,10 +15,6 @@ django.setup()
 from project.models import Lamp
 
 script, todo = sys.argv
-
-ser = serial.Serial('/dev/ttyACM0', 9600)
-serstr = str(ser)
-
 
 def confirmation(todo, ser):
 	MyInt = -1
@@ -62,13 +58,9 @@ def confirmation(todo, ser):
 			return True
 	return False
 
-def serialconnection(serstr):
-	myser = re.split('\W+', serstr)
-	if myser[4] == 'True':
-		return True
-	return False
 
-if serialconnection(serstr):
+try:	
+	ser = serial.Serial('/dev/ttyACM0', 9600)
 	if todo == '1lampon':
 		ser.write('7')
 		if confirmation(todo, ser):
@@ -124,7 +116,9 @@ if serialconnection(serstr):
 			Lamp.objects.create(value='cd_c', time_recorded=timezone.now())
 		else:
 			Lamp.objects.create(value='cd_uc', time_recorded=timezone.now())
-
-else:
+	
+	ser.close()
+	
+except serial.SerialException:
 	Lamp.objects.create(value="ConnError", time_recorded=timezone.now())
-ser.close()
+

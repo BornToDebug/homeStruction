@@ -1,5 +1,19 @@
+import sys
+sys.path.insert(0, '/home/projekt/homeStruction/website')
 import RPi.GPIO as GPIO
 from time import strftime, sleep
+import os
+import django
+from django.utils import timezone
+import signal
+
+# Initial setup required
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "homeStruction.settings")
+django.setup()
+
+
+from project.models import Door, Window
+
 
 doorpin = 25
 windowpin = 12
@@ -19,14 +33,16 @@ def door(channel):
 		elif doorstatus == 'opened':
 			doorstatus = 'closed'
 			#UPDATE DATABASE
-			print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR closed"
+			Door.objects.create(value='closed', time_recorded=timezone.now())
+#			print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR closed"
 	else:
 		if doorstatus == None:
 			doorstatus = 'opened'
 		elif doorstatus == 'closed':
 			doorstatus = 'opened'
 			#UPDATE DATABASE
-			print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR opened"
+			Door.objects.create(value='opened', time_recorded=timezone.now())
+#			print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR opened"
 
 def window(channel):
 	global windowstatus
@@ -36,21 +52,29 @@ def window(channel):
 		elif windowstatus == 'opened':
 			windowstatus = 'closed'
 			#UPDATE DATABASE
-			print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW closed"
+			Window.objects.create(value='closed', time_recorded=timezone.now())
+#			print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW closed"
 	else:
 		if windowstatus == None:
 			windowstatus = 'opened'
 		elif windowstatus == 'closed':
 			windowstatus = 'opened'
 			#UPDATE DATABASE
-			print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW opened"
+			Window.objects.create(value='opened', time_recorded=timezone.now())
+#			print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW opened"
 
 GPIO.add_event_detect(doorpin, GPIO.BOTH, callback=door, bouncetime=300)
 GPIO.add_event_detect(windowpin, GPIO.BOTH, callback=window, bouncetime=300)
 
-
-try:
-	raw_input("Press a key...")
-except KeyboardInterrupt:
+def handler(signal, frame):
 	GPIO.cleanup()
-GPIO.cleanup()
+
+signal.signal(signal.SIGTERM, handler)
+
+while True:
+	sleep(3)
+#try:
+#	raw_input("Press a key...")
+#except KeyboardInterrupt:
+#	GPIO.cleanup()
+#GPIO.cleanup()
