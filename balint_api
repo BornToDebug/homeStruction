@@ -1,0 +1,57 @@
+Arduino controls
+
+	#Lamp1
+	python /home/projekt/homeStruction/serial/controlbasic2.py 1lampon
+	python /home/projekt/homeStruction/serial/controlbasic2.py 1lampoff
+	
+	#Lamp2
+	python /home/projekt/homeStruction/serial/controlbasic2.py 2lampon
+	python /home/projekt/homeStruction/serial/controlbasic2.py 2lampoff
+
+	#Lamp3 (fan/coffee maker)
+	python /home/projekt/homeStruction/serial/controlbasic2.py 3lampon
+	python /home/projekt/homeStruction/serial/controlbasic2.py 3lampoff
+
+	#Servo
+	python /home/projekt/homeStruction/serial/controlbasic2.py closedoor
+	python /home/projekt/homeStruction/serial/controlbasic2.py opendoor
+
+Mplayer controls
+	
+	#For alarm
+	mplayer '/mnt/Stick/Music/01. Crystals.mp3'
+
+	#To listen to music
+	find /mnt/Stick/Music -type f -name "*.mp3" > /home/projekt/homeStruction/newmp3/my_playlist
+	touch /home/projekt/homeStruction/newmp3/logfile
+	python /home/projekt/homeStruction/newmp3/newdisplay.py &
+	script -c 'mplayer -slave -ao alsa -mixer-channel PCM -novideo -volstep 3 -input file=/home/projekt/homeStruction/newmp3/mplayer.pipe -playlist  /home/projekt/homeStruction/newmp3/my_playlist -loop 0' -f /home/projekt/homeStruction/newmp3/logfile
+
+	#To quit
+	echo quit > /home/projekt/homeStruction/newmp3/mplayer.pipe
+	#Although it does not quit newdisplay.py as well...
+
+	#Pause/Unpause
+	echo pause > /home/projekt/homeStruction/newmp3/mplayer.pipe
+
+	#Volume up
+	echo volume 1 > /home/projekt/homeStruction/newmp3/mplayer.pipe
+
+	#Volume down
+	echo volume -1 > /home/projekt/homeStruction/newmp3/mplayer.pipe
+	
+	#Step 1 forward
+	echo pt_step 1 > /home/projekt/homeStruction/newmp3/mplayer.pipe
+
+	#Step 1 backward
+	echo pt_step -1 > /home/projekt/homeStruction/newmp3/mplayer.pipe
+
+	#Step n forward
+	echo pt_step n > /home/projekt/homeStruction/newmp3/mplayer.pipe
+	
+	#Step n backwards
+	echo pt_step -n > /home/projekt/homeStruction/newmp3/mplayer.pipe
+	
+	
+	
+	

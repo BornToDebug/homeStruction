@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/hat4"
-    tools:context="com.example.lilla.homestruction.LoginActivity">
+    tools:context="com.lilla.homestruction.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -89,6 +89,13 @@
                 android:background="@android:color/transparent"
                 />
 
+            <TextView
+                android:id="@+id/login_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#00ffff"
+                android:textSize="16sp"
+                android:textAlignment="center"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -1,25 +1,22 @@
-package com.example.lilla.homestruction;
+package com.lilla.homestruction;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,8 +28,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.lilla.homestruction.bean.TokenResponse;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -40,6 +43,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+
+    TextView loginView;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -66,6 +71,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!TextUtils.isEmpty(SaveSharedPreference.getToken(this))) {
+            startMainScreen();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -150,7 +158,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -166,7 +173,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String username = mUsernameView.getText().toString();
+        final String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -190,7 +197,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
 
-        // TODO: find out how to stay logged in
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
@@ -198,10 +204,41 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
+            //Use retrofit for authentication
+            WebService webService = RetrofitManager.createService(WebService.class);
+            Call<TokenResponse> getTokenCall = webService.getLoginToken(username, password);
             showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
-            mAuthTask.execute((Void) null);
+            getTokenCall.enqueue(new Callback<TokenResponse>() {
+                @Override
+                public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+                    showProgress(false);
+                    if (response.body() == null) {
+                        System.out.println("Error");
+                        mPasswordView.setError("Password is not correct");
+                    } else {
+                        System.out.println("ddd " + response.body().getToken());
+                        SaveSharedPreference.setToken(LoginActivity.this, response.body().getToken());
+                        SaveSharedPreference.setUserName(LoginActivity.this, username);
+                        startMainScreen();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<TokenResponse> call, Throwable t) {
+                    showProgress(false);
+                    System.out.println("Error: " + t.getMessage());
+                    loginView = (TextView) findViewById(R.id.login_view);
+                    loginView.setVisibility(TextView.VISIBLE);
+                    loginView.setText("Failed to connect to server. Please try again.");
+                }
+            });
         }
+    }
+
+    private void startMainScreen() {
+        Intent intent = new Intent(LoginActivity.this, MainScreen.class);
+        startActivity(intent);
     }
 
     private boolean isUsernameValid(String username) {
@@ -308,6 +345,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
+
         private final String mUsername;
         private final String mPassword;
 
@@ -321,7 +359,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                // Simulate network access.
+                // Simulate network access.f
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
@@ -334,8 +372,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return pieces[1].equals(mPassword);
                 }
             }
-
-            // TODO: register the new account here.
 
             return false;
         }
@@ -354,7 +390,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
-                System.out.println("Login unsuccessful!");
             }
         }
 
@@ -363,6 +398,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+
+
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
 

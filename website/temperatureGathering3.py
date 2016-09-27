@@ -11,7 +11,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "homeStruction.settings")
 django.setup()
 
 
-from project.models import Temperature
+from project.models import Temperature, Light
 
 #Initialize serial connection
 ser = serial.Serial('/dev/ttyACM0', 9600);
@@ -22,17 +22,18 @@ ser.write('3');
 sleep(3)
 #Read the big chunk of data
 bigchunk = ser.readline()
-#sleep(1)
+sleep(1)
 #DEBUG: 
 print bigchunk
 #Process the data
 words = bigchunk.split()
 temperature = float(words[0])
-light = int(words[1])
+light = float(words[1])
 #lampstatus = int(words[2])
 #lampstatus2 = int(words[3])
 #doorstatus = int(words[4])
 #windowstatus = int(words[5])
 Temperature.objects.create(value=temperature, time_recorded=timezone.now())
+Light.objects.create(value=light, time_recorded=timezone.now())
 ser.close()
 
