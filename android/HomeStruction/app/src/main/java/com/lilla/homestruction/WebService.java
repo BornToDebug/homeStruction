@@ -1,5 +1,7 @@
 package com.lilla.homestruction;
 
+import com.lilla.homestruction.bean.Door;
+import com.lilla.homestruction.bean.DoorResponse;
 import com.lilla.homestruction.bean.LampResponse;
 import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.TemperatureResponse;
@@ -31,4 +33,6 @@ public interface WebService {
     @GET("/api/lamp/")
     Call<LampResponse>  getLamp();
 
+    @GET("/api/door/")
+    Call<DoorResponse> getDoor();
 }

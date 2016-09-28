@@ -22,6 +22,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.lilla.homestruction.bean.Door;
+import com.lilla.homestruction.bean.DoorResponse;
 import com.lilla.homestruction.bean.Lamp;
 import com.lilla.homestruction.bean.LampResponse;
 import com.lilla.homestruction.bean.Light;
@@ -49,6 +51,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private GoogleApiClient client;
     private TextView temperatureValue;
     private TextView lightText;
+    private Switch doorSwitch;
 
 
 
@@ -123,6 +126,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
         final TextView volume = (TextView) findViewById(R.id.volume);
+        doorSwitch = (Switch) findViewById(R.id.doors_switch);
+        doorSwitch.setClickable(false);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
@@ -179,6 +184,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         updateTemperatureData();
         updateLampData();
+        updateDoorData();
     }
 
     //TODO personalize your own settings in the settings menu
@@ -210,11 +216,46 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onResponse(Call<LampResponse> call, Response<LampResponse> response) {
                 List<Lamp> lampValues = response.body().getResults();
+                if (lampValues.get(0) != null){
+
+                }
             }
 
             @Override
             public void onFailure(Call<LampResponse> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
+            }
+        });
+    }
+
+    private void updateDoorData() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<DoorResponse> call = webService.getDoor();
+        call.enqueue(new Callback<DoorResponse>() {
+            @Override
+            public void onResponse(Call<DoorResponse> call, Response<DoorResponse> response) {
+                List<Door> doorValues = response.body().getResults();
+                if (doorValues.get(0) != null){
+                    switch (doorValues.get(0).getValue()){
+                        case "opened":
+                            doorSwitch.setChecked(true);
+                            doorSwitch.setText("");
+                            break;
+                        case "closed":
+                            doorSwitch.setChecked(false);
+                            doorSwitch.setText("");
+                            break;
+                        default:
+                            doorSwitch.setText("Doors: error");
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DoorResponse> call, Throwable t) {
+                System.out.println("ddd Error: " + t.getMessage());
+                doorSwitch.setText("Doors: error");
             }
         });
     }
