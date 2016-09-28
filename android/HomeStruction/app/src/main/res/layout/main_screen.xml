@@ -79,7 +79,7 @@
             android:textSize="16dp"
             android:textColor="#00ffff"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="15dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,16 +146,40 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volume:"
+            android:visibility="visible"
+            android:textSize="16dp"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"/>
+
         <SeekBar
             android:id="@+id/seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="45dp"
             android:theme="@style/ScrollBarTheme"
             android:textColorSecondaryInverseNoDisable="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0%"
+            android:visibility="visible"
+            android:textSize="16dp"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"/>
 
     </RelativeLayout>
 
