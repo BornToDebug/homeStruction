@@ -30,6 +30,8 @@ import com.lilla.homestruction.bean.Light;
 import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.Temperature;
 import com.lilla.homestruction.bean.TemperatureResponse;
+import com.lilla.homestruction.bean.Windows;
+import com.lilla.homestruction.bean.WindowsResponse;
 
 import java.util.Calendar;
 import java.util.List;
@@ -52,8 +54,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private TextView temperatureValue;
     private TextView lightText;
     private Switch doorSwitch;
-
-
+    private Switch windowSwitch;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -128,6 +129,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         final TextView volume = (TextView) findViewById(R.id.volume);
         doorSwitch = (Switch) findViewById(R.id.doors_switch);
         doorSwitch.setClickable(false);
+        windowSwitch = (Switch) findViewById(R.id.windows_switch);
+        windowSwitch.setClickable(false);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
@@ -246,16 +249,53 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                             doorSwitch.setText("");
                             break;
                         default:
-                            doorSwitch.setText("Doors: error");
+                            doorSwitch.setText("Door: error");
                             break;
                     }
+                }
+                if (doorSwitch.isChecked()) {
+                    System.out.println("Doors open");
+                } else {
+                    System.out.println("Doors closed");
                 }
             }
 
             @Override
             public void onFailure(Call<DoorResponse> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
-                doorSwitch.setText("Doors: error");
+                doorSwitch.setText("Door: error");
+            }
+        });
+    }
+
+    private void updateWindowsData() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<WindowsResponse> call = webService.getWindows();
+        call.enqueue(new Callback<WindowsResponse>() {
+            @Override
+            public void onResponse(Call<WindowsResponse> call, Response<WindowsResponse> response) {
+                List<Windows> windowValues = response.body().getResults();
+                if (windowValues.get(0) != null){
+                    switch (windowValues.get(0).getValue()){
+                        case "opened":
+                            windowSwitch.setChecked(true);
+                            windowSwitch.setText("");
+                            break;
+                        case "closed":
+                            windowSwitch.setChecked(false);
+                            windowSwitch.setText("");
+                            break;
+                        default:
+                            windowSwitch.setText("Window: error");
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WindowsResponse> call, Throwable t) {
+                System.out.println("ddd Error: " + t.getMessage());
+                doorSwitch.setText("Window: error");
             }
         });
     }

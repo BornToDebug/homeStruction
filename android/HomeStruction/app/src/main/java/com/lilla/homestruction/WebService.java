@@ -6,6 +6,7 @@ import com.lilla.homestruction.bean.LampResponse;
 import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.TokenResponse;
+import com.lilla.homestruction.bean.WindowsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -35,4 +36,7 @@ public interface WebService {
 
     @GET("/api/door/")
     Call<DoorResponse> getDoor();
+
+    @GET("/api/window/")
+    Call<WindowsResponse> getWindows();
 }

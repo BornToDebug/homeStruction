@@ -194,7 +194,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Windows"
+            android:text="Window"
             android:textSize="18sp"
             android:textColor="#00ffff"
             android:layout_centerVertical="true"
@@ -224,7 +224,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Doors"
+            android:text="Door"
             android:textSize="18sp"
             android:textColor="#00ffff"
             android:layout_centerVertical="true"
