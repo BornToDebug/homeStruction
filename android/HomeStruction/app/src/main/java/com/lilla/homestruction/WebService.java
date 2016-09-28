@@ -1,5 +1,6 @@
 package com.lilla.homestruction;
 
+import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.TokenResponse;
 
@@ -22,4 +23,8 @@ public interface WebService {
     @FormUrlEncoded
     @POST("/api-token-auth/")
     Call<TokenResponse> getLoginToken(@Field("username") String username, @Field("password") String password);
+
+    @GET("/api/light/")
+    Call<LightResponse> getLight();
+
 }
