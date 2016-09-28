@@ -22,6 +22,8 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.lilla.homestruction.bean.Lamp;
+import com.lilla.homestruction.bean.LampResponse;
 import com.lilla.homestruction.bean.Light;
 import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.Temperature;
@@ -176,6 +178,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         updateTemperatureData();
+        updateLampData();
     }
 
     //TODO personalize your own settings in the settings menu
@@ -195,6 +198,22 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
+                System.out.println("ddd Error: " + t.getMessage());
+            }
+        });
+    }
+
+    private void updateLampData() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<LampResponse> call = webService.getLamp();
+        call.enqueue(new Callback<LampResponse>() {
+            @Override
+            public void onResponse(Call<LampResponse> call, Response<LampResponse> response) {
+                List<Lamp> lampValues = response.body().getResults();
+            }
+
+            @Override
+            public void onFailure(Call<LampResponse> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
             }
         });
