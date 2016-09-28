@@ -46,7 +46,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      */
     private GoogleApiClient client;
     private TextView temperatureValue;
-    private TextView luminosity;
     private TextView lightText;
 
 
@@ -61,8 +60,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             startActivity(intent);
         }
         temperatureValue = (TextView) findViewById(R.id.temperature_value);
-        luminosity = (TextView) findViewById(R.id.luminosity);
-        lightText = (TextView) findViewById(R.id.light_text);
         System.out.println(SaveSharedPreference.getUserName(MainScreen.this));
 
 //        WebService webService = WebService.retrofit.create(WebService.class);
@@ -179,7 +176,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         updateTemperatureData();
-        updateLightData();
     }
 
     //TODO personalize your own settings in the settings menu
@@ -204,27 +200,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateLightData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
-        Call<LightResponse> call = webService.getLight();
-        call.enqueue(new Callback<LightResponse>() {
-            @Override
-            public void onResponse(Call<LightResponse> call, Response<LightResponse> response) {
-                List<Light> lightValue = response.body().getResults();
-                if (lightValue.get(0) != null){
-                    luminosity.setText("Luminosity: " + lightValue.get(0).getValue());
-                    lightText.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LightResponse> call, Throwable t) {
-                luminosity.setText("Luminosity and light: no data");
-                lightText.setVisibility(View.INVISIBLE);
-                System.out.println("ddd Error: " + t.getMessage());
-            }
-        });
-    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -310,6 +285,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.light:
                 System.out.println("Light button clicked");
+                Intent lightScreen = new Intent(MainScreen.this, LightScreen.class);
+                startActivity(lightScreen);
                 break;
             case R.id.alarm:
                 System.out.println("Alarm button clicked");
