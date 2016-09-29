@@ -1,7 +1,12 @@
 package com.lilla.homestruction;
 
+import com.lilla.homestruction.bean.Door;
+import com.lilla.homestruction.bean.DoorResponse;
+import com.lilla.homestruction.bean.LampResponse;
+import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.TokenResponse;
+import com.lilla.homestruction.bean.WindowsResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -22,4 +27,16 @@ public interface WebService {
     @FormUrlEncoded
     @POST("/api-token-auth/")
     Call<TokenResponse> getLoginToken(@Field("username") String username, @Field("password") String password);
+
+    @GET("/api/light/")
+    Call<LightResponse> getLight();
+
+    @GET("/api/lamp/")
+    Call<LampResponse>  getLamp();
+
+    @GET("/api/door/")
+    Call<DoorResponse> getDoor();
+
+    @GET("/api/window/")
+    Call<WindowsResponse> getWindows();
 }
