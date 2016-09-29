@@ -1,0 +1,2 @@
+#!/bin/bash
+ffmpeg -i /dev/video0 -video_size 640x480 -r 10 -i '/mnt/Stick/Music/01. Crystals.mp3' -acodec libfaac -f flv "rtmp://a.rtmp.youtube.com/live2/heda-mkww-ujk3-avg8"

@@ -1,0 +1,7 @@
+#!/bin/bash
+ffmpeg \
+	-i /dev/video0 -r 25 -s 640x480 -c:v:0 libx264 -crf 0 -preset ultrafast \
+	-f alsa -ar 44100 -ac 1 -i hw:1 -c:a aac\
+	-f flv sample
+#	-f flv rtmp://live.twitch.tv/app/live_135514651_a36ejEHMcpvTXGzCTx7XIQGj4sKwnL
+
