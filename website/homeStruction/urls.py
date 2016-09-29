@@ -23,12 +23,13 @@ from rest_framework.authtoken import views as tokenview
 
 router = routers.DefaultRouter()
 router.register(r'temp', views.TemperatureViewSet)
-router.register(r'lamp', views.LampViewSet)
+router.register(r'lamp', views.LampViewSet, 'lampname')
 router.register(r'light', views.LightViewSet)
 router.register(r'door', views.DoorViewSet)
 router.register(r'window', views.WindowViewSet)
 
 urlpatterns = [
+    url('^api/lamp/(?P<startswith>.+)/$', views.LampStartList.as_view()),
     url(r'^login/$', authviews.login, name='login'),
     url(r'^logout/$', authviews.logout, name='logout'),
     url(r'', include('project.urls')),

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Temperature, Light, Lamp, Door, Window
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import viewsets, generics
+from rest_framework import viewsets,generics
 from project.serializers import TemperatureSerializer, LightSerializer, LampSerializer, DoorSerializer, WindowSerializer
 
 # REST framework viewset
@@ -16,13 +16,17 @@ class LightViewSet(viewsets.ModelViewSet):
     queryset = Light.objects.all().order_by('-time_recorded')
     serializer_class = LightSerializer
 
-class LampViewSet(generics.ListAPIView):
+class LampViewSet(viewsets.ModelViewSet):
 
     serializer_class = LampSerializer
+    queryset = Lamp.objects.all().order_by('-time_recorded')
 
-    startswith = '1'   
-    queryset = Lamp.objects.all().filter(value__startswith=startswith).order_by('-time_recorded')
+class LampStartList(generics.ListAPIView):
+    serializer_class = LampSerializer
 
+    def get_queryset(self):
+        startswith = self.kwargs['startswith']
+        return Lamp.objects.filter(value__startswith=startswith)
 
 class DoorViewSet(viewsets.ModelViewSet):
 
