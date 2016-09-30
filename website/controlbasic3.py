@@ -50,7 +50,7 @@ def confirmation(todo, ser):
 			return True
 	if todo == 'opendoor':
 		MyInt = int(words[5])
-		if MyInt == 60:
+		if MyInt == 72:
 			return True
 	if todo == 'closedoor':
 		MyInt = int(words[5])

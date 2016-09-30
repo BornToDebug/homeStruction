@@ -67,7 +67,7 @@ void loop()
       break;
       case 5:
       myservo.attach(9);
-      myservo.write(60);
+      myservo.write(72);
       delay(500);
       myservo.detach();
       break;
