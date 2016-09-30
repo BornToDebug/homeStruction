@@ -1,7 +1,16 @@
 #!/bin/bash
 
-ffmpeg -f v4l2 -framerate 10 -video_size 352x288 -i /dev/video0 \
-	-f alsa -ar 44100 -ac 1 -i hw:1 -c:a aac -b:a 64k \
-	-vcodec libx264 -preset ultrafast -r 10 -s 352x288 -crf 0 \
-	-maxrate 400k -bufsize 400k -vf "format=yuv420p" -g 80\
-	-f flv rtmp://a.rtmp.youtube.com/live2/heda-mkww-ujk3-avg8
+if [ "$1" == start ]
+then
+	nohup ffmpeg -f v4l2 -framerate 10 -video_size 352x288 -i /dev/video0 \
+		-f alsa -ar 44100 -ac 1 -i hw:1 -c:a aac -b:a 64k \
+		-vcodec libx264 -preset ultrafast -r 10 -s 352x288 -crf 0 \
+		-maxrate 400k -bufsize 400k -vf "format=yuv420p" -g 80\
+		-f flv rtmp://a.rtmp.youtube.com/live2/heda-mkww-ujk3-avg8 &
+fi
+
+if [ "$1" == stop ]
+then
+	rm /home/projekt/homeStruction/stream/nohup.out
+	killall ffmpeg
+fi

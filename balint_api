@@ -1,4 +1,14 @@
+Stream controls
+	
+	#Start stream
+	/home/projekt/homeStruction/stream/stream7 start
+
+	#Stop stream
+	/home/projekt/homeStruction/stream/stream7 stop
+
 Arduino controls
+	
+	#UPDATE: import controlbasic3.py instead
 
 	#Lamp1
 	python /home/projekt/homeStruction/website/controlbasic2.py 1lampon
