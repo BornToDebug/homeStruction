@@ -67,3 +67,22 @@ The format option may be needed for raw input files.
 	????????????????????????
 	
 
+
+3. Detailed description
+
+ffmpeg calls the libavformat library (containing demuxers) to read the input files and get packets containing encoded data from them.
+When there are multiple input files, ffmpeg tries to keep them synchronized.
+Encoded packets are then passed to the decoder, which produces uncompressed frames (raw video/PCM audio{Pulse Code Modulation})
+which can be further processed by filtering.
+After filtering, the frames are encoded and then passed to the muxer, which writes them to the output file.
+
+
+
+3.1.1 Simple filtergraphs
+
+They have exactly one input and one output, both of the same type.
+Simple filtergraphs are configured per stream (with -vf and -af aliases for video and audio respectively).
+Note that some filters change frame properties but not frame contents. E.g.: the fps filter changes the number of frames, but does
+not change the frame contents.
+Another example is the setpts filter, which only sets timestamps and otherwise passes the frames unchanged.
+
