@@ -1,8 +1,6 @@
 package com.lilla.homestruction;
 
-import android.app.AlarmManager;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -115,7 +112,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.multimedia).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
-        findViewById(R.id.light).setOnClickListener(this);
         findViewById(R.id.alarm).setOnClickListener(this);
         findViewById(R.id.alarm_switch).setOnClickListener(this);
         findViewById(R.id.songs).setOnClickListener(this);
@@ -188,6 +184,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateTemperatureData();
         updateLampData();
         updateDoorData();
+        updateWindowsData();
     }
 
     //TODO personalize your own settings in the settings menu

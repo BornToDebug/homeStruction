@@ -1,6 +1,5 @@
 package com.lilla.homestruction;
 
-import com.lilla.homestruction.bean.Door;
 import com.lilla.homestruction.bean.DoorResponse;
 import com.lilla.homestruction.bean.LampResponse;
 import com.lilla.homestruction.bean.LightResponse;
@@ -28,7 +27,7 @@ public interface WebService {
     @POST("/api-token-auth/")
     Call<TokenResponse> getLoginToken(@Field("username") String username, @Field("password") String password);
 
-    @GET("/api/light/")
+    @GET("/api/light/1")
     Call<LightResponse> getLight();
 
     @GET("/api/lamp/")

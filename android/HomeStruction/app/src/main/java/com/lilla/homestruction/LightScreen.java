@@ -6,8 +6,6 @@ import android.widget.TextView;
 
 import com.lilla.homestruction.bean.Light;
 import com.lilla.homestruction.bean.LightResponse;
-import com.lilla.homestruction.bean.Temperature;
-import com.lilla.homestruction.bean.TemperatureResponse;
 
 import java.util.List;
 
