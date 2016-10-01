@@ -78,30 +78,30 @@ try:
 	if todo == '2lampon':
 		ser.write('1')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='2on_c', time_recorded=timezone.now())
-		else:
-			Lamp.objects.create(value='2on_uc', time_recorded=timezone.now())
-
-	if todo == '2lampoff':
-		ser.write('2')
-		if confirmation(todo, ser):
 			Lamp.objects.create(value='2off_c', time_recorded=timezone.now())
 		else:
 			Lamp.objects.create(value='2off_uc', time_recorded=timezone.now())
 
+	if todo == '2lampoff':
+		ser.write('2')
+		if confirmation(todo, ser):
+			Lamp.objects.create(value='2on_c', time_recorded=timezone.now())
+		else:
+			Lamp.objects.create(value='2on_uc', time_recorded=timezone.now())
+
 	if todo == '3lampon':
 		ser.write('6')
-		if confirmation(todo, ser):
-			Lamp.objects.create(value='3on_c', time_recorded=timezone.now())
-		else:
-			Lamp.objects.create(value='3on_uc', time_recorded=timezone.now())
-
-	if todo == '3lampoff':
-		ser.write('9')
 		if confirmation(todo, ser):
 			Lamp.objects.create(value='3off_c', time_recorded=timezone.now())
 		else:
 			Lamp.objects.create(value='3off_uc', time_recorded=timezone.now())
+
+	if todo == '3lampoff':
+		ser.write('9')
+		if confirmation(todo, ser):
+			Lamp.objects.create(value='3on_c', time_recorded=timezone.now())
+		else:
+			Lamp.objects.create(value='3on_uc', time_recorded=timezone.now())
 
 	if todo == 'opendoor':
 		ser.write('5')
