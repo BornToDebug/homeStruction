@@ -19,6 +19,7 @@ from django.contrib.auth import views as authviews
 from rest_framework import routers
 from project import views
 from rest_framework.authtoken import views as tokenview
+from project import commandview
 
 
 router = routers.DefaultRouter()
@@ -37,4 +38,5 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-token-auth/', tokenview.obtain_auth_token),
+    url(r'^command/test/$', commandview, name='test'),
 ]
