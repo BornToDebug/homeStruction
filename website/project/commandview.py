@@ -10,6 +10,6 @@ def controlbasic(request):
 
 @login_required
 def startstream(request):
-    call(['/home/projekt/homeStruction/stream/stream7', 'start'], shell=True)
+    call(['/home/projekt/homeStruction/stream/stream7 start'], shell=True)
     return HttpResponse('started')
 
