@@ -5,7 +5,7 @@ import controlbasic3
 @login_required
 def controlbasic(request):
     controlbasic3.controlconfirm('1lampon')
-    return HttpResponse('1')
+    return HttpResponse('2')
 
-
+#controlbasic('1lampon')
 
