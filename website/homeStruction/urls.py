@@ -9,7 +9,7 @@ Function views
 Class-based views
     1. Add an import:  from other_app.views import Home
     2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
+Including another URLconfttern
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
@@ -40,4 +40,5 @@ urlpatterns = [
     url(r'^api-token-auth/', tokenview.obtain_auth_token),
     url(r'^command/test/$', commandview.controlbasic, name='test'),
     url(r'^stream/start/$', commandview.startstream, name='startstream'),
+    url(r'^mp3/toggle/$', commandview.togglemp3, name='togglemp3'),
 ]

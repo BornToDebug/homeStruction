@@ -13,3 +13,9 @@ def startstream(request):
     call(['/home/projekt/homeStruction/stream/stream7 start'], shell=True)
     return HttpResponse('started')
 
+@login_required
+def togglemp3(request):
+    call(['/home/projekt/homeStruction/newmp3/checkrunning'], shell=True)
+    return HttpResponse('mp3 toggled')
+
+
