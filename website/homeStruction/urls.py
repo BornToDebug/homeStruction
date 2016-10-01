@@ -39,4 +39,5 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-token-auth/', tokenview.obtain_auth_token),
     url(r'^command/test/$', commandview.controlbasic, name='test'),
+    url(r'^command/stream/start/$', commandview.startstream, name='startstream'),
 ]
