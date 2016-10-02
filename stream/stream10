@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ffmpeg -f v4l2 -framerate 10 -video_size 352x288 -i /dev/video0 \
+	-f alsa -ar 44100 -ac 1 -i hw:1 -c:a ac3 -b:a 64k \
+	-vcodec libx264 -preset ultrafast -r 10 -s 352x288 -crf 0 \
+	-maxrate 1984k -bufsize 3968k -vf "format=yuv420p" -g 60\
+	-f ssegment -segment_list_flags +live -segment_list playlist.m3u8 \
+ 	-segment_time 10 -hls_time 10 -hls_list_size 0 out%03d.ts http://localhost:8090/feed1.ffm
