@@ -14,6 +14,8 @@ django.setup()
 
 from project.models import Lamp
 
+script, todo = sys.argv
+
 def confirmation(todo, ser):
 	MyInt = -1
 	sleep(2)
@@ -57,7 +59,7 @@ def confirmation(todo, ser):
 	return False
 
 def controlconfirm(todo):
-	try:	
+	try:
 		ser = serial.Serial('/dev/ttyACM0', 9600)
 		if todo == '1lampon':
 			ser.write('7')
@@ -114,9 +116,9 @@ def controlconfirm(todo):
 				Lamp.objects.create(value='cd_c', time_recorded=timezone.now())
 			else:
 				Lamp.objects.create(value='cd_uc', time_recorded=timezone.now())
-		
+
 		ser.close()
-		
+
 	except serial.SerialException:
 		Lamp.objects.create(value="ConnError", time_recorded=timezone.now())
 
