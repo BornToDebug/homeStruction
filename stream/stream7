@@ -7,7 +7,8 @@ then
 
 	if [[ $? -ne 0 ]]
 	then
-		nohup ffmpeg -f v4l2 -framerate 10 -video_size 352x288 -i /dev/video0 \
+		
+		 nohup ffmpeg -f v4l2 -framerate 10 -video_size 352x288 -i /dev/video0 \
 			-f alsa -ar 44100 -ac 1 -i hw:1 -c:a aac -b:a 64k \
 			-vcodec libx264 -preset ultrafast -r 10 -s 352x288 -crf 0 \
 			-maxrate 1984k -bufsize 3968k -vf "format=yuv420p" -g 80\
@@ -17,6 +18,6 @@ fi
 
 if [ "$1" == stop ]
 then
+	killall -9 ffmpeg
 	rm /home/projekt/homeStruction/stream/nohup.out
-	killall ffmpeg
 fi

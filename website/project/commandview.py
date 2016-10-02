@@ -16,6 +16,5 @@ def startstream(request):
 @login_required
 def togglemp3(request):
     call(['/home/projekt/homeStruction/newmp3/checkrunning'], shell=True)
-    return HttpResponse('mp3 toggled')
-
+    return HttpResponse('mp3 toggledddd')
 
