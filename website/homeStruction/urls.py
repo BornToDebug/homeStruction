@@ -38,7 +38,8 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-token-auth/', tokenview.obtain_auth_token),
-    url(r'^command/test/$', commandview.controlbasic, name='test'),
+    url(r'^command/$', commandview.controlbasic, name='test'),
     url(r'^stream/start/$', commandview.startstream, name='startstream'),
+    url(r'^stream/stop/$',  commandview.stopstream, name='stopstream'),
     url(r'^mp3/toggle/$', commandview.togglemp3, name='togglemp3'),
 ]
