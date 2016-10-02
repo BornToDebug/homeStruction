@@ -2,6 +2,6 @@
 
 ffmpeg -f v4l2 -framerate 10 -video_size 352x288 -i /dev/video0 \
 	-f alsa -ar 44100 -ac 1 -i hw:1 -c:a aac -b:a 64k \
-	-vcodec libx264 -preset veryfast -r 10 -s 352x288 -crf 0 \
+	-vcodec libx264 -preset ultrafast -r 10 -s 352x288 -crf 0 \
 	-maxrate 1984k -bufsize 3968k -vf "format=yuv420p" -g 60\
-	-f ffm http://localhost:8090/feed1.ffm
+	http://localhost:8090/feed1.ffm
