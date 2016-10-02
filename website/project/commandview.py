@@ -5,8 +5,9 @@ from subprocess import call
 
 @login_required
 def controlbasic(request):
-    controlbasic3.controlconfirm('1lampon')
-    return HttpResponse('1')
+    command = request.GET.get('command', '')
+    controlbasic3.controlconfirm(command)
+    return HttpResponse(command)
 
 @login_required
 def startstream(request):

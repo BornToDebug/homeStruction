@@ -1,307 +1,364 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/hat4">
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/layout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/hat4">
 
-    <!--<Button-->
-            <!--android:id="@+id/temperature"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="      Temperature"-->
-            <!--android:textAllCaps="false"-->
-            <!--android:textSize="18dp"-->
-            <!--android:gravity="left|center_vertical"-->
-            <!--android:textColor="#00ffff"-->
-            <!--android:background="@drawable/border"-->
-            <!--android:layout_margin="4dp"-->
+        <!--<Button-->
+        <!--android:id="@+id/temperature"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->x
+        <!--android:layout_weight="1"-->
+        <!--android:text="      Temperature"-->
+        <!--android:textAllCaps="false"-->
+        <!--android:textSize="18dp"-->
+        <!--android:gravity="left|center_vertical"-->
+        <!--android:textColor="#00ffff"-->
+        <!--android:background="@drawable/border"-->
+        <!--android:layout_margin="4dp"-->
         <!--/>-->
 
-    <RelativeLayout
-        android:id="@+id/temperature"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:layout_margin="4dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Temperature"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
-
-        <TextView
-            android:id="@+id/temperature_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            tools:text="no data"
-            />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/multimedia"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@drawable/border"
-        android:layout_margin="4dp">
-
-        <TextView
+        <RelativeLayout
+            android:id="@+id/temperature"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Music Player"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center" />
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
 
-        <TextView
-            android:id="@+id/now_playing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Now playing: "
-            android:textSize="16dp"
-            android:textColor="#00ffff"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="15dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="center_horizontal">
-
-            <ImageButton
-                android:id="@+id/songs"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/songs"
-                android:background="@android:color/transparent"
-                android:layout_margin="5dp"
+                android:text="Temperature"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
                 />
 
-            <ImageButton
-                android:id="@+id/previous"
+            <TextView
+                android:id="@+id/temperature_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/previous"
-                android:background="@android:color/transparent"
-                android:layout_margin="5dp"/>
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                tools:text="no data"
+                />
 
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/multimedia"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Music Player"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/now_playing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Now playing: "
+                android:textSize="16dp"
+                android:textColor="#00ffff"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="center_horizontal">
+
                 <ImageButton
-                    android:id="@+id/play"
+                    android:id="@+id/songs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/play"
+                    android:src="@drawable/songs"
+                    android:background="@android:color/transparent"
+                    android:layout_margin="5dp"
+                    />
+
+                <ImageButton
+                    android:id="@+id/previous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/previous"
+                    android:background="@android:color/transparent"
+                    android:layout_margin="5dp"/>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/play"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/play"
+                        android:background="@android:color/transparent"
+                        android:layout_margin="5dp"/>
+
+                    <ImageButton
+                        android:id="@+id/pause"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/pause"
+                        android:background="@android:color/transparent"
+                        android:visibility="invisible"
+                        android:layout_alignTop="@+id/play"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
+
+                <ImageButton
+                    android:id="@+id/next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/next"
                     android:background="@android:color/transparent"
                     android:layout_margin="5dp"/>
 
                 <ImageButton
-                    android:id="@+id/pause"
+                    android:id="@+id/shuffle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/pause"
+                    android:src="@drawable/shuffle"
                     android:background="@android:color/transparent"
-                    android:visibility="invisible"
-                    android:layout_alignTop="@+id/play"
-                    android:layout_centerHorizontal="true" />
-            </RelativeLayout>
+                    android:layout_margin="5dp"/>
 
+            </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/next"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/next"
-                android:background="@android:color/transparent"
-                android:layout_margin="5dp"/>
+                android:text="Volume:"
+                android:visibility="visible"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"/>
 
-            <ImageButton
-                android:id="@+id/shuffle"
+            <SeekBar
+                android:id="@+id/seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="45dp"
+                android:theme="@style/ScrollBarTheme"
+                android:textColorSecondaryInverseNoDisable="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/volume"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/shuffle"
-                android:background="@android:color/transparent"
-                android:layout_margin="5dp"/>
+                android:text="0%"
+                android:visibility="visible"
+                android:textSize="16dp"
+                android:textColor="@color/colorAccent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Volume:"
-            android:visibility="visible"
-            android:textSize="16dp"
-            android:textColor="@color/colorAccent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"/>
-
-        <SeekBar
-            android:id="@+id/seek_bar"
+        <RelativeLayout
+            android:id="@+id/windows"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="45dp"
-            android:theme="@style/ScrollBarTheme"
-            android:textColorSecondaryInverseNoDisable="@color/colorAccent"/>
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
 
-        <TextView
-            android:id="@+id/volume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0%"
-            android:visibility="visible"
-            android:textSize="16dp"
-            android:textColor="@color/colorAccent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Window"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/windows"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:layout_margin="4dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Window"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
-
-        <Switch
-            android:id="@+id/windows_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp" />
-    </RelativeLayout>
+            <Switch
+                android:id="@+id/windows_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp" />
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/doors"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:layout_margin="4dp">
+        <RelativeLayout
+            android:id="@+id/doors"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Door"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Door"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
 
-        <Switch
-            android:id="@+id/doors_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp" />
-    </RelativeLayout>
+            <Switch
+                android:id="@+id/doors_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp" />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/light"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:layout_margin="4dp">
+        <RelativeLayout
+            android:id="@+id/chandelier"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Light"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chandelier"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
 
-        <Switch
-            android:id="@+id/light_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp" />
+            <Switch
+                android:id="@+id/chandelier_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp" />
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/nightlight"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nightlight"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
+
+            <Switch
+                android:id="@+id/nightlight_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/vecof"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ventillator/Coffee machine"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
+
+            <Switch
+                android:id="@+id/light_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp" />
+
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/alarm"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/border"
-        android:layout_margin="4dp">
+        <RelativeLayout
+            android:id="@+id/alarm"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/border"
+            android:layout_margin="4dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alarm"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alarm"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                />
 
-        <Switch
-            android:id="@+id/alarm_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="#00ffff"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:textOn=""
-            android:textOff=""/>
+            <Switch
+                android:id="@+id/alarm_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#00ffff"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:textOn=""
+                android:textOff=""/>
 
-    </RelativeLayout>
-</LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

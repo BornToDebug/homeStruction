@@ -1,7 +1,11 @@
 package com.lilla.homestruction;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 /**
  * Created by lilla on 22/09/16.
@@ -19,6 +23,20 @@ public class TemperatureScreen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temperature_screen);
+
+//        ImageView imageView = (ImageView) findViewById(R.id.graph);
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        Drawable drawable = getResources().getDrawable(R.drawable.graph);
+//
+//        int hMargin = (int) (displayMetrics.widthPixels * .10);
+//        int vMargin = (int) (displayMetrics.heightPixels * .10);
+//
+//        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(displayMetrics.widthPixels - (hMargin * 2), (int)(displayMetrics.heightPixels) - (vMargin * 2));
+//        params.leftMargin = hMargin;
+//        params.topMargin =  vMargin;
+//        imageView.setLayoutParams(params);
+//        imageView.setImageDrawable(drawable);
 
         //TODO zoom in on the picture
 //        imageView = (ImageView) findViewById(R.id.graph);
