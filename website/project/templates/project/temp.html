@@ -1,10 +1,13 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <div id="lght">
-			<h6>The temperature in your room is:</h6><h5>25 C</h5>
+			<h6>The temperature in your room is:</h6><h5>25 °C</h5>
 			<div class="item">
 				<img src="{% static "project/fto/assets/img/slideshow/graph.jpg" %}">
             </div>
+			<div id="more" class="more" style="margin-top:30px; margin-bottom:30px; font-weight:bold; font-size:20px;font-family:'Oswald',sans-serif">
+				<a href="moretemp.html" >More about the temperature...</a>
+			</div>
 
 {% endblock content %}
 

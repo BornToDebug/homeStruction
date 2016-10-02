@@ -1116,6 +1116,16 @@ ul.menu ul {
 	 margin-top:-49px;
 	 padding-left:200px;
  }
+ #txtsw a{
+	 margin-left:100px;
+	 margin-top:5000px;
+	 color:#cccccc;
+	 font-weight:bold;
+ }
+ #more a:hover{
+	 color: #196666;
+	 
+ }
 .opclswitch {
     position: relative; width: 90px;
 	margin-right:auto;
@@ -1476,6 +1486,9 @@ a.slicknav_item [class*=" fa-"] {
 	 margin-top:-49px;
 	 padding-left:200px;
  }
+ #more :hover{
+	 color:black;
+ }
 .onoffswitch {
     position: relative; width: 90px;
 	margin-left:600px;
@@ -1720,10 +1733,6 @@ label:hover:before {
   border: 3px solid #00cc99!important;
    width: 15px; height: 15px;
 }
-
-
-
-
 
 
 
