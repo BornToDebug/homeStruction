@@ -56,7 +56,8 @@ class SongInfo(object):
 		for item in content.split("\n"):
 			if "ANS_FILENAME" in item:
                                 temp = item.split("ANS_FILENAME=")[-1].strip()
-				self.title = temp.replace("'", "")
+				#self.title = temp.replace("'", "")
+				self.title = 'asdff'
 			if "ANS_PERCENT_POS" in item:
 				temp = item.split("ANS_PERCENT_POSITION=")[-1].strip("\r\n")
 				self.position = int(temp)
