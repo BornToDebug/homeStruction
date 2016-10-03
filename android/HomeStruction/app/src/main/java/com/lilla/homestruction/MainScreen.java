@@ -21,10 +21,12 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.lilla.homestruction.bean.Door;
 import com.lilla.homestruction.bean.DoorResponse;
-import com.lilla.homestruction.bean.Lamp;
-import com.lilla.homestruction.bean.LampResponse;
-import com.lilla.homestruction.bean.Light;
-import com.lilla.homestruction.bean.LightResponse;
+import com.lilla.homestruction.bean.Lamp1;
+import com.lilla.homestruction.bean.Lamp1Response;
+import com.lilla.homestruction.bean.Lamp2;
+import com.lilla.homestruction.bean.Lamp2Response;
+import com.lilla.homestruction.bean.Lamp3;
+import com.lilla.homestruction.bean.Lamp3Response;
 import com.lilla.homestruction.bean.Temperature;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.Windows;
@@ -182,7 +184,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         updateTemperatureData();
-        updateLampData();
+        updateLamp1Data();
+        updateLamp2Data();
+        updateLamp3Data();
         updateDoorData();
         updateWindowsData();
     }
@@ -209,20 +213,58 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateLampData() {
+    private void updateLamp1Data() {
         WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
-        Call<LampResponse> call = webService.getLamp();
-        call.enqueue(new Callback<LampResponse>() {
+        Call<Lamp1Response> call = webService.getLamp1();
+        call.enqueue(new Callback<Lamp1Response>() {
             @Override
-            public void onResponse(Call<LampResponse> call, Response<LampResponse> response) {
-                List<Lamp> lampValues = response.body().getResults();
+            public void onResponse(Call<Lamp1Response> call, Response<Lamp1Response> response) {
+                List<Lamp1> lampValues = response.body().getResults();
                 if (lampValues.get(0) != null){
 
                 }
             }
 
             @Override
-            public void onFailure(Call<LampResponse> call, Throwable t) {
+            public void onFailure(Call<Lamp1Response> call, Throwable t) {
+                System.out.println("ddd Error: " + t.getMessage());
+            }
+        });
+    }
+
+    private void updateLamp2Data() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<Lamp2Response> call = webService.getLamp2();
+        call.enqueue(new Callback<Lamp2Response>() {
+            @Override
+            public void onResponse(Call<Lamp2Response> call, Response<Lamp2Response> response) {
+                List<Lamp2> lampValues = response.body().getResults();
+                if (lampValues.get(0) != null){
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Lamp2Response> call, Throwable t) {
+                System.out.println("ddd Error: " + t.getMessage());
+            }
+        });
+    }
+
+    private void updateLamp3Data() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<Lamp3Response> call = webService.getLamp3();
+        call.enqueue(new Callback<Lamp3Response>() {
+            @Override
+            public void onResponse(Call<Lamp3Response> call, Response<Lamp3Response> response) {
+                List<Lamp3> lampValues = response.body().getResults();
+                if (lampValues.get(0) != null){
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Lamp3Response> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
             }
         });
