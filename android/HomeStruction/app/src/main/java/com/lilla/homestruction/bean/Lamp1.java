@@ -7,18 +7,18 @@ import com.google.gson.annotations.SerializedName;
  * Created by lilla on 28/09/16.
  */
 
-public class Lamp {
+public class Lamp1 {
     @Expose
     @SerializedName("time_recorded")
     private String timeRecorded;
     @Expose
     private String value;
 
-    public Lamp() {
+    public Lamp1() {
         this(null, null);
     }
 
-    public Lamp(String timeRecorded, String value) {
+    public Lamp1(String timeRecorded, String value) {
         this.timeRecorded = timeRecorded;
         this.value = value;
     }

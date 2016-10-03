@@ -8,7 +8,7 @@ import java.util.List;
  * Created by lilla on 28/09/16.
  */
 
-public class LampResponse {
+public class Lamp1Response {
     @Expose
     private int count;
     @Expose
@@ -16,13 +16,13 @@ public class LampResponse {
     @Expose
     private String previous;
     @Expose
-    private List<Lamp> results;
+    private List<Lamp1> results;
 
-    public LampResponse() {
+    public Lamp1Response() {
         this(0, null, null, null);
     }
 
-    public LampResponse(int count, String next, String previous, List<Lamp> results) {
+    public Lamp1Response(int count, String next, String previous, List<Lamp1> results) {
         this.count = count;
         this.next = next;
         this.previous = previous;
@@ -53,11 +53,11 @@ public class LampResponse {
         this.previous = previous;
     }
 
-    public List<Lamp> getResults() {
+    public List<Lamp1> getResults() {
         return results;
     }
 
-    public void setResults(List<Lamp> results) {
+    public void setResults(List<Lamp1> results) {
         this.results = results;
     }
 }
