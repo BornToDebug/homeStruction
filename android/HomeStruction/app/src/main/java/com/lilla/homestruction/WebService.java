@@ -1,7 +1,9 @@
 package com.lilla.homestruction;
 
 import com.lilla.homestruction.bean.DoorResponse;
-import com.lilla.homestruction.bean.LampResponse;
+import com.lilla.homestruction.bean.Lamp1Response;
+import com.lilla.homestruction.bean.Lamp2Response;
+import com.lilla.homestruction.bean.Lamp3Response;
 import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.TokenResponse;
@@ -30,8 +32,14 @@ public interface WebService {
     @GET("/api/light/1")
     Call<LightResponse> getLight();
 
-    @GET("/api/lamp/")
-    Call<LampResponse>  getLamp();
+    @GET("/api/lamp/1")
+    Call<Lamp1Response>  getLamp1();
+
+    @GET("/api/lamp/2")
+    Call<Lamp2Response>  getLamp2();
+
+    @GET("/api/lamp/3")
+    Call<Lamp3Response>  getLamp3();
 
     @GET("/api/door/")
     Call<DoorResponse> getDoor();

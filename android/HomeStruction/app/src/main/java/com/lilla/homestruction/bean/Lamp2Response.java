@@ -5,10 +5,10 @@ import com.google.gson.annotations.Expose;
 import java.util.List;
 
 /**
- * Created by lilla on 28/09/16.
+ * Created by lilla on 03/10/16.
  */
 
-public class LampResponse {
+public class Lamp2Response {
     @Expose
     private int count;
     @Expose
@@ -16,13 +16,13 @@ public class LampResponse {
     @Expose
     private String previous;
     @Expose
-    private List<Lamp> results;
+    private List<Lamp2> results;
 
-    public LampResponse() {
+    public Lamp2Response() {
         this(0, null, null, null);
     }
 
-    public LampResponse(int count, String next, String previous, List<Lamp> results) {
+    public Lamp2Response(int count, String next, String previous, List<Lamp2> results) {
         this.count = count;
         this.next = next;
         this.previous = previous;
@@ -53,11 +53,11 @@ public class LampResponse {
         this.previous = previous;
     }
 
-    public List<Lamp> getResults() {
+    public List<Lamp2> getResults() {
         return results;
     }
 
-    public void setResults(List<Lamp> results) {
+    public void setResults(List<Lamp2> results) {
         this.results = results;
     }
 }
