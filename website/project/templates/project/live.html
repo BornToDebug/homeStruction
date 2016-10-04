@@ -1,10 +1,23 @@
 {% extends 'project/base.html' %}
+{% load static %}
 {% block content %}
-<video width="400" controls>
-  <source src="http://192.168.1.5:8090/feed1.flv" type="video/flv">
-  Your browser does not support HTML5 video.
-</video>
 
+<script src="{% static 'project/pyr.js' %}"></script>
+<script>plyr.setup();</script>
+
+<script src="{% static 'project/hls.js' %}"></script>
+<video id="video"></video>
+<script>
+  if(Hls.isSupported()) {
+    var video = document.getElementById('video');
+    var hls = new Hls();
+    hls.loadSource('http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8');
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+  });
+ }
+</script>
 {% endblock content %}
 
 
