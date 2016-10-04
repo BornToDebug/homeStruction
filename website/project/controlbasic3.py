@@ -32,19 +32,19 @@ def confirmation(todo, ser):
 			return True
 	if todo == '2lampon':
 		MyInt = int(words[2])
-		if MyInt == 1:
+		if MyInt == 0:
 			return True
 	if todo == '2lampoff':
 		MyInt = int(words[2])
-		if MyInt == 0:
+		if MyInt == 1:
 			return True
 	if todo == '3lampon':
 		MyInt = int(words[4])
-		if MyInt == 1:
+		if MyInt == 0:
 			return True
 	if todo == '3lampoff':
 		MyInt = int(words[4])
-		if MyInt == 0:
+		if MyInt == 1:
 			return True
 	if todo == 'opendoor':
 		MyInt = int(words[5])
@@ -74,32 +74,32 @@ def controlconfirm(todo):
 				Lamp.objects.create(value='1off_uc', time_recorded=timezone.now())
 
 		if todo == '2lampon':
-			ser.write('1')
-			if confirmation(todo, ser):
-				Lamp.objects.create(value='2off_c', time_recorded=timezone.now())
-			else:
-				Lamp.objects.create(value='2off_uc', time_recorded=timezone.now())
-
-		if todo == '2lampoff':
 			ser.write('2')
 			if confirmation(todo, ser):
 				Lamp.objects.create(value='2on_c', time_recorded=timezone.now())
 			else:
 				Lamp.objects.create(value='2on_uc', time_recorded=timezone.now())
 
-		if todo == '3lampon':
-			ser.write('6')
+		if todo == '2lampoff':
+			ser.write('1')
 			if confirmation(todo, ser):
-				Lamp.objects.create(value='3off_c', time_recorded=timezone.now())
+				Lamp.objects.create(value='2off_c', time_recorded=timezone.now())
 			else:
-				Lamp.objects.create(value='3off_uc', time_recorded=timezone.now())
+				Lamp.objects.create(value='2off_uc', time_recorded=timezone.now())
 
-		if todo == '3lampoff':
+		if todo == '3lampon':
 			ser.write('9')
 			if confirmation(todo, ser):
 				Lamp.objects.create(value='3on_c', time_recorded=timezone.now())
 			else:
 				Lamp.objects.create(value='3on_uc', time_recorded=timezone.now())
+
+		if todo == '3lampoff':
+			ser.write('6')
+			if confirmation(todo, ser):
+				Lamp.objects.create(value='3off_c', time_recorded=timezone.now())
+			else:
+				Lamp.objects.create(value='3off_uc', time_recorded=timezone.now())
 
 		if todo == 'opendoor':
 			ser.write('5')
