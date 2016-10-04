@@ -1,5 +1,8 @@
 #include <Servo.h>
+#include <dht.h>
 
+dht DHT;
+const int DHT11_PIN = 7;
 const int relay = 2;
 const int relay2 = 3;
 const int relay3 = 4;
@@ -33,6 +36,7 @@ void loop()
   int lampstatus = bitRead(PORTD, relay);
   int lampstatus2 = bitRead(PORTD, relay2);
   int lampstatus3 = bitRead(PORTD, relay3);
+  int chk = DHT.read11(DHT11_PIN);
   
   if(Serial.available())
   {
@@ -57,6 +61,10 @@ void loop()
       Serial.print(lampstatus3);
       Serial.print(" ");
       Serial.print(myservo.read());
+      Serial.print(" ");
+      Serial.print(DHT.temperature);
+      Serial.print(" ");
+      Serial.print(DHT.humidity);
       Serial.print("\n");
       break;
       case 4:
