@@ -8,3 +8,8 @@ function command(command) {
 	commandReq.open("GET", "/command?command=" + command);
 	commandReq.send();
 }
+var button2 = document.getElementById("myopclswitch");
+function myFunction(){
+	if(button2.checked==false) {command("opendoor")};
+    if (button2.checked==true) {command("closedoor");}
+}

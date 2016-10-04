@@ -1459,6 +1459,10 @@ a.slicknav_item [class*=" fa-"] {
 	
 	 
  }
+ #mutmedia{
+height:100%;
+
+ }
  #txtsw {
 	 background-color:#999999;
 	 min-height:200px;
@@ -1587,6 +1591,59 @@ a.slicknav_item [class*=" fa-"] {
 .onoff2switch-checkbox:checked + .onoff2switch-label .onoff2switch-switch {
     right: 0px; 
 }
+
+
+
+.onoff3switch {
+    position: relative; width: 90px;
+	margin-left:600px;
+	margin-top:-60px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoff3switch-checkbox {
+    display: none;
+}
+.onoff3switch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoff3switch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoff3switch-inner:before, .onoff3switch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoff3switch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #34A7C1; color: #FFFFFF;
+	text-align:left;
+}
+.onoff3switch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+	font-size:12px;
+}
+.onoff3switch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 56px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoff3switch-checkbox:checked + .onoff3switch-label .onoff3switch-inner {
+    margin-left: 0;
+}
+.onoff3switch-checkbox:checked + .onoff3switch-label .onoff3switch-switch {
+    right: 0px; 
+}
+
 /*-----------------------------------------------------------------------------------*/
 /*Light and Temperature and Alarm button too*/
 #lght{
