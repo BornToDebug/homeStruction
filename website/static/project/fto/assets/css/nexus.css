@@ -1089,13 +1089,20 @@ ul.menu ul {
 	
 	 
  }
+#daw{
+	margin-right: auto;
+    margin-left: auto;
+	width:1100px;
+	height:auto;
+	overflow:auto;
+}
  #txtsw {
-	 background-color:#999999;
-	 min-height:200px;
-	 position:relative;
-	 border-radius:10px;
-	 width:800px;
-	 margin-right:auto;
+	background-color:#999999;
+	min-height:200px;
+	position:relative;
+	border-radius:10px;
+	width:800px;
+	margin-right:auto;
 	margin-left:auto;
 	
 	 
@@ -1116,16 +1123,7 @@ ul.menu ul {
 	 margin-top:-49px;
 	 padding-left:200px;
  }
-  #txtsw a{
-	 margin-left:100px;
-	 margin-top:5000px;
-	 color:#cccccc;
-	 font-weight:bold;
- }
- #more a:hover{
-	 color: #196666;
-	 
- }
+
 .opclswitch {
     position: relative; width: 90px;
 	margin-right:auto;
@@ -1471,12 +1469,12 @@ a.slicknav_item [class*=" fa-"] {
 	margin-left:auto;
  }
  #txtsw h5{
-	 color:#cccccc;
+	 color: #404040;
 	 font-weight:bold;
 	 font-family:'Oswald',sans-serif;
 	 font-size:23 px;
 	 padding-top:70px;
-	 padding-left:100px;
+	 padding-left:50px;
  }
  #txtsw h6{
 	 color:#196666;
@@ -1484,7 +1482,10 @@ a.slicknav_item [class*=" fa-"] {
 	 font-family:'Oswald',sans-serif;
 	 font-size:23 px;
 	 margin-top:-49px;
-	 padding-left:200px;
+	 padding-left:140px;
+ }
+ #more :hover{
+	 color:black;
  }
 .onoffswitch {
     position: relative; width: 90px;
@@ -1730,10 +1731,6 @@ label:hover:before {
   border: 3px solid #00cc99!important;
    width: 15px; height: 15px;
 }
-
-
-
-
 
 
 
@@ -3068,10 +3065,4 @@ ul.posts-list li {
   line-height: 40px;
   min-height: 40px;
   text-align: center;
-}
-
-/* ERROR MESSAGE - LOG IN */
-
-.formaterror{
-	color:blue;
 }
