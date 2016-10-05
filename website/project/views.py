@@ -41,7 +41,7 @@ class WindowViewSet(viewsets.ModelViewSet):
 
 # Website views
 class TemperatureView(LoginRequiredMixin, generic.ListView):
-    template_name = 'project/temperature.html'
+    template_name = 'project/temp.html'
     context_object_name = 'query_results'
 
     def get_queryset(self):
