@@ -62,8 +62,6 @@ void loop()
       Serial.print(" ");
       Serial.print(myservo.read());
       Serial.print(" ");
-      Serial.print(DHT.temperature);
-      Serial.print(" ");
       Serial.print(DHT.humidity);
       Serial.print("\n");
       break;
