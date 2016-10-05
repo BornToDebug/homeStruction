@@ -21,13 +21,3 @@ function objectToHTML(jsonObj) {
 	return tableRow;
 }
 
-function generateRows(json, table, objectConverter) {
-	//delete current entries in table and populate it with data
-	var tableRow;
-	table.innerHTML = '';
-
-	for (i=0;i<json.length;i++) {
-		tableRow = objectConverter(json[i]);
-		table.innerHTML += tableRow;
-	}
-}
