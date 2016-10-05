@@ -1,20 +1,20 @@
 {% extends 'project/base.html' %}
 {% block content %}
 {% load static %}
-<div id="daw" style="">
-	<div id="door" name="door" style="width:50%; float:left; margin-top:18px;">
-		<h6 style="margin-left:20px;">...Oops! You may have left the door open. Let's check it out and solve it.</h6>
-		<div id="txtsw" style="width:500px" >
-			<h5>The door is: </h5><h6>OPEN/CLOSED.</h6>
-			<div class="opclswitch" style="margin-left:350px" >
-				<input type="checkbox" name="opclswitch" class="opclswitch-checkbox" id="myopclswitch" onclick="myFunction()">
-				<label class="opclswitch-label" for="myopclswitch">
-					<span class="opclswitch-inner"></span>
-					<span class="opclswitch-switch"></span>
-				</label>
-			</div>
-
-		</div>
+ <div id="daw" style="min-height:100vh;">
+			<div id="door" name="door" style="width:50%; float:left; margin-top:18px;">
+				<h6 style="margin-left:20px;">...Oops! You may have left the door open. Let's check it out and solve it.</h6>
+			  <div id="txtsw" style="width:500px" >
+				<h5>The door is: </h5><h6>OPEN/CLOSED.</h6>
+				<div class="opclswitch" style="margin-left:350px" >
+					<input type="checkbox" name="opclswitch" class="opclswitch-checkbox" id="myopclswitch">
+					<label class="opclswitch-label" for="myopclswitch">
+						<span class="opclswitch-inner"></span>
+						<span class="opclswitch-switch"></span>
+					</label>
+				</div>
+				
+			  </div>
 		<div id="mytable" style="width:500px">
 			<section>
 
@@ -22,9 +22,9 @@
 					<table cellpadding="0" cellspacing="0" border="0">
 						<thead>
 							<tr >
-								<th>Status</th>
-								<th>Date</th>
-								<th>Time</th>
+								<th style="padding-left:10px">Status</th>
+								<th style="width:113px; padding-left:30px;">Date</th>
+								<th style="padding-left:53px">Time</th>
 
 							</tr>
 						</thead>
@@ -54,9 +54,9 @@
 					<table cellpadding="0" cellspacing="0" border="0">
 						<thead>
 							<tr>
-								<th>Status</th>
-								<th>Date</th>
-								<th>Time</th>
+								<th style="padding-left:10px">Status</th>
+								<th style="width:113px; padding-left:55px;">Date</th>
+								<th style="padding-left:70px">Time</th>
 
 							</tr>
 						</thead>

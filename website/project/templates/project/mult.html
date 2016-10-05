@@ -1,11 +1,12 @@
 {% extends 'project/base.html' %}
 {% block content %}
-<div id="multimedia">
-			<div id="music" name="music">
-				<h6>...Need something to brighten up your day? Listen to your favourite music if you feel like.</h6>
-			  <div id="txtsw">
-				<h5>The music is : </h5><h6>ON/OFF.</h6>
-				<div class="onoffswitch">
+ <div id="multimedia" style="margin-left:auto; margin-right:auto;width:1100px;padding-left:30px;min-height:100vh; margin-bottom:200px">
+		  
+
+			<div id="light1" name="light1" style="width:34%; float:left;">
+			  <div id="txtsw" style="width:340px">
+				<h5>Light #1 is : </h5><h6>ON/OFF.</h6>
+				<div class="onoffswitch" style="margin-left:auto;margin-right:auto;margin-top:25px">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
 					<label class="onoffswitch-label" for="myonoffswitch">
 						<span class="onoffswitch-inner"></span>
@@ -14,11 +15,12 @@
 				</div>
 			  </div>	
 			</div>
-			<div id="tv" name="tv">
-				<h6>...You may want to catch up with the latest news. Turn the TV on.  </h6>
-				<div id="txtsw">
-				<h5>The TV is: </h5><h6>ON/OFF.</h6>
-				<div class="onoffswitch">
+			 
+			
+			<div id="light2" name="light2" style="width:33%; float:left">
+				<div id="txtsw" style="width:340px;">
+				<h5>Light #2 is: </h5><h6>ON/OFF.</h6>
+				<div class="onoffswitch" style="margin-right:auto;margin-left:auto; margin-top:25px" >
 					<input type="checkbox" name="onoff2switch" class="onoff2switch-checkbox" id="myonoff2switch" checked>
 					<label class="onoff2switch-label" for="myonoff2switch">
 						<span class="onoff2switch-inner"></span>
@@ -27,6 +29,168 @@
 				</div>
 			  </div>	
 			</div>
+			
+			<div  id="light3" class="light3" style="width:33%; float:left">
+			<div id="txtsw" style="width:340px">
+				<h5>Light #3 is : </h5><h6>ON/OFF.</h6>
+				<div class="onoffswitch" style="margin-right:auto;margin-left:auto;margin-top:25px; ">
+					<input type="checkbox" name="onoff3switch" class="onoff3switch-checkbox" id="myonoff3switch" checked>
+					<label class="onoff3switch-label" for="myonoff3switch">
+						<span class="onoff3switch-inner"></span>
+						<span class="onoff3switch-switch"></span>
+					</label>
+				</div>
+				
+			</div>
+			</div>
+			
+			<div id="mytable" style="width:100%; float:left; margin-top:50px;">	  
+	<section>
+<div  class="tbl-header" style="background-color: rgba(255,255,255,0.3); ">
+<table cellpadding="0" cellspacing="0" border="0">
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th style="padding-left:0px; width:520px;">Date</th>
+      <th style="padding-left:0px">Time</th>
+      
+    </tr>
+  </thead>
+</table>
+</div>
+<div  class="tbl-content" >
+<table cellpadding="0" cellspacing="0" border="0" >
+  <tbody >
+    <tr>
+      <td>Light #1 successfully switched on</td>
+      <td>2016.10.02.</td>
+      <td>19:27:42</td>
+      
+      
+    </tr>
+    <tr>
+      <td>Light #1 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>19:27:37</td>
+      
+    </tr>
+    <tr>
+      <td>Light #3 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>19:07:18</td>
+      
+    </tr>
+    <tr>
+      <td>Light #2 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>19:07:02</td>
+
+    </tr>
+    <tr>
+      <td>Light #3 sucessfully switched on</td>
+      <td>2016.10.02.</td>
+      <td>19:06:14</td>
+      
+    </tr>
+    <tr>
+      <td>Light #2 successfully switched on</td>
+      <td>2016.10.02.</td>
+      <td>19:06:08</td>
+
+    </tr>
+    <tr>
+      <td>Light #1 successfully switched on</td>
+      <td>2016.10.02.</td>
+      <td>19:04:09</td>
+    </tr>
+    <tr>
+      <td>Light #3 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:52:15</td>
+      
+    </tr>
+    <tr>
+      <td>Light #2 successfuly switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:52:07</td>
+
+    </tr>
+    <tr>
+      <td>Light #2 successfully switched on</td>
+      <td>2016.10.02.</td>
+      <td>16:49:10</td>
+      
+    </tr>
+    <tr>
+      <td>Light #3 successfully switched on</td>
+      <td>2016.10.02</td>
+      <td>16:48:59</td>
+      
+    </tr>
+    <tr>
+      <td>Light #3 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:46:20</td>
+      
+    </tr>
+    <tr>
+      <td>Light #1 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:46:04</td>
+      
+    </tr>
+    <tr>
+      <td>Light #2 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:45:42</td>
+      
+    </tr>
+    <tr>
+      <td>Light #2 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:45:34</td>
+      
+    </tr>
+    <tr>
+      <td>Light #2 successfully switched on</td>
+      <td>2016.10.02.</td>
+      <td>16:45:28</td>
+      
+    </tr>
+    <tr>
+      <td>Light #2 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:45:10</td>
+      
+    </tr>
+    <tr>
+      <td>Light #1 successfully switched on</td>
+      <td>2016.10.02.</td>
+      <td>16:44:54</td>
+      
+    </tr>
+    <tr>
+      <td>Light #3 successfully switched off</td>
+      <td>2016.10.02.</td>
+      <td>16:33:32</td>
+      
+    </tr>
+    <tr>
+      <td>Turning light #2 on failed</td>
+      <td>2016.09.27.</td>
+      <td>20:28:00</td>
+     
+    </tr>
+   
+  </tbody>
+</table>
+</div>
+</section>
+</div>	
+	      
+		  
+		  
+	</div>
 		  
 
 {% endblock content %}
