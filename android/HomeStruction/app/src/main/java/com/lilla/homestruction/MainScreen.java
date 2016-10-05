@@ -30,6 +30,8 @@ import com.lilla.homestruction.bean.Lamp2;
 import com.lilla.homestruction.bean.Lamp2Response;
 import com.lilla.homestruction.bean.Lamp3;
 import com.lilla.homestruction.bean.Lamp3Response;
+import com.lilla.homestruction.bean.Light;
+import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.Temperature;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.Windows;
@@ -55,6 +57,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private GoogleApiClient client;
     private TextView temperatureValue;
     private TextView humidityValue;
+    private TextView luminosityValue;
     private Switch doorSwitch;
     private Switch windowSwitch;
     private Switch chandelierSwitch;
@@ -76,10 +79,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
         temperatureValue = (TextView) findViewById(R.id.temperature_value);
         humidityValue = (TextView) findViewById(R.id.humidity_value);
+        luminosityValue = (TextView) findViewById(R.id.luminosity_value);
         System.out.println(SaveSharedPreference.getUserName(MainScreen.this));
 
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
+        findViewById(R.id.luminosity).setOnClickListener(this);
         findViewById(R.id.multimedia).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
@@ -168,6 +173,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateDoorData();
         updateWindowsData();
         updateHumidityData();
+        updateLightData();
     }
 
     private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener(){
@@ -221,6 +227,27 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         });
     }
+
+    private void updateLightData() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<LightResponse> call = webService.getLight();
+        call.enqueue(new Callback<LightResponse>() {
+            @Override
+            public void onResponse(Call<LightResponse> call, Response<LightResponse> response) {
+                List<Light> light = response.body().getResults();
+                if (light.get(0) != null){
+                    luminosityValue.setText("" + light.get(0).getValue());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LightResponse> call, Throwable t) {
+                luminosityValue.setText("no data");
+                System.out.println("ddd Error: " + t.getMessage());
+            }
+        });
+    }
+
 
     private void updateLamp1Data() {
         WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
@@ -502,11 +529,15 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 Intent humid = new Intent(MainScreen.this, HumidityScreen.class);
                 startActivity(humid);
                 break;
+            case R.id.luminosity:
+                System.out.println("Luminosity button clicked");
+                Intent lum = new Intent(MainScreen.this, LightScreen.class);
+                startActivity(lum);
+                break;
             case R.id.multimedia:
                 System.out.println("Multimedia button clicked");
 
                 //TODO solve the ripple effect
-                //TODO make a music player (with buttons and song titles)
                 break;
             case R.id.doors:
                 System.out.println("Doors button clicked");

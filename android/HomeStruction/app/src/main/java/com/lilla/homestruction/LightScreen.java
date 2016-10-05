@@ -1,11 +1,14 @@
 package com.lilla.homestruction;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.lilla.homestruction.bean.Light;
 import com.lilla.homestruction.bean.LightResponse;
+import com.theappguruz.imagezoom.ImageViewTouch;
 
 import java.util.List;
 
@@ -19,34 +22,30 @@ import retrofit2.Response;
 
 public class LightScreen extends AppCompatActivity {
 
-    private TextView luminosityValue;
+    private ImageViewTouch imageViewTouch;
+    private Bitmap myBitmap;
+
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.light_screen);
+        imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
 
-        luminosityValue = (TextView) findViewById(R.id.luminosity_value);
-        updateLightData();
-    }
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
 
-    private void updateLightData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(LightScreen.this));
-        Call<LightResponse> call = webService.getLight();
-        call.enqueue(new Callback<LightResponse>() {
-            @Override
-            public void onResponse(Call<LightResponse> call, Response<LightResponse> response) {
-                List<Light> light = response.body().getResults();
-                if (light.get(0) != null){
-                    luminosityValue.setText("Luminosity: " + light.get(0).getValue());
-                }
-            }
+        myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.graph, options);
+        if (options.outWidth > 3000 || options.outHeight > 2000) {
+            options.inSampleSize = 4;
+        } else if (options.outWidth > 2000 || options.outHeight > 1500) {
+            options.inSampleSize = 3;
+        } else if (options.outWidth > 1000 || options.outHeight > 1000) {
+            options.inSampleSize = 2;
+        }
+        options.inJustDecodeBounds = false;
 
-            @Override
-            public void onFailure(Call<LightResponse> call, Throwable t) {
-                luminosityValue.setText("Luminosity: no data");
-                System.out.println("ddd Error: " + t.getMessage());
-            }
-        });
+        myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.graph, options);
+        imageViewTouch.setImageBitmapReset(myBitmap, 0, true);
     }
 }

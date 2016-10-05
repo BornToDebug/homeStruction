@@ -30,7 +30,7 @@ public interface WebService {
     @POST("/api-token-auth/")
     Call<TokenResponse> getLoginToken(@Field("username") String username, @Field("password") String password);
 
-    @GET("/api/light/1")
+    @GET("/api/light/")
     Call<LightResponse> getLight();
 
     @GET("/api/lamp/1")
