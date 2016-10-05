@@ -4,6 +4,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,8 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.lilla.homestruction.bean.Door;
 import com.lilla.homestruction.bean.DoorResponse;
+import com.lilla.homestruction.bean.Humidity;
+import com.lilla.homestruction.bean.HumidityResponse;
 import com.lilla.homestruction.bean.Lamp1;
 import com.lilla.homestruction.bean.Lamp1Response;
 import com.lilla.homestruction.bean.Lamp2;
@@ -51,6 +54,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      */
     private GoogleApiClient client;
     private TextView temperatureValue;
+    private TextView humidityValue;
     private Switch doorSwitch;
     private Switch windowSwitch;
     private Switch chandelierSwitch;
@@ -62,11 +66,25 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
+//        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        SwipeRefreshLayout.OnRefreshListener swipeRefreshLayout = new SwipeRefreshLayout.OnRefreshListener(){
+            @Override
+            public void onRefresh() {
+                Intent refresh = getIntent();
+                finish();
+                startActivity(refresh);
+            }
+
+        };
+
+
+
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
-            Intent intent = new Intent(MainScreen.this, LoginActivity.class);
+            Intent intent = new Intent(MainScreen.this,  LoginActivity.class);
             startActivity(intent);
         }
         temperatureValue = (TextView) findViewById(R.id.temperature_value);
+        humidityValue = (TextView) findViewById(R.id.humidity_value);
         System.out.println(SaveSharedPreference.getUserName(MainScreen.this));
 
 //        WebService webService = WebService.retrofit.create(WebService.class);
@@ -201,6 +219,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateLamp3Data();
         updateDoorData();
         updateWindowsData();
+        updateHumidityData();
     }
 
     //TODO personalize your own settings in the settings menu
@@ -219,6 +238,26 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
+                temperatureValue.setText("no data");
+                System.out.println("ddd Error: " + t.getMessage());
+            }
+        });
+    }
+
+    private void updateHumidityData() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<HumidityResponse> call = webService.getHumidity();
+        call.enqueue(new Callback<HumidityResponse>() {
+            @Override
+            public void onResponse(Call<HumidityResponse> call, Response<HumidityResponse> response) {
+                List<Humidity> humidity = response.body().getResults();
+                if (humidity.get(0) != null){
+                    humidityValue.setText("" + humidity.get(0).getValue()+ " %");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HumidityResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
                 System.out.println("ddd Error: " + t.getMessage());
             }
