@@ -31,7 +31,3 @@ function generateRows(json, table, objectConverter) {
 		table.innerHTML += tableRow;
 	}
 }
-doortable = document.getElementById('doortable');
-windowtable = document.getElementById('windowtable');
-getJSON('/api/door', objectToHTML, doortable);
-getJSON('/api/window', objectToHTML, windowtable);
