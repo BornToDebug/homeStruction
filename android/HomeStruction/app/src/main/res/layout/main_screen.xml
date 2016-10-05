@@ -318,7 +318,7 @@
                 />
 
             <Switch
-                android:id="@+id/light_switch"
+                android:id="@+id/vecof_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"

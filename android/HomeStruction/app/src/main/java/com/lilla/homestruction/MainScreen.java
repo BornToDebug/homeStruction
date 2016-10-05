@@ -54,6 +54,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private TextView lightText;
     private Switch doorSwitch;
     private Switch windowSwitch;
+    private Switch chandelierSwitch;
+    private Switch nightLampSwitch;
+    private Switch veCofSwitch;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -114,6 +117,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.multimedia).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
+        findViewById(R.id.chandelier).setOnClickListener(this);
+        findViewById(R.id.chandelier_switch).setOnClickListener(this);
+        findViewById(R.id.nightlight).setOnClickListener(this);
+        findViewById(R.id.nightlight_switch).setOnClickListener(this);
+        findViewById(R.id.vecof).setOnClickListener(this);
+        findViewById(R.id.vecof_switch).setOnClickListener(this);
         findViewById(R.id.alarm).setOnClickListener(this);
         findViewById(R.id.alarm_switch).setOnClickListener(this);
         findViewById(R.id.songs).setOnClickListener(this);
@@ -129,6 +138,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         doorSwitch.setClickable(false);
         windowSwitch = (Switch) findViewById(R.id.windows_switch);
         windowSwitch.setClickable(false);
+        chandelierSwitch = (Switch) findViewById(R.id.chandelier_switch);
+        nightLampSwitch = (Switch) findViewById(R.id.nightlight_switch);
+        veCofSwitch = (Switch) findViewById(R.id.vecof_switch);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
@@ -219,15 +231,41 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         call.enqueue(new Callback<Lamp1Response>() {
             @Override
             public void onResponse(Call<Lamp1Response> call, Response<Lamp1Response> response) {
-                List<Lamp1> lampValues = response.body().getResults();
-                if (lampValues.get(0) != null){
-
+                List<Lamp1> lamp1Values = response.body().getResults();
+                if (lamp1Values.get(0) != null){
+                    switch (lamp1Values.get(0).getValue()){
+                        case "1off_c":
+                            chandelierSwitch.setChecked(false);
+                            chandelierSwitch.setText("");
+                            break;
+                        case "1off_uc":
+                            chandelierSwitch.setChecked(false);
+                            chandelierSwitch.setText("?");
+                            break;
+                        case "1on_c":
+                            chandelierSwitch.setChecked(true);
+                            chandelierSwitch.setText("");
+                            break;
+                        case "1on_uc":
+                            chandelierSwitch.setChecked(true);
+                            chandelierSwitch.setText("?");
+                            break;
+                        default:
+                            chandelierSwitch.setText("error");
+                            break;
+                    }
+                }
+                if (chandelierSwitch.isChecked()) {
+                    System.out.println("Chandelier on");
+                } else {
+                    System.out.println("Chandelier off");
                 }
             }
 
             @Override
             public void onFailure(Call<Lamp1Response> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
+                chandelierSwitch.setText("error");
             }
         });
     }
@@ -238,15 +276,41 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         call.enqueue(new Callback<Lamp2Response>() {
             @Override
             public void onResponse(Call<Lamp2Response> call, Response<Lamp2Response> response) {
-                List<Lamp2> lampValues = response.body().getResults();
-                if (lampValues.get(0) != null){
-
+                List<Lamp2> lamp2Values = response.body().getResults();
+                if (lamp2Values.get(0) != null){
+                    switch (lamp2Values.get(0).getValue()){
+                        case "2off_c":
+                            nightLampSwitch.setChecked(false);
+                            nightLampSwitch.setText("");
+                            break;
+                        case "2off_uc":
+                            nightLampSwitch.setChecked(false);
+                            nightLampSwitch.setText("?");
+                            break;
+                        case "2on_c":
+                            nightLampSwitch.setChecked(true);
+                            nightLampSwitch.setText("");
+                            break;
+                        case "2on_uc":
+                            nightLampSwitch.setChecked(true);
+                            nightLampSwitch.setText("?");
+                            break;
+                        default:
+                            nightLampSwitch.setText("error");
+                            break;
+                    }
+                }
+                if (nightLampSwitch.isChecked()) {
+                    System.out.println("Nightlamp on");
+                } else {
+                    System.out.println("Nightlamp off");
                 }
             }
 
             @Override
             public void onFailure(Call<Lamp2Response> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
+                nightLampSwitch.setText("error");
             }
         });
     }
@@ -257,15 +321,41 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         call.enqueue(new Callback<Lamp3Response>() {
             @Override
             public void onResponse(Call<Lamp3Response> call, Response<Lamp3Response> response) {
-                List<Lamp3> lampValues = response.body().getResults();
-                if (lampValues.get(0) != null){
-
+                List<Lamp3> lamp3Values = response.body().getResults();
+                if (lamp3Values.get(0) != null){
+                    switch (lamp3Values.get(0).getValue()){
+                        case "3off_c":
+                            veCofSwitch.setChecked(false);
+                            veCofSwitch.setText("");
+                            break;
+                        case "3off_uc":
+                            veCofSwitch.setChecked(false);
+                            veCofSwitch.setText("?");
+                            break;
+                        case "3on_c":
+                            veCofSwitch.setChecked(true);
+                            veCofSwitch.setText("");
+                            break;
+                        case "3on_uc":
+                            veCofSwitch.setChecked(true);
+                            veCofSwitch.setText("?");
+                            break;
+                        default:
+                            veCofSwitch.setText("error");
+                            break;
+                    }
+                }
+                if (veCofSwitch.isChecked()) {
+                    System.out.println("Ventillator/coffee machine on");
+                } else {
+                    System.out.println("Ventillator/coffee machine off");
                 }
             }
 
             @Override
             public void onFailure(Call<Lamp3Response> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
+                veCofSwitch.setText("error");
             }
         });
     }

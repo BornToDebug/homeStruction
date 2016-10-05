@@ -23,6 +23,28 @@ padding-left:30px;
   color: #fff;
   text-transform: uppercase;
 }
+#multimedia th{
+  padding-left:7px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 25px;
+  color: #fff;
+  text-transform: uppercase;
+  width:500px;
+}
+#multimedia td{
+  padding-top: 15px;
+  padding-bottom:15px;
+  padding-left:10px;
+  width:500px;
+  text-align: center;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 25px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+
+}
 #mytable td{
   padding-top: 15px;
   padding-bottom:15px;
@@ -47,7 +69,7 @@ padding-left:30px;
   margin-right:auto;
   border-radius:5px;
   margin-bottom:100px;
-  z-index:-15;
+
 }
 #mytable section{
   margin: 50px;
