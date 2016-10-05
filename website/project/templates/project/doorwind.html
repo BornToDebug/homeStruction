@@ -74,16 +74,15 @@
 </div>
 <script>
 
-function generateRows(json, table, objectConverter) {
-	//delete current entries in table and populate it with data
-	var tableRow;
-	table.innerHTML = '';
-
-	for (i=0;i<json.length;i++) {
-		tableRow = objectConverter(json[i]);
-		table.innerHTML += tableRow;
-	}
+function objectToHTML(jsonObj) {
+	// generate HTML from JSON object
+	var tableRow = '<tr> \n' +
+		'<td>' +  jsonObj['value'] + '</td> \n' +
+		'<td>' + jsonObj['time_recorded'] + '</td> \n' +
+		'</tr> \n';
+	return tableRow;
 }
+
 	doortable = document.getElementById('doortable');
 	windowtable = document.getElementById('windowtable');
 	getJSON('/api/door', objectToHTML, doortable);
