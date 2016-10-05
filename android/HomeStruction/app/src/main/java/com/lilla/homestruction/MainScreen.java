@@ -66,17 +66,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
-//        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
-        SwipeRefreshLayout.OnRefreshListener swipeRefreshLayout = new SwipeRefreshLayout.OnRefreshListener(){
-            @Override
-            public void onRefresh() {
-                Intent refresh = getIntent();
-                finish();
-                startActivity(refresh);
-            }
-
-        };
-
+        final SwipeRefreshLayout layout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        layout.setOnRefreshListener(refreshListener);
 
 
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
@@ -86,49 +77,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         temperatureValue = (TextView) findViewById(R.id.temperature_value);
         humidityValue = (TextView) findViewById(R.id.humidity_value);
         System.out.println(SaveSharedPreference.getUserName(MainScreen.this));
-
-//        WebService webService = WebService.retrofit.create(WebService.class);
-//        final Call<List<Temperatures>> call = webService.getTemperatures("value");
-//
-//        call.enqueue(new Callback<List<Temperatures>>() {
-//            @Override
-//            public void onResponse(Call<List<Temperatures>> call, retrofit2.Response<List<Temperatures>> response) {
-//                final TextView textView = (TextView) findViewById(R.id.textView);
-//                textView.setText(response.body().toString());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Temperatures>> call, Throwable t) {
-//                final TextView textView = (TextView) findViewById(R.id.textView);
-//                textView.setText("Something went wrong: " + t.getMessage());
-//            }
-//        });
-
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        String url = "http://acs1.ddns.net:2080/api/temp/?page=2";
-//
-//// Request a string response from the provided URL.
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        // Display the first 500 characters of the response string.
-//                        int ind = response.indexOf("value");
-//                        ind = ind + 7;
-//                        String temp = response.substring(ind, ind + 4);
-//                        System.out.println(temp);
-//                        //TODO fix this because on other devices it looks like shit
-//                        temperatureButton.setText("     Temperature                                      " + temp);
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                temperatureButton.setText("     Temperature                                no data");
-//            }
-//        });
-//// Add the request to the RequestQueue.
-//        queue.add(stringRequest);
-
 
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
@@ -221,6 +169,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateWindowsData();
         updateHumidityData();
     }
+
+    private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener(){
+        @Override
+        public void onRefresh() {
+//            layout.setRefreshing(true);
+            Intent refresh = getIntent();
+            finish();
+            startActivity(refresh);
+        }
+    };
 
     //TODO personalize your own settings in the settings menu
 
