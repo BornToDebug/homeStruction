@@ -133,35 +133,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-//        final Button multimediaButton = (Button) findViewById(R.id.multimedia);
-//        multimediaButton.setOnClickListener(new View.OnClickListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-//            @Override
-//            public void onClick(View view) {
-//
-//                System.out.println("Multimedia button clicked");
-//
-//                //TODO solve the ripple effect
-//                //TODO make a music player (with buttons and song titles)
-//
-//
-//                ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
-//                    @Override
-//                    public void getOutline(View view, Outline outline) {
-//                        int width = multimediaButton.getWidth();
-//                        int height = multimediaButton.getHeight();
-//                        // Or read size directly from the view's width/height
-//                        outline.setRoundRect(0, 0, width, height, R.dimen.radius);
-//                    }
-//                };
-//                multimediaButton.setOutlineProvider(viewOutlineProvider);
-//                multimediaButton.setClipToOutline(true);
-//                int[] attrs = new int[]{R.attr.selectableItemBackground};
-//                TypedArray typedArray = MainScreen.this.obtainStyledAttributes(attrs);
-//                int backgroundResource = typedArray.getResourceId(0, 0);
-//                view.setBackgroundResource(backgroundResource);
-//            }
-//        });
+                //TODO solve the ripple effect
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -179,7 +151,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener(){
         @Override
         public void onRefresh() {
-//            layout.setRefreshing(true);
             Intent refresh = getIntent();
             finish();
             startActivity(refresh);

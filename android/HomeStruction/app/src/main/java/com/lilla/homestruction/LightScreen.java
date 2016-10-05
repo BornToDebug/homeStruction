@@ -4,17 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
-import com.lilla.homestruction.bean.Light;
-import com.lilla.homestruction.bean.LightResponse;
 import com.theappguruz.imagezoom.ImageViewTouch;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by lilla on 28/09/16.

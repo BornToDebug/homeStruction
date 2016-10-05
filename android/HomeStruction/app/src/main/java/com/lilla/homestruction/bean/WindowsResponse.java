@@ -1,7 +1,5 @@
 package com.lilla.homestruction.bean;
 
-import android.view.Window;
-
 import com.google.gson.annotations.Expose;
 
 import java.util.List;
