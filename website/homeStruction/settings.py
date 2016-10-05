@@ -29,7 +29,7 @@ CSRF_COOKIE_HTTPONLY = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = settings_secret.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #always
+DEBUG = True #always
 
 ALLOWED_HOSTS = [
         'localhost','acs1.ddns.net', '127.0.0.1', '89.120.180.139', '192.168.1.5', 'homestruction.servebeer.com'
@@ -40,8 +40,9 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
-# Application definition
+ATHENTICATION_BACKENDS = ['homeStruction.tokenauth.TokenAuthBackEnd']
 
+# Application definition
 INSTALLED_APPS = [
     'project.apps.ProjectConfig',
     'django.contrib.admin',

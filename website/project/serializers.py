@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Temperature, Lamp, Light, Door, Window
+from models import Temperature, Lamp, Light, Door, Window, Humidity
 
 
 class TemperatureSerializer(serializers.HyperlinkedModelSerializer):
@@ -25,5 +25,10 @@ class DoorSerializer(serializers.HyperlinkedModelSerializer):
 class WindowSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Window
+        fields = ('time_recorded', 'value')
+
+class HumiditySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Humidity
         fields = ('time_recorded', 'value')
 
