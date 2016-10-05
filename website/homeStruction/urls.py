@@ -28,6 +28,7 @@ router.register(r'lamp', views.LampViewSet, 'lampname')
 router.register(r'light', views.LightViewSet)
 router.register(r'door', views.DoorViewSet)
 router.register(r'window', views.WindowViewSet)
+router.register(r'humidity', views.HumidityViewSet)
 
 urlpatterns = [
     url('^api/lamp/(?P<startswith>.+)/$', views.LampStartList.as_view()),
