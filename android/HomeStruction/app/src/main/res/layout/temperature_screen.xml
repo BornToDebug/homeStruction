@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/mainview"
     android:layout_width="match_parent"
-    android:background="@android:color/background_dark"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
 
-    <ImageView
-        android:id="@+id/graph"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/graph"/>
-        <!--android:scaleType="matrix"-->
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.theappguruz.imagezoom.ImageViewTouch
+            android:id="@+id/graph"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+    </LinearLayout>
 
 </LinearLayout>
