@@ -51,7 +51,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      */
     private GoogleApiClient client;
     private TextView temperatureValue;
-    private TextView lightText;
     private Switch doorSwitch;
     private Switch windowSwitch;
     private Switch chandelierSwitch;
@@ -114,6 +113,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
 
         findViewById(R.id.temperature).setOnClickListener(this);
+        findViewById(R.id.humidity).setOnClickListener(this);
         findViewById(R.id.multimedia).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
@@ -499,6 +499,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("Temperature button clicked");
                 Intent intent = new Intent(MainScreen.this, TemperatureScreen.class);
                 startActivity(intent);
+                break;
+            case R.id.humidity:
+                System.out.println("Humidity button clicked");
+                Intent humid = new Intent(MainScreen.this, HumidityScreen.class);
+                startActivity(humid);
                 break;
             case R.id.multimedia:
                 System.out.println("Multimedia button clicked");

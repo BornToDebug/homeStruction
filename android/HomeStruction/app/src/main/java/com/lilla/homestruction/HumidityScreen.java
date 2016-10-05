@@ -5,16 +5,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.theappguruz.imagezoom.ImageViewTouch;;
-
+import com.theappguruz.imagezoom.ImageViewTouch;
 
 /**
- * Created by lilla on 22/09/16.
- * http://www.theappguruz.com/blog/android-pinch-zoom
+ * Created by lilla on 05/10/16.
  */
 
-public class TemperatureScreen extends AppCompatActivity {
-
+public class HumidityScreen extends AppCompatActivity{
     private ImageViewTouch imageViewTouch;
     private Bitmap myBitmap;
 
@@ -22,7 +19,7 @@ public class TemperatureScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.temperature_screen);
+        setContentView(R.layout.humidity_screen);
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -42,4 +39,3 @@ public class TemperatureScreen extends AppCompatActivity {
         imageViewTouch.setImageBitmapReset(myBitmap, 0, true);
     }
 }
-
