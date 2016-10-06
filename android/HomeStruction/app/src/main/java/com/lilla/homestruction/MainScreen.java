@@ -2,6 +2,7 @@ package com.lilla.homestruction;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -59,7 +61,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private TextView humidityValue;
     private TextView luminosityValue;
     private Switch doorSwitch;
-    private Switch windowSwitch;
+    private ImageView windowOpen;
+    private ImageView windowClosed;
+    private TextView windowError;
     private Switch chandelierSwitch;
     private Switch nightLampSwitch;
     private Switch veCofSwitch;
@@ -107,8 +111,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         final TextView volume = (TextView) findViewById(R.id.volume);
         doorSwitch = (Switch) findViewById(R.id.doors_switch);
         doorSwitch.setClickable(false);
-        windowSwitch = (Switch) findViewById(R.id.windows_switch);
-        windowSwitch.setClickable(false);
+        windowOpen = (ImageView) findViewById(R.id.window_open);
+        windowClosed = (ImageView) findViewById(R.id.window_closed);
+        windowError = (TextView) findViewById(R.id.window_error);
         chandelierSwitch = (Switch) findViewById(R.id.chandelier_switch);
         nightLampSwitch = (Switch) findViewById(R.id.nightlight_switch);
         veCofSwitch = (Switch) findViewById(R.id.vecof_switch);
@@ -402,24 +407,36 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (windowValues.get(0) != null){
                     switch (windowValues.get(0).getValue()){
                         case "opened":
-                            windowSwitch.setChecked(true);
-                            windowSwitch.setText("");
+                            windowOpen.setVisibility(View.VISIBLE);
+                            windowClosed.setVisibility(View.INVISIBLE);
+                            windowError.setVisibility(View.INVISIBLE);
+                            System.out.println();
                             break;
                         case "closed":
-                            windowSwitch.setChecked(false);
-                            windowSwitch.setText("");
+                            windowOpen.setVisibility(View.INVISIBLE);
+                            windowClosed.setVisibility(View.VISIBLE);
+                            windowError.setVisibility(View.INVISIBLE);
                             break;
                         default:
-                            windowSwitch.setText("Window: error");
+                            windowOpen.setVisibility(View.INVISIBLE);
+                            windowClosed.setVisibility(View.INVISIBLE);
+                            windowError.setVisibility(View.VISIBLE);
                             break;
                     }
+                }
+                else {
+                    windowOpen.setVisibility(View.INVISIBLE);
+                    windowClosed.setVisibility(View.INVISIBLE);
+                    windowError.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<WindowsResponse> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
-                doorSwitch.setText("Window: error");
+                windowOpen.setVisibility(View.INVISIBLE);
+                windowClosed.setVisibility(View.INVISIBLE);
+                windowError.setVisibility(View.VISIBLE);
             }
         });
     }

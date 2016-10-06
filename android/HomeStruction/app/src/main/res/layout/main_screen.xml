@@ -271,15 +271,41 @@
                     android:layout_marginLeft="20dp"
                     />
 
-                <Switch
-                    android:id="@+id/windows_switch"
+                <ImageView
+                    android:id="@+id/window_open"
+                    android:src="@drawable/window_open"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:textSize="18sp"
                     android:textColor="#00ffff"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="20dp" />
+                    android:layout_marginRight="10dp"
+                    android:visibility="invisible"/>
+
+                <ImageView
+                    android:id="@+id/window_closed"
+                    android:src="@drawable/window_closed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="18sp"
+                    android:textColor="#00ffff"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/window_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="error"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:visibility="invisible"/>
             </RelativeLayout>
 
 
