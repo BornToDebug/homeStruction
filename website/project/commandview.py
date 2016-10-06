@@ -2,6 +2,27 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import controlbasic3
 from subprocess import call
+from rest_framework.authtoken.models import Token
+
+from rest_framework import HTTP_HEADER_ENCODING, exceptions
+
+
+def androidcontrol(request):
+    try:
+        auth = request.META.get('HTTP_AUTHORIZATION', b'').split()
+        if not auth or auth[0].lower() != 'token':
+            return HttpResponse('not a token header')
+        if len(auth) < 2:
+            return HttpResponse('no token recieved')
+        if len(auth) > 2:
+            return HttpResponse('too many arguments, check if token has spaces')
+        matchingToken = Token.objects.get(pk=auth[1])
+        command = request.GET.get('command', '')
+        controlbasic3.controlconfirm(command)
+        return HttpResponse(command)
+    except:
+        return HttpResponse('not authorized')
+
 
 @login_required
 def controlbasic(request):
