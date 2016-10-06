@@ -1154,7 +1154,7 @@ ul.menu ul {
 	text-align:left;
 }
 .opclswitch-inner:after {
-    content: "CLOSE";
+    content: "LOCK";
     padding-right: 10px;
     background-color: #EEEEEE; color: #999999;
     text-align: right;
