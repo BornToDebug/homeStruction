@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -39,6 +41,8 @@ import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.Windows;
 import com.lilla.homestruction.bean.WindowsResponse;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -57,10 +61,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private CoordinatorLayout coordinatorLayout;
     private TextView temperatureValue;
     private TextView humidityValue;
     private TextView luminosityValue;
     private Switch doorSwitch;
+    private TextView doorText;
     private ImageView windowOpen;
     private ImageView windowClosed;
     private TextView windowError;
@@ -85,6 +91,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         humidityValue = (TextView) findViewById(R.id.humidity_value);
         luminosityValue = (TextView) findViewById(R.id.luminosity_value);
         System.out.println(SaveSharedPreference.getUserName(MainScreen.this));
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
@@ -111,6 +118,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         final TextView volume = (TextView) findViewById(R.id.volume);
         doorSwitch = (Switch) findViewById(R.id.doors_switch);
         doorSwitch.setClickable(false);
+        doorText = (TextView) findViewById(R.id.doors_text);
         windowOpen = (ImageView) findViewById(R.id.window_open);
         windowClosed = (ImageView) findViewById(R.id.window_closed);
         windowError = (TextView) findViewById(R.id.window_error);
@@ -179,6 +187,17 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
+                Snackbar snackbar = Snackbar
+                        .make(coordinatorLayout, "No internet connection", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("RETRY", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent refresh = getIntent();
+                                finish();
+                                startActivity(refresh);
+                            }
+                        });
+                snackbar.show();
                 System.out.println("ddd Error: " + t.getMessage());
             }
         });
@@ -194,11 +213,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (humidity.get(0) != null){
                     humidityValue.setText("" + humidity.get(0).getValue()+ " %");
                 }
+                else {
+                    humidityValue.setText("no data");
+                }
             }
 
             @Override
             public void onFailure(Call<HumidityResponse> call, Throwable t) {
-                temperatureValue.setText("no data");
+                humidityValue.setText("no data");
                 System.out.println("ddd Error: " + t.getMessage());
             }
         });
@@ -370,29 +392,22 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (doorValues.get(0) != null){
                     switch (doorValues.get(0).getValue()){
                         case "opened":
-                            doorSwitch.setChecked(true);
-                            doorSwitch.setText("");
+                            doorText.setText("Door open");
                             break;
                         case "closed":
-                            doorSwitch.setChecked(false);
-                            doorSwitch.setText("");
+                            doorText.setText("Door closed");
                             break;
                         default:
-                            doorSwitch.setText("Door: error");
+                            doorText.setText("Door error");
                             break;
                     }
-                }
-                if (doorSwitch.isChecked()) {
-                    System.out.println("Doors open");
-                } else {
-                    System.out.println("Doors closed");
                 }
             }
 
             @Override
             public void onFailure(Call<DoorResponse> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
-                doorSwitch.setText("Door: error");
+                doorText.setText("Door error");
             }
         });
     }
