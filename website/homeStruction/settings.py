@@ -40,8 +40,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
-ATHENTICATION_BACKENDS = ['homeStruction.tokenauth.TokenAuthBackEnd']
-
 # Application definition
 INSTALLED_APPS = [
     'project.apps.ProjectConfig',
