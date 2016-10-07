@@ -43,6 +43,7 @@ import com.lilla.homestruction.bean.WindowsResponse;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -187,20 +188,24 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
-                Snackbar snackbar = Snackbar
-                        .make(coordinatorLayout, "No internet connection", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("RETRY", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent refresh = getIntent();
-                                finish();
-                                startActivity(refresh);
-                            }
-                        });
-                snackbar.show();
+                showSnackbar();
                 System.out.println("ddd Error: " + t.getMessage());
             }
         });
+    }
+
+    public void showSnackbar(){
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
+                .setAction("RETRY", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent refresh = getIntent();
+                        finish();
+                        startActivity(refresh);
+                    }
+                });
+        snackbar.show();
     }
 
     private void updateHumidityData() {
@@ -456,6 +461,32 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+    public void sendToServer(String command){
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<String> call = webService.sendCommand(command);
+        final String myCommand = command;
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                String myResponse=response.body();
+                if (myResponse != null){
+                    if (myCommand == myResponse) {
+                        System.out.println("Success");
+                    }
+                    else {
+                        System.out.println("Error");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                System.out.println("ddd Error: " + t.getMessage());
+                showSnackbar();
+            }
+        });
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -548,10 +579,68 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             case R.id.windows:
                 System.out.println("Windows button clicked");
                 break;
-            case R.id.light:
-                System.out.println("Light button clicked");
-                Intent lightScreen = new Intent(MainScreen.this, LightScreen.class);
-                startActivity(lightScreen);
+            case R.id.chandelier:
+                chandelierSwitch.toggle();
+                if (chandelierSwitch.isChecked()){
+                    System.out.println("ddd ChandelierSwitch checked");
+                    sendToServer("1lampon");
+                }
+                else{
+                    System.out.println("ddd ChandelierSwitch unchecked");
+                    sendToServer("1lampoff");
+                }
+                break;
+            case R.id.chandelier_switch:
+                if (chandelierSwitch.isChecked()){
+                    System.out.println("ddd ChandelierSwitch checked");
+                    sendToServer("1lampon");
+                }
+                else{
+                    System.out.println("ddd ChandelierSwitch unchecked");
+                    sendToServer("1lampoff");
+                }
+                break;
+            case R.id.nightlight:
+                nightLampSwitch.toggle();
+                if (nightLampSwitch.isChecked()){
+                    System.out.println("ddd NightLightSwitch checked");
+                    sendToServer("2lampon");
+                }
+                else{
+                    System.out.println("ddd NightLightSwitch unchecked");
+                    sendToServer("2lampoff");
+                }
+                break;
+            case R.id.nightlight_switch:
+                if (nightLampSwitch.isChecked()){
+                    System.out.println("ddd NightLightSwitch checked");
+                    sendToServer("2lampon");
+                }
+                else{
+                    System.out.println("ddd NightLightSwitch unchecked");
+                    sendToServer("2lampoff");
+                }
+                break;
+            case R.id.vecof:
+                veCofSwitch.toggle();
+                if (veCofSwitch.isChecked()) {
+                    System.out.println("ddd VeCofSwitch checked");
+                    sendToServer("3lampon");
+                }
+                else {
+                    System.out.println("ddd VeCofSwitch unchecked");
+                    sendToServer("3lampoff");
+                }
+                break;
+            case R.id.vecof_switch:
+                if (veCofSwitch.isChecked()) {
+                    System.out.println("ddd VeCofSwitch checked");
+                    sendToServer("3lampon");
+                }
+                else {
+                    System.out.println("ddd VeCofSwitch unchecked");
+                    sendToServer("3lampoff");
+                }
                 break;
             case R.id.alarm:
                 System.out.println("Alarm button clicked");

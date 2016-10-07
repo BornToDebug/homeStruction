@@ -15,6 +15,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * Created by lilla on 24/09/16.
@@ -48,6 +49,9 @@ public interface WebService {
     @GET("/api/window/")
     Call<WindowsResponse> getWindows();
 
-    @GET("/api/humidity")
+    @GET("/api/humidity/")
     Call<HumidityResponse> getHumidity();
+
+    @GET("/androidcommand/")
+    Call<String> sendCommand(@Query("command") String command);
 }

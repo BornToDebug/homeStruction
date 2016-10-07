@@ -3123,3 +3123,68 @@ ul.posts-list li {
   min-height: 40px;
   text-align: center;
 }
+ /* Contact html */
+ 
+ #person{
+	font-weight:bold;
+	font-family:'Oswald', sans-serif;
+	font-size:25px;
+	color:#404040;
+ }
+ #pers {
+	 padding-left:20px;
+	 width:500px;
+	 margin-bottom:50px;
+	 background-color:#999999;
+	 border-radius:5px;
+	 text-align:left;
+	 height:250px;
+ }
+ #cont p{
+	 
+	 
+ }
+ #text{
+	 margin-top:-40px;
+	 padding-left:40px;
+ }
+ #person a{
+	 font-size:20px;
+	 color:#196666;
+	 margin-bottom:10px;
+	
+	
+ }
+ #person p{
+	 padding-top:10px;
+	 
+ }
+ #person h3{
+	 font-size:20px;
+	 font-family:'Oswald',sans-serif;
+	 font-weight:bold;
+	 margin-bottom:10px;
+	
+	
+	
+ }
+  #person h4{
+	 color:#196666;
+	 font-size:20px;
+	 font-family:'Oswald',sans-serif;
+	 font-weight:bold;
+	 margin-bottom:20px;
+	 
+ }
+ #person a:hover{
+	 color:#404040;
+ }
+#person img{
+	margin-bottom:20px;
+	float: left; 
+	margin: 15px 15px 15px 15px;  
+	width:150px;
+	height:150px;
+	margin-top:10px;
+	border-radius:5px;
+}
