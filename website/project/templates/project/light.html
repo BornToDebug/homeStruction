@@ -23,136 +23,29 @@
 </div>
 <div  class="tbl-content" style="">
 <table cellpadding="0" cellspacing="0" border="0">
-  <tbody>
-    <tr>
-      <td>660.0</td>
-      <td>2016.10.02.</td>
-      <td>21:50:06</td>
-      
-      
-    </tr>
-    <tr>
-      <td>661.0</td>
-      <td>2016.10.02.</td>
-      <td>21:45:06</td>
-      
-    </tr>
-    <tr>
-      <td>659.0</td>
-      <td>2016.10.02.</td>
-      <td>21:40:06</td>
-      
-    </tr>
-    <tr>
-      <td>662.0</td>
-      <td>2016.10.02.</td>
-      <td>21:35:06</td>
-
-    </tr>
-    <tr>
-      <td>665.0</td>
-      <td>2016.10.02.</td>
-      <td>21:30:06</td>
-      
-    </tr>
-    <tr>
-      <td>658.0</td>
-      <td>2016.10.02.</td>
-      <td>21:25:06</td>
-
-    </tr>
-    <tr>
-      <td>674.0</td>
-      <td>2016.10.02.</td>
-      <td>21:20:06</td>
-    </tr>
-    <tr>
-      <td>680.0</td>
-      <td>2016.10.02</td>
-      <td>21:15:06</td>
-      
-    </tr>
-    <tr>
-      <td>687.0</td>
-      <td>2016.10.02.</td>
-      <td>21:10:07</td>
-
-    </tr>
-    <tr>
-      <td>700.0</td>
-      <td>2016.10.02.</td>
-      <td>21:05:07</td>
-      
-    </tr>
-    <tr>
-      <td>678.0</td>
-      <td>2016.10.02.</td>
-      <td>21:00:06</td>
-      
-    </tr>
-    <tr>
-      <td>690.0</td>
-      <td>2016.10.02.</td>
-      <td>20:55:06</td>
-      
-    </tr>
-    <tr>
-      <td>692.0</td>
-      <td>2016.10.02.</td>
-      <td>20:50:07</td>
-      
-    </tr>
-    <tr>
-      <td>686.0</td>
-      <td>2016.10.02.</td>
-      <td>20:45:06</td>
-      
-    </tr>
-    <tr>
-      <td>674.0</td>
-      <td>2016.10.02.</td>
-      <td>20:40:06</td>
-      
-    </tr>
-    <tr>
-      <td>679.0</td>
-      <td>2016.10.02.</td>
-      <td>20:35:06</td>
-      
-    </tr>
-    <tr>
-      <td>675.0</td>
-      <td>2016.10.02.</td>
-      <td>20:30:07</td>
-      
-    </tr>
-    <tr>
-      <td>908.0</td>
-      <td>2016.10.02.</td>
-      <td>20:25:06</td>
-      
-    </tr>
-    <tr>
-      <td>908.0</td>
-      <td>2016.10.02.</td>
-      <td>20:20:06</td>
-      
-    </tr>
-    <tr>
-      <td>909.0</td>
-      <td>2016.10.02.</td>
-      <td>20:15:06</td>
-     
-    </tr>
-   
+  <tbody id="lumintable">
   </tbody>
 </table>
 </div>
 </section>
-</div>	
-			
-			  
+</div>	  
 		  </div>
+<script>
+function objectToHTML(jsonObj) {
+	// generate HTML from JSON object
+	var timeRec= jsonObj['time_recorded'];
+	var myDate=timeRec.substring(0,10);
+	var myTime=timeRec.substring(11,19);
+	var tableRow = '<tr> \n' +
+		'<td>' +  jsonObj['value'] + '</td> \n' +
+		'<td>' + myDate + '</td> \n' +
+		'<td>' +  myTime + '</td> \n' +
+		'</tr> \n';
+	return tableRow;
+}
+	lumintable = document.getElementById('lumintable');
+	getJSON('/api/light', objectToHTML, lumintable);
+</script>		  
 
 {% endblock content %}
 

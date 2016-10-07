@@ -22,128 +22,8 @@
 </div>
 <div  class="tbl-content">
 <table cellpadding="0" cellspacing="0" border="0">
-  <tbody>
-    <tr>
-      <td>24.74 °C</td>
-      <td>2016.10.02.</td>
-      <td>21:30:06</td>
-      
-      
-    </tr>
-    <tr>
-      <td>24.8 °C</td>
-      <td>2016.10.02.</td>
-      <td>21:25:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.73 °C</td>
-      <td>2016.10.02.</td>
-      <td>21:20:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.67 °C</td>
-      <td>2016.10.02.</td>
-      <td>21:15:06</td>
-
-    </tr>
-    <tr>
-      <td>24.46 °C</td>
-      <td>2016.10.02.</td>
-      <td>21:10:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.38 °C</td>
-      <td>2016.10.02.</td>
-      <td>21:05:06</td>
-
-    </tr>
-    <tr>
-      <td>24.4 °C</td>
-      <td>2016.10.02.</td>
-      <td>21:00:06</td>
-    </tr>
-    <tr>
-      <td>24:38 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:55:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.41 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:50:06</td>
-
-    </tr>
-    <tr>
-      <td>24.37 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:45:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.37 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:40:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.38 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:35:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.33 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:30:07</td>
-      
-    </tr>
-    <tr>
-      <td>23.97 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:25:06</td>
-      
-    </tr>
-    <tr>
-      <td>23.96 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:20:06</td>
-      
-    </tr>
-    <tr>
-      <td>23.97 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:15:06</td>
-      
-    </tr>
-    <tr>
-      <td>23.97 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:10:06</td>
-      
-    </tr>
-    <tr>
-      <td>23.97 °C</td>
-      <td>2016.10.02.</td>
-      <td>20:05:06</td>
-      
-    </tr>
-    <tr>
-      <td>23.96 °C</td>
-      <td>2016.10.02</td>
-      <td>20:00:06</td>
-      
-    </tr>
-    <tr>
-      <td>24.16 °C</td>
-      <td>2016.10.02.</td>
-      <td>19:55:06</td>
-     
-    </tr>
-   
+  <tbody id="temptable">
+    
   </tbody>
 </table>
 </div>
@@ -151,6 +31,24 @@
 </div>	
 		  
 		  </div>
+		  
+<script>
+function objectToHTML(jsonObj) {
+	// generate HTML from JSON object
+	var timeRec= jsonObj['time_recorded'];
+	var myDate=timeRec.substring(0,10);
+	var myTime=timeRec.substring(11,19);
+	var tableRow = '<tr> \n' +
+		'<td>' +  jsonObj['value'] + '</td> \n' +
+		'<td>' + myDate + '</td> \n' +
+		'<td>' +  myTime + '</td> \n' +
+		'</tr> \n';
+	return tableRow;
+}
+temptable = document.getElementById('temptable');
+getJSON('/api/temperature', objectToHTML, temptable);
+
+</script>		  
 
 {% endblock content %}
 
