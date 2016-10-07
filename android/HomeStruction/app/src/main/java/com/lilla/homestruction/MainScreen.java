@@ -47,9 +47,11 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by lilla on 21/09/16.
@@ -463,14 +465,21 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     public void sendToServer(String command){
         WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
-        Call<String> call = webService.sendCommand(command);
+        Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<ResponseBody>() {
+
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                String myResponse=response.body();
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String myResponse= null;
+                try {
+                    myResponse = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("resp: " + myResponse + " command: " + myCommand);
                 if (myResponse != null){
-                    if (myCommand == myResponse) {
+                    if (myCommand.equals(myResponse)) {
                         System.out.println("Success");
                     }
                     else {
@@ -480,8 +489,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                System.out.println("ddd Error: " + t.getMessage());
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("dddd Error: " + t.getMessage());
                 showSnackbar();
             }
         });

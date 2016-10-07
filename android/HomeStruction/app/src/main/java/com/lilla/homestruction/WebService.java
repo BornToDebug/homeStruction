@@ -10,6 +10,7 @@ import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.TokenResponse;
 import com.lilla.homestruction.bean.WindowsResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -53,5 +54,5 @@ public interface WebService {
     Call<HumidityResponse> getHumidity();
 
     @GET("/androidcommand/")
-    Call<String> sendCommand(@Query("command") String command);
+    Call<ResponseBody> sendCommand(@Query("command") String command);
 }
