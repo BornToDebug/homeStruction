@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">HomeStruction</string>
 
     <!-- Strings related to login -->
@@ -10,10 +11,10 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="sign_out">Sign out</string>
+
+    <!--Strings related to app button texts and functionalities-->
     <string name="temperature">Temperature</string>
     <string name="humidity">Humidity</string>
     <string name="luminosity">Luminosity</string>
@@ -44,4 +45,6 @@
     <string name="friday">Fr</string>
     <string name="saturday">Sa</string>
     <string name="sunday">Su</string>
+    <string name="forgotten_password">Forgot your password?</string>
+
 </resources>
