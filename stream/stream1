@@ -1,4 +1,0 @@
--profile: aac_low
-ffmpeg -i input.wav -codec:a libfaac -b:a 128k -output.m4a
-ffmpeg -i input.wav -c:a libfaac -profile:a aac_ltp -q:a 100 output.m4a
-
