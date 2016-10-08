@@ -32,7 +32,7 @@ class AlarmExecute(object):
         self.wednesday = new_alarm.wednesday
         self.thursday = new_alarm.thursday
         self.friday = new_alarm.friday
-        self.tuesday = new_alarm.saturday
+        self.saturday = new_alarm.saturday
         self.sunday = new_alarm.sunday
 
     def timeToString(self):
@@ -55,6 +55,7 @@ class AlarmExecute(object):
             schedule.every().saturday.at(timeString).do(wekker)
         if self.sunday:
             schedule.every().sunday.at(timeString).do(wekker)
+
 
 myAlarm = AlarmExecute()
 myAlarm.get_alarm_settings()
