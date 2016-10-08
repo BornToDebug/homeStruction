@@ -1,11 +1,12 @@
 {% extends 'project/base.html' %}
 {% block content %}
+{% load static %}
 		  <div id="cont" style="min-height:100vh;width:1050px;margin-left:auto; margin-right:auto;">
 				<p style="font-family:'Oswald',sans-serif;color:#169999;font-size:30px;margin-left:auto;margin-right:auto;font-weight:bold;">Contact our team!</p>
 				<div id="person" style="width:50%; float:left">
 				<div id="pers">
 				<p>Ács Dávid <div class="profpic">
-                                    <img src="assets/img/david.jpg">
+					<img src="{% static 'project/assets/img/david.jpg' %}">
 			</div></p><br>
 				<div id="text">
 				<h3>Facebook:</h3><a href="https://www.facebook.com/acs.david97">acs.david97</a><br>
@@ -16,7 +17,7 @@
 				<div id="person" style="width:50%;float:left">
 				<div id="pers">
 				<p>Albert Erika-Timea <div class="profpic">
-                                    <img src="assets/img/erika.jpg">
+					<img src="{% static 'project/assets/img/erika.jpg' %}">
 			</div></p><br>
 				<div id="text">
 				<h3>Facebook:</h3><a href="https://www.facebook.com/erika.albert.1">erika.albert.1</a><br>
@@ -27,7 +28,7 @@
 				<div id="person" style="width:50%;float:left">
 				<div id="pers">
 				<p>Nagy Lilla <div class="profpic">
-                                    <img src="assets/img/lilla.jpg">
+					<img src="{% static 'project/assets/img/lilla.jpg' %}">
 			</div></p><br>
 				<div id="text">
 				<h3>Facebook:</h3><a href="https://www.facebook.com/nagylilla96">nagylilla96</a><br>
@@ -38,7 +39,7 @@
 				<div id="person" style="width:50%; float:left">
 				<div id="pers">
 				<p>Szabó Bálint <div class="profpic">
-                                    <img src="assets/img/balint.jpg">
+					<img src="{% static 'project/assets/img/balint.jpg' %}">
 			</div></p><br>
 				<div id="text">
 				<h3>Facebook:</h3><a href="https://www.facebook.com/balint.szabo.735">balint.szabo.735</a><br>
@@ -46,7 +47,7 @@
 				</div>
 				</div>
 				</div>
-		
+
 
 		  </div>
 {% endblock content %}

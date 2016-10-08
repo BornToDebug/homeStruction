@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^doorwind/$', views.DoorAndWindowView.as_view(), name='doorwind'),
     url(r'^mult/$', views.MultimediaView.as_view(), name='mult'),
     url(r'^light/$', views.LightView.as_view(), name='light'),
-    url(r'^live/$', views.LiveView.as_view(), name='live'),    
+    url(r'^live/$', views.LiveView.as_view(), name='live'),
     url(r'^contact/$', views.ContactView.as_view(), name='contact'),
 ]

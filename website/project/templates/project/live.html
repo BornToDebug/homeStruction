@@ -2,22 +2,6 @@
 {% load static %}
 {% block content %}
 <div id="livestr" style="min-height: 100vh; ">
-<script src="{% static 'project/pyr.js' %}"></script>
-<script>plyr.setup();</script>
-
-<script src="{% static 'project/hls.js' %}"></script>
-<video id="video"></video>
-<script>
-  if(Hls.isSupported()) {
-    var video = document.getElementById('video');
-    var hls = new Hls();
-    hls.loadSource('http://qthttp.apple.com.edgesuite.net/1010qwoeiuryfg/sl.m3u8');
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-      video.play();
-  });
- }
-</script>
 </div>
 {% endblock content %}
 
