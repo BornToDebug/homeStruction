@@ -814,5 +814,3 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         startActivity(intent);
     }
 }
-
-
