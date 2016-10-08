@@ -7,17 +7,20 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/hat4">
+
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainScreen">
+
         <android.support.v4.widget.NestedScrollView
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:id="@+id/layout"
                 android:orientation="vertical"
@@ -39,8 +42,7 @@
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginLeft="20dp"/>
 
                     <TextView
                         android:id="@+id/temperature_value"
@@ -53,8 +55,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        tools:text="no data"
-                        />
+                        tools:text="no data"/>
 
                 </RelativeLayout>
 
@@ -73,8 +74,7 @@
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginLeft="20dp"/>
 
                     <TextView
                         android:id="@+id/humidity_value"
@@ -87,8 +87,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        tools:text="no data"
-                        />
+                        tools:text="no data"/>
 
                 </RelativeLayout>
 
@@ -106,8 +105,8 @@
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <TextView
                         android:id="@+id/luminosity_value"
@@ -117,9 +116,10 @@
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        tools:text="no data"
-                        />
+                        tools:text="no data"/>
 
                 </RelativeLayout>
 
@@ -133,7 +133,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Music Player"
+                        android:text="@string/music_player"
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerHorizontal="true"
@@ -144,10 +144,11 @@
                         android:id="@+id/now_playing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Now playing: "
-                        android:textSize="16dp"
+                        android:text="@string/now_playing"
+                        android:textSize="16sp"
                         android:textColor="#00ffff"
                         android:layout_marginTop="30dp"
+                        android:layout_marginStart="15dp"
                         android:layout_marginLeft="15dp"/>
 
                     <LinearLayout
@@ -163,7 +164,7 @@
                             android:src="@drawable/songs"
                             android:background="@android:color/transparent"
                             android:layout_margin="5dp"
-                            />
+                            android:contentDescription="@string/song_button"/>
 
                         <ImageButton
                             android:id="@+id/previous"
@@ -171,19 +172,21 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/previous"
                             android:background="@android:color/transparent"
-                            android:layout_margin="5dp"/>
-
+                            android:layout_margin="5dp"
+                            android:contentDescription="@string/previous_button"/>
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
+
                             <ImageButton
                                 android:id="@+id/play"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/play"
                                 android:background="@android:color/transparent"
-                                android:layout_margin="5dp"/>
+                                android:layout_margin="5dp"
+                                android:contentDescription="@string/play_button"/>
 
                             <ImageButton
                                 android:id="@+id/pause"
@@ -193,9 +196,10 @@
                                 android:background="@android:color/transparent"
                                 android:visibility="invisible"
                                 android:layout_alignTop="@+id/play"
-                                android:layout_centerHorizontal="true" />
-                        </RelativeLayout>
+                                android:layout_centerHorizontal="true"
+                                android:contentDescription="@string/pause_button"/>
 
+                        </RelativeLayout>
 
                         <ImageButton
                             android:id="@+id/next"
@@ -203,7 +207,8 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/next"
                             android:background="@android:color/transparent"
-                            android:layout_margin="5dp"/>
+                            android:layout_margin="5dp"
+                            android:contentDescription="@string/next_button"/>
 
                         <ImageButton
                             android:id="@+id/shuffle"
@@ -211,19 +216,21 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/shuffle"
                             android:background="@android:color/transparent"
-                            android:layout_margin="5dp"/>
+                            android:layout_margin="5dp"
+                            android:contentDescription="@string/shuffle_button"/>
 
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Volume:"
+                        android:text="@string/volume"
                         android:visibility="visible"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textColor="@color/colorAccent"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginStart="15dp"
                         android:layout_marginLeft="15dp"/>
 
                     <SeekBar
@@ -232,7 +239,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginStart="70dp"
                         android:layout_marginLeft="70dp"
+                        android:layout_marginEnd="45dp"
                         android:layout_marginRight="45dp"
                         android:theme="@style/ScrollBarTheme"
                         android:textColorSecondaryInverseNoDisable="@color/colorAccent"/>
@@ -241,13 +250,14 @@
                         android:id="@+id/volume"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0%"
                         android:visibility="visible"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textColor="@color/colorAccent"
                         android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"/>
 
                 </RelativeLayout>
@@ -262,12 +272,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Window"
+                        android:text="@string/window"
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <ImageView
                         android:id="@+id/window_open"
@@ -277,9 +287,12 @@
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible"
+                        android:contentDescription="@string/window_open"/>
 
                     <ImageView
                         android:id="@+id/window_closed"
@@ -289,21 +302,27 @@
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:visibility="invisible"/>
+                        android:visibility="invisible"
+                        android:contentDescription="@string/window_closed"/>
 
                     <TextView
                         android:id="@+id/window_error"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="error"
+                        android:text="@string/error"
                         android:textSize="18sp"
                         android:textColor="@color/colorAccent"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
                         android:visibility="invisible"/>
+
                 </RelativeLayout>
 
 
@@ -318,12 +337,12 @@
                         android:id="@+id/doors_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Door"
+                        android:text="@string/door"
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <TextView
                         android:id="@+id/conf"
@@ -334,15 +353,18 @@
                         android:textColor="@android:color/white"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="10dp"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="70dp"
-                        />
+                        android:layout_marginEnd="70dp"
+                        android:layout_marginRight="70dp"/>
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
                         android:id="@+id/lock">
 
@@ -351,18 +373,24 @@
                             android:src="@drawable/locked"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
+                            android:layout_marginEnd="0dp"
                             android:layout_marginRight="0dp"
-                            android:visibility="visible"/>
+                            android:visibility="visible"
+                            android:contentDescription="@string/door_locked"/>
 
                         <ImageView
                             android:id="@+id/door_unlocked"
                             android:src="@drawable/unlocked"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
+                            android:layout_marginEnd="8dp"
                             android:layout_marginRight="8dp"
-                            android:visibility="invisible"/>
+                            android:visibility="invisible"
+                            android:contentDescription="@string/door_unlocked"/>
 
                     </RelativeLayout>
 
@@ -378,12 +406,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Chandelier"
+                        android:text="@string/chandelier"
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <Switch
                         android:id="@+id/chandelier_switch"
@@ -392,7 +420,9 @@
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp" />
 
                 </RelativeLayout>
@@ -407,12 +437,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nightlight"
+                        android:text="@string/nightlight"
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <Switch
                         android:id="@+id/nightlight_switch"
@@ -421,8 +451,10 @@
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp" />
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"/>
 
                 </RelativeLayout>
 
@@ -436,12 +468,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ventillator/Coffee machine"
+                        android:text="@string/vecof"
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
-                        />
+                        android:layout_marginStart="20dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <Switch
                         android:id="@+id/vecof_switch"
@@ -450,11 +482,12 @@
                         android:textSize="18sp"
                         android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp" />
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"/>
 
                 </RelativeLayout>
-
 
                 <RelativeLayout
                     android:id="@+id/alarm"
@@ -470,12 +503,12 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Alarm"
+                            android:text="@string/alarm"
                             android:textSize="18sp"
                             android:textColor="#00ffff"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="20dp"
-                            />
+                            android:layout_marginStart="20dp"
+                            android:layout_marginLeft="20dp"/>
 
                         <Switch
                             android:id="@+id/alarm_switch"
@@ -484,7 +517,9 @@
                             android:textSize="18sp"
                             android:textColor="#00ffff"
                             android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
+                            android:layout_marginEnd="20dp"
                             android:layout_marginRight="20dp"
                             android:textOn=""
                             android:textOff=""/>
@@ -502,36 +537,34 @@
                             android:id="@+id/monday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
                             android:textAllCaps="false"
-                            android:textOn="Mo"
-                            android:textOff="Mo"
+                            android:textOn="@string/monday"
+                            android:textOff="@string/monday"
                             android:background="@drawable/button_toggle"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"
-                            />
+                            android:layout_margin="3dp"/>
 
                         <ToggleButton
                             android:id="@+id/tuesday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
                             android:textAllCaps="false"
-                            android:textOn="Tu"
-                            android:textOff="Tu"
+                            android:textOn="@string/tuesday"
+                            android:textOff="@string/tuesday"
                             android:background="@drawable/button_toggle"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"
-                            />
+                            android:layout_margin="3dp"/>
 
                         <ToggleButton
                             android:id="@+id/wednesday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
                             android:textAllCaps="false"
-                            android:textOn="We"
-                            android:textOff="We"
+                            android:textOn="@string/wednesday"
+                            android:textOff="@string/wednesday"
                             android:background="@drawable/button_toggle"
                             android:textColor="@color/toggle_color"
                             android:layout_margin="3dp"
@@ -541,14 +574,13 @@
                             android:id="@+id/thursday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
                             android:textAllCaps="false"
-                            android:textOn="Th"
-                            android:textOff="Th"
+                            android:textOn="@string/thursday"
+                            android:textOff="@string/thursday"
                             android:background="@drawable/button_toggle"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"
-                            />
+                            android:layout_margin="3dp"/>
 
                         <ToggleButton
                             android:id="@+id/friday"
@@ -556,43 +588,44 @@
                             android:layout_height="40dp"
                             android:textSize="18sp"
                             android:textAllCaps="false"
-                            android:textOn="Fr"
-                            android:textOff="Fr"
+                            android:textOn="@string/friday"
+                            android:textOff="@string/friday"
                             android:background="@drawable/button_toggle"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"
-                            />
+                            android:layout_margin="3dp"/>
 
                         <ToggleButton
                             android:id="@+id/saturday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
                             android:textAllCaps="false"
-                            android:textOn="Sa"
-                            android:textOff="Sa"
+                            android:textOn="@string/saturday"
+                            android:textOff="@string/saturday"
                             android:background="@drawable/button_toggle"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"
-                            />
+                            android:layout_margin="3dp"/>
 
                         <ToggleButton
                             android:id="@+id/sunday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
                             android:textAllCaps="false"
-                            android:textOn="Su"
-                            android:textOff="Su"
+                            android:textOn="@string/sunday"
+                            android:textOff="@string/sunday"
                             android:background="@drawable/button_toggle"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"
-                            />
+                            android:layout_margin="3dp"/>
 
                     </LinearLayout>
 
                 </RelativeLayout>
+
             </LinearLayout>
+
         </android.support.v4.widget.NestedScrollView>
+
     </android.support.design.widget.CoordinatorLayout>
+    
 </android.support.v4.widget.SwipeRefreshLayout>

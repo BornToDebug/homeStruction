@@ -137,6 +137,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         nightLampSwitch = (Switch) findViewById(R.id.nightlight_switch);
         veCofSwitch = (Switch) findViewById(R.id.vecof_switch);
 
+        volume.setText("0%");
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
 
