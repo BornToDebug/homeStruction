@@ -1,5 +1,6 @@
 package com.lilla.homestruction;
 
+import com.lilla.homestruction.bean.DoorLockedResponse;
 import com.lilla.homestruction.bean.DoorResponse;
 import com.lilla.homestruction.bean.HumidityResponse;
 import com.lilla.homestruction.bean.Lamp1Response;
@@ -10,6 +11,7 @@ import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.TokenResponse;
 import com.lilla.homestruction.bean.WindowsResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -46,6 +48,9 @@ public interface WebService {
     @GET("/api/door/")
     Call<DoorResponse> getDoor();
 
+    @GET("/api/lamp/d")
+    Call<DoorLockedResponse> getDoorLocked();
+
     @GET("/api/window/")
     Call<WindowsResponse> getWindows();
 
@@ -53,5 +58,5 @@ public interface WebService {
     Call<HumidityResponse> getHumidity();
 
     @GET("/androidcommand/")
-    Call<String> sendCommand(@Query("command") String command);
+    Call<ResponseBody> sendCommand(@Query("command") String command);
 }
