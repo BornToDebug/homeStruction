@@ -1154,7 +1154,7 @@ ul.menu ul {
 	text-align:left;
 }
 .opclswitch-inner:after {
-    content: "LOCK";
+    content: "CLOSE";
     padding-right: 10px;
     background-color: #EEEEEE; color: #999999;
     text-align: right;
@@ -2654,7 +2654,7 @@ ul.social-icons li a:hover {
   font-size: 16px !important;
   height: 34px;
   margin-top: -20px;
-  top: 50%;
+  top: 75%;
   text-shadow: none;
   opacity: 1;
 }
@@ -3187,4 +3187,31 @@ ul.posts-list li {
 	height:150px;
 	margin-top:10px;
 	border-radius:5px;
+}
+
+/* Home extras */
+
+#data{
+	
+	width:345px;
+	height:100px;
+	margin-top:20px;
+	background-color: #999999;
+	border-radius:5px;
+	text-align:left;
+	
+	
+	
+}
+#data h6{
+	font-size:23px;
+	color:#404040;
+	margin-left:50px;
+	padding-top:40px;
+	
+}
+#data h5{
+	
+	margin-top:-220px;
+	
 }
