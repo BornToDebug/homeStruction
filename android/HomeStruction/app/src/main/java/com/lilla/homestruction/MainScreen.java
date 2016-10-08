@@ -25,6 +25,8 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.lilla.homestruction.bean.Door;
+import com.lilla.homestruction.bean.DoorLocked;
+import com.lilla.homestruction.bean.DoorLockedResponse;
 import com.lilla.homestruction.bean.DoorResponse;
 import com.lilla.homestruction.bean.Humidity;
 import com.lilla.homestruction.bean.HumidityResponse;
@@ -101,6 +103,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.luminosity).setOnClickListener(this);
         findViewById(R.id.multimedia).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
+        findViewById(R.id.doors_switch).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
         findViewById(R.id.chandelier).setOnClickListener(this);
         findViewById(R.id.chandelier_switch).setOnClickListener(this);
@@ -120,7 +123,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
         final TextView volume = (TextView) findViewById(R.id.volume);
         doorSwitch = (Switch) findViewById(R.id.doors_switch);
-        doorSwitch.setClickable(false);
         doorText = (TextView) findViewById(R.id.doors_text);
         windowOpen = (ImageView) findViewById(R.id.window_open);
         windowClosed = (ImageView) findViewById(R.id.window_closed);
@@ -159,6 +161,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateLamp2Data();
         updateLamp3Data();
         updateDoorData();
+        updateDoorLockedData();
         updateWindowsData();
         updateHumidityData();
         updateLightData();
@@ -172,6 +175,20 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             startActivity(refresh);
         }
     };
+
+    public void showSnackbar(){
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
+                .setAction("RETRY", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent refresh = getIntent();
+                        finish();
+                        startActivity(refresh);
+                    }
+                });
+        snackbar.show();
+    }
 
     //TODO personalize your own settings in the settings menu
 
@@ -196,19 +213,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    public void showSnackbar(){
-        Snackbar snackbar = Snackbar
-                .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
-                .setAction("RETRY", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent refresh = getIntent();
-                        finish();
-                        startActivity(refresh);
-                    }
-                });
-        snackbar.show();
-    }
+
 
     private void updateHumidityData() {
         WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
@@ -419,6 +424,46 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+    private void updateDoorLockedData() {
+        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+        Call<DoorLockedResponse> call = webService.getDoorLocked();
+        call.enqueue(new Callback<DoorLockedResponse>() {
+            @Override
+            public void onResponse(Call<DoorLockedResponse> call, Response<DoorLockedResponse> response) {
+                List<DoorLocked> doorLockValues = response.body().getResults();
+                if (doorLockValues.get(0) != null){
+                    switch (doorLockValues.get(0).getValue()){
+                        case "do_c":
+                            doorSwitch.setChecked(true);
+                            doorSwitch.setText("");
+                            break;
+                        case "do_uc":
+                            doorSwitch.setChecked(true);
+                            doorSwitch.setText("?");
+                            break;
+                        case "dc_c":
+                            doorSwitch.setChecked(false);
+                            doorSwitch.setText("");
+                            break;
+                        case "dc_uc":
+                            doorSwitch.setChecked(false);
+                            doorSwitch.setText("?");
+                            break;
+                        default:
+                            doorSwitch.setText("error");
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DoorLockedResponse> call, Throwable t) {
+                System.out.println("ddd Error: " + t.getMessage());
+                doorSwitch.setText("error");
+            }
+        });
+    }
+
     private void updateWindowsData() {
         WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
         Call<WindowsResponse> call = webService.getWindows();
@@ -583,7 +628,25 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 //TODO solve the ripple effect
                 break;
             case R.id.doors:
-                System.out.println("Doors button clicked");
+                doorSwitch.toggle();
+                if (doorSwitch.isChecked()){
+                    System.out.println("ddd DoorSwitch checked");
+                    sendToServer("opendoor");
+                }
+                else{
+                    System.out.println("ddd DoorSwitch unchecked");
+                    sendToServer("closedoor");
+                }
+                break;
+            case R.id.doors_switch:
+                if (doorSwitch.isChecked()){
+                    System.out.println("ddd DoorSwitch checked");
+                    sendToServer("opendoor");
+                }
+                else{
+                    System.out.println("ddd DoorSwitch unchecked");
+                    sendToServer("closedoor");
+                }x
                 break;
             case R.id.windows:
                 System.out.println("Windows button clicked");
@@ -719,7 +782,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("Pause button pressed");
                 play.setVisibility(View.VISIBLE);
                 pause.setVisibility(View.INVISIBLE);
-                //THIS IS FUCKING AWESOME!!! :D
                 break;
             case R.id.next:
                 System.out.println("Next button pressed");

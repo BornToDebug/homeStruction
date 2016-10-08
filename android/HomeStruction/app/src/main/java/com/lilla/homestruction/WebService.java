@@ -1,5 +1,6 @@
 package com.lilla.homestruction;
 
+import com.lilla.homestruction.bean.DoorLockedResponse;
 import com.lilla.homestruction.bean.DoorResponse;
 import com.lilla.homestruction.bean.HumidityResponse;
 import com.lilla.homestruction.bean.Lamp1Response;
@@ -46,6 +47,9 @@ public interface WebService {
 
     @GET("/api/door/")
     Call<DoorResponse> getDoor();
+
+    @GET("/api/lamp/d")
+    Call<DoorLockedResponse> getDoorLocked();
 
     @GET("/api/window/")
     Call<WindowsResponse> getWindows();
