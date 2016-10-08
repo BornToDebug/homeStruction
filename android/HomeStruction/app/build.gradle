@@ -32,5 +32,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-    compile files('/home/lilla/Desktop/homeStruction/android/HomeStruction/libs/imagezoom.jar')
+    compile files('libs/imagezoom.jar')
 }

@@ -13,5 +13,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="sign_out">"Sign out"</string>
+    <string name="sign_out">Sign out</string>
+    <string name="temperature">Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="luminosity">Luminosity</string>
 </resources>
