@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,14 +12,15 @@
         <item name="android:textColorSecondary">@android:color/background_light</item>
         <item name="android:colorForeground">@android:color/background_light</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
+
     </style>
 
-    <style name="DialogTheme" parent="Base.Theme.AppCompat.Dialog">
-    </style>
+    <style name="DialogTheme" parent="Base.Theme.AppCompat.Dialog"/>
 
     <style name="ScrollBarTheme" parent="AppTheme">
-        <item name="colorPrimary">@android:color/background_light</item>
-    </style>
 
+        <item name="colorPrimary">@android:color/background_light</item>
+
+    </style>
 
 </resources>

@@ -2,7 +2,6 @@ package com.lilla.homestruction;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -44,8 +42,6 @@ import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.Windows;
 import com.lilla.homestruction.bean.WindowsResponse;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
@@ -54,7 +50,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by lilla on 21/09/16.
@@ -136,6 +131,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         chandelierSwitch = (Switch) findViewById(R.id.chandelier_switch);
         nightLampSwitch = (Switch) findViewById(R.id.nightlight_switch);
         veCofSwitch = (Switch) findViewById(R.id.vecof_switch);
+
+        volume.setText("0%");
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {

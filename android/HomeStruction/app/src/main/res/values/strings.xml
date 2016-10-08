@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">HomeStruction</string>
 
     <!-- Strings related to login -->
@@ -10,11 +11,40 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="sign_out">Sign out</string>
+
+    <!--Strings related to app button texts and functionalities-->
     <string name="temperature">Temperature</string>
     <string name="humidity">Humidity</string>
     <string name="luminosity">Luminosity</string>
+    <string name="music_player">Music Player</string>
+    <string name="now_playing">Now playing: </string>
+    <string name="song_button">Pick a song</string>
+    <string name="previous_button">Previous song</string>
+    <string name="play_button">Play song</string>
+    <string name="pause_button">Pause the song</string>
+    <string name="next_button">Play the next song</string>
+    <string name="shuffle_button">Shuffle the songs</string>
+    <string name="volume">Volume</string>
+    <string name="window">Window</string>
+    <string name="window_open">Open window logo</string>
+    <string name="window_closed">Closed window logo</string>
+    <string name="error">error</string>
+    <string name="door">Door</string>
+    <string name="door_locked">Door locked icon</string>
+    <string name="door_unlocked">Door unlocked icon</string>
+    <string name="chandelier">Chandelier</string>
+    <string name="nightlight">Nightlight</string>
+    <string name="vecof">Fan/coffee machine</string>
+    <string name="alarm">Alarm</string>
+    <string name="monday">Mo</string>
+    <string name="tuesday">Tu</string>
+    <string name="wednesday">We</string>
+    <string name="thursday">Th</string>
+    <string name="friday">Fr</string>
+    <string name="saturday">Sa</string>
+    <string name="sunday">Su</string>
+    <string name="forgotten_password">Forgot your password?</string>
+
 </resources>

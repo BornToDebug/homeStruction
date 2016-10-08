@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,18 +9,10 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
+    <com.theappguruz.imagezoom.ImageViewTouch
+        android:id="@+id/graph"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center"
-        android:orientation="vertical" >
-
-        <com.theappguruz.imagezoom.ImageViewTouch
-            android:id="@+id/graph"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center" />
-    </LinearLayout>
+        android:layout_gravity="center"/>
 
 </LinearLayout>
