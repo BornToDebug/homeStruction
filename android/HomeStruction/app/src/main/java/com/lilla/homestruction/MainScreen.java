@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -70,7 +71,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private TextView temperatureValue;
     private TextView humidityValue;
     private TextView luminosityValue;
-    private Switch doorSwitch;
+    private ImageView doorLocked;
+    private ImageView doorUnlocked;
     private TextView doorText;
     private ImageView windowOpen;
     private ImageView windowClosed;
@@ -78,6 +80,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Switch chandelierSwitch;
     private Switch nightLampSwitch;
     private Switch veCofSwitch;
+    private TextView confirm;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -97,13 +100,17 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         luminosityValue = (TextView) findViewById(R.id.luminosity_value);
         System.out.println(SaveSharedPreference.getUserName(MainScreen.this));
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        doorLocked = (ImageView) findViewById(R.id.door_locked);
+        doorUnlocked = (ImageView) findViewById(R.id.door_unlocked);
+        confirm = (TextView) findViewById(R.id.conf);
+
 
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
         findViewById(R.id.luminosity).setOnClickListener(this);
         findViewById(R.id.multimedia).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
-        findViewById(R.id.doors_switch).setOnClickListener(this);
+        findViewById(R.id.lock).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
         findViewById(R.id.chandelier).setOnClickListener(this);
         findViewById(R.id.chandelier_switch).setOnClickListener(this);
@@ -122,7 +129,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
         final TextView volume = (TextView) findViewById(R.id.volume);
-        doorSwitch = (Switch) findViewById(R.id.doors_switch);
         doorText = (TextView) findViewById(R.id.doors_text);
         windowOpen = (ImageView) findViewById(R.id.window_open);
         windowClosed = (ImageView) findViewById(R.id.window_closed);
@@ -434,23 +440,26 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (doorLockValues.get(0) != null){
                     switch (doorLockValues.get(0).getValue()){
                         case "do_c":
-                            doorSwitch.setChecked(true);
-                            doorSwitch.setText("");
+                            doorUnlocked.setVisibility(View.VISIBLE);
+                            doorLocked.setVisibility(View.INVISIBLE);
+                            confirm.setText("");
                             break;
                         case "do_uc":
-                            doorSwitch.setChecked(true);
-                            doorSwitch.setText("?");
+                            doorUnlocked.setVisibility(View.VISIBLE);
+                            doorLocked.setVisibility(View.INVISIBLE);
+                            confirm.setText("?");
                             break;
                         case "dc_c":
-                            doorSwitch.setChecked(false);
-                            doorSwitch.setText("");
+                            doorUnlocked.setVisibility(View.INVISIBLE);
+                            doorLocked.setVisibility(View.VISIBLE);
+                            confirm.setText("");
                             break;
                         case "dc_uc":
-                            doorSwitch.setChecked(false);
-                            doorSwitch.setText("?");
+                            doorUnlocked.setVisibility(View.INVISIBLE);
+                            doorLocked.setVisibility(View.VISIBLE);
+                            confirm.setText("?");
                             break;
                         default:
-                            doorSwitch.setText("error");
                             break;
                     }
                 }
@@ -459,7 +468,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<DoorLockedResponse> call, Throwable t) {
                 System.out.println("ddd Error: " + t.getMessage());
-                doorSwitch.setText("error");
             }
         });
     }
@@ -628,25 +636,33 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 //TODO solve the ripple effect
                 break;
             case R.id.doors:
-                doorSwitch.toggle();
-                if (doorSwitch.isChecked()){
-                    System.out.println("ddd DoorSwitch checked");
+                System.out.println("Clicked doors button");
+                if (doorLocked.getVisibility() == View.VISIBLE){
+                    doorLocked.setVisibility(View.INVISIBLE);
+                    doorUnlocked.setVisibility(View.VISIBLE);
+                    System.out.println("Door unlocked");
                     sendToServer("opendoor");
                 }
-                else{
-                    System.out.println("ddd DoorSwitch unchecked");
+                else {
+                    doorLocked.setVisibility(View.VISIBLE);
+                    doorUnlocked.setVisibility(View.INVISIBLE);
+                    System.out.println("Door locked");
                     sendToServer("closedoor");
                 }
                 break;
-            case R.id.doors_switch:
-                if (doorSwitch.isChecked()){
-                    System.out.println("ddd DoorSwitch checked");
+            case R.id.lock:
+                if (doorLocked.getVisibility() == View.VISIBLE){
+                    doorLocked.setVisibility(View.INVISIBLE);
+                    doorUnlocked.setVisibility(View.VISIBLE);
+                    System.out.println("Door unlocked");
                     sendToServer("opendoor");
                 }
-                else{
-                    System.out.println("ddd DoorSwitch unchecked");
+                else {
+                    doorLocked.setVisibility(View.VISIBLE);
+                    doorUnlocked.setVisibility(View.INVISIBLE);
+                    System.out.println("Door locked");
                     sendToServer("closedoor");
-                }x
+                }
                 break;
             case R.id.windows:
                 System.out.println("Windows button clicked");
