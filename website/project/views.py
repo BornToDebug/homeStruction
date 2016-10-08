@@ -26,7 +26,7 @@ class LampStartList(generics.ListAPIView):
 
     def get_queryset(self):
         startswith = self.kwargs['startswith']
-        return Lamp.objects.filter(value__startswith=startswith)
+        return Lamp.objects.filter(value__startswith=startswith).order_by('-time_recorded')
 
 class DoorViewSet(viewsets.ModelViewSet):
 

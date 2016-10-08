@@ -23,3 +23,5 @@ function generateRows(json, table, objectConverter) {
 		table.innerHTML += tableRow;
 	}
 }
+
+

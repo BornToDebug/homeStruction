@@ -1,0 +1,3 @@
+#!/bin/bash
+sleep 5
+DISPLAY=:1 /usr/local/bin/xdotool mousemove 186 22 click 1

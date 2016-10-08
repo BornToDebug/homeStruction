@@ -106,16 +106,16 @@ try:
 	if todo == 'opendoor':
 		ser.write('5')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='od_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='do_c', time_recorded=timezone.now())
 		else:
-			Lamp.objects.create(value='od_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='do_uc', time_recorded=timezone.now())
 
 	if todo == 'closedoor':
 		ser.write('4')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='cd_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='dc_c', time_recorded=timezone.now())
 		else:
-			Lamp.objects.create(value='cd_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='dc_uc', time_recorded=timezone.now())
 	
 	ser.close()
 	

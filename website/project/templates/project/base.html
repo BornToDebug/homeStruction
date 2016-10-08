@@ -71,17 +71,20 @@
 
                                 </li>
                                 <li>
-									<a href="{% url "project:mult" %}" class="fa-music">Lamps</a>
+									<a href="{% url "project:mult" %}" class="fa-lightbulb-o">Lamps</a>
 
 								</li>
                                 <li>
-									<a href="{% url "project:light" %}" class="fa-lightbulb-o">Light</a>
+									<a href="{% url "project:light" %}" class="fa-flash">Light</a>
 
                                 </li>
                                 <li>
 									<a href="{% url "project:temp" %}" class="fa-sun-o">Temperature</a>
 
                                 </li>
+								<li>
+									<a class="fa-cloud">Humidity</a>
+								</li>
                                 <li>
 									<a href="{% url "project:alarm" %}" class="fa-bell">Alarm</a>
                                 </li>
@@ -89,10 +92,11 @@
 									<a href="{% url "project:live" %}" class="fa-desktop">Live Stream</a>
 								</li>
 								<li>
+									<a href="" class="fa-facebook-square">Contact</a>
 								</li>
-									<a>Contact</a>
+									
 								<li>
-									<a href="{% url 'logout' %}?next=/logout" class="fa-power-off">Log Out</a>
+									<a href="{% url 'logout' %}?next=/logout" class="fa-power-off"></a>
 								</li>
                         </div>
                     </div>
@@ -101,8 +105,7 @@
 	      </div>
 		  <!-- CONTENT -->
 
-<script src="{% static 'project/rest/rest.js' %}"></script>
-<script src="{% static 'project/rest/command.js' %}"></script>
+
 		{% block content %}
 	  	{% endblock content %}
 		  <!-- ========== ABOUT SECTION ========== -->
@@ -141,6 +144,8 @@
 
 
 	  <!-- JS -->
+			<script src="{% static 'project/rest/rest.js' %}"></script>
+			<script src="{% static 'project/rest/command.js' %}"></script>
 			<script src="{% static "project/assets/js/classie.js"%}"></script>
 			<script src="{% static "project/assets/js/bootstrap.min.js"%}"></script>
 			<script src="{% static "project/assets/js/smoothscroll.js"%}"></script>

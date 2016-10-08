@@ -1,7 +1,0 @@
-#!/bin/bash
-
-ffmpeg -f v4l2 -framerate 20 -video_size 320x240 -i /dev/video0 \
-	-f alsa -ar 44100 -ac 1 -i hw:1 -c:a aac -b:a 64k \
-	-vcodec libx264 -preset veryfast -r 20 -s 320x240 -crf 0 \
-	-maxrate 1984k -bufsize 3968k -vf "format=yuv420p" -g 60\
-	-f flv rtmp://live.twitch.tv/app/live_135514651_a36ejEHMcpvTXGzCTx7XIQGj4sKwnL

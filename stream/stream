@@ -1,5 +1,0 @@
-#!/bin/bash
-
-#ffmpeg -f v4l2 -video_size 640x480 -framerate 5 -i /dev/video0  -i '/mnt/Stick/Music/01. Crystals.mp3' -vcodec libx264 -preset veryfast -maxrate 1984k -bufsize 3968k -vf "format=yuv420p" -g 60 -f flv "rtmp://a.rtmp.youtube.com/live2/heda-mkww-ujk3-avg8"
-ffmpeg -f v4l2 -i /dev/video0 -f alsa -i hw:0 -c:v libx264 -crf 0 -r 10 -f alsa -i /dev/media0 -f flv "rtmp://a.rtmp.youtube.com/live2/heda-mkww-ujk3-avg8"
-
