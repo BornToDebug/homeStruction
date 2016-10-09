@@ -83,3 +83,6 @@ class LiveView(LoginRequiredMixin, generic.TemplateView):
 class ContactView(LoginRequiredMixin, generic.TemplateView):
     template_name = 'project/contact.html'
 
+class HumidityView(LoginRequiredMixin, generic.TemplateView):
+    template_name = 'project/humid.html'
+

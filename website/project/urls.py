@@ -14,4 +14,6 @@ urlpatterns = [
     url(r'^light/$', views.LightView.as_view(), name='light'),
     url(r'^live/$', views.LiveView.as_view(), name='live'),
     url(r'^contact/$', views.ContactView.as_view(), name='contact'),
+    url(r'^humidity/$', views.HumidityView.as_view(), name='humidity'),
+
 ]
