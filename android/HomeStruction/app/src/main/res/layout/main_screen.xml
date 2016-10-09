@@ -31,7 +31,7 @@
                     android:id="@+id/temperature"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -63,7 +63,7 @@
                     android:id="@+id/humidity"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -95,7 +95,7 @@
                     android:id="@+id/luminosity"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -127,7 +127,7 @@
                     android:id="@+id/multimedia"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -266,7 +266,7 @@
                     android:id="@+id/windows"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -330,7 +330,7 @@
                     android:id="@+id/doors"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -377,7 +377,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginEnd="0dp"
                             android:layout_marginRight="0dp"
-                            android:visibility="visible"
+                            android:visibility="invisible"
                             android:contentDescription="@string/door_locked"/>
 
                         <ImageView
@@ -389,7 +389,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginEnd="8dp"
                             android:layout_marginRight="8dp"
-                            android:visibility="invisible"
+                            android:visibility="visible"
                             android:contentDescription="@string/door_unlocked"/>
 
                     </RelativeLayout>
@@ -400,7 +400,7 @@
                     android:id="@+id/chandelier"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -431,7 +431,7 @@
                     android:id="@+id/nightlight"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -462,7 +462,7 @@
                     android:id="@+id/vecof"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/ripple"
                     android:layout_margin="4dp">
 
                     <TextView
@@ -490,15 +490,16 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/alarm"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
-                    android:background="@drawable/border"
+                    android:background="@drawable/border_unpressed"
                     android:layout_margin="4dp">
 
                     <RelativeLayout
+                        android:id="@+id/alarm"
                         android:layout_width="match_parent"
-                        android:layout_height="70dp">
+                        android:layout_height="70dp"
+                        android:background="@drawable/ripple_small">
 
                         <TextView
                             android:layout_width="wrap_content"

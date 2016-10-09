@@ -78,8 +78,9 @@ function objectToHTML(jsonObj) {
 	var timeRec= jsonObj['time_recorded'];
 	var myDate=timeRec.substring(0,10);
 	var myTime=timeRec.substring(11,19);
+	var myValue=jsonObj['value'];
 	var tableRow = '<tr> \n' +
-		'<td>' +  jsonObj['value'] + '</td> \n' +
+		'<td>' +  myValue+ '</td> \n' +
 		'<td>' + myDate + '</td> \n' +
 		'<td>' +  myTime + '</td> \n' +
 		'</tr> \n';
