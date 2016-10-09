@@ -5,7 +5,7 @@
 			<div id="door" name="door" style="width:50%; float:left; margin-top:18px;">
 				<h6 style="margin-left:20px;">...Oops! You may have left the door open. Let's check it out and solve it.</h6>
 			  <div id="txtsw" style="width:500px" >
-				<h5>The door is: </h5><h6>OPEN/CLOSED.</h6>
+				<h5>The door is: </h5><h6 id="doorstat"></h6>
 				<div class="opclswitch" style="margin-left:350px" >
 					<input type="checkbox" name="opclswitch" class="opclswitch-checkbox" id="myopclswitch" onclick="myFunction()">
 					<label class="opclswitch-label" for="myopclswitch">
@@ -85,7 +85,7 @@ function objectToHTML(jsonObj) {
 	if(myValue == "dc_c") { tableVar ="Locked";}
 	if(myValue == "do_uc") {tableVar="Unlocking failed";}
 	if(myValue == "dc_uc") {tableVar="Locking failed";}
-	if(myValue == "open") {tableVar="Open";}
+	if(myValue == "opened") {tableVar="Open";}
 	if(myValue == "closed") {tableVar="Closed";}
 	var tableRow = '<tr> \n' +
 		'<td>' +  tableVar + '</td> \n' +
@@ -95,12 +95,13 @@ function objectToHTML(jsonObj) {
 	return tableRow;
 	}
 }
-
+	var s= document.getElementById('doorstat');
+    s.value = jsonObj['value'];
 	doortable = document.getElementById('doortable');
 	windowtable = document.getElementById('windowtable');
-	getJSON('/api/door', objectToHTML, doortable);
-	getJSON('/api/lamp', objectToHTML, doortable);
-	getJSON('/api/window', objectToHTML, windowtable);
+	getJSON('/api/door/', objectToHTML, doortable);
+	getJSON('/api/lamp/', objectToHTML, doortable);
+	getJSON('/api/window/', objectToHTML, windowtable);
 </script>
 {% endblock content %}
 
