@@ -17,7 +17,7 @@ def between(what, a, b):
 	if what > a and what < b:
 		return True
 	return False
-	
+
 
 #Initialize serial connection
 ser = serial.Serial('/dev/ttyACM0', 9600);
@@ -29,7 +29,7 @@ sleep(3)
 #Read the big chunk of data
 bigchunk = ser.readline()
 sleep(1)
-#DEBUG: 
+#DEBUG:
 print bigchunk
 #Process the data
 words = bigchunk.split()
