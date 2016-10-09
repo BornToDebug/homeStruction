@@ -4,13 +4,13 @@
 <!-- actual content -->
             <div id="content" style="min-height:100vh">
                 <div class="container no-padding">
-				
+
                     <div class="row">
-					
+
                         <!-- Carousel Slideshow -->
                         <div id="carousel-example" class="carousel slide" data-ride="carousel">
                             <!-- Carousel Indicators -->
-				<div id="news" style="margin-left:auto; margin-right:auto;width:1100px;padding-left:5px;">			
+				<div id="news" style="margin-left:auto; margin-right:auto;width:1100px;padding-left:5px;">
 				<div id="news1" style="width:33%;float:left; margin-right:-8px;">
 					<div id="data" style="">
 						<h6>Humidity:</h6><h5 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">34</h5>
@@ -37,11 +37,11 @@
 						<span class="opclswitch-switch"></span>
 					</label>
 				</div>
-				
+
 			  </div>
 			  </div>
 			  <div id="window" name="window" style="width:50%; float:left">
-		
+
 		<div id="txtsw" style="width:503px;min-height:105px;">
 			<h5 style="padding-top:35px;">Window: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">OPEN/CLOSED.</h6>
 
@@ -58,10 +58,10 @@
 						<span class="onoffswitch-switch"></span>
 					</label>
 				</div>
-			  </div>	
+			  </div>
 			</div>
-			 
-			
+
+
 			<div id="light2" name="light2" style="width:33%; float:left;height:30px">
 				<div id="txtsw" style="width:345px;margin-top:-30px; min-height:110px;">
 				<h5 style="padding-top:30px;">Lamp #2: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;" >ON/OFF.</h6>
@@ -72,9 +72,9 @@
 						<span class="onoff2switch-switch"></span>
 					</label>
 				</div>
-			  </div>	
+			  </div>
 			</div>
-			
+
 			<div  id="light3" class="light3" style="width:33%; float:left">
 			<div id="txtsw" style="width:345px; margin-top:-30px;min-height:110px;">
 				<h5 style="padding-top:30px;">Lamp #3: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;">ON/OFF.</h6>
@@ -85,7 +85,7 @@
 						<span class="onoff3switch-switch"></span>
 					</label>
 				</div>
-				
+
 			</div>
 			</div>
 			</div>
@@ -98,25 +98,25 @@
                             </ol>
                             <div class="clearfix"></div>
                             <!-- End Carousel Indicators -->
-							
-							
-							
+
+
+
                             <!-- Carousel Images -->
                             <div class="carousel-inner" style="margin-top:50px;">
                                 <div class="item active">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
                                 </div>
                                 <div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
                                 </div>
                                 <div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
                                 </div>
                                 <div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
                                 </div>
 								<div class="item">
-									<img src="assets/img/haz3.png">
+									<img src="{% static 'project/assets/img/haz3.png' %}">
 								</div>
                             </div>
                             <!-- End Carousel Images -->
@@ -132,7 +132,7 @@
                         <!-- End Carousel Slideshow -->
                     </div>
 					</div>
-					
-              
+
+
             </div>
 {% endblock content %}

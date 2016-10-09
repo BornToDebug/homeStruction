@@ -1,9 +1,12 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from .models import Temperature, Light, Lamp, Door, Window, Humidity
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import viewsets,generics
 from project.serializers import TemperatureSerializer, LightSerializer, LampSerializer, DoorSerializer, WindowSerializer, HumiditySerializer
+from django.contrib.auth.decorators import login_required
+
 
 # REST framework viewset
 class TemperatureViewSet(viewsets.ModelViewSet):

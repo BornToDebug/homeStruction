@@ -20,6 +20,7 @@ from rest_framework import routers
 from project import views
 from rest_framework.authtoken import views as tokenview
 from project import commandview
+from project import imageview
 
 
 router = routers.DefaultRouter()
@@ -43,5 +44,6 @@ urlpatterns = [
     url(r'^androidcommand/$', commandview.androidcontrol, name='androidcontrol'),
     url(r'^stream/start/$', commandview.startstream, name='startstream'),
     url(r'^stream/stop/$',  commandview.stopstream, name='stopstream'),
+    url(r'^image/temp$', imageview.imageView, name='imageview'),
     url(r'^mp3/toggle/$', commandview.togglemp3, name='togglemp3'),
 ]
