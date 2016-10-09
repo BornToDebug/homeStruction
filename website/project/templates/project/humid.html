@@ -44,7 +44,7 @@ function objectToHTML(jsonObj) {
 	return tableRow;
 }
 	humidtable = document.getElementById('humidtable');
-	getJSON('/api/humidity', objectToHTML, humidtable);
+	getJSON('/api/humidity/', objectToHTML, humidtable);
 </script>			
 
 {% endblock content %}

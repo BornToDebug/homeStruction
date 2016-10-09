@@ -47,7 +47,7 @@ function objectToHTML(jsonObj) {
 	return tableRow;
 }
 temptable = document.getElementById('temptable');
-getJSON('/api/temperature', objectToHTML, temptable);
+getJSON('/api/temperature/', objectToHTML, temptable);
 
 </script>		  
 

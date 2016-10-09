@@ -99,9 +99,9 @@ function objectToHTML(jsonObj) {
     s.value = jsonObj['value'];
 	doortable = document.getElementById('doortable');
 	windowtable = document.getElementById('windowtable');
-	getJSON('/api/door', objectToHTML, doortable);
-	getJSON('/api/lamp', objectToHTML, doortable);
-	getJSON('/api/window', objectToHTML, windowtable);
+	getJSON('/api/door/', objectToHTML, doortable);
+	getJSON('/api/lamp/', objectToHTML, doortable);
+	getJSON('/api/window/', objectToHTML, windowtable);
 </script>
 {% endblock content %}
 
