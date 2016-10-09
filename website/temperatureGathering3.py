@@ -35,12 +35,12 @@ print bigchunk
 words = bigchunk.split()
 temperature = float(words[0])
 light = float(words[1])
-light = 1024.0 - light
+light2 = 1024.0 - light
 humidity = float(words[6])
 
-if between(temperature, 10.0, 100.0) and between(light, 0.0, 1024.0) and between(humidity, 10.0, 100.0):
+if between(temperature, 10.0, 100.0) and between(light2, 0.0, 1024.0) and between(humidity, 10.0, 100.0):
 	Temperature.objects.create(value=temperature, time_recorded=timezone.now())
-	Light.objects.create(value=light, time_recorded=timezone.now())
+	Light.objects.create(value=light2, time_recorded=timezone.now())
 	Humidity.objects.create(value=humidity, time_recorded=timezone.now())
 ser.close()
 
