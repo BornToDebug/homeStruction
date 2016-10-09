@@ -7,9 +7,11 @@ django.setup()
 import schedule
 import time
 from project.models import Alarm
+from subprocess import call
 
 def wekker():
     print 'AAAAALLLLLLLAAAAAARRRRRRRRMMMMM'
+    call(['mplayer /mnt/Stick/Music/01.\ Crystals.mp3'], shell=True)
 
 class AlarmExecute(object):
     alarm_hour = 0
