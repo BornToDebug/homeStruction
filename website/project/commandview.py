@@ -10,24 +10,52 @@ def androidlogin(request):
     try:
         auth = request.META.get('HTTP_AUTHORIZATION', b'').split()
         if not auth or auth[0].lower() != 'token':
-            return HttpResponse('not a token header')
+            return 'not a token header'
         if len(auth) < 2:
-            return HttpResponse('no token recieved')
+            return 'no token recieved'
         if len(auth) > 2:
-            return HttpResponse('too many arguments, check if token has spaces')
+            return 'too many arguments, check if token has spaces'
         matchingToken = Token.objects.get(pk=auth[1])
-        return True
+        return 'auth'
     except:
-        return False
+        return 'not authorized'
 
 def androidcontrol(request):
-    if androidlogin(request):
+    authcheck = androidlogin(request)
+    if authcheck == 'auth':
         command = request.GET.get('command', '')
         controlbasic3.controlconfirm(command)
         return HttpResponse(command)
     else:
-        return HttpResponse('not authorized')
+        return HttpResponse(authcheck)
 
+def getimage(request):
+    image = request.GET.get('image', '')
+    imageurl = None
+    if image == 'temp':
+        imageurl = '/home/david/git/homeStruction/website/Temperature.png'
+    if image == 'humid':
+        imageurl = '/home/david/git/homeStruction/website/Humidity.png'
+    if image == 'light':
+        imageurl = '/home/david/git/homeStruction/website/Light.png'
+    if imageurl is not None:
+        try:
+            with open(imageurl) as f:
+                return HttpResponse(f.read(), content_type="image/png")
+        except IOError:
+            return HttpResponse('image cannot be accessed')
+    return HttpResponse(image + ' no such image')
+
+@login_required
+def imageView(request):
+    return getimage(request)
+
+def androidImageView(request):
+    authcheck = androidlogin(request)
+    if authcheck is 'auth':
+        return getimage(request)
+    else:
+        return HttpResponse(authcheck)
 
 
 @login_required
