@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 import controlbasic3
@@ -5,6 +6,7 @@ from subprocess import call
 from rest_framework.authtoken.models import Token
 
 from rest_framework import HTTP_HEADER_ENCODING, exceptions
+from project.models import Alarm
 
 def androidlogin(request):
     try:
@@ -58,6 +60,42 @@ def androidImageView(request):
     else:
         return HttpResponse(authcheck)
 
+def setAlarm(request):
+    hour = request.GET.get('hour', '00')
+    minute = request.GET.get('minute', '00')
+    monday = request.GET.get('monday', 'False')
+    tuesday = request.GET.get('tuesday', 'False')
+    wednesday = request.GET.get('wednesday', 'False')
+    thursday = request.GET.get('thursday', 'False')
+    friday = request.GET.get('friday', 'False')
+    saturday = request.GET.get('saturday', 'False')
+    sunday = request.GET.get('sunday', 'False')
+    coffee = request.GET.get('coffee', 'False')
+
+    try:
+        Alarm.objects.create(
+                monday=(monday == 'True'),
+                tuesday=(tuesday == 'True'),
+                wednesday=(wednesday == 'True'),
+                thursday=(thursday == 'True'),
+                friday=(friday == 'True'),
+                saturday=(saturday == 'True'),
+                sunday=(sunday == 'True'),
+                alarm_time=datetime.strptime(hour + ':' + minute, '%H:%M').time())
+        return HttpResponse('success')
+    except ValueError:
+        return HttpResponse('values are not correct')
+
+@login_required
+def setAlarmView(request):
+    return setAlarm(request)
+
+def androidSetAlarmView(request):
+    authcheck = androidlogin(request)
+    if authcheck is 'auth':
+        return setAlarm(request)
+    else:
+        return HttpResponse(authcheck)
 
 @login_required
 def controlbasic(request):

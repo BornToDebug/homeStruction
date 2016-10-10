@@ -46,4 +46,6 @@ urlpatterns = [
     url(r'^image/$', commandview.imageView, name='imageview'),
     url(r'^androidimage/$', commandview.androidImageView, name='androidimageview'),
     url(r'^mp3/toggle/$', commandview.togglemp3, name='togglemp3'),
+    url(r'^setalarm/$', commandview.setAlarmView, name='setalarm'),
+    url(r'^androidsetalarm/$', commandview.androidSetAlarmView, name='androidsetalarm'),
 ]

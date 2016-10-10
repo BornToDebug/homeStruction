@@ -53,7 +53,7 @@ class Window(models.Model):
 
 class Alarm(models.Model):
     time_recorded = models.DateTimeField('Time recorded', default=timezone.now)
-    alarm_time = models.TimeField('Alarm time')
+    alarm_time = models.TimeField('Alarm time', default=timezone.now)
     monday = models.BooleanField('Monday', default=False)
     tuesday = models.BooleanField('Tuesday', default=False)
     wednesday = models.BooleanField('Wednesday', default=False)
