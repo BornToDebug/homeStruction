@@ -1,11 +1,12 @@
 package com.lilla.homestruction;
 
-import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -41,6 +41,8 @@ import com.lilla.homestruction.bean.Temperature;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.Windows;
 import com.lilla.homestruction.bean.WindowsResponse;
+import com.lilla.homestruction.fragments.TimePickerFragment;
+import com.lilla.homestruction.listeners.OnDialogCallbacksListener;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -55,7 +57,7 @@ import retrofit2.Response;
  * Created by lilla on 21/09/16.
  */
 
-public class MainScreen extends AppCompatActivity implements View.OnClickListener {
+public class MainScreen extends AppCompatActivity implements View.OnClickListener, DialogInterface.OnClickListener, OnDialogCallbacksListener {
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -76,9 +78,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Switch nightLampSwitch;
     private Switch veCofSwitch;
     private TextView confirm;
+    private Calendar calendar = Calendar.getInstance();
+    private Switch alarmSwitch;
 
     protected void onCreate(Bundle savedInstanceState) {
-
+        long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
@@ -87,9 +91,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
 
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
-            Intent intent = new Intent(MainScreen.this,  LoginActivity.class);
+            Intent intent = new Intent(MainScreen.this, LoginActivity.class);
             startActivity(intent);
         }
+        long startTime2 = System.currentTimeMillis();
+        System.out.println("TEST first run: " + (startTime2 - startTime));
+
         temperatureValue = (TextView) findViewById(R.id.temperature_value);
         humidityValue = (TextView) findViewById(R.id.humidity_value);
         luminosityValue = (TextView) findViewById(R.id.luminosity_value);
@@ -98,7 +105,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         doorLocked = (ImageView) findViewById(R.id.door_locked);
         doorUnlocked = (ImageView) findViewById(R.id.door_unlocked);
         confirm = (TextView) findViewById(R.id.conf);
-
+        alarmSwitch = (Switch) findViewById(R.id.alarm_switch);
 
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
@@ -132,45 +139,48 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         nightLampSwitch = (Switch) findViewById(R.id.nightlight_switch);
         veCofSwitch = (Switch) findViewById(R.id.vecof_switch);
 
+        long startTime3 = System.currentTimeMillis();
+        System.out.println("TEST finding views run: " + (startTime3 - startTime2));
+
         volume.setText("0%");
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-        {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            public void onStopTrackingTouch(SeekBar bar)
-            {
+            public void onStopTrackingTouch(SeekBar bar) {
                 int value = bar.getProgress(); // the value of the seekBar progress
             }
 
-            public void onStartTrackingTouch(SeekBar bar)
-            {
+            public void onStartTrackingTouch(SeekBar bar) {
 
             }
 
             public void onProgressChanged(SeekBar bar,
-                                          int paramInt, boolean paramBoolean)
-            {
+                                          int paramInt, boolean paramBoolean) {
                 volume.setText("" + paramInt + "%"); // here in textView the percent will be shown
             }
         });
 
-                //TODO solve the ripple effect
+        //TODO solve the ripple effect
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        updateTemperatureData();
-        updateLamp1Data();
-        updateLamp2Data();
-        updateLamp3Data();
-        updateDoorData();
-        updateDoorLockedData();
-        updateWindowsData();
-        updateHumidityData();
-        updateLightData();
+        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
+        updateTemperatureData(webService);
+        updateLamp1Data(webService);
+        updateLamp2Data(webService);
+        updateLamp3Data(webService);
+        updateDoorData(webService);
+        updateDoorLockedData(webService);
+        updateWindowsData(webService);
+        updateHumidityData(webService);
+        updateLightData(webService);
+        long startTime4 = System.currentTimeMillis();
+        System.out.println("TEST first run updating shits : " + (startTime4 - startTime3));
+        System.out.println("TEST first run total : " + (startTime4 - startTime));
     }
 
-    private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener(){
+    private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
             Intent refresh = getIntent();
@@ -179,7 +189,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     };
 
-    public void showSnackbar(){
+    public void showSnackbar() {
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
                 .setAction("RETRY", new View.OnClickListener() {
@@ -195,15 +205,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     //TODO personalize your own settings in the settings menu
 
-    private void updateTemperatureData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateTemperatureData(WebService webService) {
         Call<TemperatureResponse> call = webService.getTemperatures();
         call.enqueue(new Callback<TemperatureResponse>() {
             @Override
             public void onResponse(Call<TemperatureResponse> call, Response<TemperatureResponse> response) {
                 List<Temperature> temperatures = response.body().getResults();
-                if (temperatures.get(0) != null){
-                    temperatureValue.setText("" + temperatures.get(0).getValue()+ " °C");
+                if (temperatures.get(0) != null) {
+                    temperatureValue.setText("" + temperatures.get(0).getValue() + " °C");
                 }
             }
 
@@ -217,18 +226,15 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
 
-
-    private void updateHumidityData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateHumidityData(WebService webService) {
         Call<HumidityResponse> call = webService.getHumidity();
         call.enqueue(new Callback<HumidityResponse>() {
             @Override
             public void onResponse(Call<HumidityResponse> call, Response<HumidityResponse> response) {
                 List<Humidity> humidity = response.body().getResults();
-                if (humidity.get(0) != null){
-                    humidityValue.setText("" + humidity.get(0).getValue()+ " %");
-                }
-                else {
+                if (humidity.get(0) != null) {
+                    humidityValue.setText("" + humidity.get(0).getValue() + " %");
+                } else {
                     humidityValue.setText("no data");
                 }
             }
@@ -241,14 +247,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateLightData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateLightData(WebService webService) {
         Call<LightResponse> call = webService.getLight();
         call.enqueue(new Callback<LightResponse>() {
             @Override
             public void onResponse(Call<LightResponse> call, Response<LightResponse> response) {
                 List<Light> light = response.body().getResults();
-                if (light.get(0) != null){
+                if (light.get(0) != null) {
                     luminosityValue.setText("" + light.get(0).getValue());
                 }
             }
@@ -262,15 +267,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    private void updateLamp1Data() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateLamp1Data(WebService webService) {
         Call<Lamp1Response> call = webService.getLamp1();
         call.enqueue(new Callback<Lamp1Response>() {
             @Override
             public void onResponse(Call<Lamp1Response> call, Response<Lamp1Response> response) {
                 List<Lamp1> lamp1Values = response.body().getResults();
-                if (lamp1Values.get(0) != null){
-                    switch (lamp1Values.get(0).getValue()){
+                if (lamp1Values.get(0) != null) {
+                    switch (lamp1Values.get(0).getValue()) {
                         case "1off_c":
                             chandelierSwitch.setChecked(false);
                             chandelierSwitch.setText("");
@@ -307,15 +311,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateLamp2Data() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateLamp2Data(WebService webService) {
         Call<Lamp2Response> call = webService.getLamp2();
         call.enqueue(new Callback<Lamp2Response>() {
             @Override
             public void onResponse(Call<Lamp2Response> call, Response<Lamp2Response> response) {
                 List<Lamp2> lamp2Values = response.body().getResults();
-                if (lamp2Values.get(0) != null){
-                    switch (lamp2Values.get(0).getValue()){
+                if (lamp2Values.get(0) != null) {
+                    switch (lamp2Values.get(0).getValue()) {
                         case "2off_c":
                             nightLampSwitch.setChecked(false);
                             nightLampSwitch.setText("");
@@ -352,15 +355,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateLamp3Data() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateLamp3Data(WebService webService) {
         Call<Lamp3Response> call = webService.getLamp3();
         call.enqueue(new Callback<Lamp3Response>() {
             @Override
             public void onResponse(Call<Lamp3Response> call, Response<Lamp3Response> response) {
                 List<Lamp3> lamp3Values = response.body().getResults();
-                if (lamp3Values.get(0) != null){
-                    switch (lamp3Values.get(0).getValue()){
+                if (lamp3Values.get(0) != null) {
+                    switch (lamp3Values.get(0).getValue()) {
                         case "3off_c":
                             veCofSwitch.setChecked(false);
                             veCofSwitch.setText("");
@@ -397,15 +399,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateDoorData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateDoorData(WebService webService) {
         Call<DoorResponse> call = webService.getDoor();
         call.enqueue(new Callback<DoorResponse>() {
             @Override
             public void onResponse(Call<DoorResponse> call, Response<DoorResponse> response) {
                 List<Door> doorValues = response.body().getResults();
-                if (doorValues.get(0) != null){
-                    switch (doorValues.get(0).getValue()){
+                if (doorValues.get(0) != null) {
+                    switch (doorValues.get(0).getValue()) {
                         case "opened":
                             doorText.setText("Door open");
                             break;
@@ -427,15 +428,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateDoorLockedData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateDoorLockedData(WebService webService) {
         Call<DoorLockedResponse> call = webService.getDoorLocked();
         call.enqueue(new Callback<DoorLockedResponse>() {
             @Override
             public void onResponse(Call<DoorLockedResponse> call, Response<DoorLockedResponse> response) {
                 List<DoorLocked> doorLockValues = response.body().getResults();
-                if (doorLockValues.get(0) != null){
-                    switch (doorLockValues.get(0).getValue()){
+                if (doorLockValues.get(0) != null) {
+                    switch (doorLockValues.get(0).getValue()) {
                         case "do_c":
                             doorUnlocked.setVisibility(View.VISIBLE);
                             doorLocked.setVisibility(View.INVISIBLE);
@@ -469,15 +469,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void updateWindowsData() {
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    private void updateWindowsData(WebService webService) {
         Call<WindowsResponse> call = webService.getWindows();
         call.enqueue(new Callback<WindowsResponse>() {
             @Override
             public void onResponse(Call<WindowsResponse> call, Response<WindowsResponse> response) {
                 List<Windows> windowValues = response.body().getResults();
-                if (windowValues.get(0) != null){
-                    switch (windowValues.get(0).getValue()){
+                if (windowValues.get(0) != null) {
+                    switch (windowValues.get(0).getValue()) {
                         case "opened":
                             windowOpen.setVisibility(View.VISIBLE);
                             windowClosed.setVisibility(View.INVISIBLE);
@@ -495,8 +494,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                             windowError.setVisibility(View.VISIBLE);
                             break;
                     }
-                }
-                else {
+                } else {
                     windowOpen.setVisibility(View.INVISIBLE);
                     windowClosed.setVisibility(View.INVISIBLE);
                     windowError.setVisibility(View.VISIBLE);
@@ -513,26 +511,24 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    public void sendToServer(String command){
-        WebService webService = RetrofitManager.createService(WebService.class,"Token " + SaveSharedPreference.getToken(MainScreen.this));
+    public void sendToServer(String command, WebService webService) {
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
         call.enqueue(new Callback<ResponseBody>() {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                String myResponse= null;
+                String myResponse = null;
                 try {
                     myResponse = response.body().string();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 System.out.println("resp: " + myResponse + " command: " + myCommand);
-                if (myResponse != null){
+                if (myResponse != null) {
                     if (myCommand.equals(myResponse)) {
                         System.out.println("Success");
-                    }
-                    else {
+                    } else {
                         System.out.println("Error");
                     }
                 }
@@ -607,11 +603,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        final Switch alarmSwitch = (Switch) findViewById(R.id.alarm_switch);
+
         ImageButton play = (ImageButton) findViewById(R.id.play);
         ImageButton pause = (ImageButton) findViewById(R.id.pause);
+        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.temperature:
                 System.out.println("Temperature button clicked");
                 Intent intent = new Intent(MainScreen.this, TemperatureScreen.class);
@@ -629,36 +626,32 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.multimedia:
                 System.out.println("Multimedia button clicked");
-
-                //TODO solve the ripple effect
                 break;
             case R.id.doors:
                 System.out.println("Clicked doors button");
-                if (doorLocked.getVisibility() == View.VISIBLE){
+                if (doorLocked.getVisibility() == View.VISIBLE) {
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
                     System.out.println("Door unlocked");
-                    sendToServer("opendoor");
-                }
-                else {
+                    sendToServer("opendoor", webService);
+                } else {
                     doorLocked.setVisibility(View.VISIBLE);
                     doorUnlocked.setVisibility(View.INVISIBLE);
                     System.out.println("Door locked");
-                    sendToServer("closedoor");
+                    sendToServer("closedoor", webService);
                 }
                 break;
             case R.id.lock:
-                if (doorLocked.getVisibility() == View.VISIBLE){
+                if (doorLocked.getVisibility() == View.VISIBLE) {
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
                     System.out.println("Door unlocked");
-                    sendToServer("opendoor");
-                }
-                else {
+                    sendToServer("opendoor", webService);
+                } else {
                     doorLocked.setVisibility(View.VISIBLE);
                     doorUnlocked.setVisibility(View.INVISIBLE);
                     System.out.println("Door locked");
-                    sendToServer("closedoor");
+                    sendToServer("closedoor", webService);
                 }
                 break;
             case R.id.windows:
@@ -666,118 +659,74 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.chandelier:
                 chandelierSwitch.toggle();
-                if (chandelierSwitch.isChecked()){
+                if (chandelierSwitch.isChecked()) {
                     System.out.println("ddd ChandelierSwitch checked");
-                    sendToServer("1lampon");
-                }
-                else{
+                    sendToServer("1lampon", webService);
+                } else {
                     System.out.println("ddd ChandelierSwitch unchecked");
-                    sendToServer("1lampoff");
+                    sendToServer("1lampoff", webService);
                 }
                 break;
             case R.id.chandelier_switch:
-                if (chandelierSwitch.isChecked()){
+                if (chandelierSwitch.isChecked()) {
                     System.out.println("ddd ChandelierSwitch checked");
-                    sendToServer("1lampon");
-                }
-                else{
+                    sendToServer("1lampon", webService);
+                } else {
                     System.out.println("ddd ChandelierSwitch unchecked");
-                    sendToServer("1lampoff");
+                    sendToServer("1lampoff", webService);
                 }
                 break;
             case R.id.nightlight:
                 nightLampSwitch.toggle();
-                if (nightLampSwitch.isChecked()){
+                if (nightLampSwitch.isChecked()) {
                     System.out.println("ddd NightLightSwitch checked");
-                    sendToServer("2lampon");
-                }
-                else{
+                    sendToServer("2lampon", webService);
+                } else {
                     System.out.println("ddd NightLightSwitch unchecked");
-                    sendToServer("2lampoff");
+                    sendToServer("2lampoff", webService);
                 }
                 break;
             case R.id.nightlight_switch:
-                if (nightLampSwitch.isChecked()){
+                if (nightLampSwitch.isChecked()) {
                     System.out.println("ddd NightLightSwitch checked");
-                    sendToServer("2lampon");
-                }
-                else{
+                    sendToServer("2lampon", webService);
+                } else {
                     System.out.println("ddd NightLightSwitch unchecked");
-                    sendToServer("2lampoff");
+                    sendToServer("2lampoff", webService);
                 }
                 break;
             case R.id.vecof:
                 veCofSwitch.toggle();
                 if (veCofSwitch.isChecked()) {
                     System.out.println("ddd VeCofSwitch checked");
-                    sendToServer("3lampon");
-                }
-                else {
+                    sendToServer("3lampon", webService);
+                } else {
                     System.out.println("ddd VeCofSwitch unchecked");
-                    sendToServer("3lampoff");
+                    sendToServer("3lampoff", webService);
                 }
                 break;
             case R.id.vecof_switch:
                 if (veCofSwitch.isChecked()) {
                     System.out.println("ddd VeCofSwitch checked");
-                    sendToServer("3lampon");
-                }
-                else {
+                    sendToServer("3lampon", webService);
+                } else {
                     System.out.println("ddd VeCofSwitch unchecked");
-                    sendToServer("3lampoff");
+                    sendToServer("3lampoff", webService);
                 }
                 break;
             case R.id.alarm:
                 System.out.println("Alarm button clicked");
-
-
                 if (!alarmSwitch.isChecked()) {
                     alarmSwitch.toggle();
                 }
-
-                final Calendar calendar = Calendar.getInstance();
-                int mHour = calendar.get(Calendar.HOUR_OF_DAY);
-                int mMinute = calendar.get(Calendar.MINUTE);
-
-
-                //TODO: nem tudom kicserelni a szineit a timepickernek mert luzer vagyok
-                TimePickerDialog timePickerDialog = new TimePickerDialog(this, R.style.DialogTheme,
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-
-                                if (hourOfDay < 10){
-                                    if (minute < 10){
-                                        alarmSwitch.setText("0" + hourOfDay + ":" + "0" + minute);
-                                    }
-                                    else {
-                                        alarmSwitch.setText("0" + hourOfDay + ":" + minute);
-                                    }
-                                }
-                                else {
-                                    if (minute < 10){
-                                        alarmSwitch.setText(hourOfDay + ":" + "0" + minute);
-                                    }
-                                    else {
-                                        alarmSwitch.setText(hourOfDay + ":" + minute);
-                                    }
-                                }
-
-                                System.out.println("SET alarm");
-
-
-                            }
-                        }, mHour, mMinute, true);
-
-                timePickerDialog.show();
+                showTimePickerDialog();
                 break;
             case R.id.alarm_switch:
-
-                if (!alarmSwitch.isChecked()){
+                if (!alarmSwitch.isChecked()) {
                     alarmSwitch.setText("");
                     System.out.println("RESET alarm!");
+                } else {
+                    showTimePickerDialog();
                 }
                 break;
             case R.id.songs:
@@ -804,10 +753,33 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
+
+    public void showTimePickerDialog() {
+        TimePickerFragment newFragment = new TimePickerFragment();
+        newFragment.setOnDialogCallbacksListener(this);
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        System.out.println("test isPositive " + (which == DialogInterface.BUTTON_POSITIVE));
+    }
+
+    @Override
+    public void onTimeSet(int hourOfDay, int minute) {
+        System.out.println("BAZDMEG time set: " + hourOfDay + ":" + minute);
+        alarmSwitch.setText("" + hourOfDay + ":" + minute);
+    }
+
+    @Override
+    public void onCancel() {
+        System.out.println("BAZDMEG canceled");
     }
 }
