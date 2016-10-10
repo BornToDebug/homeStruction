@@ -6,8 +6,7 @@ from rest_framework.authtoken.models import Token
 
 from rest_framework import HTTP_HEADER_ENCODING, exceptions
 
-
-def androidcontrol(request):
+def androidlogin(request):
     try:
         auth = request.META.get('HTTP_AUTHORIZATION', b'').split()
         if not auth or auth[0].lower() != 'token':
@@ -17,11 +16,18 @@ def androidcontrol(request):
         if len(auth) > 2:
             return HttpResponse('too many arguments, check if token has spaces')
         matchingToken = Token.objects.get(pk=auth[1])
+        return True
+    except:
+        return False
+
+def androidcontrol(request):
+    if androidlogin(request):
         command = request.GET.get('command', '')
         controlbasic3.controlconfirm(command)
         return HttpResponse(command)
-    except:
+    else:
         return HttpResponse('not authorized')
+
 
 
 @login_required
