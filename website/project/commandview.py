@@ -32,12 +32,13 @@ def androidcontrol(request):
 def getimage(request):
     image = request.GET.get('image', '')
     imageurl = None
+    dirurl = '/home/projekt/homeStruction/website/'
     if image == 'temp':
-        imageurl = '/home/david/git/homeStruction/website/Temperature.png'
+        imageurl = dirurl + 'Temperature.png'
     if image == 'humid':
-        imageurl = '/home/david/git/homeStruction/website/Humidity.png'
+        imageurl = dirurl + 'Humidity.png'
     if image == 'light':
-        imageurl = '/home/david/git/homeStruction/website/Light.png'
+        imageurl = dirurl + 'Light.png'
     if imageurl is not None:
         try:
             with open(imageurl) as f:
