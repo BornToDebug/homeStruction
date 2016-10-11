@@ -1,8 +1,8 @@
 stream: setup server(done) find a suitable player(we have a strong plan B)
 alarm implementation -- create a new deamon and update from database(nearly done)
-alarm api, refresh alarm -- android and session
-image generation and serving(partially done) -- serving
-create image serving view -- for android too
+alarm api, refresh alarm -- android and session(hopefully done)
+image generation and serving(partially done) -- serving(done)
+create image serving view -- for android too(done)
 demo video -- get equipment
 add important stuff to homepage(nearly done)
 recompile ffmpeg for date (Balint)
