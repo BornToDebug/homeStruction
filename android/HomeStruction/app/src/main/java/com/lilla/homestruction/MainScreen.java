@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -18,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -45,8 +45,11 @@ import com.lilla.homestruction.fragments.TimePickerFragment;
 import com.lilla.homestruction.listeners.OnDialogCallbacksListener;
 
 import java.io.IOException;
-import java.util.Calendar;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -78,13 +81,25 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Switch nightLampSwitch;
     private Switch veCofSwitch;
     private TextView confirm;
-    private Calendar calendar = Calendar.getInstance();
     private Switch alarmSwitch;
+    private List<Boolean> daysChecked;
+    private ToggleButton mondayButton;
+    private ToggleButton tuesdayButton;
+    private ToggleButton wednesdayButton;
+    private ToggleButton thursdayButton;
+    private ToggleButton fridayButton;
+    private ToggleButton saturdayButton;
+    private ToggleButton sundayButton;
+    private String hour;
+    private String minute;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
+        hour = null;
+        minute = null;
 
         final SwipeRefreshLayout layout = (SwipeRefreshLayout) findViewById(R.id.refresh);
         layout.setOnRefreshListener(refreshListener);
@@ -106,6 +121,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         doorUnlocked = (ImageView) findViewById(R.id.door_unlocked);
         confirm = (TextView) findViewById(R.id.conf);
         alarmSwitch = (Switch) findViewById(R.id.alarm_switch);
+        daysChecked = new ArrayList<>(Arrays.asList(new Boolean[7]));
+        Collections.fill(daysChecked, Boolean.FALSE);
+        mondayButton = (ToggleButton) findViewById(R.id.monday);
+        tuesdayButton = (ToggleButton) findViewById(R.id.tuesday);
+        wednesdayButton = (ToggleButton) findViewById(R.id.wednesday);
+        thursdayButton = (ToggleButton) findViewById(R.id.thursday);
+        fridayButton = (ToggleButton) findViewById(R.id.friday);
+        saturdayButton = (ToggleButton) findViewById(R.id.saturday);
+        sundayButton = (ToggleButton) findViewById(R.id.sunday);
+
 
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
@@ -122,6 +147,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.vecof_switch).setOnClickListener(this);
         findViewById(R.id.alarm).setOnClickListener(this);
         findViewById(R.id.alarm_switch).setOnClickListener(this);
+        findViewById(R.id.monday).setOnClickListener(this);
+        findViewById(R.id.tuesday).setOnClickListener(this);
+        findViewById(R.id.wednesday).setOnClickListener(this);
+        findViewById(R.id.thursday).setOnClickListener(this);
+        findViewById(R.id.friday).setOnClickListener(this);
+        findViewById(R.id.saturday).setOnClickListener(this);
+        findViewById(R.id.sunday).setOnClickListener(this);
         findViewById(R.id.songs).setOnClickListener(this);
         findViewById(R.id.previous).setOnClickListener(this);
         findViewById(R.id.play).setOnClickListener(this);
@@ -542,6 +574,67 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+    public void setAlarm(String hour, String minute, String monday, String tuesday, String wednesday, String thursday,
+                         String friday, String saturday, String sunday, WebService webService) {
+        Call<ResponseBody> call = webService.sendAlarm(hour, minute, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+        call.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String myResponse = null;
+                try {
+                    myResponse = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("resp: " + myResponse );
+                if (myResponse != null) {
+                    if (myResponse.equals("success")) {
+                        System.out.println("Success");
+                    } else {
+                        System.out.println("Error");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("LOG Error: " + t.getMessage());
+                showSnackbar();
+            }
+        });
+    }
+
+    public void resetAlarm(WebService webService) {
+        Call<ResponseBody> call = webService.resetAlarm();
+        call.enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                String myResponse = null;
+                try {
+                    myResponse = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("resp: " + myResponse);
+                if (myResponse != null) {
+                    if (myResponse.equals("success")) {
+                        System.out.println("Success");
+                    } else {
+                        System.out.println("Error");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("LOG Error: " + t.getMessage());
+                showSnackbar();
+            }
+        });
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -720,13 +813,88 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     alarmSwitch.toggle();
                 }
                 showTimePickerDialog();
+                System.out.println("LOG " + hour + ":" + minute);
                 break;
             case R.id.alarm_switch:
                 if (!alarmSwitch.isChecked()) {
                     alarmSwitch.setText("");
                     System.out.println("RESET alarm!");
+                    resetAlarm(webService);
+                    //todo call resetalarm()
                 } else {
                     showTimePickerDialog();
+                }
+                System.out.println("LOG " + hour + ":" + minute);
+                break;
+            case R.id.monday:
+                if (mondayButton.isChecked()) {
+                    daysChecked.set(0, true);
+                } else {
+                    daysChecked.set(0, false);
+                }
+                System.out.println("LOG monday button clicked");
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
+                }
+                break;
+            case R.id.tuesday:
+                if (tuesdayButton.isChecked()) {
+                    daysChecked.set(1, true);
+                } else {
+                    daysChecked.set(1, false);
+                }
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
+                }
+                break;
+            case R.id.wednesday:
+                if (wednesdayButton.isChecked()) {
+                    daysChecked.set(2, true);
+                } else {
+                    daysChecked.set(2, false);
+                }
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
+                }
+                break;
+            case R.id.thursday:
+                if (thursdayButton.isChecked()) {
+                    daysChecked.set(3, true);
+                } else {
+                    daysChecked.set(3, false);
+                }
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
+                }
+                break;
+            case R.id.friday:
+                if (fridayButton.isChecked()) {
+                    daysChecked.set(4, true);
+                } else {
+                    daysChecked.set(4, false);
+                }
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
+                }
+                break;
+            case R.id.saturday:
+                if (saturdayButton.isChecked()) {
+                    daysChecked.set(5, true);
+                } else {
+                    daysChecked.set(5, false);
+                }
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
+                }
+                break;
+            case R.id.sunday:
+                if (sundayButton.isChecked()) {
+                    daysChecked.set(6, true);
+                } else {
+                    daysChecked.set(6, false);
+                }
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
                 }
                 break;
             case R.id.songs:
@@ -768,18 +936,50 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        System.out.println("test isPositive " + (which == DialogInterface.BUTTON_POSITIVE));
-    }
-
-    @Override
     public void onTimeSet(int hourOfDay, int minute) {
         System.out.println("BAZDMEG time set: " + hourOfDay + ":" + minute);
-        alarmSwitch.setText("" + hourOfDay + ":" + minute);
+        hour = Integer.toString(hourOfDay);
+        this.minute = Integer.toString(minute);
+        if (hourOfDay < 10){
+            if (minute < 10){
+                hour = "0" + hour;
+                this.minute = "0" + minute;
+                alarmSwitch.setText("0" + hourOfDay + ":0" + minute);
+            }
+            else {
+                hour = "0" + hour;
+            }
+        }
+        else {
+            if (minute < 10){
+                this.minute = "0" + minute;
+            }
+        }
+        alarmSwitch.setText(hour + ":" + this.minute);
     }
 
     @Override
     public void onCancel() {
         System.out.println("BAZDMEG canceled");
+        System.out.println("LOG" + daysChecked);
+        hour = null;
+        minute = null;
+    }
+
+    public void createRequest(List<Boolean> daysChecked, WebService webService) {
+
+        String request = hour + "&minute=" + minute;
+        List<String> days = Arrays.asList(null,null,null,null,null,null,null);
+        for (int i = 0; i < 7; i++) {
+            if (daysChecked.get(i).equals(true)) {
+                days.set(i, "True");
+            }
+        }
+        System.out.println(days);
+        setAlarm(hour, minute, days.get(0), days.get(1), days.get(2), days.get(3), days.get(4), days.get(5), days.get(6), webService);
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
     }
 }

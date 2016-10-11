@@ -37,13 +37,13 @@ public interface WebService {
     Call<LightResponse> getLight();
 
     @GET("/api/lamp/1")
-    Call<Lamp1Response>  getLamp1();
+    Call<Lamp1Response> getLamp1();
 
     @GET("/api/lamp/2")
-    Call<Lamp2Response>  getLamp2();
+    Call<Lamp2Response> getLamp2();
 
     @GET("/api/lamp/3")
-    Call<Lamp3Response>  getLamp3();
+    Call<Lamp3Response> getLamp3();
 
     @GET("/api/door/")
     Call<DoorResponse> getDoor();
@@ -59,4 +59,19 @@ public interface WebService {
 
     @GET("/androidcommand/")
     Call<ResponseBody> sendCommand(@Query("command") String command);
+
+    @GET("/androidsetalarm/")
+    Call<ResponseBody> resetAlarm();
+
+    @GET("/androidsetalarm/")
+    Call<ResponseBody> sendAlarm(
+            @Query("hour") String hour,
+            @Query("minute") String minute,
+            @Query("monday") String monday,
+            @Query("tuesday") String tuesday,
+            @Query("wednesday") String wednesday,
+            @Query("thursday") String thursday,
+            @Query("friday") String friday,
+            @Query("saturday") String saturday,
+            @Query("sunday") String sunday);
 }

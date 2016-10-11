@@ -1,7 +1,9 @@
 package com.lilla.homestruction.fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,7 +20,7 @@ import java.util.Calendar;
  * Created by lilla on 09/10/16.
  */
 
-public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener, DialogInterface.OnCancelListener {
+public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener, DialogInterface.OnCancelListener, DialogInterface.OnClickListener {
 
     private OnDialogCallbacksListener onDialogCallbacksListener;
     private Handler mainHandler;
@@ -28,7 +30,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         this.onDialogCallbacksListener = onDialogCallbacksListener;
     }
 
-    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
@@ -37,8 +38,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         mainHandler = new Handler(getContext().getMainLooper());
         // Create a new instance of TimePickerDialog and return it
-        TimePickerDialog dialog = new TimePickerDialog(getActivity(), R.style.DialogTheme, this, hour, minute,
-                DateFormat.is24HourFormat(getActivity()));
+        TimePickerDialog dialog = new TimePickerDialog(getContext(), R.style.DialogTheme, this, hour, minute,
+                DateFormat.is24HourFormat(getContext()));
         dialog.setOnCancelListener(this);
         return dialog;
     }
@@ -55,6 +56,11 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         }
         wasCancelled = true;
         super.onCancel(dialog);
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        System.out.println("Clicked");
     }
 
     private class ShouldCancelRunnable implements Runnable {

@@ -46,5 +46,7 @@
     <string name="saturday">Sa</string>
     <string name="sunday">Su</string>
     <string name="forgotten_password">Forgot your password?</string>
+    <string name="coffee_checkbox">I want coffee in the morning!</string>
+    <string name="select_day">Please select a day!</string>
 
 </resources>

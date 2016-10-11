@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.SwipeRefreshLayout android:id="@+id/refresh"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/hat4">
 
     <android.support.design.widget.CoordinatorLayout
@@ -14,48 +14,47 @@
         android:layout_height="match_parent"
         tools:context=".MainScreen">
 
-        <android.support.v4.widget.NestedScrollView
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:id="@+id/layout"
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:id="@+id/temperature"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/temperature"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/temperature"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/temperature_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        tools:text="no data"/>
+                        android:textColor="#00ffff"
+                        android:textSize="18sp"
+                        tools:text="no data" />
 
                 </RelativeLayout>
 
@@ -63,31 +62,31 @@
                     android:id="@+id/humidity"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/humidity"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/humidity"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/humidity_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        tools:text="no data"/>
+                        android:textColor="#00ffff"
+                        android:textSize="18sp"
+                        tools:text="no data" />
 
                 </RelativeLayout>
 
@@ -95,31 +94,31 @@
                     android:id="@+id/luminosity"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/luminosity"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/luminosity"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/luminosity_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        tools:text="no data"/>
+                        android:textColor="#00ffff"
+                        android:textSize="18sp"
+                        tools:text="no data" />
 
                 </RelativeLayout>
 
@@ -127,29 +126,29 @@
                     android:id="@+id/multimedia"
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/music_player"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:textAlignment="center" />
+                        android:text="@string/music_player"
+                        android:textAlignment="center"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/now_playing"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/now_playing"
-                        android:textSize="16sp"
-                        android:textColor="#00ffff"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="15dp"
                         android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"/>
+                        android:layout_marginTop="30dp"
+                        android:text="@string/now_playing"
+                        android:textColor="#00ffff"
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -161,19 +160,19 @@
                             android:id="@+id/songs"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/songs"
-                            android:background="@android:color/transparent"
                             android:layout_margin="5dp"
-                            android:contentDescription="@string/song_button"/>
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/song_button"
+                            android:src="@drawable/songs" />
 
                         <ImageButton
                             android:id="@+id/previous"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/previous"
-                            android:background="@android:color/transparent"
                             android:layout_margin="5dp"
-                            android:contentDescription="@string/previous_button"/>
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/previous_button"
+                            android:src="@drawable/previous" />
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -183,21 +182,21 @@
                                 android:id="@+id/play"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/play"
-                                android:background="@android:color/transparent"
                                 android:layout_margin="5dp"
-                                android:contentDescription="@string/play_button"/>
+                                android:background="@android:color/transparent"
+                                android:contentDescription="@string/play_button"
+                                android:src="@drawable/play" />
 
                             <ImageButton
                                 android:id="@+id/pause"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/pause"
-                                android:background="@android:color/transparent"
-                                android:visibility="invisible"
                                 android:layout_alignTop="@+id/play"
                                 android:layout_centerHorizontal="true"
-                                android:contentDescription="@string/pause_button"/>
+                                android:background="@android:color/transparent"
+                                android:contentDescription="@string/pause_button"
+                                android:src="@drawable/pause"
+                                android:visibility="invisible" />
 
                         </RelativeLayout>
 
@@ -205,33 +204,33 @@
                             android:id="@+id/next"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/next"
-                            android:background="@android:color/transparent"
                             android:layout_margin="5dp"
-                            android:contentDescription="@string/next_button"/>
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/next_button"
+                            android:src="@drawable/next" />
 
                         <ImageButton
                             android:id="@+id/shuffle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/shuffle"
-                            android:background="@android:color/transparent"
                             android:layout_margin="5dp"
-                            android:contentDescription="@string/shuffle_button"/>
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/shuffle_button"
+                            android:src="@drawable/shuffle" />
 
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/volume"
-                        android:visibility="visible"
-                        android:textSize="16sp"
-                        android:textColor="@color/colorAccent"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="15dp"
                         android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"/>
+                        android:text="@string/volume"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
 
                     <SeekBar
                         android:id="@+id/seek_bar"
@@ -239,26 +238,26 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="10dp"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginLeft="70dp"
                         android:layout_marginEnd="45dp"
+                        android:layout_marginLeft="70dp"
                         android:layout_marginRight="45dp"
-                        android:theme="@style/ScrollBarTheme"
-                        android:textColorSecondaryInverseNoDisable="@color/colorAccent"/>
+                        android:layout_marginStart="70dp"
+                        android:textColorSecondaryInverseNoDisable="@color/colorAccent"
+                        android:theme="@style/ScrollBarTheme" />
 
                     <TextView
                         android:id="@+id/volume"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
-                        android:textSize="16sp"
-                        android:textColor="@color/colorAccent"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginBottom="10dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
 
                 </RelativeLayout>
 
@@ -266,62 +265,62 @@
                     android:id="@+id/windows"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/window"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/window"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:id="@+id/window_open"
-                        android:src="@drawable/window_open"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:visibility="invisible"
-                        android:contentDescription="@string/window_open"/>
+                        android:contentDescription="@string/window_open"
+                        android:src="@drawable/window_open"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
 
                     <ImageView
                         android:id="@+id/window_closed"
-                        android:src="@drawable/window_closed"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
-                        android:visibility="invisible"
-                        android:contentDescription="@string/window_closed"/>
+                        android:contentDescription="@string/window_closed"
+                        android:src="@drawable/window_closed"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
 
                     <TextView
                         android:id="@+id/window_error"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/error"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorAccent"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        android:visibility="invisible"/>
+                        android:text="@string/error"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        android:visibility="invisible" />
 
                 </RelativeLayout>
 
@@ -330,67 +329,67 @@
                     android:id="@+id/doors"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:id="@+id/doors_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/door"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/door"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/conf"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="10dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginEnd="70dp"
-                        android:layout_marginRight="70dp"/>
+                        android:layout_marginRight="70dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
                     <RelativeLayout
+                        android:id="@+id/lock"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginRight="10dp"
-                        android:id="@+id/lock">
+                        android:layout_marginRight="10dp">
 
                         <ImageView
                             android:id="@+id/door_locked"
-                            android:src="@drawable/locked"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_marginEnd="0dp"
                             android:layout_marginRight="0dp"
-                            android:visibility="invisible"
-                            android:contentDescription="@string/door_locked"/>
+                            android:contentDescription="@string/door_locked"
+                            android:src="@drawable/locked"
+                            android:visibility="invisible" />
 
                         <ImageView
                             android:id="@+id/door_unlocked"
-                            android:src="@drawable/unlocked"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
                             android:layout_marginEnd="8dp"
                             android:layout_marginRight="8dp"
-                            android:visibility="visible"
-                            android:contentDescription="@string/door_unlocked"/>
+                            android:contentDescription="@string/door_unlocked"
+                            android:src="@drawable/unlocked"
+                            android:visibility="visible" />
 
                     </RelativeLayout>
 
@@ -400,30 +399,30 @@
                     android:id="@+id/chandelier"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/chandelier"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/chandelier"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <Switch
                         android:id="@+id/chandelier_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp" />
+                        android:layout_marginRight="20dp"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -431,30 +430,30 @@
                     android:id="@+id/nightlight"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/nightlight"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/nightlight"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <Switch
                         android:id="@+id/nightlight_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp"/>
+                        android:layout_marginRight="20dp"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -462,164 +461,191 @@
                     android:id="@+id/vecof"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:background="@drawable/ripple"
-                    android:layout_margin="4dp">
+                    android:layout_margin="4dp"
+                    android:background="@drawable/ripple">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/vecof"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
                         android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"/>
+                        android:text="@string/vecof"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                     <Switch
                         android:id="@+id/vecof_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="#00ffff"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp"/>
+                        android:layout_marginRight="20dp"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    android:background="@drawable/border_unpressed"
-                    android:layout_margin="4dp">
+                    android:layout_height="180dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/border_unpressed">
 
                     <RelativeLayout
                         android:id="@+id/alarm"
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:background="@drawable/ripple_small">
+                        android:layout_height="70dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/alarm"
-                            android:textSize="18sp"
-                            android:textColor="#00ffff"
                             android:layout_centerVertical="true"
+                            android:layout_marginLeft="20dp"
                             android:layout_marginStart="20dp"
-                            android:layout_marginLeft="20dp"/>
+                            android:text="@string/alarm"
+                            android:textColor="#00ffff"
+                            android:textSize="18sp"
+                            android:background="@drawable/ripple_small"/>
 
                         <Switch
                             android:id="@+id/alarm_switch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:textColor="#00ffff"
-                            android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:layout_marginEnd="20dp"
                             android:layout_marginRight="20dp"
+                            android:textColor="#00ffff"
+                            android:textOff=""
                             android:textOn=""
-                            android:textOff=""/>
+                            android:textSize="18sp" />
 
                     </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="55dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/select_day"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorAccent"
+                        />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
                         android:layout_alignParentTop="true"
-                        android:layout_marginTop="70dp">
+                        android:layout_marginTop="80dp"
+                        android:gravity="center_horizontal">
 
                         <ToggleButton
                             android:id="@+id/monday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18sp"
-                            android:textAllCaps="false"
-                            android:textOn="@string/monday"
-                            android:textOff="@string/monday"
+                            android:layout_margin="3dp"
                             android:background="@drawable/button_toggle"
+                            android:textAllCaps="false"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"/>
+                            android:textOff="@string/monday"
+                            android:textOn="@string/monday"
+                            android:textSize="18sp" />
 
                         <ToggleButton
                             android:id="@+id/tuesday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18sp"
-                            android:textAllCaps="false"
-                            android:textOn="@string/tuesday"
-                            android:textOff="@string/tuesday"
+                            android:layout_margin="3dp"
                             android:background="@drawable/button_toggle"
+                            android:textAllCaps="false"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"/>
+                            android:textOff="@string/tuesday"
+                            android:textOn="@string/tuesday"
+                            android:textSize="18sp" />
 
                         <ToggleButton
                             android:id="@+id/wednesday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18sp"
-                            android:textAllCaps="false"
-                            android:textOn="@string/wednesday"
-                            android:textOff="@string/wednesday"
-                            android:background="@drawable/button_toggle"
-                            android:textColor="@color/toggle_color"
                             android:layout_margin="3dp"
-                            />
+                            android:background="@drawable/button_toggle"
+                            android:textAllCaps="false"
+                            android:textColor="@color/toggle_color"
+                            android:textOff="@string/wednesday"
+                            android:textOn="@string/wednesday"
+                            android:textSize="18sp" />
 
                         <ToggleButton
                             android:id="@+id/thursday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18sp"
-                            android:textAllCaps="false"
-                            android:textOn="@string/thursday"
-                            android:textOff="@string/thursday"
+                            android:layout_margin="3dp"
                             android:background="@drawable/button_toggle"
+                            android:textAllCaps="false"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"/>
+                            android:textOff="@string/thursday"
+                            android:textOn="@string/thursday"
+                            android:textSize="18sp" />
 
                         <ToggleButton
                             android:id="@+id/friday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18sp"
-                            android:textAllCaps="false"
-                            android:textOn="@string/friday"
-                            android:textOff="@string/friday"
+                            android:layout_margin="3dp"
                             android:background="@drawable/button_toggle"
+                            android:textAllCaps="false"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"/>
+                            android:textOff="@string/friday"
+                            android:textOn="@string/friday"
+                            android:textSize="18sp" />
 
                         <ToggleButton
                             android:id="@+id/saturday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18sp"
-                            android:textAllCaps="false"
-                            android:textOn="@string/saturday"
-                            android:textOff="@string/saturday"
+                            android:layout_margin="3dp"
                             android:background="@drawable/button_toggle"
+                            android:textAllCaps="false"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"/>
+                            android:textOff="@string/saturday"
+                            android:textOn="@string/saturday"
+                            android:textSize="18sp" />
 
                         <ToggleButton
                             android:id="@+id/sunday"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:textSize="18sp"
-                            android:textAllCaps="false"
-                            android:textOn="@string/sunday"
-                            android:textOff="@string/sunday"
+                            android:layout_margin="3dp"
                             android:background="@drawable/button_toggle"
+                            android:textAllCaps="false"
                             android:textColor="@color/toggle_color"
-                            android:layout_margin="3dp"/>
+                            android:textOff="@string/sunday"
+                            android:textOn="@string/sunday"
+                            android:textSize="18sp" />
 
                     </LinearLayout>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/coffee_checkbox"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:scaleX="1"
+                        android:scaleY="1"/>
 
                 </RelativeLayout>
 
@@ -628,5 +654,5 @@
         </android.support.v4.widget.NestedScrollView>
 
     </android.support.design.widget.CoordinatorLayout>
-    
+
 </android.support.v4.widget.SwipeRefreshLayout>
