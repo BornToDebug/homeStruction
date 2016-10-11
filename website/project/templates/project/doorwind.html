@@ -13,7 +13,7 @@
 						<span class="opclswitch-switch"></span>
 					</label>
 				</div>
-				
+
 			  </div>
 		<div id="mytable" style="width:500px">
 			<section>
@@ -92,13 +92,12 @@ function objectToHTML(jsonObj) {
 		'<td>' +  myTime + '</td> \n' +
 		'</tr> \n';
 	return tableRow;
-	
+
 }
-	document.getElementById('doorstat') = firstJSON ('/api/door/');
 	doortable = document.getElementById('doortable');
 	windowtable = document.getElementById('windowtable');
-	getJSON('/api/door/', objectToHTML, doortable);
-	getJSON('/api/lamp/d', objectToHTML, doortable);
+	doorlockbutton = document.getElementById('myopclswitch');
+	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton);
 	getJSON('/api/window/', objectToHTML, windowtable);
 </script>
 {% endblock content %}

@@ -1,8 +1,12 @@
-function getJSON(url, objectConverter, table) {
+function getJSON(url, objectConverter, table, button) {
 	// try to fetch JSON data from url and call events
 	var json = $.getJSON(url, function(data) {
 		console.log('success');
 		generateRows(data['results'], table, objectConverter);
+		if(button != undefined) {
+			button.checked = data['results'][0].value === 'dc_c';
+		}
+
 	})
 	.done(function() {
 		console.log('second success')
@@ -23,5 +27,4 @@ function generateRows(json, table, objectConverter) {
 		table.innerHTML += tableRow;
 	}
 }
-
 

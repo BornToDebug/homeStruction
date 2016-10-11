@@ -20,19 +20,19 @@ function myFunction(){
 }
 
 function lamp1Func(){
-	if(lamp1button.checked==false) {command("1lampon")};
-    if (lamp1button.checked==true) {command("1lampoff");}
+	if(lamp1button.checked==false) {command("1lampoff")};
+    if (lamp1button.checked==true) {command("1lampon");}
 	
 }
 
 function lamp2Func(){
-	if(lamp2button.checked==false) {command("2lampon")};
-    if (lamp2button.checked==true) {command("2lampoff");}
+	if(lamp2button.checked==false) {command("2lampoff")};
+    if (lamp2button.checked==true) {command("2lampon");}
 	
 }
 
 function lamp3Func(){
-	if(lamp3button.checked==false) {command("3lampon")};
-    if (lamp3button.checked==true) {command("3lampoff");}
+	if(lamp3button.checked==false) {command("3lampoff")};
+    if (lamp3button.checked==true) {command("3lampon");}
 	
 }
