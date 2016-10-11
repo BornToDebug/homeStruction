@@ -1,0 +1,3 @@
+#!/bin/bash
+
+su projekt -c 'nohup /usr/bin/python /home/projekt/homeStruction/website/alarm2.py &'

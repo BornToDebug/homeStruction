@@ -9,6 +9,8 @@ import time
 from project.models import Alarm
 from subprocess import call
 
+os.setuid(1001)
+
 def wekker():
     print 'AAAAALLLLLLLAAAAAARRRRRRRRMMMMM'
     call(['mplayer /mnt/Stick/Music/01.\ Crystals.mp3'], shell=True)
