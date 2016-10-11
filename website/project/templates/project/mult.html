@@ -78,7 +78,6 @@
 	var myDate=timeRec.substring(0,10);
 	var myTime=timeRec.substring(11,19);
 	var myValue=jsonObj['value'];
-	if(myValue!="do_c" && myValue!="do_uc" && myValue!="dc_c"  && myValue!="dc_uc"){
 	var tableVar=myValue;
 	if(myValue == "1on_c"){tableVar="Lamp #1 successfully switched on";}
 	if(myValue == "1off_c"){tableVar="Lamp #1 successfully switched off";}
@@ -100,10 +99,12 @@
 		'<td>' +  myTime + '</td> \n' +
 		'</tr> \n';
 	return tableRow;
-	}
+	
 }
 lamptable = document.getElementById('lamptable');
-	getJSON('/api/lamp/', objectToHTML, lamptable);
+	getJSON('/api/lamp/1', objectToHTML, lamptable);
+	getJSON('/api/lamp/2', objectToHTML, lamptable);
+	getJSON('/api/lamp/3', objectToHTML, lamptable);
 	</script>
 		  
 

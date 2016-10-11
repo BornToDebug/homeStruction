@@ -23,5 +23,10 @@ function generateRows(json, table, objectConverter) {
 		table.innerHTML += tableRow;
 	}
 }
+ function firstJSON(data){
+	 var myData=JSON.parse(data);
+	 return myData[0].value;
+	 
+ }
 
 

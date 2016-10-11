@@ -1148,17 +1148,18 @@ ul.menu ul {
     box-sizing: border-box;
 }
 .opclswitch-inner:before {
-    content: "OPEN";
+    content: "LOCKED";
     padding-left: 10px;
     background-color: #34A7C1; color: #FFFFFF;
 	text-align:left;
+	font-size:12px;
 }
 .opclswitch-inner:after {
-    content: "CLOSE";
+    content: "UNLOCKED";
     padding-right: 10px;
     background-color: #EEEEEE; color: #999999;
     text-align: right;
-	font-size:12px;
+	font-size:9px;
 }
 .opclswitch-switch {
     display: block; width: 18px; margin: 6px;

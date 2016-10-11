@@ -30,7 +30,18 @@
 
   </head>
 
-  <body>
+  <body> 
+   <nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="signin.html">More</a></h1>
+			<i class="icon-remove menu-close"></i>
+			<a href="#about" class="smoothScroll">About</a>
+			<a href="#contact" class="smoothScroll">Contact</a>
+		</div>
+		
+		
+		<div id="menuToggle"><i class="icon-reorder"></i></div>
+	</nav>
 
     <div class="cont">
   <div class="demo">
@@ -74,6 +85,39 @@
   </div>
   
 </div>
+</div>
+<section id="about" name="about"></section>
+	<div id="f">
+		<div class="container">
+			<div class="row">
+				<h3>ABOUT US</h3>
+				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+				
+				<!-- INTRO INFORMATIO-->
+				<div class="col-lg-6 col-lg-offset-3">
+					<p>Our team is composed of four 20-year-old computer science students who have the passion of turning great ideas into reality.</p>
+					
+					<p>Always aiming high, we try to make positive changes in the world.</p>
+				</div>								
+			</div>
+		</div><!-- /container -->
+	</div><!-- /f -->
+
+	<!-- ========== CONTACT SECTION ========== -->
+	<section id="contact" name="contact"></section>
+	<div id="f">
+		<div class="container">
+			<div class="row">
+				<h3>CONTACT US</h3>
+				<p class="centered"><i class="icon icon-circle"></i><i class="icon icon-circle"></i><i class="icon icon-circle"></i></p>
+				
+				<div class="col-lg-6 col-lg-offset-3">
+					<p>Some Avenue, 987<br/>Cluj-Napoca, Romania<br/>+40700000000</p>
+					<p>iam@awesomemail.com</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 		<script src="{% static "project/assetsjs/index.js" %}"></script>
 		<script src="{% static "project/assets/js/classie.js" %}"></script>

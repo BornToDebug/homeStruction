@@ -40,8 +40,8 @@ input, button {
 
 .cont {
   position: relative;
-  height:100%;
- min-height: 800px;
+  height:100vh;
+ min-height: 1800px;
   background: url("../img/hat4.png");
   background-size: cover;
   padding-top:40px;
@@ -51,7 +51,7 @@ input, button {
 
 .demo {
   position: relative;
-  top: 50%;
+  top: 30%;
   left: 50%;
   margin-left: -15rem;
   margin-top: -26.5rem;

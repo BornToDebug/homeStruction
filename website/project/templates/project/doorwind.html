@@ -79,8 +79,7 @@ function objectToHTML(jsonObj) {
 	var myDate=timeRec.substring(0,10);
 	var myTime=timeRec.substring(11,19);
 	var myValue=jsonObj['value'];
-	if(myValue!="1on_c" && myValue!="1off_c" && myValue!="1on_uc" && myValue!="1off_uc" && myValue!="2on_c" && myValue!="2off_c" && myValue!="2on_uc" && myValue!="2off_uc" && myValue!="3on_c" && myValue!="3off_c" && myValue!="3on_uc" && myValue!="3off_uc" ){
-	var tableVal=myValue;
+	var tableVar=myValue;
 	if(myValue == "do_c" ) { tableVar="Unlocked";}
 	if(myValue == "dc_c") { tableVar ="Locked";}
 	if(myValue == "do_uc") {tableVar="Unlocking failed";}
@@ -93,14 +92,13 @@ function objectToHTML(jsonObj) {
 		'<td>' +  myTime + '</td> \n' +
 		'</tr> \n';
 	return tableRow;
-	}
+	
 }
-	var s= document.getElementById('doorstat');
-    s.value = jsonObj['value'];
+	document.getElementById('doorstat') = firstJSON ('/api/door/');
 	doortable = document.getElementById('doortable');
 	windowtable = document.getElementById('windowtable');
 	getJSON('/api/door/', objectToHTML, doortable);
-	getJSON('/api/lamp/', objectToHTML, doortable);
+	getJSON('/api/lamp/d', objectToHTML, doortable);
 	getJSON('/api/window/', objectToHTML, windowtable);
 </script>
 {% endblock content %}
