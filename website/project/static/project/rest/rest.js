@@ -1,10 +1,10 @@
-function getJSON(url, objectConverter, table, button) {
+function getJSON(url, objectConverter, table, button,posVal) {
 	// try to fetch JSON data from url and call events
 	var json = $.getJSON(url, function(data) {
 		console.log('success');
 		generateRows(data['results'], table, objectConverter);
 		if(button != undefined) {
-			button.checked = data['results'][0].value === 'dc_c';
+			button.checked = data['results'][0].value === posVal;
 		}
 
 	})
