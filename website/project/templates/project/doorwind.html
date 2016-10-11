@@ -94,10 +94,11 @@ function objectToHTML(jsonObj) {
 	return tableRow;
 
 }
+	var doorId="dc_c";
 	doortable = document.getElementById('doortable');
 	windowtable = document.getElementById('windowtable');
 	doorlockbutton = document.getElementById('myopclswitch');
-	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton);
+	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,posVal);
 	getJSON('/api/window/', objectToHTML, windowtable);
 </script>
 {% endblock content %}
