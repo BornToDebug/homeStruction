@@ -11,7 +11,7 @@
 ### END INIT INFO
 
 # Change the next 3 lines to suit where you install your script and what you want to call it
-DIR=/home/projekt/homeStruction/website
+DIR=/home/projekt/homeStruction/alarm
 DAEMON=$DIR/alarmscript
 DAEMON_NAME=alarmd
 
