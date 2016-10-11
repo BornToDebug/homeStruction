@@ -1,4 +1,4 @@
-package com.lilla.homestruction;
+package com.lilla.homestruction.interfaces;
 
 import com.lilla.homestruction.bean.DoorLockedResponse;
 import com.lilla.homestruction.bean.DoorResponse;
@@ -33,36 +33,47 @@ public interface WebService {
     @POST("/api-token-auth/")
     Call<TokenResponse> getLoginToken(@Field("username") String username, @Field("password") String password);
 
+    //Webservice for luminosity
     @GET("/api/light/")
     Call<LightResponse> getLight();
 
+    //Webservice for lamp1 (the chandelier)
     @GET("/api/lamp/1")
     Call<Lamp1Response> getLamp1();
 
+    //Webservice for lamp2 (the nightlight)
     @GET("/api/lamp/2")
     Call<Lamp2Response> getLamp2();
 
+    //Webservice for the coffee machine/fan
     @GET("/api/lamp/3")
     Call<Lamp3Response> getLamp3();
 
+    //Webservice for getting the door's state (open/closed)
     @GET("/api/door/")
     Call<DoorResponse> getDoor();
 
+    //Webservice for the lock's state (door locked/unlocked)
     @GET("/api/lamp/d")
     Call<DoorLockedResponse> getDoorLocked();
 
+    //Webservice for the windows (open/closed)
     @GET("/api/window/")
     Call<WindowsResponse> getWindows();
 
+    //Webservice for humidity
     @GET("/api/humidity/")
     Call<HumidityResponse> getHumidity();
 
+    //Webservice for sending commands (for the previous services)
     @GET("/androidcommand/")
     Call<ResponseBody> sendCommand(@Query("command") String command);
 
+    //Webservice for resetting the alarm
     @GET("/androidsetalarm/")
     Call<ResponseBody> resetAlarm();
 
+    //Webservice for setting the alarm
     @GET("/androidsetalarm/")
     Call<ResponseBody> sendAlarm(
             @Query("hour") String hour,

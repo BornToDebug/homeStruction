@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mainview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryDark">
+    android:orientation="vertical">
 
     <com.theappguruz.imagezoom.ImageViewTouch
         android:id="@+id/graph"

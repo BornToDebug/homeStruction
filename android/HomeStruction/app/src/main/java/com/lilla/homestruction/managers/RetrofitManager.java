@@ -1,4 +1,4 @@
-package com.lilla.homestruction;
+package com.lilla.homestruction.managers;
 
 import java.io.IOException;
 
@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by lilla on 25/09/16.
  */
 
+//Retrofit manager, which manages the authentication
 public class RetrofitManager {
 
     private static final String BASE_URL = "http://homestruction.servebeer.com";
@@ -28,6 +29,7 @@ public class RetrofitManager {
         return createService(serviceClass, null);
     }
 
+    //It creates a new service, which returns a token, that can be used for acquiring further data
     public static <S> S createService(Class<S> serviceClass, final String authToken) {
         if (authToken != null) {
             httpClient.addInterceptor(new Interceptor() {

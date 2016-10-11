@@ -1,4 +1,4 @@
-package com.lilla.homestruction;
+package com.lilla.homestruction.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -28,7 +28,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.lilla.homestruction.R;
+import com.lilla.homestruction.activities.ForgottenPassword;
+import com.lilla.homestruction.activities.MainScreen;
 import com.lilla.homestruction.bean.TokenResponse;
+import com.lilla.homestruction.interfaces.WebService;
+import com.lilla.homestruction.managers.RetrofitManager;
+import com.lilla.homestruction.preferences.SaveSharedPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +51,8 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     TextView loginView;
+
+    //This is the basic Android login screen
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -346,7 +354,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-
         private final String mUsername;
         private final String mPassword;
 
@@ -399,8 +406,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
-
-
     }
 
     public void onBackPressed() {

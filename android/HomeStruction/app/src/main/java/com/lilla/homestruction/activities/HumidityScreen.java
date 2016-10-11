@@ -1,20 +1,20 @@
-package com.lilla.homestruction;
+package com.lilla.homestruction.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.lilla.homestruction.R;
 import com.theappguruz.imagezoom.ImageViewTouch;
 
 /**
  * Created by lilla on 05/10/16.
  */
 
-public class HumidityScreen extends AppCompatActivity{
+public class HumidityScreen extends AppCompatActivity {
     private ImageViewTouch imageViewTouch;
     private Bitmap myBitmap;
-
 
     protected void onCreate(Bundle savedInstanceState) {
 

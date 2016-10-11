@@ -1,8 +1,10 @@
-package com.lilla.homestruction;
+package com.lilla.homestruction.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.lilla.homestruction.R;
 
 /**
  * Created by lilla on 21/09/16.
@@ -15,7 +17,7 @@ public class ForgottenPassword extends AppCompatActivity {
         setContentView(R.layout.forgotten_password);
         final TextView mTextView = (TextView) findViewById(R.id.txtDisplay);
 
-        //TODO forgotten password screen (question + answer)
+        //TODO forgotten password screen
 
     }
 }

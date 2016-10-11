@@ -1,28 +1,26 @@
-package com.lilla.homestruction;
+package com.lilla.homestruction.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.theappguruz.imagezoom.ImageViewTouch;;
-
+import com.lilla.homestruction.R;
+import com.theappguruz.imagezoom.ImageViewTouch;
 
 /**
- * Created by lilla on 22/09/16.
- * http://www.theappguruz.com/blog/android-pinch-zoom
+ * Created by lilla on 28/09/16.
  */
 
-public class TemperatureScreen extends AppCompatActivity {
+public class LightScreen extends AppCompatActivity {
 
     private ImageViewTouch imageViewTouch;
     private Bitmap myBitmap;
 
-
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.temperature_screen);
+        setContentView(R.layout.light_screen);
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -42,4 +40,3 @@ public class TemperatureScreen extends AppCompatActivity {
         imageViewTouch.setImageBitmapReset(myBitmap, 0, true);
     }
 }
-

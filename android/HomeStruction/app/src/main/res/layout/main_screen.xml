@@ -505,10 +505,10 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="20dp"
                             android:layout_marginStart="20dp"
+                            android:background="@drawable/ripple_small"
                             android:text="@string/alarm"
                             android:textColor="#00ffff"
-                            android:textSize="18sp"
-                            android:background="@drawable/ripple_small"/>
+                            android:textSize="18sp" />
 
                         <Switch
                             android:id="@+id/alarm_switch"
@@ -535,9 +535,8 @@
                         android:layout_marginTop="55dp"
                         android:gravity="center_horizontal"
                         android:text="@string/select_day"
-                        android:textSize="16sp"
                         android:textColor="@color/colorAccent"
-                        />
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -636,16 +635,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/coffee_checkbox"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginStart="20dp"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="16sp"
                         android:scaleX="1"
-                        android:scaleY="1"/>
+                        android:scaleY="1"
+                        android:text="@string/coffee_checkbox"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
