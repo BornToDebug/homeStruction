@@ -25,7 +25,7 @@ function generateRows(json, table, objectConverter) {
 }
  function firstJSON(data){
 	 var myData=JSON.parse(data);
-	 return myData[0].value;
+	 return myData.result[0].value;
 	 
  }
 
