@@ -5,7 +5,7 @@
 
 			<div id="light1" name="light1" style="width:34%; float:left;">
 			  <div id="txtsw" style="width:340px">
-				<h5>Light #1 is : </h5><h6>ON/OFF.</h6>
+				<h5>Light #1 is : </h5><h6  id="lamp1stat"></h6>
 				<div class="onoffswitch" style="margin-left:auto;margin-right:auto;margin-top:25px">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" onclick="lamp1Func()">
 					<label class="onoffswitch-label" for="myonoffswitch">
@@ -101,10 +101,20 @@
 	return tableRow;
 	
 }
+l1status=document.getElementById('lamp1stat');
+newJson('/api/lamp/1',l1status);
 lamptable = document.getElementById('lamptable');
-	getJSON('/api/lamp/1', objectToHTML, lamptable);
-	getJSON('/api/lamp/2', objectToHTML, lamptable);
-	getJSON('/api/lamp/3', objectToHTML, lamptable);
+var lamp1Id="1on_c";
+var lamp2Id="2on_c";
+var lmap3Id="3on_c";
+lock1button = document.getElementById('myonoffswitch');
+lock2button = document.getElementById('myonoff2switch');
+lock3button = document.getElementById('myonoff3switch');
+
+
+	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id);
+	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id);
+	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id);
 	</script>
 		  
 
