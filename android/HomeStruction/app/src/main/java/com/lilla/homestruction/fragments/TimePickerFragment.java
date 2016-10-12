@@ -22,7 +22,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     private OnDialogCallbacksListener onDialogCallbacksListener;
     private Handler mainHandler;
-    boolean wasCancelled;
+    private boolean wasCancelled;
 
     //gets instance of OnDialogCallbacksListener
     public void setOnDialogCallbacksListener(OnDialogCallbacksListener onDialogCallbacksListener) {

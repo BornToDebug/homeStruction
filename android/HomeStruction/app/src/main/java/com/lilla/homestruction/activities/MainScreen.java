@@ -215,7 +215,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     };
 
     //Show snackbar when there is no connection
-    public void showSnackbar() {
+    protected void showSnackbar() {
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
                 .setAction("RETRY", new View.OnClickListener() {
@@ -536,7 +536,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     //Send data to the server
-    public void sendToServer(String command, WebService webService) {
+    private void sendToServer(String command, WebService webService) {
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
         call.enqueue(new Callback<ResponseBody>() {
@@ -567,7 +567,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    public void setAlarm(String hour, String minute, String monday, String tuesday, String wednesday, String thursday,
+    private void setAlarm(String hour, String minute, String monday, String tuesday, String wednesday, String thursday,
                          String friday, String saturday, String sunday, WebService webService) {
         Call<ResponseBody> call = webService.sendAlarm(hour, minute, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
         call.enqueue(new Callback<ResponseBody>() {
@@ -598,7 +598,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    public void resetAlarm(WebService webService) {
+    private void resetAlarm(WebService webService) {
         Call<ResponseBody> call = webService.resetAlarm();
         call.enqueue(new Callback<ResponseBody>() {
 
@@ -880,7 +880,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void showTimePickerDialog() {
+    private void showTimePickerDialog() {
         TimePickerFragment newFragment = new TimePickerFragment();
         newFragment.setOnDialogCallbacksListener(this);
         newFragment.show(getSupportFragmentManager(), "timePicker");
@@ -922,7 +922,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         minute = null;
     }
 
-    public void createRequest(List<Boolean> daysChecked, WebService webService) {
+    private void createRequest(List<Boolean> daysChecked, WebService webService) {
 
         List<String> days = Arrays.asList(null, null, null, null, null, null, null);
         for (int i = 0; i < 7; i++) {
