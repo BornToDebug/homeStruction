@@ -55,7 +55,7 @@ def imageView(request):
 
 def androidImageView(request):
     authcheck = androidlogin(request)
-    if authcheck is 'auth':
+    if authcheck == 'auth':
         return getimage(request)
     else:
         return HttpResponse(authcheck)
