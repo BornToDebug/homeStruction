@@ -18,6 +18,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
 
 /**
  * Created by lilla on 24/09/16.
@@ -85,4 +86,9 @@ public interface WebService {
             @Query("friday") String friday,
             @Query("saturday") String saturday,
             @Query("sunday") String sunday);
+
+    @GET("/androidimage/")
+    @Streaming  Call<ResponseBody> getImage(
+            @Query("image") String command
+    );
 }

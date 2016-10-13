@@ -8,8 +8,13 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.theappguruz.imagezoom.ImageViewTouch
-        android:id="@+id/graph"
+    <!--<com.theappguruz.imagezoom.ImageViewTouch-->
+        <!--android:id="@+id/graph"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_gravity="center" />-->
+    <ImageView
+        android:id="@+id/temperature"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center" />

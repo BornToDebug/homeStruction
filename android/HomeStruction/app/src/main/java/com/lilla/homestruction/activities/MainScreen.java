@@ -567,9 +567,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    private void setAlarm(String hour, String minute, String monday, String tuesday, String wednesday, String thursday,
-                         String friday, String saturday, String sunday, WebService webService) {
-        Call<ResponseBody> call = webService.sendAlarm(hour, minute, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+    private void setAlarm(String hour, String minute, List<String> days, WebService webService) {
+        Call<ResponseBody> call = webService.sendAlarm(hour, minute, days.get(0), days.get(1), days.get(2), days.get(3),
+                days.get(4), days.get(5), days.get(6));
         call.enqueue(new Callback<ResponseBody>() {
 
             @Override
@@ -627,6 +627,26 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         });
     }
+
+//    private void getImage(WebService webService, String command){
+//        Call<ResponseBody> call = webService.getImage(command);
+//        call.enqueue(new Callback<ResponseBody>() {
+//
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if (response.isSuccessful()){
+//                    if (response.body() != null){
+//
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                System.out.println("LOG Error: " + t.getMessage());
+//            }
+//        });
+//    }
 
     //Create an options meny (it only has a sign out button for now)
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -931,6 +951,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         }
         System.out.println("LOG " + days);
-        setAlarm(hour, minute, days.get(0), days.get(1), days.get(2), days.get(3), days.get(4), days.get(5), days.get(6), webService);
+        setAlarm(hour, minute, days, webService);
     }
 }

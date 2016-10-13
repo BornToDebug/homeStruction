@@ -25,7 +25,7 @@ public class HumidityScreen extends AppCompatActivity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
-        myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.graph, options);
+        myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.humidity, options);
         if (options.outWidth > 3000 || options.outHeight > 2000) {
             options.inSampleSize = 4;
         } else if (options.outWidth > 2000 || options.outHeight > 1500) {
@@ -35,7 +35,7 @@ public class HumidityScreen extends AppCompatActivity {
         }
         options.inJustDecodeBounds = false;
 
-        myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.graph, options);
+        myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.humidity, options);
         imageViewTouch.setImageBitmapReset(myBitmap, 0, true);
     }
 }
