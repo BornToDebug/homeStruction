@@ -17,11 +17,11 @@ function getJSON(url, objectConverter, table,_status, button,posVal) {
 	});
 }
 
-function newJSON(url,_status) {
+function newJSON(url,_status,objectConverter) {
 	// try to fetch JSON data from url and call events
 	var json = $.getJSON(url, function(data) {
 		console.log('success');
-		_status=data['results'][0].value;
+		generateStatus(data['results'],_status,objectConverter);
 
 	})
 	.done(function() {
@@ -33,6 +33,16 @@ function newJSON(url,_status) {
 	});
 	
 }
+function generateStatus(json,_status,objectConverter){
+	var tableState;
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		_status.innerHTML = tableState;
+
+	
+}
+
 
 function generateRows(json, table, objectConverter) {
 	//delete current entries in table and populate it with data

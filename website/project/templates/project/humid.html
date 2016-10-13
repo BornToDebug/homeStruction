@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 	<div id="lght" style="margin-left:auto; margin-right:auto; min-height:100vh">
-			<h6>The humidity in your room is:</h6><h5>34</h5>
+			<h6>The humidity in your room is:</h6><h5 id="humstat"></h5>
 
 			<div class="item">
                                     <img src="fto/assets/img/slideshow/graph.jpg">
@@ -43,6 +43,16 @@ function objectToHTML(jsonObj) {
 		'</tr> \n';
 	return tableRow;
 }
+function stateToHTML(jsonObj) {
+	// generate HTML from JSON object
+	
+	var myVar = jsonObj['value'];
+	var tableState = myVar;
+	return tableState;
+	
+}
+	hstatus=document.getElementById('humstat');
+	newJson('/api/humidity/',stateToHTML,hstatus);
 	humidtable = document.getElementById('humidtable');
 	getJSON('/api/humidity/', objectToHTML, humidtable);
 </script>

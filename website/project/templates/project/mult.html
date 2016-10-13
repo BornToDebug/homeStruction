@@ -19,7 +19,7 @@
 			
 			<div id="light2" name="light2" style="width:33%; float:left">
 				<div id="txtsw" style="width:340px;">
-				<h5>Light #2 is: </h5><h6>ON/OFF.</h6>
+				<h5>Light #2 is: </h5><h6 id="lamp2stat"></h6>
 				<div class="onoffswitch" style="margin-right:auto;margin-left:auto; margin-top:25px" >
 					<input type="checkbox" name="onoff2switch" class="onoff2switch-checkbox" id="myonoff2switch" onclick="lamp2Func()">
 					<label class="onoff2switch-label" for="myonoff2switch">
@@ -32,7 +32,7 @@
 			
 			<div  id="light3" class="light3" style="width:33%; float:left">
 			<div id="txtsw" style="width:340px">
-				<h5>Light #3 is : </h5><h6>ON/OFF.</h6>
+				<h5>Light #3 is : </h5><h6 id="lamp3stat"></h6>
 				<div class="onoffswitch" style="margin-right:auto;margin-left:auto;margin-top:25px; ">
 					<input type="checkbox" name="onoff3switch" class="onoff3switch-checkbox" id="myonoff3switch" onclick="lamp3Func()">
 					<label class="onoff3switch-label" for="myonoff3switch">
@@ -101,21 +101,34 @@
 	return tableRow;
 	
 }
-l1status=document.getElementById('lamp1stat');
-newJson('/api/lamp/1',l1status);
-lamptable = document.getElementById('lamptable');
-var lamp1Id="1on_c";
-var lamp2Id="2on_c";
-var lmap3Id="3on_c";
-lock1button = document.getElementById('myonoffswitch');
-lock2button = document.getElementById('myonoff2switch');
-lock3button = document.getElementById('myonoff3switch');
-
-
+function stateToHTML(jsonObj) {
+	// generate HTML from JSON object
+	
+	var myVar = jsonObj['value'];
+	var tableState = myVar;
+	if(myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c"){tableState = "ON";}
+	if(myVar == "1off_c" || myVar == "2off_c" || myVar == "3off_c"){tableState = "OFF";}
+	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c") {tableState = "ERR";}
+	return tableState;
+	
+}
+	l1status=document.getElementById('lamp1stat');
+	l2status=document.getElementById('lamp2stat');
+	l3status=document.getElementById('lamp3stat');
+	newJson('/api/lamp/1',stateToHTML,l1status);
+	newJson('/api/lamp/2',stateToHTML,l2status);
+	newJson('/api/lamp/3',stateToHTML,l3status);
+	lamptable = document.getElementById('lamptable');
+	var lamp1Id="1on_c";
+	var lamp2Id="2on_c";
+	var lmap3Id="3on_c";
+	lock1button = document.getElementById('myonoffswitch');
+	lock2button = document.getElementById('myonoff2switch');
+	lock3button = document.getElementById('myonoff3switch');
 	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id);
 	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id);
 	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id);
-	</script>
+</script>
 		  
 
 {% endblock content %}
