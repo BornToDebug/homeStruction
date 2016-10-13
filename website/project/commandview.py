@@ -34,17 +34,17 @@ def androidcontrol(request):
 def getimage(request):
     image = request.GET.get('image', '')
     imageurl = None
-    dirurl = '/home/projekt/homeStruction/website/'
+    dirurl = '/home/david/git/homeStruction/website/'
     if image == 'temp':
-        imageurl = dirurl + 'Temperature.png'
+        imageurl = dirurl + 'Temperature.jpg'
     if image == 'humid':
-        imageurl = dirurl + 'Humidity.png'
+        imageurl = dirurl + 'Humidity.jpg'
     if image == 'light':
-        imageurl = dirurl + 'Light.png'
+        imageurl = dirurl + 'Light.jpg'
     if imageurl is not None:
         try:
             with open(imageurl) as f:
-                return HttpResponse(f.read(), content_type="image/png")
+                return HttpResponse(f.read(), content_type="image/jpeg")
         except IOError:
             return HttpResponse('image cannot be accessed')
     return HttpResponse(image + ' no such image')
