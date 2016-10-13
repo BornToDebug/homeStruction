@@ -34,7 +34,7 @@ def androidcontrol(request):
 def getimage(request):
     image = request.GET.get('image', '')
     imageurl = None
-    dirurl = '/home/david/git/homeStruction/website/'
+    dirurl = '/home/projekt/homeStruction/website/'
     if image == 'temp':
         imageurl = dirurl + 'Temperature.jpg'
     if image == 'humid':
