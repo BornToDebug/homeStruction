@@ -1,8 +1,8 @@
 package com.lilla.homestruction.activities;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -12,8 +12,6 @@ import com.lilla.homestruction.R;
 import com.lilla.homestruction.preferences.SaveSharedPreference;
 import com.theappguruz.imagezoom.ImageViewTouch;
 
-;
-
 
 /**
  * Created by lilla on 22/09/16.
@@ -22,20 +20,15 @@ import com.theappguruz.imagezoom.ImageViewTouch;
 
 public class TemperatureScreen extends AppCompatActivity {
 
-    private ImageViewTouch imageViewTouch;
-    private ImageView imageView;
-    private Bitmap myBitmap;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temperature_screen);
         final String token = SaveSharedPreference.getToken(TemperatureScreen.this);
-
-        String Url = "http://homestruction.servebeer.com/androidimage/?image=temp";
-
-        imageView = (ImageView) findViewById(R.id.temperature);
-        GlideUrl glideUrl = new GlideUrl(Url,
+        Log.d("tok", token);
+        ImageView imageView = (ImageView) findViewById(R.id.temperature_view);
+        GlideUrl glideUrl = new GlideUrl("http://192.168.0.103/androidimage/?image=temp",
                 new LazyHeaders.Builder()
                         .addHeader("Authorization", "Token " + token).build());
         Glide

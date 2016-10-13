@@ -13,9 +13,9 @@
         <!--android:layout_height="fill_parent"-->
         <!--android:layout_gravity="center" />-->
     <ImageView
-        android:id="@+id/temperature"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:id="@+id/temperature_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
 </LinearLayout>
