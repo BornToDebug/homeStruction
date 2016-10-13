@@ -17,7 +17,7 @@ function getJSON(url, objectConverter, table,_status, button,posVal) {
 	});
 }
 
-function newJSON(url,_status,objectConverter) {
+function newJSON(url,objectConverter,_status) {
 	// try to fetch JSON data from url and call events
 	var json = $.getJSON(url, function(data) {
 		console.log('success');

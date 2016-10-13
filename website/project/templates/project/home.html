@@ -135,4 +135,100 @@
 
 
             </div>
+<script>
+	function objectToHTML(jsonObj) {
+	// generate HTML from JSON object
+	var timeRec= jsonObj['time_recorded'];
+	var myDate=timeRec.substring(0,10);
+	var myTime=timeRec.substring(11,19);
+	var myValue=jsonObj['value'];
+	var tableVar=myValue;
+	if(myValue == "1on_c"){tableVar="Lamp #1 successfully switched on";}
+	if(myValue == "1off_c"){tableVar="Lamp #1 successfully switched off";}
+	if(myValue == "1on_uc"){tableVar="Could not switch light #1 on";}
+	if(myValue == "1off_uc"){tableVar="Could not switch light #1 off";}
+	
+	if(myValue == "2on_c"){tableVar="Lamp #2 successfully switched on";}
+	if(myValue == "2off_c"){tableVar="Lamp #2 successfully switched off";}
+	if(myValue == "2on_uc"){tableVar="Could not switch light #2 on";}
+	if(myValue == "2off_uc"){tableVar="Could not switch light #2 off";}
+	
+	if(myValue == "3on_c"){tableVar="Lamp #3 successfully switched on";}
+	if(myValue == "3off_c"){tableVar="Lamp #3 successfully switched off";}
+	if(myValue == "3on_uc"){tableVar="Could not switch light #3 on";}
+	if(myValue == "3off_uc"){tableVar="Could not switch light #3 off";}
+	
+	if(myValue == "do_c" ) { tableVar="Unlocked";}
+	if(myValue == "dc_c") { tableVar ="Locked";}
+	if(myValue == "do_uc") {tableVar="Unlocking failed";}
+	if(myValue == "dc_uc") {tableVar="Locking failed";}
+	if(myValue == "opened") {tableVar="Open";}
+	if(myValue == "closed") {tableVar="Closed";}
+	
+	var tableRow = '<tr> \n' +
+		'<td>' +  tableVar + '</td> \n' +
+		'<td>' + myDate + '</td> \n' +
+		'<td>' +  myTime + '</td> \n' +
+		'</tr> \n';
+	return tableRow;
+	
+}
+function stateToHTML(jsonObj) {
+	// generate HTML from JSON object
+	
+	var myVar = jsonObj['value'];
+	var tableState = myVar;
+	if(myVar == "opened"){tableState="OPEN";}
+	if(myVar == "closed"){tableState = "CLOSED";}
+	
+	if(myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c"){tableState = "ON";}
+	if(myVar == "1off_c" || myVar == "2off_c" || myVar == "3off_c"){tableState = "OFF";}
+	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c") {tableState = "ERR";}
+	
+	return tableState;
+}
+l1status=document.getElementById('lamp1stat');
+	l2status=document.getElementById('lamp2stat');
+	l3status=document.getElementById('lamp3stat');
+	newJson('/api/lamp/1',stateToHTML,l1status);
+	newJson('/api/lamp/2',stateToHTML,l2status);
+	newJson('/api/lamp/3',stateToHTML,l3status);
+	lamptable = document.getElementById('lamptable');
+	var lamp1Id="1on_c";
+	var lamp2Id="2on_c";
+	var lmap3Id="3on_c";
+	lock1button = document.getElementById('myonoffswitch');
+	lock2button = document.getElementById('myonoff2switch');
+	lock3button = document.getElementById('myonoff3switch');
+	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id);
+	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id);
+	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id);
+	
+	dstatus=document.getElementById('doorstat');
+	wstatus=document.getElementById('windstat');
+	newJson('/api/door/',stateToHTML,dstatus);
+	newJson('/api/window/',stateToHTML,wstatus);
+	var doorId="dc_c";
+	doortable = document.getElementById('doortable');
+	windowtable = document.getElementById('windowtable');
+	windowstat=document.getElementById('windstat')
+	doorlockbutton = document.getElementById('myopclswitch');
+	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId);
+	getJSON('/api/window/', objectToHTML, windowtable);
+	
+	hstatus=document.getElementById('humstat');
+	newJson('/api/humidity/',stateToHTML,hstatus);
+	humidtable = document.getElementById('humidtable');
+	getJSON('/api/humidity/', objectToHTML, humidtable);
+	
+	lstatus=document.getElementById('lightstat');
+	newJson('/api/light/',stateToHTML,lstatus);
+	lumintable = document.getElementById('lumintable');
+	getJSON('/api/light/', objectToHTML, lumintable);
+	
+	tstatus=document.getElementById('tempstat');
+	newJson('/api/temp/',stateToHTML,tstatus);
+	temptable = document.getElementById('temptable');
+	getJSON('/api/temp/', objectToHTML, temptable);
+</script>			
 {% endblock content %}
