@@ -2,8 +2,12 @@ package com.lilla.homestruction.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.lilla.homestruction.R;
@@ -28,6 +32,7 @@ public class TemperatureScreen extends AppCompatActivity {
 
     ImageViewTouch imageViewTouch;
     Bitmap myBitmap;
+    ProgressBar progressBar;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,11 @@ public class TemperatureScreen extends AppCompatActivity {
         final String token = SaveSharedPreference.getToken(TemperatureScreen.this);
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
         String url = "http://homestruction.servebeer.com/androidimage/?image=temp";
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
 
         Request request = new Request.Builder().url("http://test.com/image.jpg").build();
 
@@ -64,10 +74,25 @@ public class TemperatureScreen extends AppCompatActivity {
                 .downloader(new OkHttp3Downloader(client))
                 .build();
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
+
         picasso
                 .load(url)
                 .placeholder(R.drawable.graph_placeholder)
-                .into(imageViewTouch);
+                .into(imageViewTouch, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        if (progressBar != null) {
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
 
 //        GlideUrl glideUrl = new GlideUrl("http://homestruction.servebeer.com/androidimage/?image=temp",
 //                new LazyHeaders.Builder()

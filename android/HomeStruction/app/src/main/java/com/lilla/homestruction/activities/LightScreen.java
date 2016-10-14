@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.lilla.homestruction.R;
@@ -26,6 +28,7 @@ public class LightScreen extends AppCompatActivity {
 
     private ImageViewTouch imageViewTouch;
     private Bitmap myBitmap;
+    ProgressBar progressBar;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,10 +59,25 @@ public class LightScreen extends AppCompatActivity {
                 .downloader(new OkHttp3Downloader(client))
                 .build();
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
+
         picasso
                 .load(url)
                 .placeholder(R.drawable.graph_placeholder)
-                .into(imageViewTouch);
+                .into(imageViewTouch, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        if (progressBar != null) {
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
