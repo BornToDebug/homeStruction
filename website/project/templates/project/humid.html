@@ -52,7 +52,7 @@ function stateToHTML(jsonObj) {
 	
 }
 	hstatus=document.getElementById('humstat');
-	newJson('/api/humidity/',stateToHTML,hstatus);
+	newJSON('/api/humidity/',stateToHTML,hstatus);
 	humidtable = document.getElementById('humidtable');
 	getJSON('/api/humidity/', objectToHTML, humidtable);
 </script>

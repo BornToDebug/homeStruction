@@ -115,9 +115,9 @@ function stateToHTML(jsonObj) {
 	l1status=document.getElementById('lamp1stat');
 	l2status=document.getElementById('lamp2stat');
 	l3status=document.getElementById('lamp3stat');
-	newJson('/api/lamp/1',stateToHTML,l1status);
-	newJson('/api/lamp/2',stateToHTML,l2status);
-	newJson('/api/lamp/3',stateToHTML,l3status);
+	newJSON('/api/lamp/1',stateToHTML,l1status);
+	newJSON('/api/lamp/2',stateToHTML,l2status);
+	newJSON('/api/lamp/3',stateToHTML,l3status);
 	lamptable = document.getElementById('lamptable');
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
