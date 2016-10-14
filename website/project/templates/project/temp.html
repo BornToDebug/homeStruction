@@ -55,7 +55,7 @@ function stateToHTML(jsonObj) {
 	
 }
 tstatus=document.getElementById('tempstat');
-newJson('/api/temp/',stateToHTML,tstatus);
+newJSON('/api/temp/',stateToHTML,tstatus);
 temptable = document.getElementById('temptable');
 getJSON('/api/temp/', objectToHTML, temptable);
 

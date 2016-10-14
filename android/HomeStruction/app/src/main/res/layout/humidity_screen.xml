@@ -8,6 +8,13 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
     <com.theappguruz.imagezoom.ImageViewTouch
         android:id="@+id/graph"
         android:layout_width="fill_parent"

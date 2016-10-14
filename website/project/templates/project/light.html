@@ -52,7 +52,7 @@ function stateToHTML(jsonObj) {
 	
 }
 	lstatus=document.getElementById('lightstat');
-	newJson('/api/light/',stateToHTML,lstatus);
+	newJSON('/api/light/',stateToHTML,lstatus);
 	lumintable = document.getElementById('lumintable');
 	getJSON('/api/light/', objectToHTML, lumintable);
 </script>		  
