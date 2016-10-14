@@ -92,7 +92,9 @@ public class TemperatureScreen extends AppCompatActivity {
                     public void onError() {
 
                     }
-                });
+                })
+        ;
+
 
 //        GlideUrl glideUrl = new GlideUrl("http://homestruction.servebeer.com/androidimage/?image=temp",
 //                new LazyHeaders.Builder()
