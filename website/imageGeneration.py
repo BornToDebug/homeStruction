@@ -14,9 +14,10 @@ from matplotlib.dates import DateFormatter
 from matplotlib import pyplot as plt
 
 def generateImage(Model, ytext):
+    plt.figure(figsize=(8.00, 6.00), dpi=100)
     modelArray = Model.objects.order_by('-time_recorded').\
         filter(time_recorded__gte=timezone.now() - timezone.timedelta(days=1))
-
+    print modelArray
     dateArray = []
     valueArray = []
     for item in modelArray:
@@ -31,7 +32,7 @@ def generateImage(Model, ytext):
     plt.ylabel(ytext), plt.xlabel('time')
     plt.xticks(rotation='vertical')
     plt.subplots_adjust(bottom=.3)
-    plt.savefig(ytext + '.jpg', bbox_inches='tight')
+    plt.savefig(ytext + '.jpg', dpi=100)
     plt.close()
 
 generateImage(Temperature, 'Temperature')
