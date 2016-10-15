@@ -1,10 +1,10 @@
 Stream controls
 	
 	#Start stream
-	/home/projekt/homeStruction/stream/stream7 start
+	/home/projekt/homeStruction/stream/stream12 start
 
 	#Stop stream
-	/home/projekt/homeStruction/stream/stream7 stop
+	/home/projekt/homeStruction/stream/stream12 stop
 
 Arduino controls
 	
