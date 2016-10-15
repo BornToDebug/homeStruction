@@ -105,12 +105,12 @@ def controlbasic(request):
 
 @login_required
 def startstream(request):
-    call(['/home/projekt/homeStruction/stream/stream7 start'], shell=True)
+    call(['/home/projekt/homeStruction/stream/stream12 start'], shell=True)
     return HttpResponse('started')
 
 @login_required
 def stopstream(request):
-    call(['/home/projekt/homeStruction/stream/stream7 stop'], shell=True)
+    call(['/home/projekt/homeStruction/stream/stream12 stop'], shell=True)
     return HttpResponse('stopped')
 
 @login_required
