@@ -43,7 +43,7 @@
 			  <div id="window" name="window" style="width:50%; float:left">
 
 		<div id="txtsw" style="width:503px;min-height:105px;">
-			<h5 style="padding-top:35px;">Window: </h5><h6 id="windowstat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">OPEN/CLOSED.</h6>
+			<h5 style="padding-top:35px;">Window: </h5><h6 id="windstat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">OPEN/CLOSED.</h6>
 
 		</div>
 		</div>
@@ -136,23 +136,7 @@
 
             </div>
 <script>
-function buttonJSON(url, button,posVal) {
-	// try to fetch JSON data from url and call events
-	var json = $.getJSON(url, function(data) {
-		console.log('success');
-		if(button != undefined) {
-			button.checked = data['results'][0].value === posVal;
-		}
 
-	})
-	.done(function() {
-		console.log('second success')
-	})
-	.fail(function() {
-		//TODO implement error message
-		console.log('error');
-	});
-}
 
 function stateToHTML(jsonObj) {
 	// generate HTML from JSON object
@@ -164,7 +148,7 @@ function stateToHTML(jsonObj) {
 	
 	if(myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c"){tableState = "ON";}
 	if(myVar == "1off_c" || myVar == "2off_c" || myVar == "3off_c"){tableState = "OFF";}
-	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c") {tableState = "ERR";}
+	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_uc" || myVar == "2on_uc" || myVar == "3on_uc") {tableState = "UNCONF. OP.";}
 	
 	return tableState;
 }
@@ -173,7 +157,7 @@ l1status=document.getElementById('lamp1stat');
 	l3status=document.getElementById('lamp3stat');
 	newJSON('/api/lamp/1',stateToHTML,l1status);
 	newJSON('/api/lamp/2',stateToHTML,l2status);
-	newJSON('/api/lamp/3',stateToHTML,l3status);lamptable = document.getElementById('lamptable');
+	newJSON('/api/lamp/3',stateToHTML,l3status);
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
 	var lamp3Id="3on_c";
@@ -181,8 +165,8 @@ l1status=document.getElementById('lamp1stat');
 	lock2button = document.getElementById('myonoff2switch');
 	lock3button = document.getElementById('myonoff3switch');
 	buttonJSON('/api/lamp/1',lock1button,lamp1Id);
-	buttonJSON('/api/lamp/2',lock1button,lamp2Id);
-	buttonJSON('/api/lamp/3',lock1button,lamp3Id);
+	buttonJSON('/api/lamp/2',lock2button,lamp2Id);
+	buttonJSON('/api/lamp/3',lock3button,lamp3Id);
 	
 	
 	dstatus=document.getElementById('doorstat');

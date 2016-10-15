@@ -7,6 +7,7 @@ function getJSON(url, objectConverter, table, button,posVal) {
 			button.checked = data['results'][0].value === posVal;
 		}
 
+
 	})
 	.done(function() {
 		console.log('second success')
@@ -42,7 +43,23 @@ function generateStatus(json,_status,objectConverter){
 
 	
 }
+function buttonJSON(url, button,posVal) {
+	// try to fetch JSON data from url and call events
+	var json = $.getJSON(url, function(data) {
+		console.log('success');
+		if(button != undefined) {
+			button.checked = data['results'][0].value === posVal;
+		}
 
+	})
+	.done(function() {
+		console.log('second success')
+	})
+	.fail(function() {
+		//TODO implement error message
+		console.log('error');
+	});
+}
 
 function generateRows(json, table, objectConverter) {
 	//delete current entries in table and populate it with data
