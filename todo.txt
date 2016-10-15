@@ -1,6 +1,5 @@
 image download and display in JS
 demo -- make a video and do a pratice live presentation
 add important stuff to homepage(nearly done)
-alarm script including lcd display and non-root mplayer execution (Balint)
 work hard play hard
 
