@@ -2,8 +2,8 @@
 
 ffmpeg -f v4l2 -framerate 10 -video_size 320x240 -i /dev/video0 \
 	-thread_queue_size 1024 -f alsa -ar 44100 -ac 1 -i hw:1 -c:a aac -b:a 64k \
-	-vcodec libx264 -preset ultrafast -r 10 -s 320x240 -crf 23 \
+	-vcodec libx264 -preset ultrafast -r 10 -s 320x240 -crf 30 \
 	 -vf "format=yuv420p" -g 30\
-	-vf "drawtext=fontfile=/usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf: \
-	text='\%T': fontcolor=white@0.8: x=7: y=460"\
+	-vf "drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf: \
+	text='%{localtime}': fontcolor=white@1: fontsize=12: box=1: boxcolor=0x00000000@1: borderw=4: x=7: y=7"\
 	-f flv rtmp://localhost/live/

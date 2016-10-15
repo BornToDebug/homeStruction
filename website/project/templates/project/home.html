@@ -13,23 +13,23 @@
 				<div id="news" style="margin-left:auto; margin-right:auto;width:1100px;padding-left:5px;">
 				<div id="news1" style="width:33%;float:left; margin-right:-8px;">
 					<div id="data" style="">
-						<h6>Humidity:</h6><h5 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">34</h5>
+						<h6>Humidity:</h6><h5 id="humstat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">34</h5>
 					</div>
 				</div>
 				<div id="news2" style="width:33%; float:left; margin-right:-8px;">
 					<div id="data">
-						<h6>Luminosity:</h6><h5 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">600</h5>
+						<h6>Luminosity:</h6><h5 id="lightstat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">600</h5>
 					</div>
 				</div>
 				<div id="news3" style="width:34%; float:left">
 					<div id="data">
-						<h6>Temperature:</h6><h5 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">24 °C</h5>
+						<h6>Temperature:</h6><h5 id="tempstat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">24 °C</h5>
 					</div>
 				</div>
 				</div>
 							<div id="door" name="door" style="width:50%; float:left;">
 			  <div id="txtsw" style="width:547px;margin-right:-10px;min-height:105px;" >
-				<h5 style="padding-top:35px;">Door: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">OPEN/CLOSED.</h6>
+				<h5 style="padding-top:35px;">Door: </h5><h6 id="doorstat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">OPEN/CLOSED.</h6>
 				<div class="opclswitch" style="margin-left:350px" >
 					<input type="checkbox" name="opclswitch" class="opclswitch-checkbox" id="myopclswitch" onclick="myFunction()">
 					<label class="opclswitch-label" for="myopclswitch">
@@ -43,14 +43,14 @@
 			  <div id="window" name="window" style="width:50%; float:left">
 
 		<div id="txtsw" style="width:503px;min-height:105px;">
-			<h5 style="padding-top:35px;">Window: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">OPEN/CLOSED.</h6>
+			<h5 style="padding-top:35px;">Window: </h5><h6 id="windowstat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-54px;padding-left:200px;">OPEN/CLOSED.</h6>
 
 		</div>
 		</div>
 		<div id="lamps" style="margin-left:auto;margin-right:auto;padding-right:15px;">
 		<div id="light1" name="light1" style="width:34%; float:left;">
 			  <div id="txtsw" style="width:357px; margin-top:-30px; min-height:110px;">
-				<h5 style="padding-top:30px;paddin-bottom:20px;">Lamp #1: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;">ON/OFF.</h6>
+				<h5 style="padding-top:30px;paddin-bottom:20px;">Lamp #1: </h5><h6 id="lamp1stat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;">ON/OFF.</h6>
 				<div class="onoffswitch" style="margin-left:auto;margin-right:auto;margin-top:-20px; margin-bottom:10px;">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" onclick="lamp1Func()">
 					<label class="onoffswitch-label" for="myonoffswitch">
@@ -64,7 +64,7 @@
 
 			<div id="light2" name="light2" style="width:33%; float:left;height:30px">
 				<div id="txtsw" style="width:345px;margin-top:-30px; min-height:110px;">
-				<h5 style="padding-top:30px;">Lamp #2: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;" >ON/OFF.</h6>
+				<h5 style="padding-top:30px;">Lamp #2: </h5><h6 id="lamp2stat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;" >ON/OFF.</h6>
 				<div class="onoffswitch" style="margin-right:auto;margin-left:auto; margin-top:-20px;margin-bottom:10px" >
 					<input type="checkbox" name="onoff2switch" class="onoff2switch-checkbox" id="myonoff2switch" onclick="lamp2Func()">
 					<label class="onoff2switch-label" for="myonoff2switch">
@@ -77,7 +77,7 @@
 
 			<div  id="light3" class="light3" style="width:33%; float:left">
 			<div id="txtsw" style="width:345px; margin-top:-30px;min-height:110px;">
-				<h5 style="padding-top:30px;">Lamp #3: </h5><h6 style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;">ON/OFF.</h6>
+				<h5 style="padding-top:30px;">Lamp #3: </h5><h6 id="lamp3stat" style=" color:#196666;font-weight:bold;font-family:'Oswald',sans-serif;font-size:23px;margin-top:-55px;padding-left:200px;">ON/OFF.</h6>
 				<div class="onoffswitch" style="margin-right:auto;margin-left:auto;margin-top:-20px; margin-bottom:10px; ">
 					<input type="checkbox" name="onoff3switch" class="onoff3switch-checkbox" id="myonoff3switch" onclick="lamp3Func()">
 					<label class="onoff3switch-label" for="myonoff3switch">
@@ -136,43 +136,24 @@
 
             </div>
 <script>
-	function objectToHTML(jsonObj) {
-	// generate HTML from JSON object
-	var timeRec= jsonObj['time_recorded'];
-	var myDate=timeRec.substring(0,10);
-	var myTime=timeRec.substring(11,19);
-	var myValue=jsonObj['value'];
-	var tableVar=myValue;
-	if(myValue == "1on_c"){tableVar="Lamp #1 successfully switched on";}
-	if(myValue == "1off_c"){tableVar="Lamp #1 successfully switched off";}
-	if(myValue == "1on_uc"){tableVar="Could not switch light #1 on";}
-	if(myValue == "1off_uc"){tableVar="Could not switch light #1 off";}
-	
-	if(myValue == "2on_c"){tableVar="Lamp #2 successfully switched on";}
-	if(myValue == "2off_c"){tableVar="Lamp #2 successfully switched off";}
-	if(myValue == "2on_uc"){tableVar="Could not switch light #2 on";}
-	if(myValue == "2off_uc"){tableVar="Could not switch light #2 off";}
-	
-	if(myValue == "3on_c"){tableVar="Lamp #3 successfully switched on";}
-	if(myValue == "3off_c"){tableVar="Lamp #3 successfully switched off";}
-	if(myValue == "3on_uc"){tableVar="Could not switch light #3 on";}
-	if(myValue == "3off_uc"){tableVar="Could not switch light #3 off";}
-	
-	if(myValue == "do_c" ) { tableVar="Unlocked";}
-	if(myValue == "dc_c") { tableVar ="Locked";}
-	if(myValue == "do_uc") {tableVar="Unlocking failed";}
-	if(myValue == "dc_uc") {tableVar="Locking failed";}
-	if(myValue == "opened") {tableVar="Open";}
-	if(myValue == "closed") {tableVar="Closed";}
-	
-	var tableRow = '<tr> \n' +
-		'<td>' +  tableVar + '</td> \n' +
-		'<td>' + myDate + '</td> \n' +
-		'<td>' +  myTime + '</td> \n' +
-		'</tr> \n';
-	return tableRow;
-	
+function buttonJSON(url, button,posVal) {
+	// try to fetch JSON data from url and call events
+	var json = $.getJSON(url, function(data) {
+		console.log('success');
+		if(button != undefined) {
+			button.checked = data['results'][0].value === posVal;
+		}
+
+	})
+	.done(function() {
+		console.log('second success')
+	})
+	.fail(function() {
+		//TODO implement error message
+		console.log('error');
+	});
 }
+
 function stateToHTML(jsonObj) {
 	// generate HTML from JSON object
 	
@@ -192,43 +173,36 @@ l1status=document.getElementById('lamp1stat');
 	l3status=document.getElementById('lamp3stat');
 	newJSON('/api/lamp/1',stateToHTML,l1status);
 	newJSON('/api/lamp/2',stateToHTML,l2status);
-	newJSON('/api/lamp/3',stateToHTML,l3status);
-	lamptable = document.getElementById('lamptable');
+	newJSON('/api/lamp/3',stateToHTML,l3status);lamptable = document.getElementById('lamptable');
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
-	var lmap3Id="3on_c";
+	var lamp3Id="3on_c";
 	lock1button = document.getElementById('myonoffswitch');
 	lock2button = document.getElementById('myonoff2switch');
 	lock3button = document.getElementById('myonoff3switch');
-	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id);
-	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id);
-	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id);
+	buttonJSON('/api/lamp/1',lock1button,lamp1Id);
+	buttonJSON('/api/lamp/2',lock1button,lamp2Id);
+	buttonJSON('/api/lamp/3',lock1button,lamp3Id);
+	
 	
 	dstatus=document.getElementById('doorstat');
 	wstatus=document.getElementById('windstat');
 	newJSON('/api/door/',stateToHTML,dstatus);
 	newJSON('/api/window/',stateToHTML,wstatus);
 	var doorId="dc_c";
-	doortable = document.getElementById('doortable');
-	windowtable = document.getElementById('windowtable');
-	windowstat=document.getElementById('windstat')
 	doorlockbutton = document.getElementById('myopclswitch');
-	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId);
-	getJSON('/api/window/', objectToHTML, windowtable);
+	buttonJSON('api/door/',doorlockbutton,doorId);
 	
 	hstatus=document.getElementById('humstat');
 	newJSON('/api/humidity/',stateToHTML,hstatus);
-	humidtable = document.getElementById('humidtable');
-	getJSON('/api/humidity/', objectToHTML, humidtable);
+	
 	
 	lstatus=document.getElementById('lightstat');
 	newJSON('/api/light/',stateToHTML,lstatus);
-	lumintable = document.getElementById('lumintable');
-	getJSON('/api/light/', objectToHTML, lumintable);
+	
 	
 	tstatus=document.getElementById('tempstat');
 	newJSON('/api/temp/',stateToHTML,tstatus);
-	temptable = document.getElementById('temptable');
-	getJSON('/api/temp/', objectToHTML, temptable);
+	
 </script>			
 {% endblock content %}

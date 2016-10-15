@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 //Retrofit manager, which manages the authentication
 public class RetrofitManager {
 
-    private static final String BASE_URL = "http://192.168.0.103";
+    private static final String BASE_URL = "http://homestruction.servebeer.com/";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 

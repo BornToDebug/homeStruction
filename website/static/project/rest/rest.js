@@ -1,4 +1,4 @@
-function getJSON(url, objectConverter, table,_status, button,posVal) {
+function getJSON(url, objectConverter, table, button,posVal) {
 	// try to fetch JSON data from url and call events
 	var json = $.getJSON(url, function(data) {
 		console.log('success');
