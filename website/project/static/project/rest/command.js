@@ -19,26 +19,26 @@ var lamp3button=document.getElementById("myonoff3switch");
 function myFunction(){
 	if(button2.checked==false) {command("opendoor")};
     if (button2.checked==true) {command("closedoor");}
-	window.location.reload();
+	
 }
 
 function lamp1Func(){
 	if(lamp1button.checked==false) {command("1lampoff")};
     if (lamp1button.checked==true) {command("1lampon");}
-	window.location.reload();
+	
 	
 }
 
 function lamp2Func(){
 	if(lamp2button.checked==false) {command("2lampoff")};
     if (lamp2button.checked==true) {command("2lampon");}
-	window.location.reload();
+	
 	
 }
 
 function lamp3Func(){
 	if(lamp3button.checked==false) {command("3lampoff")};
     if (lamp3button.checked==true) {command("3lampon");}
-	window.location.reload();
+	
 	
 }
