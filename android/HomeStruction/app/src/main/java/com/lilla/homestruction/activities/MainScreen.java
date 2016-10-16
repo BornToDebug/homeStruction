@@ -247,7 +247,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
                 showSnackbar();
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error temperature: " + t.getMessage());
             }
         });
     }
@@ -561,7 +561,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error send to server: " + t.getMessage());
                 showSnackbar();
             }
         });
@@ -592,7 +592,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error set alarm: " + t.getMessage());
                 showSnackbar();
             }
         });
@@ -622,7 +622,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error reset alarm: " + t.getMessage());
                 showSnackbar();
             }
         });

@@ -90,7 +90,7 @@ public class TemperatureScreen extends AppCompatActivity {
 
                     @Override
                     public void onError() {
-
+                        System.out.println("LOG Error temperature");
                     }
                 })
         ;
