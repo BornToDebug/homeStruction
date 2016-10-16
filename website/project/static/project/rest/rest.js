@@ -1,6 +1,6 @@
 function getJSON(url, objectConverter, table, button,posVal) {
 	// try to fetch JSON data from url and call events
-	var json = $.getJSON(url, function(data) {
+	var json =function(){ $.getJSON(url, function(data) {
 		console.log('success');
 		generateRows(data['results'], table, objectConverter);
 		if(button != undefined) {
@@ -17,10 +17,12 @@ function getJSON(url, objectConverter, table, button,posVal) {
 		console.log('error');
 	});
 }
+    setInterval(json,table.reload(),3000);
+}
 
 function newJSON(url,objectConverter,_status) {
 	// try to fetch JSON data from url and call events
-	var json = $.getJSON(url, function(data) {
+	var json = function(){$.getJSON(url, function(data) {
 		console.log('success');
 		generateStatus(data['results'],_status,objectConverter);
 
@@ -32,6 +34,8 @@ function newJSON(url,objectConverter,_status) {
 		//TODO implement error message
 		console.log('error');
 	});
+}
+    setInterval(json,_status.reload(),3000);
 	
 }
 function generateStatus(json,_status,objectConverter){
