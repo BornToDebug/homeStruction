@@ -1,6 +1,7 @@
+var success = false;
 function getJSON(url, objectConverter, table, button,posVal) {
 	// try to fetch JSON data from url and call events
-
+	success = false;
 	var json =function(){$.getJSON(url, function(data) {
 		console.log('success');
 		generateRows(data['results'], table, objectConverter);
@@ -11,32 +12,35 @@ function getJSON(url, objectConverter, table, button,posVal) {
 
 	})
 	.done(function() {
-		console.log('second success')
+		console.log('second success');
+		success = true;
 	})
 	.fail(function() {
 		//TODO implement error message
 		console.log('error');
 	});
 	}
-    setInterval(json,function(){table.reload();},3000);
+    setInterval(json,function(){table.reload();},5000);
 }
 
 function newJSON(url,objectConverter,_status) {
 	// try to fetch JSON data from url and call events
+	success = false;
 	var json =function(){$.getJSON(url, function(data) {
 		console.log('success');
 		generateStatus(data['results'],_status,objectConverter);
 
 	})
 	.done(function() {
-		console.log('second success')
+		console.log('second success');
+		success = true;
 	})
 	.fail(function() {
 		//TODO implement error message
 		console.log('error');
 	});
 	}
-    setInterval(json,function(){_status.reload();},3000);
+    setInterval(json,function(){_status.reload();},5000);
 	
 }
 function generateStatus(json,_status,objectConverter){
@@ -51,7 +55,8 @@ function generateStatus(json,_status,objectConverter){
 }
 function buttonJSON(url, button,posVal) {
 	// try to fetch JSON data from url and call events
-	var json = $.getJSON(url, function(data) {
+	success = false;
+	var json =function(){ $.getJSON(url, function(data) {
 		console.log('success');
 		if(button != undefined) {
 			button.checked = data['results'][0].value === posVal;
@@ -59,12 +64,15 @@ function buttonJSON(url, button,posVal) {
 
 	})
 	.done(function() {
-		console.log('second success')
+		console.log('second success');
+		success = true;
 	})
 	.fail(function() {
 		//TODO implement error message
 		console.log('error');
 	});
+	}
+	setInterval(json,function(){posVal.reload();},5000);
 }
 
 function generateRows(json, table, objectConverter) {
