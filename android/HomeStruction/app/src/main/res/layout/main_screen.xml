@@ -331,50 +331,50 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/ripple">
 
-                <TextView
-                    android:id="@+id/ocText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_centerVertical="true"
-                    android:text="@string/door"
-                    android:textColor="#00ffff"
-                    android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/ocText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/door"
+                        android:textColor="#00ffff"
+                        android:textSize="18sp" />
 
-                <RelativeLayout
-                    android:id="@+id/closed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp">
-
-                    <ImageView
-                        android:id="@+id/door_closed"
+                    <RelativeLayout
+                        android:id="@+id/closed"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginRight="0dp"
-                        android:contentDescription="@string/door_locked"
-                        android:src="@drawable/door_closed"
-                        android:visibility="invisible" />
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp">
 
-                    <ImageView
-                        android:id="@+id/door_open"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginEnd="0dp"
-                        android:layout_marginRight="0dp"
-                        android:contentDescription="@string/door_unlocked"
-                        android:src="@drawable/door_open"
-                        android:visibility="visible" />
+                        <ImageView
+                            android:id="@+id/door_closed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginRight="0dp"
+                            android:contentDescription="@string/door_locked"
+                            android:src="@drawable/door_closed"
+                            android:visibility="invisible" />
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/door_open"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginRight="0dp"
+                            android:contentDescription="@string/door_unlocked"
+                            android:src="@drawable/door_open"
+                            android:visibility="visible" />
+
+                    </RelativeLayout>
                 </RelativeLayout>
 
 

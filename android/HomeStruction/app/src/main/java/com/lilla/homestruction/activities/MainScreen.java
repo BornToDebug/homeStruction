@@ -147,6 +147,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.humidity).setOnClickListener(this);
         findViewById(R.id.luminosity).setOnClickListener(this);
         findViewById(R.id.multimedia).setOnClickListener(this);
+        findViewById(R.id.door).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.lock).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
@@ -706,6 +707,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.multimedia:
                 System.out.println("LOG Multimedia button clicked");
+                break;
+            case R.id.door:
                 break;
             case R.id.doors:
                 System.out.println("LOG Clicked doors button");
