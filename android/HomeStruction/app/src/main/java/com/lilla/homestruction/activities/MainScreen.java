@@ -106,6 +106,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             startActivity(intent);
         }
 
+
+
         //Testing the running time
         long startTime2 = System.currentTimeMillis();
         System.out.println("LOG first run: " + (startTime2 - startTime));
