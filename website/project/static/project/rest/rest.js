@@ -17,7 +17,7 @@ function getJSON(url, objectConverter, table, button,posVal) {
 		console.log('error');
 	});
 }
-    setInterval(json,table.reload(),3000);
+    setInterval(function(){json,table.reload(),3000});
 }
 
 function newJSON(url,objectConverter,_status) {
@@ -35,7 +35,7 @@ function newJSON(url,objectConverter,_status) {
 		console.log('error');
 	});
 }
-    setInterval(json,_status.reload(),3000);
+    setInterval(function(){json,_status.reload(),3000});
 	
 }
 function generateStatus(json,_status,objectConverter){
