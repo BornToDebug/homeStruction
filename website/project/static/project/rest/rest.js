@@ -35,7 +35,7 @@ function newJSON(url,objectConverter,_status) {
 		console.log('error');
 	});
 
-    setInterval(function(){json,_status.reload();},3000);
+    setInterval(function(){_status.reload();},3000);
 	
 }
 function generateStatus(json,_status,objectConverter){
