@@ -3,3 +3,4 @@
 killall mplayer
 pkill -f alarmlight.py
 pkill -9 -f alarmlight.py
+pulseaudio -D
