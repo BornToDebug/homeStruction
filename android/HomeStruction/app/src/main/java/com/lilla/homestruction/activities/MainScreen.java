@@ -85,6 +85,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ToggleButton sundayButton;
     private String hour;
     private String minute;
+    private ImageView doorOpen;
+    private ImageView doorClosed;
+    private TextView doorConf;
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -135,6 +138,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         chandelierSwitch = (Switch) findViewById(R.id.chandelier_switch);
         nightLampSwitch = (Switch) findViewById(R.id.nightlight_switch);
         veCofSwitch = (Switch) findViewById(R.id.vecof_switch);
+        doorOpen = (ImageView) findViewById(R.id.door_open);
+        doorClosed = (ImageView) findViewById(R.id.door_closed);
+        doorConf = (TextView) findViewById(R.id.ocText);
 
         //Setting onClickListener
         findViewById(R.id.temperature).setOnClickListener(this);
@@ -433,13 +439,15 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (doorValues.get(0) != null) {
                     switch (doorValues.get(0).getValue()) {
                         case "opened":
-                            doorText.setText("Door open");
+                            doorOpen.setVisibility(View.VISIBLE);
+                            doorClosed.setVisibility(View.INVISIBLE);
                             break;
                         case "closed":
-                            doorText.setText("Door closed");
+                            doorOpen.setVisibility(View.INVISIBLE);
+                            doorClosed.setVisibility(View.VISIBLE);
                             break;
                         default:
-                            doorText.setText("Door error");
+                            doorConf.setText("Door error");
                             break;
                     }
                 }

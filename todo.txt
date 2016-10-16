@@ -1,5 +1,7 @@
 image download and display in JS
 demo -- make a video and do a pratice live presentation
 add important stuff to homepage(nearly done)
+android refresh (lilla)
+stream on android (lilla) ?
 work hard play hard
 
