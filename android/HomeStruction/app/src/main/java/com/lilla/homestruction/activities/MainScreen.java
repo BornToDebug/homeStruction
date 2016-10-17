@@ -1,6 +1,5 @@
 package com.lilla.homestruction.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,8 +54,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static java.security.AccessController.getContext;
-
 /**
  * Created by lilla on 21/09/16.
  */
@@ -94,18 +91,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Handler handler;
     private boolean isActivityStarted;
 
-
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            if (isActivityStarted) {
-                updateUI();
-                handler.postDelayed(runnable, 3000);
-            }
-        }
-    };
-
-
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
@@ -113,16 +98,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         hour = null;
         minute = null;
 
-        //initialize refresh layout
-        final SwipeRefreshLayout layout = (SwipeRefreshLayout) findViewById(R.id.refresh);
-        layout.setOnRefreshListener(refreshListener);
-
         //keeps the user logged in
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
             Intent intent = new Intent(MainScreen.this, LoginActivity.class);
             startActivity(intent);
         }
-
 
         //Testing the running time
         long startTime2 = System.currentTimeMillis();
@@ -212,23 +192,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-        //Create a new WebService and update the data
         handler = new Handler(getMainLooper());
 
         long startTime4 = System.currentTimeMillis();
         System.out.println("LOG first run updating : " + (startTime4 - startTime3));
         System.out.println("LOG first run total : " + (startTime4 - startTime));
     }
-
-    //Refresh activity if needed
-    private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            Intent refresh = getIntent();
-            finish();
-            startActivity(refresh);
-        }
-    };
 
     //Show snackbar when there is no connection
     protected void showSnackbar() {
@@ -265,6 +234,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
                 showSnackbar();
+                isActivityStarted = false;
                 System.out.println("LOG Error temperature: " + t.getMessage());
             }
         });
@@ -588,21 +558,23 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("LOG resp: " + myResponse + " command: " + myCommand);
                 if (myResponse != null) {
                     if (myCommand.equals(myResponse)) {
-                        System.out.println("LOG Success");
+                        System.out.println("LOGG Success");
                     } else {
-                        System.out.println("LOG Error");
+                        System.out.println("LOGG Error");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error send to server: " + t.getMessage());
+                System.out.println("LOGG Error send to server: " + t.getMessage());
                 showSnackbar();
+                isActivityStarted = false;
             }
         });
     }
 
+    //Set the alarm and send it to the server
     private void setAlarm(String hour, String minute, List<String> days, WebService webService) {
         Call<ResponseBody> call = webService.sendAlarm(hour, minute, days.get(0), days.get(1), days.get(2), days.get(3),
                 days.get(4), days.get(5), days.get(6));
@@ -619,21 +591,23 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("LOG resp: " + myResponse);
                 if (myResponse != null) {
                     if (myResponse.equals("success")) {
-                        System.out.println("LOG Success");
+                        System.out.println("LOGG Success");
                     } else {
-                        System.out.println("LOG Error");
+                        System.out.println("LOGG Error");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error set alarm: " + t.getMessage());
+                System.out.println("LOGG Error set alarm: " + t.getMessage());
                 showSnackbar();
+                isActivityStarted = false;
             }
         });
     }
 
+    //reset the alarm
     private void resetAlarm(WebService webService) {
         Call<ResponseBody> call = webService.resetAlarm();
         call.enqueue(new Callback<ResponseBody>() {
@@ -649,17 +623,18 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("LOG resp: " + myResponse);
                 if (myResponse != null) {
                     if (myResponse.equals("success")) {
-                        System.out.println("LOG Success");
+                        System.out.println("LOGG Success");
                     } else {
-                        System.out.println("LOG Error");
+                        System.out.println("LOGG Error");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error reset alarm: " + t.getMessage());
+                System.out.println("LOGG Error reset alarm: " + t.getMessage());
                 showSnackbar();
+                isActivityStarted = false;
             }
         });
     }
@@ -821,8 +796,15 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             case R.id.alarm_switch:
                 if (!alarmSwitch.isChecked()) {
                     alarmSwitch.setText("");
-                    System.out.println("LOG RESET alarm!");
+                    System.out.println("LOGG RESET alarm!");
                     resetAlarm(webService);
+                    mondayButton.setChecked(false);
+                    tuesdayButton.setChecked(false);
+                    wednesdayButton.setChecked(false);
+                    thursdayButton.setChecked(false);
+                    fridayButton.setChecked(false);
+                    saturdayButton.setChecked(false);
+                    sundayButton.setChecked(false);
                 } else {
                     showTimePickerDialog();
                 }
@@ -924,12 +906,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    //show the alarm's timepicker
     private void showTimePickerDialog() {
         TimePickerFragment newFragment = new TimePickerFragment();
         newFragment.setOnDialogCallbacksListener(this);
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
+    //if back button is pressed, go to home screen
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -937,6 +921,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         startActivity(intent);
     }
 
+    //if time is set on timepicker, set the button's text correspondingly
     @Override
     public void onTimeSet(int hourOfDay, int minute) {
         System.out.println("LOG time set: " + hourOfDay + ":" + minute);
@@ -958,6 +943,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         alarmSwitch.setText(hour + ":" + this.minute);
     }
 
+    //If time picking is canceled, nullify the hour and minute (to fix error in older android versions)
     @Override
     public void onCancel() {
         System.out.println("LOG canceled");
@@ -966,8 +952,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         minute = null;
     }
 
+    //create request for the alarm
     private void createRequest(List<Boolean> daysChecked, WebService webService) {
-
         List<String> days = Arrays.asList(null, null, null, null, null, null, null);
         for (int i = 0; i < 7; i++) {
             if (daysChecked.get(i).equals(true)) {
@@ -978,6 +964,18 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         setAlarm(hour, minute, days, webService);
     }
 
+    //make a new runnable which updates the ui in every 3s
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (isActivityStarted) {
+                updateUI();
+                handler.postDelayed(runnable, 3000);
+            }
+        }
+    };
+
+    //when activity is started, update UI
     @Override
     protected void onStart() {
         super.onStart();
@@ -986,12 +984,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         handler.postDelayed(runnable, 3000);
     }
 
+    //when activity is stopped, don't refresh anymore
     @Override
     protected void onStop() {
         isActivityStarted = false;
         super.onStop();
     }
 
+    //Create a new webservice and update the data from the app
     private void updateUI() {
         System.out.println("LOG updateUI");
         WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
@@ -1004,7 +1004,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateWindowsData(webService);
         updateHumidityData(webService);
         updateLightData(webService);
-
     }
 
 }
