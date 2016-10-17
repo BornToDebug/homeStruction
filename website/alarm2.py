@@ -11,6 +11,7 @@ from subprocess import call
 
 def wekker():
     print 'AAAAALLLLLLLAAAAAARRRRRRRRMMMMM'
+    call(['killall pulseaudio'], shell=True)
     call(['python /home/projekt/homeStruction/alarm/alarmlight.py &'], shell=True)
     call(['nohup mplayer /mnt/Stick/Music/01.\ Crystals.mp3 &'], shell=True)
 

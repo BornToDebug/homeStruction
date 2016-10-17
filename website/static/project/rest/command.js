@@ -19,22 +19,36 @@ var lamp3button=document.getElementById("myonoff3switch");
 function myFunction(){
 	if(button2.checked==false) {command("opendoor")};
     if (button2.checked==true) {command("closedoor");}
+<<<<<<< HEAD
+	
+=======
+
+>>>>>>> c650ece51d3d81c650862e3ae4b1976bd7324d59
 }
 
 function lamp1Func(){
 	if(lamp1button.checked==false) {command("1lampoff")};
     if (lamp1button.checked==true) {command("1lampon");}
 	
+	
 }
 
 function lamp2Func(){
 	if(lamp2button.checked==false) {command("2lampoff")};
     if (lamp2button.checked==true) {command("2lampon");}
+<<<<<<< HEAD
+	
+=======
+>>>>>>> c650ece51d3d81c650862e3ae4b1976bd7324d59
 	
 }
 
 function lamp3Func(){
 	if(lamp3button.checked==false) {command("3lampoff")};
     if (lamp3button.checked==true) {command("3lampon");}
+<<<<<<< HEAD
+	
+=======
+>>>>>>> c650ece51d3d81c650862e3ae4b1976bd7324d59
 	
 }

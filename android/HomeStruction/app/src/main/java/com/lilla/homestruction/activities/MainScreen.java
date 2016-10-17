@@ -85,6 +85,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ToggleButton sundayButton;
     private String hour;
     private String minute;
+    private ImageView doorOpen;
+    private ImageView doorClosed;
+    private TextView doorConf;
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -102,6 +105,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             Intent intent = new Intent(MainScreen.this, LoginActivity.class);
             startActivity(intent);
         }
+
+
 
         //Testing the running time
         long startTime2 = System.currentTimeMillis();
@@ -135,12 +140,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         chandelierSwitch = (Switch) findViewById(R.id.chandelier_switch);
         nightLampSwitch = (Switch) findViewById(R.id.nightlight_switch);
         veCofSwitch = (Switch) findViewById(R.id.vecof_switch);
+        doorOpen = (ImageView) findViewById(R.id.door_open);
+        doorClosed = (ImageView) findViewById(R.id.door_closed);
+        doorConf = (TextView) findViewById(R.id.ocText);
 
         //Setting onClickListener
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
         findViewById(R.id.luminosity).setOnClickListener(this);
         findViewById(R.id.multimedia).setOnClickListener(this);
+        findViewById(R.id.door).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.lock).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
@@ -247,7 +256,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
                 showSnackbar();
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error temperature: " + t.getMessage());
             }
         });
     }
@@ -433,13 +442,15 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (doorValues.get(0) != null) {
                     switch (doorValues.get(0).getValue()) {
                         case "opened":
-                            doorText.setText("Door open");
+                            doorOpen.setVisibility(View.VISIBLE);
+                            doorClosed.setVisibility(View.INVISIBLE);
                             break;
                         case "closed":
-                            doorText.setText("Door closed");
+                            doorOpen.setVisibility(View.INVISIBLE);
+                            doorClosed.setVisibility(View.VISIBLE);
                             break;
                         default:
-                            doorText.setText("Door error");
+                            doorConf.setText("Door error");
                             break;
                     }
                 }
@@ -561,7 +572,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error send to server: " + t.getMessage());
                 showSnackbar();
             }
         });
@@ -592,7 +603,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error set alarm: " + t.getMessage());
                 showSnackbar();
             }
         });
@@ -622,7 +633,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOG Error: " + t.getMessage());
+                System.out.println("LOG Error reset alarm: " + t.getMessage());
                 showSnackbar();
             }
         });
@@ -704,6 +715,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.multimedia:
                 System.out.println("LOG Multimedia button clicked");
+                break;
+            case R.id.door:
                 break;
             case R.id.doors:
                 System.out.println("LOG Clicked doors button");
