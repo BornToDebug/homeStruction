@@ -1,10 +1,10 @@
 {% extends 'project/base.html' %}
 {% block content %}
  <div id="lght" style="min-height:100vh">
-			
-			
+
+
 		<div id="clock">
-    
+
         <label for="timepicker" style="color:#cccccc; font-size:30px;">Set the time:</label>
         <input type="text" id="timepicker" name="timepicker" class="timepicker" style="font-size:28px;width:270px; text-align: center; color:#3d5c5c; border-radius:5px">
        <!-- <label for="timepicker-two" style="color:#ffffff;">Time input 2:</label> -->
@@ -13,43 +13,43 @@
             $('.timepicker').wickedpicker({now: '12:00', twentyFour: false, title:
                     'Wake up at:', showSeconds: false});
         //   $('.timepicker-24').wickedpicker({twentyFour: true});
-	
+
         </script>
 		</div>
 		<!-- Putting jQuery into no-conflict mode. -->
 <!-- Another way to put jQuery into no-conflict mode. -->
 
-		
+
 			  <h3>Repeat:</h3>
 <form id="rep" action="#">
-  
+
     <input type="checkbox" id="test1" class="days"/>
     <label for="test1">Monday</label>
-  
-  
+
+
     <input type="checkbox" id="test2" class="days"/>
     <label for="test2">Tuesday</label>
-  
-  
+
+
     <input type="checkbox" id="test3" class="days" />
     <label for="test3">Wednesday</label><br>
-  
-    
+
+
       <input type="checkbox" id="test4" class="days" />
       <label for="test4">Thursday</label>
-	  
+
 	  <input type="checkbox" id="test5" class="days" />
       <label for="test5">Friday</label>
-	  
+
 	  <input type="checkbox" id="test6" class="days" />
       <label for="test6">Saturday</label>
-	  
+
 	  <input type="checkbox" id="test7" class="days" />
       <label for="test7">Sunday</label>
-	
+
 </form>
 
-		
+
 
 		  </div>
 {% endblock content %}
