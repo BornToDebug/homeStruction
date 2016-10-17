@@ -3,6 +3,7 @@ package com.lilla.homestruction.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -54,6 +55,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static java.security.AccessController.getContext;
+
 /**
  * Created by lilla on 21/09/16.
  */
@@ -88,6 +91,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ImageView doorOpen;
     private ImageView doorClosed;
     private TextView doorConf;
+    private Handler handler;
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -197,16 +201,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
 
         //Create a new WebService and update the data
-        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
-        updateTemperatureData(webService);
-        updateLamp1Data(webService);
-        updateLamp2Data(webService);
-        updateLamp3Data(webService);
-        updateDoorData(webService);
-        updateDoorLockedData(webService);
-        updateWindowsData(webService);
-        updateHumidityData(webService);
-        updateLightData(webService);
+        createRunnable();
 
         long startTime4 = System.currentTimeMillis();
         System.out.println("LOG first run updating : " + (startTime4 - startTime3));
@@ -639,27 +634,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-//    private void getImage(WebService webService, String command){
-//        Call<ResponseBody> call = webService.getImage(command);
-//        call.enqueue(new Callback<ResponseBody>() {
-//
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                if (response.isSuccessful()){
-//                    if (response.body() != null){
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                System.out.println("LOG Error: " + t.getMessage());
-//            }
-//        });
-//    }
-
-    //Create an options meny (it only has a sign out button for now)
+    //Create an options menu (it only has a sign out button for now)
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
 
@@ -972,4 +947,43 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         System.out.println("LOG " + days);
         setAlarm(hour, minute, days, webService);
     }
+
+    public void createRunnable(){
+        handler = new Handler(this.getMainLooper());
+        handler.postDelayed(new refreshRunnable(), 3000);
+    }
+
+    private class refreshRunnable implements Runnable {
+
+        @Override
+        public void run() {
+            if (activityVisible){
+                WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
+                updateTemperatureData(webService);
+                updateLamp1Data(webService);
+                updateLamp2Data(webService);
+                updateLamp3Data(webService);
+                updateDoorData(webService);
+                updateDoorLockedData(webService);
+                updateWindowsData(webService);
+                updateHumidityData(webService);
+                updateLightData(webService);
+            }
+        }
+    }
+
+    public static boolean isActivityVisible() {
+        return activityVisible;
+    }
+
+    public static void activityResumed() {
+        activityVisible = true;
+    }
+
+    public static void activityPaused() {
+        activityVisible = false;
+    }
+
+    private static boolean activityVisible;
+
 }
