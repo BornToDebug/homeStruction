@@ -1,3 +1,6 @@
+alarm on website(David)
+image display on website(David)
+website appearace fine tuning on Firefox(Erika)
 image download and display in JS
 demo -- make a video and do a pratice live presentation
 add important stuff to homepage(nearly done)
