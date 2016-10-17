@@ -1,8 +1,20 @@
 package com.lilla.homestruction.activities;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.trackselection.AdaptiveVideoTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.lilla.homestruction.R;
 
 import io.vov.vitamio.LibsChecker;
@@ -20,6 +32,7 @@ public class LiveStream extends AppCompatActivity {
     private String path;
     //private HashMap<String, String> options;
     private VideoView mVideoView;
+    SimpleExoPlayerView simpleExoPlayerView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

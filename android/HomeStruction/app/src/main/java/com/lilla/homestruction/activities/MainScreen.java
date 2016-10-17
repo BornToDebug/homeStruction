@@ -92,6 +92,19 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ImageView doorClosed;
     private TextView doorConf;
     private Handler handler;
+    private boolean isActivityStarted;
+
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (isActivityStarted) {
+                updateUI();
+                handler.postDelayed(runnable, 3000);
+            }
+        }
+    };
+
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -200,16 +213,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
 
         //Create a new WebService and update the data
-        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
-        updateTemperatureData(webService);
-        updateLamp1Data(webService);
-        updateLamp2Data(webService);
-        updateLamp3Data(webService);
-        updateDoorData(webService);
-        updateDoorLockedData(webService);
-        updateWindowsData(webService);
-        updateHumidityData(webService);
-        updateLightData(webService);
+        handler = new Handler(getMainLooper());
 
         long startTime4 = System.currentTimeMillis();
         System.out.println("LOG first run updating : " + (startTime4 - startTime3));
@@ -974,44 +978,33 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         setAlarm(hour, minute, days, webService);
     }
 
-//    public void createRunnable(){
-//        handler = new Handler(this.getMainLooper());
-//        while (activityVisible)
-//        {
-//            System.out.println("LOG postdelayed");
-//            handler.postDelayed(new refreshRunnable(), 3000);
-//        }
-//    }
-
-//    private class refreshRunnable implements Runnable {
-//
-//        @Override
-//        public void run() {
-//                WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
-//                updateTemperatureData(webService);
-//                updateLamp1Data(webService);
-//                updateLamp2Data(webService);
-//                updateLamp3Data(webService);
-//                updateDoorData(webService);
-//                updateDoorLockedData(webService);
-//                updateWindowsData(webService);
-//                updateHumidityData(webService);
-//                updateLightData(webService);
-//        }
-//    }
-
-    public static boolean isActivityVisible() {
-        return activityVisible;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        isActivityStarted = true;
+        updateUI();
+        handler.postDelayed(runnable, 3000);
     }
 
-    public static void activityResumed() {
-        activityVisible = true;
+    @Override
+    protected void onStop() {
+        isActivityStarted = false;
+        super.onStop();
     }
 
-    public static void activityPaused() {
-        activityVisible = false;
-    }
+    private void updateUI() {
+        System.out.println("LOG updateUI");
+        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
+        updateTemperatureData(webService);
+        updateLamp1Data(webService);
+        updateLamp2Data(webService);
+        updateLamp3Data(webService);
+        updateDoorData(webService);
+        updateDoorLockedData(webService);
+        updateWindowsData(webService);
+        updateHumidityData(webService);
+        updateLightData(webService);
 
-    private static boolean activityVisible;
+    }
 
 }

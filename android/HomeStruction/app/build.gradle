@@ -20,6 +20,7 @@ android {
 }
 repositories{
     mavenCentral()
+    jcenter()
 }
 dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -41,4 +42,5 @@ dependencies {
     compile files('libs/picasso-2.5.2.jar')
     compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
     compile 'com.charonchui.vitamio:vitamio:4.2.2'
+    compile 'com.google.android.exoplayer:exoplayer:r2.0.3'
 }
