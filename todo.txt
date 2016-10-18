@@ -4,7 +4,9 @@ website appearace fine tuning on Firefox(Erika)
 image download and display in JS
 demo -- make a video and do a pratice live presentation
 add important stuff to homepage(nearly done)
-android refresh (lilla)
+!!!make humidity range bigger on graph
+!!!add video to the presentation
+!!!add stream (probably) as features to implement in android :))
 stream on android (lilla) ?
 work hard play hard
 
