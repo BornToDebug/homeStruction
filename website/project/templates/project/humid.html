@@ -45,16 +45,16 @@ function objectToHTML(jsonObj) {
 }
 function stateToHTML(jsonObj) {
 	// generate HTML from JSON object
-	
+
 	var myVar = jsonObj['value'];
 	var tableState = myVar;
 	return tableState;
-	
+
 }
 	hstatus=document.getElementById('humstat');
-	setInterval(function(){newJSON('/api/humidity/',stateToHTML,hstatus)},180000);
+	newJSON('/api/humidity/',stateToHTML,hstatus);
 	humidtable = document.getElementById('humidtable');
-	setInterval(function(){getJSON('/api/humidity/', objectToHTML, humidtable)},180000);
+	getJSON('/api/humidity/', objectToHTML, humidtable);
 </script>
 
 {% endblock content %}

@@ -48,16 +48,16 @@ function objectToHTML(jsonObj) {
 }
 function stateToHTML(jsonObj) {
 	// generate HTML from JSON object
-	
+
 	var myVar = jsonObj['value'];
 	var tableState = myVar + "°C";
 	return tableState;
-	
+
 }
 tstatus=document.getElementById('tempstat');
-setInterval(function(){newJSON('/api/temp/',stateToHTML,tstatus)},180000);
+newJSON('/api/temp/',stateToHTML,tstatus);
 temptable = document.getElementById('temptable');
-setInterval(function(){getJSON('/api/temp/', objectToHTML, temptable)},180000);
+getJSON('/api/temp/', objectToHTML, temptable);
 
 </script>
 
