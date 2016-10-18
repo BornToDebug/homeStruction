@@ -6,9 +6,9 @@
         android:id="@+id/sign_out"
         android:title="@string/sign_out" />
 
-    <item
-        android:id="@+id/live_stream"
-        android:title="Live stream"
-        />
+    <!--<item-->
+        <!--android:id="@+id/live_stream"-->
+        <!--android:title="Live stream"-->
+        <!--/>-->
 
 </menu>

@@ -1,9 +1,17 @@
 package com.lilla.homestruction.activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.MediaController;
+import android.widget.Toast;
 
 import com.lilla.homestruction.R;
 
@@ -16,15 +24,20 @@ import org.videolan.libvlc.media.VideoView;
 public class LiveStream extends AppCompatActivity {
 
     VideoView videoView;
-    String path = "rtmp://homestruction.servebeer.com/live/";
+    private String path = "rtmp://homestruction.servebeer.com/live/";
+    private Uri uri;
+    private Intent intent;
+    private WebView webView;
     MediaController mediaController;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_stream);
 
+
+
+
         videoView = (VideoView) findViewById(R.id.player);
-        Uri uri = Uri.parse(path);
         mediaController = new MediaController(this);
 
         videoView.setVideoURI(uri);
