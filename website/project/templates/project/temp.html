@@ -48,11 +48,11 @@ function objectToHTML(jsonObj) {
 }
 function stateToHTML(jsonObj) {
 	// generate HTML from JSON object
-	
+
 	var myVar = jsonObj['value'];
 	var tableState = myVar + "°C";
 	return tableState;
-	
+
 }
 tstatus=document.getElementById('tempstat');
 newJSON('/api/temp/',stateToHTML,tstatus);

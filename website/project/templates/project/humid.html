@@ -45,11 +45,11 @@ function objectToHTML(jsonObj) {
 }
 function stateToHTML(jsonObj) {
 	// generate HTML from JSON object
-	
+
 	var myVar = jsonObj['value'];
 	var tableState = myVar;
 	return tableState;
-	
+
 }
 	hstatus=document.getElementById('humstat');
 	newJSON('/api/humidity/',stateToHTML,hstatus);

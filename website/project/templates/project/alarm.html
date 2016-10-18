@@ -1,5 +1,6 @@
 {% extends 'project/base.html' %}
 {% block content %}
+{% load static %}
  <div id="lght" style="min-height:100vh">
 
 
@@ -48,7 +49,10 @@
       <label for="test7">Sunday</label>
 
 </form>
+<button type="button" id="alarm_button" onclick="setAlarm()">Set Alarm</button>
 
+
+<script src="{% static 'project/alarm.js' %}"></script>
 
 
 		  </div>
