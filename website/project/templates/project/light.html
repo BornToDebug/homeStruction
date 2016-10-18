@@ -53,8 +53,10 @@ function stateToHTML(jsonObj) {
 }
 	lstatus=document.getElementById('lightstat');
 	newJSON('/api/light/',stateToHTML,lstatus);
+    setInterval(function(){newJSON('/api/light/',stateToHTML,lstatus);},18000);
 	lumintable = document.getElementById('lumintable');
 	getJSON('/api/light/', objectToHTML, lumintable);
+    setInterval(function(){getJSON('/api/light/', objectToHTML, lumintable);},18000);
 </script>
 
 {% endblock content %}

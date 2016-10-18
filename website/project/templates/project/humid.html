@@ -53,8 +53,10 @@ function stateToHTML(jsonObj) {
 }
 	hstatus=document.getElementById('humstat');
 	newJSON('/api/humidity/',stateToHTML,hstatus);
+    setInterval(function(){newJSON('/api/humidity/',stateToHTML,hstatus);},18000);
 	humidtable = document.getElementById('humidtable');
 	getJSON('/api/humidity/', objectToHTML, humidtable);
+    setInterval(function(){getJSON('/api/humidity/', objectToHTML, humidtable);},18000);
 </script>
 
 {% endblock content %}

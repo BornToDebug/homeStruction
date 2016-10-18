@@ -184,7 +184,14 @@ l1status=document.getElementById('lamp1stat');
 	
 	tstatus=document.getElementById('tempstat');
 
-	
+	newJSON('/api/lamp/1', stateToHTML, l1status);
+	newJSON('/api/lamp/2', stateToHTML, l2status);
+	newJSON('/api/lamp/3', stateToHTML, l3status);
+	newJSON('/api/window/', stateToHTML, wstatus);
+	newJSON('/api/door/', stateToHTML, dstatus);
+	newJSON('/api/temp/', stateToHTML, tstatus);
+	newJSON('/api/humidity/', stateToHTML, hstatus);
+	newJSON('/api/light/', stateToHTML, lstatus);
 	setInterval(function () {newJSON('/api/lamp/1', stateToHTML, l1status)}, 3000);
 	setInterval(function () {newJSON('/api/lamp/2', stateToHTML, l2status)}, 3000);
 	setInterval(function () {newJSON('/api/lamp/3', stateToHTML, l3status)}, 3000);
