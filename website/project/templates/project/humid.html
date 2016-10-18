@@ -54,7 +54,7 @@ function stateToHTML(jsonObj) {
 	hstatus=document.getElementById('humstat');
 	setInterval(function(){newJSON('/api/humidity/',stateToHTML,hstatus)},180000);
 	humidtable = document.getElementById('humidtable');
-	setInterval(getJSON('/api/humidity/', objectToHTML, humidtable),180000);
+	setInterval(function(){getJSON('/api/humidity/', objectToHTML, humidtable)},180000);
 </script>
 
 {% endblock content %}

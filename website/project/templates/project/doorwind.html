@@ -114,7 +114,7 @@ function stateToHTML(jsonObj) {
 	windowstat=document.getElementById('windstat')
 	doorlockbutton = document.getElementById('myopclswitch');
 	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId);
-	setInterval(function(){getJSON('/api/window/', objectToHTML, windowtable)},1000);
+	setInterval(function(){getJSON('/api/window/', objectToHTML, windowtable)},10000000);
 </script>
 {% endblock content %}
 
