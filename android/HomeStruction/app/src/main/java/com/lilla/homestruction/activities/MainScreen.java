@@ -279,6 +279,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<LightResponse> call, Throwable t) {
                 luminosityValue.setText("no data");
+                isActivityStarted = false;
                 System.out.println("LOG Error: " + t.getMessage());
             }
         });
@@ -326,6 +327,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp1Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 chandelierSwitch.setText("error");
+                isActivityStarted = false;
             }
         });
     }
@@ -372,6 +374,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp2Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 nightLampSwitch.setText("error");
+                isActivityStarted = false;
             }
         });
     }
@@ -418,6 +421,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp3Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 veCofSwitch.setText("error");
+                isActivityStarted = false;
             }
         });
     }
@@ -451,6 +455,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<DoorResponse> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 doorText.setText("Door error");
+                isActivityStarted = false;
             }
         });
     }
@@ -467,21 +472,25 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                             case "do_c":
                                 doorUnlocked.setVisibility(View.VISIBLE);
                                 doorLocked.setVisibility(View.INVISIBLE);
+                                doorText.setText("Door unlocked");
                                 confirm.setText("");
                                 break;
                             case "do_uc":
                                 doorUnlocked.setVisibility(View.VISIBLE);
                                 doorLocked.setVisibility(View.INVISIBLE);
+                                doorText.setText("Door unlocked");
                                 confirm.setText("?");
                                 break;
                             case "dc_c":
                                 doorUnlocked.setVisibility(View.INVISIBLE);
                                 doorLocked.setVisibility(View.VISIBLE);
+                                doorText.setText("Door locked");
                                 confirm.setText("");
                                 break;
                             case "dc_uc":
                                 doorUnlocked.setVisibility(View.INVISIBLE);
                                 doorLocked.setVisibility(View.VISIBLE);
+                                doorText.setText("Door locked");
                                 confirm.setText("?");
                                 break;
                             default:
@@ -494,6 +503,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<DoorLockedResponse> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
+                isActivityStarted = false;
             }
         });
     }
@@ -537,12 +547,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 windowOpen.setVisibility(View.INVISIBLE);
                 windowClosed.setVisibility(View.INVISIBLE);
                 windowError.setVisibility(View.VISIBLE);
+                isActivityStarted = false;
             }
         });
     }
 
     //Send data to the server
     private void sendToServer(String command, WebService webService) {
+        isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
         call.enqueue(new Callback<ResponseBody>() {
@@ -558,9 +570,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("LOG resp: " + myResponse + " command: " + myCommand);
                 if (myResponse != null) {
                     if (myCommand.equals(myResponse)) {
-                        System.out.println("LOGG Success");
+                        System.out.println("LOGG " + myCommand + " Success");
+                        isActivityStarted = true;
+                        updateUI();
+                        handler.postDelayed(runnable, 1000);
                     } else {
-                        System.out.println("LOGG Error");
+                        System.out.println("LOGG " + myCommand + " Error");
                     }
                 }
             }
@@ -569,7 +584,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("LOGG Error send to server: " + t.getMessage());
                 showSnackbar();
-                isActivityStarted = false;
             }
         });
     }
@@ -970,7 +984,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         public void run() {
             if (isActivityStarted) {
                 updateUI();
-                handler.postDelayed(runnable, 3000);
+                handler.postDelayed(runnable, 1000);
             }
         }
     };
@@ -981,7 +995,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         super.onStart();
         isActivityStarted = true;
         updateUI();
-        handler.postDelayed(runnable, 3000);
+        handler.postDelayed(runnable, 1000);
     }
 
     //when activity is stopped, don't refresh anymore
