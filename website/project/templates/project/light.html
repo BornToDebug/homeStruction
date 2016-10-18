@@ -52,9 +52,9 @@ function stateToHTML(jsonObj) {
 	
 }
 	lstatus=document.getElementById('lightstat');
-	newJSON('/api/light/',stateToHTML,lstatus);
+	setInterval(function(){newJSON('/api/light/',stateToHTML,lstatus)},180000);
 	lumintable = document.getElementById('lumintable');
-	getJSON('/api/light/', objectToHTML, lumintable);
+	setInterval(function(){getJSON('/api/light/', objectToHTML, lumintable)},180000);
 </script>		  
 
 {% endblock content %}

@@ -155,9 +155,7 @@ function stateToHTML(jsonObj) {
 l1status=document.getElementById('lamp1stat');
 	l2status=document.getElementById('lamp2stat');
 	l3status=document.getElementById('lamp3stat');
-	newJSON('/api/lamp/1',stateToHTML,l1status);
-	newJSON('/api/lamp/2',stateToHTML,l2status);
-	newJSON('/api/lamp/3',stateToHTML,l3status);
+	
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
 	var lamp3Id="3on_c";
@@ -171,22 +169,30 @@ l1status=document.getElementById('lamp1stat');
 	
 	dstatus=document.getElementById('doorstat');
 	wstatus=document.getElementById('windstat');
-	newJSON('/api/door/',stateToHTML,dstatus);
-	newJSON('/api/window/',stateToHTML,wstatus);
+	
 	var doorId="dc_c";
 	doorlockbutton = document.getElementById('myopclswitch');
 	buttonJSON('api/door/',doorlockbutton,doorId);
 	
 	hstatus=document.getElementById('humstat');
-	newJSON('/api/humidity/',stateToHTML,hstatus);
+
 	
 	
 	lstatus=document.getElementById('lightstat');
-	newJSON('/api/light/',stateToHTML,lstatus);
+
 	
 	
 	tstatus=document.getElementById('tempstat');
-	newJSON('/api/temp/',stateToHTML,tstatus);
+
+	
+	setInterval(function () {newJSON('/api/lamp/1', stateToHTML, l1status)}, 3000);
+	setInterval(function () {newJSON('/api/lamp/2', stateToHTML, l2status)}, 3000);
+	setInterval(function () {newJSON('/api/lamp/3', stateToHTML, l3status)}, 3000);
+	setInterval(function () {newJSON('/api/window/', stateToHTML, wstatus)}, 1000);
+	setInterval(function () {newJSON('/api/door/', stateToHTML, dstatus)}, 1000);
+	setInterval(function () {newJSON('/api/temp/', stateToHTML, tstatus)}, 60000);
+	setInterval(function () {newJSON('/api/humidity/', stateToHTML, hstatus)}, 60000);
+	setInterval(function () {newJSON('/api/light/', stateToHTML, lstatus)}, 60000);
 	
 </script>			
 {% endblock content %}
