@@ -55,9 +55,9 @@ function stateToHTML(jsonObj) {
 	
 }
 tstatus=document.getElementById('tempstat');
-newJSON('/api/temp/',stateToHTML,tstatus);
+setInterval(function(){newJSON('/api/temp/',stateToHTML,tstatus)},180000);
 temptable = document.getElementById('temptable');
-getJSON('/api/temp/', objectToHTML, temptable);
+setInterval(function(){getJSON('/api/temp/', objectToHTML, temptable)},180000);
 
 </script>
 

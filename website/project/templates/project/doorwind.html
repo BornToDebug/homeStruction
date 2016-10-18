@@ -106,15 +106,15 @@ function stateToHTML(jsonObj) {
 }
 	dstatus=document.getElementById('doorstat');
 	wstatus=document.getElementById('windstat');
-	newJSON('/api/door/',stateToHTML,dstatus);
-	newJSON('/api/window/',stateToHTML,wstatus);
+	setInterval(function(){newJSON('/api/door/',stateToHTML,dstatus)},1000);
+	setInterval(function(){newJSON('/api/window/',stateToHTML,wstatus)},1000);
 	var doorId="dc_c";
 	doortable = document.getElementById('doortable');
 	windowtable = document.getElementById('windowtable');
 	windowstat=document.getElementById('windstat')
 	doorlockbutton = document.getElementById('myopclswitch');
 	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId);
-	getJSON('/api/window/', objectToHTML, windowtable);
+	setInterval(function(){getJSON('/api/window/', objectToHTML, windowtable)},1000);
 </script>
 {% endblock content %}
 
