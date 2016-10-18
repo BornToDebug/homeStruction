@@ -555,7 +555,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     //Send data to the server
-    private void sendToServer(String command, WebService webService) {
+    private void sendToServer(String command) {
         isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
@@ -720,12 +720,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
                     System.out.println("LOG Door unlocked");
-                    sendToServer("opendoor", webService);
+                    sendToServer("opendoor");
                 } else {
                     doorLocked.setVisibility(View.VISIBLE);
                     doorUnlocked.setVisibility(View.INVISIBLE);
                     System.out.println("LOG Door locked");
-                    sendToServer("closedoor", webService);
+                    sendToServer("closedoor");
                 }
                 break;
             case R.id.lock:
@@ -733,12 +733,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
                     System.out.println("LOG Door unlocked");
-                    sendToServer("opendoor", webService);
+                    sendToServer("opendoor");
                 } else {
                     doorLocked.setVisibility(View.VISIBLE);
                     doorUnlocked.setVisibility(View.INVISIBLE);
                     System.out.println("LOG Door locked");
-                    sendToServer("closedoor", webService);
+                    sendToServer("closedoor");
                 }
                 break;
             case R.id.windows:
@@ -748,57 +748,57 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 chandelierSwitch.toggle();
                 if (chandelierSwitch.isChecked()) {
                     System.out.println("LOG ChandelierSwitch checked");
-                    sendToServer("1lampon", webService);
+                    sendToServer("1lampon");
                 } else {
                     System.out.println("LOG ChandelierSwitch unchecked");
-                    sendToServer("1lampoff", webService);
+                    sendToServer("1lampoff");
                 }
                 break;
             case R.id.chandelier_switch:
                 if (chandelierSwitch.isChecked()) {
                     System.out.println("LOG ChandelierSwitch checked");
-                    sendToServer("1lampon", webService);
+                    sendToServer("1lampon");
                 } else {
                     System.out.println("LOG ChandelierSwitch unchecked");
-                    sendToServer("1lampoff", webService);
+                    sendToServer("1lampoff");
                 }
                 break;
             case R.id.nightlight:
                 nightLampSwitch.toggle();
                 if (nightLampSwitch.isChecked()) {
                     System.out.println("LOG NightLightSwitch checked");
-                    sendToServer("2lampon", webService);
+                    sendToServer("2lampon");
                 } else {
                     System.out.println("LOG NightLightSwitch unchecked");
-                    sendToServer("2lampoff", webService);
+                    sendToServer("2lampoff");
                 }
                 break;
             case R.id.nightlight_switch:
                 if (nightLampSwitch.isChecked()) {
                     System.out.println("LOG NightLightSwitch checked");
-                    sendToServer("2lampon", webService);
+                    sendToServer("2lampon");
                 } else {
                     System.out.println("LOG NightLightSwitch unchecked");
-                    sendToServer("2lampoff", webService);
+                    sendToServer("2lampoff");
                 }
                 break;
             case R.id.vecof:
                 veCofSwitch.toggle();
                 if (veCofSwitch.isChecked()) {
                     System.out.println("LOG VeCofSwitch checked");
-                    sendToServer("3lampon", webService);
+                    sendToServer("3lampon");
                 } else {
                     System.out.println("LOG VeCofSwitch unchecked");
-                    sendToServer("3lampoff", webService);
+                    sendToServer("3lampoff");
                 }
                 break;
             case R.id.vecof_switch:
                 if (veCofSwitch.isChecked()) {
                     System.out.println("LOG VeCofSwitch checked");
-                    sendToServer("3lampon", webService);
+                    sendToServer("3lampon");
                 } else {
                     System.out.println("LOG VeCofSwitch unchecked");
-                    sendToServer("3lampoff", webService);
+                    sendToServer("3lampoff");
                 }
                 break;
             case R.id.alarm:
