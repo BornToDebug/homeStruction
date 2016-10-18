@@ -5,7 +5,7 @@
 			<div id="door" name="door" style="width:50%; float:left; margin-top:18px;">
 				<h6 style="margin-left:20px;">...Oops! You may have left the door open. Let's check it out and solve it.</h6>
 			  <div id="txtsw" style="width:500px" >
-				<h5>The door is: </h5><h6 id="doorstat"></h6>
+				<h5>The door is: </h5><h6 id="doorstat">OPEN/CLOSED</h6>
 				<div class="opclswitch" style="margin-left:350px" >
 					<input type="checkbox" name="opclswitch" class="opclswitch-checkbox" id="myopclswitch" onclick="myFunction()">
 					<label class="opclswitch-label" for="myopclswitch">
@@ -44,7 +44,7 @@
 	<div id="window" name="window" style="width:50%; float:left">
 		<h6 style="margin-left:20px;">...You may be wondering whether you left the window open or not... Check it out!  </h6>
 		<div id="txtsw" style="width:500px;">
-			<h5>The window is: </h5><h6 id="windstat"></h6>
+			<h5>The window is: </h5><h6 id="windstat">OPEN/CLOSED</h6>
 
 		</div>
 		<div id="mytable" style="width:500px">
@@ -106,7 +106,8 @@ function stateToHTML(jsonObj) {
 }
 	dstatus=document.getElementById('doorstat');
 	wstatus=document.getElementById('windstat');
-	setInterval(function(){newJSON('/api/door/',stateToHTML,dstatus)},1000);
+	newJSON('/api/door/',stateToHTML,dstatus);
+	newJSON('/api/window/',stateToHTML,wstatus);
 	setInterval(function(){newJSON('/api/window/',stateToHTML,wstatus)},1000);
 	var doorId="dc_c";
 	doortable = document.getElementById('doortable');

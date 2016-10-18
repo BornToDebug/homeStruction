@@ -5,7 +5,7 @@
 
 			<div id="light1" name="light1" style="width:34%; float:left;">
 			  <div id="txtsw" style="width:340px">
-				<h5>Light #1 is : </h5><h6  id="lamp1stat"></h6>
+				<h5>Light #1 is : </h5><h6  id="lamp1stat">ON/OFF</h6>
 				<div class="onoffswitch" style="margin-left:auto;margin-right:auto;margin-top:25px">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" onclick="lamp1Func()">
 					<label class="onoffswitch-label" for="myonoffswitch">
@@ -19,7 +19,7 @@
 			
 			<div id="light2" name="light2" style="width:33%; float:left">
 				<div id="txtsw" style="width:340px;">
-				<h5>Light #2 is: </h5><h6 id="lamp2stat"></h6>
+				<h5>Light #2 is: </h5><h6 id="lamp2stat">ON/OFF</h6>
 				<div class="onoffswitch" style="margin-right:auto;margin-left:auto; margin-top:25px" >
 					<input type="checkbox" name="onoff2switch" class="onoff2switch-checkbox" id="myonoff2switch" onclick="lamp2Func()">
 					<label class="onoff2switch-label" for="myonoff2switch">
@@ -32,7 +32,7 @@
 			
 			<div  id="light3" class="light3" style="width:33%; float:left">
 			<div id="txtsw" style="width:340px">
-				<h5>Light #3 is : </h5><h6 id="lamp3stat"></h6>
+				<h5>Light #3 is : </h5><h6 id="lamp3stat">ON/OFF</h6>
 				<div class="onoffswitch" style="margin-right:auto;margin-left:auto;margin-top:25px; ">
 					<input type="checkbox" name="onoff3switch" class="onoff3switch-checkbox" id="myonoff3switch" onclick="lamp3Func()">
 					<label class="onoff3switch-label" for="myonoff3switch">
@@ -79,20 +79,20 @@
 	var myTime=timeRec.substring(11,19);
 	var myValue=jsonObj['value'];
 	var tableVar=myValue;
-	if(myValue == "1on_c"){tableVar="Lamp #1 successfully switched on";}
-	if(myValue == "1off_c"){tableVar="Lamp #1 successfully switched off";}
-	if(myValue == "1on_uc"){tableVar="Could not switch light #1 on";}
-	if(myValue == "1off_uc"){tableVar="Could not switch light #1 off";}
+	if(myValue == "1on_c"){tableVar="Lamp successfully switched on";}
+	if(myValue == "1off_c"){tableVar="Lamp successfully switched off";}
+	if(myValue == "1on_uc"){tableVar="Could not switch lamp on";}
+	if(myValue == "1off_uc"){tableVar="Could not switch lamp off";}
 	
-	if(myValue == "2on_c"){tableVar="Lamp #2 successfully switched on";}
-	if(myValue == "2off_c"){tableVar="Lamp #2 successfully switched off";}
-	if(myValue == "2on_uc"){tableVar="Could not switch light #2 on";}
-	if(myValue == "2off_uc"){tableVar="Could not switch light #2 off";}
+	if(myValue == "2on_c"){tableVar="Nightlight successfully switched on";}
+	if(myValue == "2off_c"){tableVar="Nighlight successfully switched off";}
+	if(myValue == "2on_uc"){tableVar="Could not switch nighlight on";}
+	if(myValue == "2off_uc"){tableVar="Could not switch nighlight off";}
 	
-	if(myValue == "3on_c"){tableVar="Lamp #3 successfully switched on";}
-	if(myValue == "3off_c"){tableVar="Lamp #3 successfully switched off";}
-	if(myValue == "3on_uc"){tableVar="Could not switch light #3 on";}
-	if(myValue == "3off_uc"){tableVar="Could not switch light #3 off";}
+	if(myValue == "3on_c"){tableVar="Fan successfully switched on";}
+	if(myValue == "3off_c"){tableVar="Fan successfully switched off";}
+	if(myValue == "3on_uc"){tableVar="Could not switch fan on";}
+	if(myValue == "3off_uc"){tableVar="Could not switch fan off";}
 	var tableRow = '<tr> \n' +
 		'<td>' +  tableVar + '</td> \n' +
 		'<td>' + myDate + '</td> \n' +
@@ -115,6 +115,9 @@ function stateToHTML(jsonObj) {
 	l1status=document.getElementById('lamp1stat');
 	l2status=document.getElementById('lamp2stat');
 	l3status=document.getElementById('lamp3stat');
+    newJSON('/api/lamp/1',stateToHTML,l1status);
+    newJSON('/api/lamp/2',stateToHTML,l2status);
+    newJSON('/api/lamp/3',stateToHTML,l3status);
 	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
 	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);
 	setInterval(function(){newJSON('/api/lamp/3',stateToHTML,l3status)},3000);
