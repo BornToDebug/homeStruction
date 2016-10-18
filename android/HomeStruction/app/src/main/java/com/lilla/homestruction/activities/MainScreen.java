@@ -90,6 +90,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private TextView doorConf;
     private Handler handler;
     private boolean isActivityStarted;
+    private WebService webService;
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -97,6 +98,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.main_screen);
         hour = null;
         minute = null;
+        webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
 
         //keeps the user logged in
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
@@ -689,7 +691,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
         ImageButton play = (ImageButton) findViewById(R.id.play);
         ImageButton pause = (ImageButton) findViewById(R.id.pause);
-        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
+//        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
 
         switch (v.getId()) {
             case R.id.temperature:
@@ -1008,7 +1010,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     //Create a new webservice and update the data from the app
     private void updateUI() {
         System.out.println("LOG updateUI");
-        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
+//        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
         updateTemperatureData(webService);
         updateLamp1Data(webService);
         updateLamp2Data(webService);
