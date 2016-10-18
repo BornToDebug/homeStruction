@@ -10,33 +10,33 @@ function genURL(timeValue, monday, tuesday, wednesday, thursday, friday, saturda
 	if(HourMin[1].trim().split(" ")[1] === "PM") {
 		hour = (parseInt(hour) + 12).toString();
 		}
-	
-	
-	
-	
+
+
+
+
 	console.log("minute:" + minute);
 	url += "hour=" + hour + "&";
 	url += "minute=" + minute + "&";
 	if(monday === true) {
-		url +="monday=true&";
+		url +="monday=True&";
 	}
 	if(tuesday === true) {
-		url += "tuesday=true&";
+		url += "tuesday=True&";
 	}
 	if(wednesday === true) {
-		url += "wednesday=true&";
+		url += "wednesday=True&";
 	}
 	if(thursday === true) {
-		url += "thursday=true&";
+		url += "thursday=True&";
 	}
 	if(friday === true) {
-		url += "friday=true&";
+		url += "friday=True&";
 	}
 	if(saturday === true) {
-		url += "saturday=true&";
+		url += "saturday=True&";
 	}
 	if(sunday === true) {
-		url += "sunday=true&";
+		url += "sunday=True&";
 	}
 	return url;
 }
