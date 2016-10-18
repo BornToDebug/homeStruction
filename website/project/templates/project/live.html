@@ -1,9 +1,18 @@
 {% extends 'project/base.html' %}
 {% load static %}
 {% block content %}
+<div id="livestr" style="height:100vh">
+	<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org" version="VideoLAN.VLCPlugin.2"  width="100%"  height="100%" style="min-height:500px; margin-top:0px; margin-bottom:50px;" id="vlc" loop="yes" autoplay="yes" target="rtmp://homestruction.servebeer.com/live"></embed>
 
-	<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org" version="VideoLAN.VLCPlugin.2"  width="100%"  height="100%" style="min-height:500px; margin-top:0px; margin-bottom:700px;" id="vlc" loop="yes" autoplay="yes" target="rtmp://homestruction.servebeer.com/live"></embed>
-
+	  <div id="livestr" style="margin-bottom:300px;">
+		  <div id="button1"  style="width:50%;margin-left:auto;margin-right:auto;">
+		  <button type="button" id="start_button" onclick="setAlarm()">Start Stream</button>
+		  </div>
+		  <div  id="button2"  style="width:50%;margin-left:auto;margin-right:auto;"> 
+			<button type="button" id="stop_button" onclick="setAlarm()">Stop Stream</button>
+		  </div>
+	  </div>
+</div>
 {% endblock content %}
 
 

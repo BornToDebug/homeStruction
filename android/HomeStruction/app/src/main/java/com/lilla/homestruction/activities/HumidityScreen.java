@@ -37,6 +37,7 @@ public class HumidityScreen extends AppCompatActivity {
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
         String url = "http://homestruction.servebeer.com/androidimage/?image=humid";
 
+        //reate a http client with the authorization and the token
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
@@ -54,6 +55,7 @@ public class HumidityScreen extends AppCompatActivity {
 
         OkHttpClient client = httpClient.build();
 
+        //create a new picasso which downloads the picture from the http client
         Picasso picasso = new Picasso.Builder(this)
                 .downloader(new OkHttp3Downloader(client))
                 .build();
@@ -61,10 +63,12 @@ public class HumidityScreen extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
+        //load the picture and place it on the placeholder
         picasso
                 .load(url)
                 .placeholder(R.drawable.graph_placeholder)
                 .into(imageViewTouch, new com.squareup.picasso.Callback() {
+                    //add progress bar if picture is not loaded yet
                     @Override
                     public void onSuccess() {
                         if (progressBar != null) {
@@ -81,6 +85,7 @@ public class HumidityScreen extends AppCompatActivity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
+        //use ImageViewTouch to pinch-zoom, double-click zoom and scroll the picture
         myBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.graph_placeholder, options);
         if (options.outWidth > 3000 || options.outHeight > 2000) {
             options.inSampleSize = 4;

@@ -43,4 +43,5 @@ dependencies {
     compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
     compile 'com.charonchui.vitamio:vitamio:4.2.2'
     compile 'com.google.android.exoplayer:exoplayer:r2.0.3'
+    compile "de.mrmaffen:vlc-android-sdk:1.9.8"
 }
