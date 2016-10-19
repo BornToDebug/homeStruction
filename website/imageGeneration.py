@@ -28,6 +28,9 @@ def generateImage(Model, ytext):
 
     cmap = (0, 0, 0)
 
+    if Model is Humidity:
+        print 'asf'
+        plt.ylim([30, 40])
     plt.plot(dateArray, valueArray, color=cmap, linewidth=2.0)
     plt.ylabel(ytext), plt.xlabel('time')
     plt.xticks(rotation='vertical')

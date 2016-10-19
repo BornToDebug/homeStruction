@@ -1,4 +1,3 @@
-alarm on website(David)
 image display on website(David)
 website appearace fine tuning on Firefox(Erika)
 image download and display in JS
