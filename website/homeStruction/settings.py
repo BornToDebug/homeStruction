@@ -32,7 +32,10 @@ SECRET_KEY = settings_secret.SECRET_KEY
 DEBUG = False #always
 
 ALLOWED_HOSTS = [
-        '192.168.0.103','localhost','acs1.ddns.net', '127.0.0.1', '89.120.180.139', '192.168.1.6', 'homestruction.servebeer.com'
+        '192.168.0.103','localhost','acs1.ddns.net', '127.0.0.1',
+        '89.120.180.139', '192.168.1.6', 'homestruction.servebeer.com',
+        'homestruction.org',
+
         ]
 
 LOGIN_REDIRECT_URL = '/'
