@@ -92,3 +92,4 @@ settings_secret.py
 *.swp
 *~
 *#
+website/static/
