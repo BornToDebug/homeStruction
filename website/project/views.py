@@ -3,12 +3,18 @@ from django.shortcuts import render
 from django.views import generic
 from .models import Temperature, Light, Lamp, Door, Window, Humidity
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import viewsets,generics
+from rest_framework import viewsets, generics, response, views
 from project.serializers import TemperatureSerializer, LightSerializer, LampSerializer, DoorSerializer, WindowSerializer, HumiditySerializer
 from django.contrib.auth.decorators import login_required
-
+from rest_framework.response import Response
 
 # REST framework viewset
+class TestViewSet(views.APIView):
+
+    def get(self, request, format=None):
+        lights = [light.value for light in Light.objects.all()]
+        return Response(lights)
+
 class TemperatureViewSet(viewsets.ModelViewSet):
 
     queryset = Temperature.objects.all().order_by('-time_recorded')

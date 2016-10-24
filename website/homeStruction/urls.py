@@ -48,4 +48,5 @@ urlpatterns = [
     url(r'^mp3/toggle/$', commandview.togglemp3, name='togglemp3'),
     url(r'^setalarm/$', commandview.setAlarmView, name='setalarm'),
     url(r'^androidsetalarm/$', commandview.androidSetAlarmView, name='androidsetalarm'),
+    url(r'^test/$', views.TestViewSet.as_view(), name='tes'),
 ]
