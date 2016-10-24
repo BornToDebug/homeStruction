@@ -1,11 +1,13 @@
-image display on website(David)
-website appearace fine tuning on Firefox(Erika)
-image download and display in JS
-demo -- make a video and do a pratice live presentation
-add important stuff to homepage(nearly done)
-!!!make humidity range bigger on graph
-!!!add video to the presentation
-!!!add stream (probably) as features to implement in android :))
-stream on android (lilla) ?
-work hard play hard
+HTTPS
+sensor data 15 min time
+image on website
+neopixel
+text to speech
+mp3
+mail server -- reset password
+demo video -- get equipment
+fan temperature
+stream android
+optimize network usage
 
+work hard play hard
