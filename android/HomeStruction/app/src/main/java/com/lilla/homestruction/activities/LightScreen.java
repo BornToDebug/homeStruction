@@ -36,7 +36,7 @@ public class LightScreen extends AppCompatActivity {
         setContentView(R.layout.light_screen);
         final String token = SaveSharedPreference.getToken(LightScreen.this);
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
-        String url = "http://homestruction.servebeer.com/androidimage/?image=light";
+        String url = "https://homestruction.org/androidimage/?image=light";
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {

@@ -41,14 +41,14 @@ public class TemperatureScreen extends AppCompatActivity {
         setContentView(R.layout.temperature_screen);
         final String token = SaveSharedPreference.getToken(TemperatureScreen.this);
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
-        String url = "http://homestruction.servebeer.com/androidimage/?image=temp";
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+        String url = "https://homestruction.org/androidimage/?image=temp";
+//        Display display = getWindowManager().getDefaultDisplay();
+//        Point size = new Point();
+//        display.getSize(size);
+//        int width = size.x;
+//        int height = size.y;
 
-        Request request = new Request.Builder().url("http://test.com/image.jpg").build();
+//        Request request = new Request.Builder().url("http://test.com/image.jpg").build();
 
 
 

@@ -35,7 +35,7 @@ public class HumidityScreen extends AppCompatActivity {
         setContentView(R.layout.humidity_screen);
         final String token = SaveSharedPreference.getToken(HumidityScreen.this);
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
-        String url = "http://homestruction.servebeer.com/androidimage/?image=humid";
+        String url = "https://homestruction.org/androidimage/?image=humid";
 
         //reate a http client with the authorization and the token
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
