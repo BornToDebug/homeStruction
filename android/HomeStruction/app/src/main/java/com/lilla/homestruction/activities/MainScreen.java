@@ -674,12 +674,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent);
                 finish();
                 return true;
-//            case R.id.live_stream:
-//                System.out.println("LOG Live Stream button pressed");
-//                Intent stream = new Intent(MainScreen.this, LiveStream.class);
-//                startActivity(stream);
-//                finish();
-//                return true;
+            case R.id.live_stream:
+                System.out.println("LOG Live Stream button pressed");
+                Intent stream = new Intent(MainScreen.this, LiveStream.class);
+                startActivity(stream);
+                finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

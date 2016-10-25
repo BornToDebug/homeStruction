@@ -1,21 +1,20 @@
 package com.lilla.homestruction.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
+import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.MediaController;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.lilla.homestruction.R;
 
-import org.videolan.libvlc.media.VideoView;
+import io.vov.vitamio.LibsChecker;
+import io.vov.vitamio.MediaPlayer;
+import io.vov.vitamio.widget.MediaController;
+import io.vov.vitamio.widget.VideoView;
 
 /**
  * Created by lilla on 17/10/16.
@@ -23,50 +22,44 @@ import org.videolan.libvlc.media.VideoView;
 
 public class LiveStream extends AppCompatActivity {
 
-    VideoView videoView;
-    private String path = "rtmp://homestruction.servebeer.com/live/";
-    private Uri uri;
-    private Intent intent;
-    private WebView webView;
-    MediaController mediaController;
+    VideoView mVideoView;
+    private String path;
+    TextView textView;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_stream);
+        mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
+        path = "rtmp://homestruction.servebeer.com/live/";
 
+        if (!Build.VERSION.RELEASE.startsWith("6.")) {
 
+            if (!LibsChecker.checkVitamioLibs(this)) {
+                return;
+            }
 
+        /*options = new HashMap<>();
+        options.put("rtmp_playpath", "");
+        options.put("rtmp_swfurl", "");
+        options.put("rtmp_live", "1");
+        options.put("rtmp_pageurl", "");*/
+            mVideoView.setVideoPath(path);
+            //mVideoView.setVideoURI(Uri.parse(path), options);
+            mVideoView.setMediaController(new MediaController(this));
+            mVideoView.requestFocus();
 
-        videoView = (VideoView) findViewById(R.id.player);
-        mediaController = new MediaController(this);
-
-        videoView.setVideoURI(uri);
-        mediaController.setAnchorView(videoView);
-        videoView.setMediaController(mediaController);
-        videoView.start();
+            mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.setPlaybackSpeed(1.0f);
+                }
+            });
+        }
+        else{
+            textView = (TextView) findViewById(R.id.textview);
+            mVideoView.setVisibility(View.INVISIBLE);
+            System.out.println("LOG lalala");
+        }
     }
-
-
-//        if (!LibsChecker.checkVitamioLibs(this)) {
-//            return;
-//        }
-//        mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
-//        path = "rtmp://homestruction.servebeer.com/live/";
-//        /*options = new HashMap<>();
-//        options.put("rtmp_playpath", "");
-//        options.put("rtmp_swfurl", "");
-//        options.put("rtmp_live", "1");
-//        options.put("rtmp_pageurl", "");*/
-//        mVideoView.setVideoPath(path);
-//        //mVideoView.setVideoURI(Uri.parse(path), options);
-//        mVideoView.setMediaController(new MediaController(this));
-//        mVideoView.requestFocus();
-//
-//        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mediaPlayer) {
-//                mediaPlayer.setPlaybackSpeed(1.0f);
-//            }
-//        });
-
 }
