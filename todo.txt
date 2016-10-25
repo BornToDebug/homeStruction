@@ -9,5 +9,6 @@ demo video -- get equipment
 fan temperature
 stream android
 optimize network usage
+fix bug at stream back button
 
 work hard play hard
