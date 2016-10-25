@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -678,7 +677,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("LOG Live Stream button pressed");
                 Intent stream = new Intent(MainScreen.this, LiveStream.class);
                 startActivity(stream);
-                finish();
+//                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

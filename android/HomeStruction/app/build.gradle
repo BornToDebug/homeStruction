@@ -26,7 +26,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:support-core-utils:24.2.1"
+    compile 'com.android.support:support-core-utils:24.2.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
@@ -42,6 +42,4 @@ dependencies {
     compile files('libs/picasso-2.5.2.jar')
     compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2'
     compile 'com.charonchui.vitamio:vitamio:4.2.2'
-    compile 'com.google.android.exoplayer:exoplayer:r2.0.3'
-    compile "de.mrmaffen:vlc-android-sdk:1.9.8"
 }

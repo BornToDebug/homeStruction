@@ -10,5 +10,6 @@ fan temperature
 stream android
 optimize network usage
 fix bug at stream back button
+app is fucking big. fix that
 
 work hard play hard
