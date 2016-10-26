@@ -3,12 +3,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/sign_out"
-        android:title="@string/sign_out" />
+        android:id="@+id/live_stream"
+        android:title="Live stream" />
 
     <item
-        android:id="@+id/live_stream"
-        android:title="Live stream"
-        />
+        android:id="@+id/sign_out"
+        android:title="@string/sign_out" />
 
 </menu>

@@ -7,9 +7,9 @@ mp3
 mail server -- reset password
 demo video -- get equipment
 fan temperature
-stream android
+stream android (done)
 optimize network usage
-fix bug at stream back button
-app is fucking big. fix that
+fix bug at stream back button (done)
+app is fucking big. fix that (partially done)
 
 work hard play hard

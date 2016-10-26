@@ -578,7 +578,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         System.out.println("LOGG " + myCommand + " Success");
                         isActivityStarted = true;
                         updateUI();
-                        handler.postDelayed(runnable, 1000);
+                        handler.postDelayed(runnable, 3000);
                     } else {
                         System.out.println("LOGG " + myCommand + " Error");
                     }
@@ -1023,7 +1023,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         public void run() {
             if (isActivityStarted) {
                 updateUI();
-                handler.postDelayed(runnable, 1000);
+                handler.postDelayed(runnable, 3000);
             }
         }
     };
@@ -1034,7 +1034,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         super.onStart();
         isActivityStarted = true;
         updateUI();
-        handler.postDelayed(runnable, 1000);
+        handler.postDelayed(runnable, 3000);
     }
 
     //when activity is stopped, don't refresh anymore
