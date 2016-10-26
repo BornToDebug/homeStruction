@@ -1,6 +1,9 @@
 package com.lilla.homestruction.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
@@ -90,6 +93,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Handler handler;
     private boolean isActivityStarted;
     private WebService webService;
+    private String path;
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -98,7 +102,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         hour = null;
         minute = null;
         webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
-
+        path = "rtmp://homestruction.servebeer.com/live/";
         //keeps the user logged in
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
             Intent intent = new Intent(MainScreen.this, LoginActivity.class);
@@ -675,12 +679,46 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 return true;
             case R.id.live_stream:
                 System.out.println("LOG Live Stream button pressed");
-                Intent stream = new Intent(MainScreen.this, LiveStream.class);
-                startActivity(stream);
+                if (!Build.VERSION.RELEASE.startsWith("6.")) {
+                    Intent stream = new Intent(MainScreen.this, LiveStream.class);
+                    startActivity(stream);
+                } else {
+                    if (!installed("org.videolan.vlc")) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.videolan.vlc")));
+                            while (!installed("org.videolan.vlc")) {
+
+                            }
+                            Uri uri = Uri.parse(path);
+                            Intent vlcIntent = new Intent(Intent.ACTION_VIEW);
+                            vlcIntent.setPackage("org.videolan.vlc");
+                            vlcIntent.setDataAndTypeAndNormalize(uri, "video/*");
+                            startActivityForResult(vlcIntent, 42);
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=org.videolan.vlc")));
+                        }
+                    } else {
+                        Uri uri = Uri.parse(path);
+                        Intent vlcIntent = new Intent(Intent.ACTION_VIEW);
+                        vlcIntent.setPackage("org.videolan.vlc");
+                        vlcIntent.setDataAndTypeAndNormalize(uri, "video/*");
+                        startActivityForResult(vlcIntent, 42);
+                    }
+                }
 //                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean installed(String uri) {
+        PackageManager pm = getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
 
