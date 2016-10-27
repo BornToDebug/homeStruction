@@ -1,4 +1,3 @@
-HTTPS
 sensor data 15 min time
 image on website
 neopixel
