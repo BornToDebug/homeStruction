@@ -11,5 +11,6 @@ stream android (done)
 optimize network usage
 fix bug at stream back button (done)
 app is fucking big. fix that (partially done)
+user screen on android + settings
 
 work hard play hard
