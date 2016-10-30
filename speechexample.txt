@@ -1,0 +1,2 @@
+projekt@raspberrypi:~/speech/build/flite/bin $ ./flite -voice /home/projekt/speech/build/flite/voices/cmu_us_slt.flitevox "The temperature outside is 23.1 degrees Celsius"
+

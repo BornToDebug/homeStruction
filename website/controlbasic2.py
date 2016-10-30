@@ -18,7 +18,7 @@ script, todo = sys.argv
 
 def confirmation(todo, ser):
 	MyInt = -1
-	sleep(2)
+	sleep(1.5)
 	ser.write('3');
 	sleep(1)
 	bigchunk = ser.readline()
