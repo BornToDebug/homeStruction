@@ -21,7 +21,12 @@ void loop() {
     incoming = Serial.parseInt();
     Serial.print("I received: ");
     Serial.println(incoming);
-    switch (incoming) {
+    choose(incoming);
+  }
+}
+
+void choose(int choice){
+   switch (choice) {
       case 1:
         //half circle wake up
         halfCircleWakeUp();
@@ -66,7 +71,6 @@ void loop() {
       default:
         break;
     }
-  }
 }
 
 void halfCircleWakeUp() {
@@ -81,6 +85,8 @@ void halfCircleWakeUp() {
     delay(100);
   }
 }
+
+
 
 void fullCircleWakeUp(int right) {
   //wake up animation with eyes open
