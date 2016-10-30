@@ -7,15 +7,6 @@
 Adafruit_NeoPixel rightEye = Adafruit_NeoPixel(NUMPIXELS, RIGHT, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel leftEye = Adafruit_NeoPixel(NUMPIXELS, LEFT, NEO_GRB + NEO_KHZ800);
 
-uint32_t bluel = leftEye.Color(0, 0, 255);
-uint32_t bluer = rightEye.Color(0, 0, 255);
-uint32_t teall = leftEye.Color(0, 255, 255);
-uint32_t tealr = rightEye.Color(0, 255, 255);
-uint32_t greenl = leftEye.Color(0, 255, 0);
-uint32_t greenr = rightEye.Color(0, 255, 0);
-uint32_t yellowl = leftEye.Color(197, 244, 66);
-uint32_t yellowr = rightEye.Color(197, 244, 66);
-
 void setup() {
   rightEye.setBrightness(1);
   leftEye.setBrightness(1);
@@ -95,35 +86,35 @@ void halfCircleWakeUp() {
   for (int i = 0; i < NUMPIXELS / 4; i++) {
     switch (i) {
       case 0:
-        leftEye.setPixelColor(NUMPIXELS / 2 + i, bluel);
-        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluel);
+        leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
         leftEye.show();
-        rightEye.setPixelColor(NUMPIXELS / 2 + i, bluer);
-        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluer);
+        rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
         rightEye.show();
         break;
       case 1:
-        leftEye.setPixelColor(NUMPIXELS / 2 + i, teall);
-        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, teall);
+        leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
         leftEye.show();
-        rightEye.setPixelColor(NUMPIXELS / 2 + i, tealr);
-        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, tealr);
+        rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
         rightEye.show();
         break;
       case 2:
-        leftEye.setPixelColor(NUMPIXELS / 2 + i, greenl);
-        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenl);
+        leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
         leftEye.show();
-        rightEye.setPixelColor(NUMPIXELS / 2 + i, greenr);
-        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenr);
+        rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
         rightEye.show();
         break;
       case 3:
-        leftEye.setPixelColor(NUMPIXELS / 2 + i, yellowl);
-        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowl);
+        leftEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+        leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
         leftEye.show();
-        rightEye.setPixelColor(NUMPIXELS / 2 + i, yellowr);
-        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowr);
+        rightEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+        rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
         rightEye.show();
         break;
       default:
@@ -142,31 +133,31 @@ void fullCircleWakeUp(int right) {
     for (int i = NUMPIXELS / 4 - 1; i >= 0; i--) {
       switch (i) {
         case 0:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, bluel);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluel);
-          leftEye.setPixelColor(i, bluel); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, bluel); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
+          leftEye.setPixelColor(i, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 0, 255); // 4th quarter <-
           leftEye.show();
           break;
         case 1:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, teall);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, teall);
-          leftEye.setPixelColor(i, teall); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, teall); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
+          leftEye.setPixelColor(i, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 255); // 4th quarter <-
           leftEye.show();
           break;
         case 2:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, greenl);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenl);
-          leftEye.setPixelColor(i, greenl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, greenl); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
+          leftEye.setPixelColor(i, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 0); // 4th quarter <-
           leftEye.show();
           break;
         case 3:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, yellowl);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowl);
-          leftEye.setPixelColor(i, yellowl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, yellowl); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
+          leftEye.setPixelColor(i, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 197, 244, 66); // 4th quarter <-
           leftEye.show();
           break;
         default:
@@ -181,31 +172,31 @@ void fullCircleWakeUp(int right) {
       for (int i = NUMPIXELS / 4 - 1; i >= 0; i--) {
         switch (i) {
           case 0:
-            rightEye.setPixelColor(i, bluer); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, bluer); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, bluer);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluer);
+            rightEye.setPixelColor(i, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 0, 255); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
             rightEye.show();
             break;
           case 1:
-            rightEye.setPixelColor(i, tealr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, tealr); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, tealr);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, tealr);
+            rightEye.setPixelColor(i, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 255); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
             rightEye.show();
             break;
           case 2:
-            rightEye.setPixelColor(i, greenr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, greenr); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, greenr);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenr);
+            rightEye.setPixelColor(i, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 0); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
             rightEye.show();
             break;
           case 3:
-            rightEye.setPixelColor(i, yellowr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, yellowr); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, yellowr);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowr);
+            rightEye.setPixelColor(i, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 197, 244, 66); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
             rightEye.show();
             break;
           default:
@@ -219,51 +210,51 @@ void fullCircleWakeUp(int right) {
       for (int i = NUMPIXELS / 4 - 1; i >= 0; i--) {
         switch (i) {
           case 0:
-            leftEye.setPixelColor(NUMPIXELS / 2 + i, bluel);
-            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluel);
-            leftEye.setPixelColor(i, bluel); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            leftEye.setPixelColor(NUMPIXELS - i - 1, bluel); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
+            leftEye.setPixelColor(i, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 0, 255); // 4th quarter <-
             leftEye.show();
-            rightEye.setPixelColor(i, bluer); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, bluer); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, bluer);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluer);
+            rightEye.setPixelColor(i, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 0, 255); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
             rightEye.show();
             break;
           case 1:
-            leftEye.setPixelColor(NUMPIXELS / 2 + i, teall);
-            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, teall);
-            leftEye.setPixelColor(i, teall); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            leftEye.setPixelColor(NUMPIXELS - i - 1, teall); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
+            leftEye.setPixelColor(i, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 255); // 4th quarter <-
             leftEye.show();
-            rightEye.setPixelColor(i, tealr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, tealr); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, tealr);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, tealr);
+            rightEye.setPixelColor(i, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 255); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
             rightEye.show();
             break;
           case 2:
-            leftEye.setPixelColor(NUMPIXELS / 2 + i, greenl);
-            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenl);
-            leftEye.setPixelColor(i, greenl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            leftEye.setPixelColor(NUMPIXELS - i - 1, greenl); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
+            leftEye.setPixelColor(i, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 0); // 4th quarter <-
             leftEye.show();
-            rightEye.setPixelColor(i, greenr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, greenr); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, greenr);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenr);
+            rightEye.setPixelColor(i, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 0); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
             rightEye.show();
             break;
           case 3:
-            leftEye.setPixelColor(NUMPIXELS / 2 + i, yellowl);
-            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowl);
-            leftEye.setPixelColor(i, yellowl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            leftEye.setPixelColor(NUMPIXELS - i - 1, yellowl); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+            leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
+            leftEye.setPixelColor(i, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            leftEye.setPixelColor(NUMPIXELS - i - 1, 197, 244, 66); // 4th quarter <-
             leftEye.show();
-            rightEye.setPixelColor(i, yellowr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(NUMPIXELS - i - 1, yellowr); // 4th quarter <-
-            rightEye.setPixelColor(NUMPIXELS / 2 + i, yellowr);
-            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowr);
+            rightEye.setPixelColor(i, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(NUMPIXELS - i - 1, 197, 244, 66); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+            rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
             rightEye.show();
             break;
           default:
@@ -292,51 +283,51 @@ void clip(int nrOfClips) {
     for (int i = NUMPIXELS / 4 - 1; i >= 0; i--) {
       switch (i) {
         case 0:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, bluel);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluel);
-          leftEye.setPixelColor(i, bluel); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, bluel); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
+          leftEye.setPixelColor(i, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 0, 255); // 4th quarter <-
           leftEye.show();
-          rightEye.setPixelColor(i, bluer); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          rightEye.setPixelColor(NUMPIXELS - i - 1, bluer); // 4th quarter <-
-          rightEye.setPixelColor(NUMPIXELS / 2 + i, bluer);
-          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, bluer);
+          rightEye.setPixelColor(i, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 0, 255); // 4th quarter <-
+          rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 0, 255);
+          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 0, 255);
           rightEye.show();
           break;
         case 1:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, teall);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, teall);
-          leftEye.setPixelColor(i, teall); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, teall); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
+          leftEye.setPixelColor(i, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 255); // 4th quarter <-
           leftEye.show();
-          rightEye.setPixelColor(i, tealr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          rightEye.setPixelColor(NUMPIXELS - i - 1, tealr); // 4th quarter <-
-          rightEye.setPixelColor(NUMPIXELS / 2 + i, tealr);
-          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, tealr);
+          rightEye.setPixelColor(i, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 255); // 4th quarter <-
+          rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 255);
+          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 255);
           rightEye.show();
           break;
         case 2:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, greenl);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenl);
-          leftEye.setPixelColor(i, greenl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, greenl); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
+          leftEye.setPixelColor(i, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 0); // 4th quarter <-
           leftEye.show();
-          rightEye.setPixelColor(i, greenr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          rightEye.setPixelColor(NUMPIXELS - i - 1, greenr); // 4th quarter <-
-          rightEye.setPixelColor(NUMPIXELS / 2 + i, greenr);
-          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, greenr);
+          rightEye.setPixelColor(i, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS - i - 1, 0, 255, 0); // 4th quarter <-
+          rightEye.setPixelColor(NUMPIXELS / 2 + i, 0, 255, 0);
+          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 0, 255, 0);
           rightEye.show();
           break;
         case 3:
-          leftEye.setPixelColor(NUMPIXELS / 2 + i, yellowl);
-          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowl);
-          leftEye.setPixelColor(i, yellowl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          leftEye.setPixelColor(NUMPIXELS - i - 1, yellowl); // 4th quarter <-
+          leftEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+          leftEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
+          leftEye.setPixelColor(i, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS - i - 1, 197, 244, 66); // 4th quarter <-
           leftEye.show();
-          rightEye.setPixelColor(i, yellowr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-          rightEye.setPixelColor(NUMPIXELS - i - 1, yellowr); // 4th quarter <-
-          rightEye.setPixelColor(NUMPIXELS / 2 + i, yellowr);
-          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, yellowr);
+          rightEye.setPixelColor(i, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS - i - 1, 197, 244, 66); // 4th quarter <-
+          rightEye.setPixelColor(NUMPIXELS / 2 + i, 197, 244, 66);
+          rightEye.setPixelColor(NUMPIXELS / 2 - i - 1, 197, 244, 66);
           rightEye.show();
           break;
         default:
@@ -452,142 +443,142 @@ void rotate() {
         case 0:
           //left eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, bluel);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 255);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, bluel);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 255);
           }
           //2nd quarter
-          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, bluel); // 3rd quarter
-          leftEye.setPixelColor(k + j, bluel); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 255); // 3rd quarter
+          leftEye.setPixelColor(k + j, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            leftEye.setPixelColor(- k - 1 + j, bluel); // 4th quarter <-
+            leftEye.setPixelColor(- k - 1 + j, 0, 0, 255); // 4th quarter <-
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, bluel); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 255); // 4th quarter <-
           }
           leftEye.show();
 
           //right eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, bluer);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 255);
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, bluer);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 255);
           }
           //2nd quarter
-          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, bluer); // 3rd quarter
-          rightEye.setPixelColor(k + j, bluer); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 255); // 3rd quarter
+          rightEye.setPixelColor(k + j, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            rightEye.setPixelColor(- k - 1 + j, bluer); // 4th quarter <-
+            rightEye.setPixelColor(- k - 1 + j, 0, 0, 255); // 4th quarter <-
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, bluer); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 255); // 4th quarter <-
           }
           rightEye.show();
           break;
         case 1:
           //left eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, teall);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 255);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, teall);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 255);
           }
-          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, teall);
-          leftEye.setPixelColor(k + j, teall); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 255);
+          leftEye.setPixelColor(k + j, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            leftEye.setPixelColor(- k - 1 + j , teall); // 4th quarter <-
+            leftEye.setPixelColor(- k - 1 + j , 0, 255, 255); // 4th quarter <-
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, teall); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 255); // 4th quarter <-
           }
           leftEye.show();
 
           //right eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, tealr);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 255);
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, tealr);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 255);
           }
-          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, tealr);
-          rightEye.setPixelColor(k + j, tealr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 255);
+          rightEye.setPixelColor(k + j, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            rightEye.setPixelColor(- k - 1 + j , tealr); // 4th quarter <-
+            rightEye.setPixelColor(- k - 1 + j , 0, 255, 255); // 4th quarter <-
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, tealr); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 255); // 4th quarter <-
           }
           rightEye.show();
           break;
         case 2:
           //left eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, greenl);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 0);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, greenl);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 0);
           }
-          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, greenl);
-          leftEye.setPixelColor(k + j, greenl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 0);
+          leftEye.setPixelColor(k + j, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            leftEye.setPixelColor(- k - 1 + j, greenl); // 4th quarter <-
+            leftEye.setPixelColor(- k - 1 + j, 0, 255, 0); // 4th quarter <-
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, greenl); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 0); // 4th quarter <-
           }
           leftEye.show();
 
           //right eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, greenr);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 0);
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, greenr);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 0);
           }
-          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, greenr);
-          rightEye.setPixelColor(k + j, greenr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 0);
+          rightEye.setPixelColor(k + j, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            rightEye.setPixelColor(- k - 1 + j, greenr); // 4th quarter <-
+            rightEye.setPixelColor(- k - 1 + j, 0, 255, 0); // 4th quarter <-
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, greenr); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 0); // 4th quarter <-
           }
           rightEye.show();
           break;
         case 3:
           //left eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, yellowl);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 197, 244, 66);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, yellowl);
+            leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 197, 244, 66);
           }
-          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, yellowl);
-          leftEye.setPixelColor(k + j, yellowl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 197, 244, 66);
+          leftEye.setPixelColor(k + j, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            leftEye.setPixelColor(- k - 1 + j, yellowl); // 4th quarter <-
+            leftEye.setPixelColor(- k - 1 + j, 197, 244, 66); // 4th quarter <-
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, yellowl); // 4th quarter <-
+            leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 197, 244, 66); // 4th quarter <-
           }
           leftEye.show();
 
           //right eye rotate
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, yellowr);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 197, 244, 66);
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, yellowr);
+            rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 197, 244, 66);
           }
-          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, yellowr);
-          rightEye.setPixelColor(k + j, yellowr); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+          rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 197, 244, 66);
+          rightEye.setPixelColor(k + j, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
-            rightEye.setPixelColor(- k - 1 + j, yellowr); // 4th quarter <-
+            rightEye.setPixelColor(- k - 1 + j, 197, 244, 66); // 4th quarter <-
           }
           else {
-            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, yellowr); // 4th quarter <-
+            rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 197, 244, 66); // 4th quarter <-
           }
           rightEye.show();
           break;
@@ -660,8 +651,8 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, bluel);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, bluer);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 255);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 255);
             }
           }
           else {
@@ -670,26 +661,28 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, bluel);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, bluer);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 255);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 255);
             }
           }
+
           //2nd quarter
           if (NUMPIXELS / 2 - k - 1 + j == a1 || NUMPIXELS / 2 - k - 1 + j == a2 || NUMPIXELS / 2 - k - 1 + j == a3 || NUMPIXELS / 2 - k - 1 + j == a4) {
             leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
             rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, bluel); // 3rd quarter
-            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, bluer);
+            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 255); // 3rd quarter
+            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 255);
           }
+
           if (k + j == a1 || k + j == a2 || k + j == a3 || k + j == a4) {
             leftEye.setPixelColor(k + j, 0, 0, 0);
             rightEye.setPixelColor(k + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(k + j, bluel); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(k + j, bluer);
+            leftEye.setPixelColor(k + j, 0, 0, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(k + j, 0, 0, 255);
           }
 
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
@@ -698,8 +691,8 @@ void rollEyes() {
               rightEye.setPixelColor(- k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(- k - 1 + j, bluel); // 4th quarter <-
-              rightEye.setPixelColor(- k - 1 + j, bluer); // 4th quarter <-
+              leftEye.setPixelColor(- k - 1 + j, 0, 0, 255); // 4th quarter <-
+              rightEye.setPixelColor(- k - 1 + j, 0, 0, 255); // 4th quarter <-
             }
           }
           else {
@@ -708,8 +701,8 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, bluel); // 4th quarter <-
-              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, bluer);
+              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 255); // 4th quarter <-
+              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 255);
             }
           }
           leftEye.show();
@@ -717,15 +710,15 @@ void rollEyes() {
           break;
         case 1:
           //left eye rotate
-          //TODO
+
           if (NUMPIXELS / 2 + k + j >= NUMPIXELS) {
             if (NUMPIXELS / 2 + k + j - NUMPIXELS == a1 || NUMPIXELS / 2 + k + j - NUMPIXELS == a2 || NUMPIXELS / 2 + k + j - NUMPIXELS == a3 || NUMPIXELS / 2 + k + j - NUMPIXELS == a4) {
               leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 0);
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, teall);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, tealr);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 255);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 255);
             }
           }
           else {
@@ -734,27 +727,28 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, teall);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, tealr);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 255);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 255);
             }
           }
-          //TODO
           //2nd quarter
+
           if (NUMPIXELS / 2 - k - 1 + j == a1 || NUMPIXELS / 2 - k - 1 + j == a2 || NUMPIXELS / 2 - k - 1 + j == a3 || NUMPIXELS / 2 - k - 1 + j == a4) {
             leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
             rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, teall); // 3rd quarter
-            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, tealr);
+            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 255); // 3rd quarter
+            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 255);
           }
+
           if (k + j == a1 || k + j == a2 || k + j == a3 || k + j == a4) {
             leftEye.setPixelColor(k + j, 0, 0, 0);
             rightEye.setPixelColor(k + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(k + j, teall); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(k + j, tealr);
+            leftEye.setPixelColor(k + j, 0, 255, 255); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(k + j, 0, 255, 255);
           }
 
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
@@ -763,8 +757,8 @@ void rollEyes() {
               rightEye.setPixelColor(- k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(- k - 1 + j, teall); // 4th quarter <-
-              rightEye.setPixelColor(- k - 1 + j, tealr); // 4th quarter <-
+              leftEye.setPixelColor(- k - 1 + j, 0, 255, 255); // 4th quarter <-
+              rightEye.setPixelColor(- k - 1 + j, 0, 255, 255); // 4th quarter <-
             }
           }
           else {
@@ -773,8 +767,8 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, teall); // 4th quarter <-
-              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, tealr);
+              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 255); // 4th quarter <-
+              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 255);
             }
           }
           leftEye.show();
@@ -788,8 +782,8 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, greenl);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, greenr);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 0);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 255, 0);
             }
           }
           else {
@@ -798,26 +792,28 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, greenl);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, greenr);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 0);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 255, 0);
             }
           }
+
           //2nd quarter
           if (NUMPIXELS / 2 - k - 1 + j == a1 || NUMPIXELS / 2 - k - 1 + j == a2 || NUMPIXELS / 2 - k - 1 + j == a3 || NUMPIXELS / 2 - k - 1 + j == a4) {
             leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
             rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, greenl); // 3rd quarter
-            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, greenr);
+            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 0); // 3rd quarter
+            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 255, 0);
           }
+
           if (k + j == a1 || k + j == a2 || k + j == a3 || k + j == a4) {
             leftEye.setPixelColor(k + j, 0, 0, 0);
             rightEye.setPixelColor(k + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(k + j, greenl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(k + j, greenr);
+            leftEye.setPixelColor(k + j, 0, 255, 0); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(k + j, 0, 255, 0);
           }
 
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
@@ -826,8 +822,8 @@ void rollEyes() {
               rightEye.setPixelColor(- k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(- k - 1 + j, greenl); // 4th quarter <-
-              rightEye.setPixelColor(- k - 1 + j, greenr); // 4th quarter <-
+              leftEye.setPixelColor(- k - 1 + j, 0, 255, 0); // 4th quarter <-
+              rightEye.setPixelColor(- k - 1 + j, 0, 255, 0); // 4th quarter <-
             }
           }
           else {
@@ -836,8 +832,8 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, greenl); // 4th quarter <-
-              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, greenr);
+              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 0); // 4th quarter <-
+              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 255, 0);
             }
           }
           leftEye.show();
@@ -851,8 +847,8 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, yellowl);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, yellowr);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 197, 244, 66);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j - NUMPIXELS, 197, 244, 66);
             }
           }
           else {
@@ -861,26 +857,28 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, yellowl);
-              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, yellowr);
+              leftEye.setPixelColor(NUMPIXELS / 2 + k + j, 197, 244, 66);
+              rightEye.setPixelColor(NUMPIXELS / 2 + k + j, 197, 244, 66);
             }
           }
+
           //2nd quarter
           if (NUMPIXELS / 2 - k - 1 + j == a1 || NUMPIXELS / 2 - k - 1 + j == a2 || NUMPIXELS / 2 - k - 1 + j == a3 || NUMPIXELS / 2 - k - 1 + j == a4) {
             leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
             rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, yellowl); // 3rd quarter
-            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, yellowr);
+            leftEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 197, 244, 66); // 3rd quarter
+            rightEye.setPixelColor(NUMPIXELS / 2 - k - 1 + j, 197, 244, 66);
           }
+
           if (k + j == a1 || k + j == a2 || k + j == a3 || k + j == a4) {
             leftEye.setPixelColor(k + j, 0, 0, 0);
             rightEye.setPixelColor(k + j, 0, 0, 0);
           }
           else {
-            leftEye.setPixelColor(k + j, yellowl); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
-            rightEye.setPixelColor(k + j, yellowr);
+            leftEye.setPixelColor(k + j, 197, 244, 66); // if 0 is the upper pixel, first quarter (as on the trigonometrical circle) ->
+            rightEye.setPixelColor(k + j, 197, 244, 66);
           }
 
           if (NUMPIXELS - k - 1 + j >= NUMPIXELS) {
@@ -889,8 +887,8 @@ void rollEyes() {
               rightEye.setPixelColor(- k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(- k - 1 + j, yellowl); // 4th quarter <-
-              rightEye.setPixelColor(- k - 1 + j, yellowr); // 4th quarter <-
+              leftEye.setPixelColor(- k - 1 + j, 197, 244, 66); // 4th quarter <-
+              rightEye.setPixelColor(- k - 1 + j, 197, 244, 66); // 4th quarter <-
             }
           }
           else {
@@ -899,8 +897,8 @@ void rollEyes() {
               rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 0, 0, 0);
             }
             else {
-              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, yellowl); // 4th quarter <-
-              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, yellowr);
+              leftEye.setPixelColor(NUMPIXELS - k - 1 + j, 197, 244, 66); // 4th quarter <-
+              rightEye.setPixelColor(NUMPIXELS - k - 1 + j, 197, 244, 66);
             }
           }
           leftEye.show();
@@ -909,15 +907,6 @@ void rollEyes() {
         default:
           break;
       }
-      leftEye.setPixelColor(a1, 0, 0, 0);
-      leftEye.setPixelColor(a2, 0, 0, 0);
-      leftEye.setPixelColor(a3, 0, 0, 0);
-      leftEye.setPixelColor(a4, 0, 0, 0);
-      rightEye.setPixelColor(a1, 0, 0, 0);
-      rightEye.setPixelColor(a2, 0, 0, 0);
-      rightEye.setPixelColor(a3, 0, 0, 0);
-      rightEye.setPixelColor(a4, 0, 0, 0);
     }
   }
 }
-
