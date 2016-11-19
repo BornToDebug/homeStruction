@@ -1,13 +1,18 @@
-sensor data 15 min time
-image on website
-neopixel
-text to speech
-mp3
+image on website ~1 week 1 hr
+neopixel ~1 day
+text to speech ~ 1/2 day
+mp3 ~ 2 day
 mail server -- reset password
-demo video -- get equipment
-fan temperature
-optimize network usage
-app is fucking big. fix that (partially done)
+demo video -- get equipment ~ not probable
+fan temperature 
+optimize network usage ~ full day
 user screen on android + settings
 
 work hard play hard
+
+Priorities
+
+neopixel, coffee machine, text-to-speech(server weather)
+image website
+fix bugs(switches)
+
