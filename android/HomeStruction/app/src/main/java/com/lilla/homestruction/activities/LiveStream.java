@@ -26,7 +26,7 @@ public class LiveStream extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_stream);
         mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
-        path = "rtmp://homestruction.servebeer.com/live/";
+        path = "rtmp://homestruction.org/live/";
 
         if (!LibsChecker.checkVitamioLibs(this)) {
             return;
