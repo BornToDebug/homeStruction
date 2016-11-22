@@ -460,7 +460,7 @@
                     android:textColor="#00ffff"
                     android:textSize="18sp" />
 
-                <Switch
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/chandelier_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -491,7 +491,7 @@
                     android:textColor="#00ffff"
                     android:textSize="18sp" />
 
-                <Switch
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/nightlight_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -522,7 +522,7 @@
                     android:textColor="#00ffff"
                     android:textSize="18sp" />
 
-                <Switch
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/vecof_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -558,7 +558,7 @@
                         android:textColor="#00ffff"
                         android:textSize="18sp" />
 
-                    <Switch
+                    <android.support.v7.widget.SwitchCompat
                         android:id="@+id/alarm_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
