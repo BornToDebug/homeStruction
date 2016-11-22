@@ -102,6 +102,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         hour = null;
         minute = null;
         webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
+        System.out.println("Token: " + SaveSharedPreference.getToken(MainScreen.this));
         path = "rtmp://homestruction.servebeer.com/live/";
         //keeps the user logged in
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
@@ -1058,5 +1059,4 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateHumidityData(webService);
         updateLightData(webService);
     }
-
 }
