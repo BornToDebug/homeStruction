@@ -42,5 +42,12 @@ if between(temperature, 10.0, 100.0) and between(light2, 0.0, 1024.0) and betwee
 	Temperature.objects.create(value=temperature, time_recorded=timezone.now())
 	Light.objects.create(value=light2, time_recorded=timezone.now())
 	Humidity.objects.create(value=humidity, time_recorded=timezone.now())
+
+myFile = open('/home/projekt/homeStruction/textSpeech/insideData', 'w')
+myFile.seek(0)
+myFile.truncate()
+myFile.write("Inside,\nTemperature, %.2f degrees Celsius,\nRelative Humidity, %.1f%s," % (temperature, humidity, '%'))
+myFile.close()
+
 ser.close()
 

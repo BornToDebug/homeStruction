@@ -35,7 +35,7 @@ def generateImage(Model, ytext):
     plt.ylabel(ytext), plt.xlabel('time')
     plt.xticks(rotation='vertical')
     plt.subplots_adjust(bottom=.3)
-    plt.savefig(ytext + '.jpg', dpi=100)
+    plt.savefig('/home/projekt/homeStruction/website/' + ytext + '.jpg', dpi=100)
     plt.close()
 
 generateImage(Temperature, 'Temperature')
