@@ -96,6 +96,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private boolean isActivityStarted;
     private WebService webService;
     private String path;
+    private SwitchCompat switchCompat = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -562,6 +563,32 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     //Send data to the server
     private void sendToServer(String command) {
+        switch(command) {
+            case "1lampon":
+                switchCompat = chandelierSwitch;
+                switchCompat.setOnCheckedChangeListener(null);
+                break;
+            case "1lampoff":
+                switchCompat = chandelierSwitch;
+                switchCompat.setOnCheckedChangeListener(null);
+                break;
+            case "2lampon":
+                switchCompat = nightLampSwitch;
+                switchCompat.setOnCheckedChangeListener(null);
+                break;
+            case "2lampoff":
+                switchCompat = nightLampSwitch;
+                switchCompat.setOnCheckedChangeListener(null);
+                break;
+            case "3lampon":
+                switchCompat = veCofSwitch;
+                switchCompat.setOnCheckedChangeListener(null);
+                break;
+            case "3lampoff":
+                switchCompat = veCofSwitch;
+                switchCompat.setOnCheckedChangeListener(null);
+                break;
+        }
         isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
@@ -580,10 +607,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     if (myCommand.equals(myResponse)) {
                         System.out.println("LOGG " + myCommand + " Success");
                         isActivityStarted = true;
+                        switchCompat.setOnCheckedChangeListener(MainScreen.this);
                         updateUI();
                         handler.postDelayed(runnable, 3000);
                     } else {
                         System.out.println("LOGG " + myCommand + " Error");
+                        switchCompat.setOnCheckedChangeListener(MainScreen.this);
                     }
                 }
             }
@@ -591,6 +620,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("LOGG Error send to server: " + t.getMessage());
+                switchCompat.setOnCheckedChangeListener(MainScreen.this);
                 showSnackbar();
             }
         });
