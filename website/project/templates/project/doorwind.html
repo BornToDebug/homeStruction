@@ -104,6 +104,12 @@ function stateToHTML(jsonObj) {
 	return tableState;
 
 }
+var milliseconds=0;
+function myFunction(){
+	if(button2.checked==false) {command("opendoor")};
+    if (button2.checked==true) {command("closedoor");}
+	milliseconds = (new Date).getTime();
+}
 	dstatus=document.getElementById('doorstat');
 	wstatus=document.getElementById('windstat');
 	newJSON('/api/door/',stateToHTML,dstatus);
@@ -115,8 +121,8 @@ function stateToHTML(jsonObj) {
 	windowtable = document.getElementById('windowtable');
 	windowstat=document.getElementById('windstat')
 	doorlockbutton = document.getElementById('myopclswitch');
-	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId);
-	getJSON('/api/window/', objectToHTML, windowtable);
+	setInterval(function(){getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId,milliseconds)},1000);
+	setInterval(function(){getJSON('/api/window/', objectToHTML, windowtable)},1000);
 </script>
 {% endblock content %}
 

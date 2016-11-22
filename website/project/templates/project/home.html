@@ -146,9 +146,7 @@ function stateToHTML(jsonObj) {
 	
 	return tableState;
 }
-l1status=document.getElementById('lamp1stat');
-	l2status=document.getElementById('lamp2stat');
-	l3status=document.getElementById('lamp3stat');
+    
 	
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
@@ -156,27 +154,55 @@ l1status=document.getElementById('lamp1stat');
 	lock1button = document.getElementById('myonoffswitch');
 	lock2button = document.getElementById('myonoff2switch');
 	lock3button = document.getElementById('myonoff3switch');
-	buttonJSON('/api/lamp/1',lock1button,lamp1Id);
-	buttonJSON('/api/lamp/2',lock2button,lamp2Id);
-	buttonJSON('/api/lamp/3',lock3button,lamp3Id);
+	var lamp1_milli=0;
+	var lamp2_milli=0;
+	var lamp3_milli=0;
+	function lamp1Func(){
+	if(lamp1button.checked==false) {command("1lampoff")};
+    if (lamp1button.checked==true) {command("1lampon");}
+	lamp1_milli = (new Date).getTime();
+	
+	}
+
+	function lamp2Func(){
+		if(lamp2button.checked==false) {command("2lampoff")};
+		if (lamp2button.checked==true) {command("2lampon");}
+		lamp2_milli = (new Date).getTime();
+	
+	}
+
+	function lamp3Func(){
+		if(lamp3button.checked==false) {command("3lampoff")};
+		if (lamp3button.checked==true) {command("3lampon");}
+		lamp3_milli = (new Date).getTime();
+
+	
+	}
+	setIntercal(function(){buttonJSON('/api/lamp/1',lock1button,lamp1Id,lamp1_milli)},1000);
+	setInterval(function(){buttonJSON('/api/lamp/2',lock2button,lamp2Id,lamp2_milli)},1000);
+	setInterval(function(){buttonJSON('/api/lamp/3',lock3button,lamp3Id,lamp3_milli)},1000);
 	
 	
-	dstatus=document.getElementById('doorstat');
-	wstatus=document.getElementById('windstat');
 	
 	var doorId="dc_c";
 	doorlockbutton = document.getElementById('myopclswitch');
-	buttonJSON('api/lamp/d',doorlockbutton,doorId);
+	var door_milli=0;
+	function myFunction(){
+		if(button2.checked==false) {command("opendoor")};
+		if (button2.checked==true) {command("closedoor");}
+		door_milli = (new Date).getTime();
+	}
+	setInterval(function(){buttonJSON('api/lamp/d',doorlockbutton,doorId,door_milli)},1000);
 	
 	hstatus=document.getElementById('humstat');
-
-	
-	
 	lstatus=document.getElementById('lightstat');
-
-	
-	
 	tstatus=document.getElementById('tempstat');
+	l1status=document.getElementById('lamp1stat');
+	l2status=document.getElementById('lamp2stat');
+	l3status=document.getElementById('lamp3stat');
+	dstatus=document.getElementById('doorstat');
+	wstatus=document.getElementById('windstat');
+	
 
 	newJSON('/api/lamp/1', stateToHTML, l1status);
 	newJSON('/api/lamp/2', stateToHTML, l2status);
@@ -186,6 +212,7 @@ l1status=document.getElementById('lamp1stat');
 	newJSON('/api/temp/', stateToHTML, tstatus);
 	newJSON('/api/humidity/', stateToHTML, hstatus);
 	newJSON('/api/light/', stateToHTML, lstatus);
+	
 	setInterval(function () {newJSON('/api/lamp/1', stateToHTML, l1status)}, 3000);
 	setInterval(function () {newJSON('/api/lamp/2', stateToHTML, l2status)}, 3000);
 	setInterval(function () {newJSON('/api/lamp/3', stateToHTML, l3status)}, 3000);
