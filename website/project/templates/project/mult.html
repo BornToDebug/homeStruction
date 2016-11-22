@@ -125,12 +125,37 @@ function stateToHTML(jsonObj) {
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
 	var lamp3Id="3on_c";
+	var lamp1_milli=0;
+	var lamp2_milli=0;
+	var lamp3_milli=0;
+	function lamp1Func(){
+	if(lamp1button.checked==false) {command("1lampoff")};
+    if (lamp1button.checked==true) {command("1lampon");}
+	lamp1_milli = (new Date).getTime();
+	
+	}
+
+	function lamp2Func(){
+		if(lamp2button.checked==false) {command("2lampoff")};
+		if (lamp2button.checked==true) {command("2lampon");}
+		lamp2_milli = (new Date).getTime();
+	
+	}
+
+	function lamp3Func(){
+		if(lamp3button.checked==false) {command("3lampoff")};
+		if (lamp3button.checked==true) {command("3lampon");}
+		lamp3_milli = (new Date).getTime();
+
+	
+	}
+	
 	lock1button = document.getElementById('myonoffswitch');
 	lock2button = document.getElementById('myonoff2switch');
 	lock3button = document.getElementById('myonoff3switch');
-	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id);
-	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id);
-	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id);
+	setInterval(function(){getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id,lamp1_milli)},1000);
+	setInterval(function(){getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id,lamp2_milli)},1000);
+	setInterval(function(){getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id,lamp3_milli)},1000);
 </script>
 		  
 

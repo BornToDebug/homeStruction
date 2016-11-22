@@ -1,11 +1,14 @@
 
-function getJSON(url, objectConverter, table, button,posVal) {
+function getJSON(url, objectConverter, table, button,posVal,milliseconds) {
 	// try to fetch JSON data from url and call event
 	var json =$.getJSON(url, function(data) {
 		console.log('success');
 		generateRows(data['results'], table, objectConverter);
-		if(button != undefined) {
-			button.checked = data['results'][0].value === posVal;
+		var currentTime = (new Data).getTime();
+		if(milliseconds!= undefined && currentTime-milliseconds >= 6000){
+			if(button != undefined) {
+				button.checked = data['results'][0].value === posVal;
+			}
 		}
 
 
@@ -51,15 +54,17 @@ function generateStatus(json,_status,objectConverter){
 
 
 }
-function buttonJSON(url, button,posVal) {
+function buttonJSON(url, button,posVal,milliseconds) {
 	// try to fetch JSON data from url and call events
 
 	var json = $.getJSON(url, function(data) {
 		console.log('success');
+		var currentTime = (new Data).getTime();
+		if(currentTime-milliseconds >= 6000){
 		if(button != undefined) {
 			button.checked = data['results'][0].value === posVal;
 		}
-
+		}
 	})
 	.done(function() {
 		console.log('second success');

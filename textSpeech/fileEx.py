@@ -1,0 +1,5 @@
+myFile = open('/home/projekt/homeStruction/textSpeech/insideData', 'w')
+myFile.seek(0)
+myFile.truncate()
+myFile.write("Inside,\nTemperature, %d\nHumidity, %d" % (23, 33))
+myFile.close()
