@@ -206,7 +206,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         System.out.println("LOG first run total : " + (startTime4 - startTime));
     }
 
-    /**Show snackbar when there is no connection**/
+    /**
+     * Show snackbar when there is no connection
+     **/
     protected void showSnackbar() {
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
@@ -224,7 +226,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     //TODO personalize your own settings in the settings menu
 
-    /**Update methods to get the data from the RasPi**/
+    /**
+     * Update methods to get the data from the RasPi
+     **/
     private void updateTemperatureData(WebService webService) {
         Call<TemperatureResponse> call = webService.getTemperatures();
         call.enqueue(new Callback<TemperatureResponse>() {
@@ -585,9 +589,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    /**Send data to the server**/
+    /**
+     * Send data to the server
+     **/
     private void sendToServer(String command) {
         System.out.println("LOGG sendToServer() started");
+        switchCompat = null;
         /**set switchCompat to a certain switch based on a command**/
         switch (command) {
             case "1lampon":
@@ -616,7 +623,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
         }
         /**unset setOnCheckedChangeListener until the user gets a response**/
-        switchCompat.setOnCheckedChangeListener(null);
+        if (switchCompat != null) {
+            switchCompat.setOnCheckedChangeListener(null);
+        }
         isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
@@ -627,10 +636,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 String myResponse = null;
-                try {
-                    myResponse = response.body().string();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (response.body() != null) {
+                    try {
+                        myResponse = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 /**reset setOnCheckedChangeListener in any case, so the user can get the real state of the switch**/
                 System.out.println("LOG resp: " + myResponse + " command: " + myCommand);
@@ -642,10 +653,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
                         updateUI2();
                         handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
-                        switchCompat.setOnCheckedChangeListener(MainScreen.this);
+                        if (switchCompat != null) {
+                            switchCompat.setOnCheckedChangeListener(MainScreen.this);
+                        }
                     } else {
                         System.out.println("LOGG " + myCommand + " Error");
-                        switchCompat.setOnCheckedChangeListener(MainScreen.this);
+                        if (switchCompat != null) {
+                            switchCompat.setOnCheckedChangeListener(MainScreen.this);
+                        }
                     }
                 }
             }
@@ -654,13 +669,17 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("LOGG onFailure from sendToServer" + "");
                 System.out.println("LOGG Error send to server: " + t.getMessage());
-                switchCompat.setOnCheckedChangeListener(MainScreen.this);
+                if (switchCompat != null) {
+                    switchCompat.setOnCheckedChangeListener(MainScreen.this);
+                }
                 showSnackbar();
             }
         });
     }
 
-    /**Set the alarm and send it to the server**/
+    /**
+     * Set the alarm and send it to the server
+     **/
     private void setAlarm(String hour, String minute, List<String> days, WebService webService) {
         Call<ResponseBody> call = webService.sendAlarm(hour, minute, days.get(0), days.get(1), days.get(2), days.get(3),
                 days.get(4), days.get(5), days.get(6));
@@ -693,7 +712,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    /**reset the alarm**/
+    /**
+     * reset the alarm
+     **/
     private void resetAlarm(WebService webService) {
         Call<ResponseBody> call = webService.resetAlarm();
         call.enqueue(new Callback<ResponseBody>() {
@@ -725,7 +746,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    /**Create an options menu (it only has a sign out button for now)**/
+    /**
+     * Create an options menu (it only has a sign out button for now)
+     **/
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
 
@@ -788,7 +811,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    /**Managing the onClickListeners by id**/
+    /**
+     * Managing the onClickListeners by id
+     **/
     @Override
     public void onClick(View v) {
 
@@ -967,14 +992,18 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    /**show the alarm's timepicker**/
+    /**
+     * show the alarm's timepicker
+     **/
     private void showTimePickerDialog() {
         TimePickerFragment newFragment = new TimePickerFragment();
         newFragment.setOnDialogCallbacksListener(this);
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
-    /**if back button is pressed, go to home screen**/
+    /**
+     * if back button is pressed, go to home screen
+     **/
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -982,7 +1011,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         startActivity(intent);
     }
 
-    /**if time is set on timepicker, set the button's text correspondingly**/
+    /**
+     * if time is set on timepicker, set the button's text correspondingly
+     **/
     @Override
     public void onTimeSet(int hourOfDay, int minute) {
         System.out.println("LOG time set: " + hourOfDay + ":" + minute);
@@ -1004,7 +1035,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         alarmSwitch.setText(hour + ":" + this.minute);
     }
 
-    /**If time picking is canceled, nullify the hour and minute (to fix error in older android versions)**/
+    /**
+     * If time picking is canceled, nullify the hour and minute (to fix error in older android versions)
+     **/
     @Override
     public void onCancel() {
         System.out.println("LOG canceled");
@@ -1013,7 +1046,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         minute = null;
     }
 
-    /**create request for the alarm**/
+    /**
+     * create request for the alarm
+     **/
     private void createRequest(List<Boolean> daysChecked, WebService webService) {
         List<String> days = Arrays.asList(null, null, null, null, null, null, null);
         for (int i = 0; i < 7; i++) {
@@ -1025,7 +1060,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         setAlarm(hour, minute, days, webService);
     }
 
-    /**make a new runnable which updates the ui in every 3s**/
+    /**
+     * make a new runnable which updates the ui in every 3s
+     **/
     private Runnable runnable1 = new Runnable() {
         @Override
         public void run() {
@@ -1040,7 +1077,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     };
 
-    /**make another runnable which updates luminosity, temperature and humidity only in every 5 minutes,
+    /**
+     * make another runnable which updates luminosity, temperature and humidity only in every 5 minutes,
      * because those values are only updated every 15 minutes, and this way it sends less requests
      */
     private Runnable runnable2 = new Runnable() {
@@ -1057,7 +1095,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     };
 
-    /**when activity is started, update UI**/
+    /**
+     * when activity is started, update UI
+     **/
     @Override
     protected void onStart() {
         super.onStart();
@@ -1070,14 +1110,18 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         onStart = true;
     }
 
-    /**when activity is stopped, don't refresh anymore**/
+    /**
+     * when activity is stopped, don't refresh anymore
+     **/
     @Override
     protected void onStop() {
         isActivityStarted = false;
         super.onStop();
     }
 
-    /**update the data from the app (lamps, doors, windows)**/
+    /**
+     * update the data from the app (lamps, doors, windows)
+     **/
     private void updateUI1() {
         System.out.println("LOG updateUI1");
         updateLamp1Data(webService);
@@ -1088,7 +1132,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         updateWindowsData(webService);
     }
 
-    /**update the humidity, temperature and light state**/
+    /**
+     * update the humidity, temperature and light state
+     **/
     private void updateUI2() {
         System.out.println("LOG updateUI2");
         updateHumidityData(webService);
