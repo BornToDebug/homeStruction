@@ -194,14 +194,14 @@ function stateToHTML(jsonObj) {
 	}
 	setInterval(function(){buttonJSON('api/lamp/d',doorlockbutton,doorId,door_milli)},1000);
 	
-	hstatus=document.getElementById('humstat');
-	lstatus=document.getElementById('lightstat');
-	tstatus=document.getElementById('tempstat');
-	l1status=document.getElementById('lamp1stat');
-	l2status=document.getElementById('lamp2stat');
-	l3status=document.getElementById('lamp3stat');
-	dstatus=document.getElementById('doorstat');
-	wstatus=document.getElementById('windstat');
+	var hstatus=document.getElementById('humstat');
+	var lstatus=document.getElementById('lightstat');
+	var tstatus=document.getElementById('tempstat');
+	var l1status=document.getElementById('lamp1stat');
+	var l2status=document.getElementById('lamp2stat');
+	var l3status=document.getElementById('lamp3stat');
+	var dstatus=document.getElementById('doorstat');
+	var wstatus=document.getElementById('windstat');
 	
 
 	newJSON('/api/lamp/1', stateToHTML, l1status);
