@@ -78,7 +78,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private SwitchCompat nightLampSwitch;
     private SwitchCompat veCofSwitch;
     private TextView confirm;
-    private SwitchCompat alarmSwitch;
+    private Switch alarmSwitch;
     private List<Boolean> daysChecked;
     private ToggleButton mondayButton;
     private ToggleButton tuesdayButton;
@@ -88,11 +88,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ToggleButton saturdayButton;
     private ToggleButton sundayButton;
     private String hour;
+    private boolean onStart;
     private String minute;
     private ImageView doorOpen;
     private ImageView doorClosed;
     private TextView doorConf;
-    private Handler handler;
+    private Handler handler1;
+    private Handler handler2;
     private boolean isActivityStarted;
     private WebService webService;
     private String path;
@@ -126,7 +128,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         doorLocked = (ImageView) findViewById(R.id.door_locked);
         doorUnlocked = (ImageView) findViewById(R.id.door_unlocked);
         confirm = (TextView) findViewById(R.id.conf);
-        alarmSwitch = (SwitchCompat) findViewById(R.id.alarm_switch);
+        alarmSwitch = (Switch) findViewById(R.id.alarm_switch);
         daysChecked = new ArrayList<>(Arrays.asList(new Boolean[7]));
         Collections.fill(daysChecked, Boolean.FALSE);
         mondayButton = (ToggleButton) findViewById(R.id.monday);
@@ -158,14 +160,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.lock).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
-        findViewById(R.id.chandelier).setOnClickListener(this);
+//        findViewById(R.id.chandelier).setOnClickListener(this);
         ((SwitchCompat) findViewById(R.id.chandelier_switch)).setOnCheckedChangeListener(this);
-        findViewById(R.id.nightlight).setOnClickListener(this);
+//        findViewById(R.id.nightlight).setOnClickListener(this);
         ((SwitchCompat) findViewById(R.id.nightlight_switch)).setOnCheckedChangeListener(this);
-        findViewById(R.id.vecof).setOnClickListener(this);
+//        findViewById(R.id.vecof).setOnClickListener(this);
         ((SwitchCompat) findViewById(R.id.vecof_switch)).setOnCheckedChangeListener(this);
         findViewById(R.id.alarm).setOnClickListener(this);
-        ((SwitchCompat) findViewById(R.id.alarm_switch)).setOnCheckedChangeListener(this);
+        findViewById(R.id.alarm_switch).setOnClickListener(this);
         findViewById(R.id.monday).setOnClickListener(this);
         findViewById(R.id.tuesday).setOnClickListener(this);
         findViewById(R.id.wednesday).setOnClickListener(this);
@@ -201,7 +203,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-        handler = new Handler(getMainLooper());
+        handler1 = new Handler(getMainLooper());
+        handler2 = new Handler(getMainLooper());
 
         long startTime4 = System.currentTimeMillis();
         System.out.println("LOG first run updating : " + (startTime4 - startTime3));
@@ -218,6 +221,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         Intent refresh = getIntent();
                         finish();
                         startActivity(refresh);
+                        isActivityStarted = true;
                     }
                 });
         snackbar.show();
@@ -563,28 +567,35 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     //Send data to the server
     private void sendToServer(String command) {
+        System.out.println("LOGG sendToServer() started");
         switch(command) {
             case "1lampon":
+                System.out.println("LOGG 1lampon");
                 switchCompat = chandelierSwitch;
                 switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "1lampoff":
+                System.out.println("LOGG 1lampoff");
                 switchCompat = chandelierSwitch;
                 switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "2lampon":
+                System.out.println("LOGG 2lampon");
                 switchCompat = nightLampSwitch;
                 switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "2lampoff":
+                System.out.println("LOGG 2lampoff");
                 switchCompat = nightLampSwitch;
                 switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "3lampon":
+                System.out.println("LOGG 3lampon");
                 switchCompat = veCofSwitch;
                 switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "3lampoff":
+                System.out.println("LOGG 3lampoff");
                 switchCompat = veCofSwitch;
                 switchCompat.setOnCheckedChangeListener(null);
                 break;
@@ -592,7 +603,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
+        System.out.println("LOGG command: " + myCommand);
         call.enqueue(new Callback<ResponseBody>() {
+
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -608,8 +621,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         System.out.println("LOGG " + myCommand + " Success");
                         isActivityStarted = true;
                         switchCompat.setOnCheckedChangeListener(MainScreen.this);
-                        updateUI();
-                        handler.postDelayed(runnable, 3000);
+                        updateUI1();
+                        handler1.postDelayed(runnable1, 5000);
+                        updateUI2();
+                        handler2.postDelayed(runnable2, 301777);
                     } else {
                         System.out.println("LOGG " + myCommand + " Error");
                         switchCompat.setOnCheckedChangeListener(MainScreen.this);
@@ -619,6 +634,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("LOGG onFailure from sendToServer" + "");
                 System.out.println("LOGG Error send to server: " + t.getMessage());
                 switchCompat.setOnCheckedChangeListener(MainScreen.this);
                 showSnackbar();
@@ -814,16 +830,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             case R.id.windows:
                 System.out.println("LOG Windows button clicked");
                 break;
-            case R.id.chandelier:
-                chandelierSwitch.toggle();
-                if (chandelierSwitch.isChecked()) {
-                    System.out.println("LOG ChandelierSwitch checked");
-                    sendToServer("1lampon");
-                } else {
-                    System.out.println("LOG ChandelierSwitch unchecked");
-                    sendToServer("1lampoff");
-                }
-                break;
+//            case R.id.chandelier:
+//                chandelierSwitch.toggle();
+//                if (chandelierSwitch.isChecked()) {
+//                    System.out.println("LOG ChandelierSwitch checked");
+//                    sendToServer("1lampon");
+//                } else {
+//                    System.out.println("LOG ChandelierSwitch unchecked");
+//                    sendToServer("1lampoff");
+//                }
+//                break;
 //            case R.id.chandelier_switch:
 //                if (chandelierSwitch.isChecked()) {
 //                    System.out.println("LOG ChandelierSwitch checked");
@@ -833,16 +849,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 //                    sendToServer("1lampoff");
 //                }
 //                break;
-            case R.id.nightlight:
-                nightLampSwitch.toggle();
-                if (nightLampSwitch.isChecked()) {
-                    System.out.println("LOG NightLightSwitch checked");
-                    sendToServer("2lampon");
-                } else {
-                    System.out.println("LOG NightLightSwitch unchecked");
-                    sendToServer("2lampoff");
-                }
-                break;
+//            case R.id.nightlight:
+//                nightLampSwitch.toggle();
+//                if (nightLampSwitch.isChecked()) {
+//                    System.out.println("LOG NightLightSwitch checked");
+//                    sendToServer("2lampon");
+//                } else {
+//                    System.out.println("LOG NightLightSwitch unchecked");
+//                    sendToServer("2lampoff");
+//                }
+//                break;
 //            case R.id.nightlight_switch:
 //                if (nightLampSwitch.isChecked()) {
 //                    System.out.println("LOG NightLightSwitch checked");
@@ -852,16 +868,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 //                    sendToServer("2lampoff");
 //                }
 //                break;
-            case R.id.vecof:
-                veCofSwitch.toggle();
-                if (veCofSwitch.isChecked()) {
-                    System.out.println("LOG VeCofSwitch checked");
-                    sendToServer("3lampon");
-                } else {
-                    System.out.println("LOG VeCofSwitch unchecked");
-                    sendToServer("3lampoff");
-                }
-                break;
+//            case R.id.vecof:
+//                veCofSwitch.toggle();
+//                if (veCofSwitch.isChecked()) {
+//                    System.out.println("LOG VeCofSwitch checked");
+//                    sendToServer("3lampon");
+//                } else {
+//                    System.out.println("LOG VeCofSwitch unchecked");
+//                    sendToServer("3lampoff");
+//                }
+//                break;
 //            case R.id.vecof_switch:
 //                if (veCofSwitch.isChecked()) {
 //                    System.out.println("LOG VeCofSwitch checked");
@@ -879,23 +895,23 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 showTimePickerDialog();
                 System.out.println("LOG " + hour + ":" + minute);
                 break;
-//            case R.id.alarm_switch:
-//                if (!alarmSwitch.isChecked()) {
-//                    alarmSwitch.setText("");
-//                    System.out.println("LOGG RESET alarm!");
-//                    resetAlarm(webService);
-//                    mondayButton.setChecked(false);
-//                    tuesdayButton.setChecked(false);
-//                    wednesdayButton.setChecked(false);
-//                    thursdayButton.setChecked(false);
-//                    fridayButton.setChecked(false);
-//                    saturdayButton.setChecked(false);
-//                    sundayButton.setChecked(false);
-//                } else {
-//                    showTimePickerDialog();
-//                }
-//                System.out.println("LOG " + hour + ":" + minute);
-//                break;
+            case R.id.alarm_switch:
+                if (!alarmSwitch.isChecked()) {
+                    alarmSwitch.setText("");
+                    System.out.println("LOGG RESET alarm!");
+                    resetAlarm(webService);
+                    mondayButton.setChecked(false);
+                    tuesdayButton.setChecked(false);
+                    wednesdayButton.setChecked(false);
+                    thursdayButton.setChecked(false);
+                    fridayButton.setChecked(false);
+                    saturdayButton.setChecked(false);
+                    sundayButton.setChecked(false);
+                } else {
+                    showTimePickerDialog();
+                }
+                System.out.println("LOG " + hour + ":" + minute);
+                break;
             case R.id.monday:
                 if (mondayButton.isChecked()) {
                     daysChecked.set(0, true);
@@ -1051,13 +1067,27 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     //make a new runnable which updates the ui in every 3s
-    private Runnable runnable = new Runnable() {
+    private Runnable runnable1 = new Runnable() {
         @Override
         public void run() {
             if (isActivityStarted) {
                 System.out.println("Activity is started");
-                updateUI();
-                handler.postDelayed(runnable, 3000);
+                updateUI1();
+                handler1.postDelayed(runnable1, 5000);
+            }
+            else {
+                System.out.println("Activity is not started");
+            }
+        }
+    };
+
+    private Runnable runnable2 = new Runnable() {
+        @Override
+        public void run() {
+            if (isActivityStarted) {
+                System.out.println("Activity is started");
+                updateUI2();
+                handler2.postDelayed(runnable2, 301777);
             }
             else {
                 System.out.println("Activity is not started");
@@ -1070,8 +1100,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     protected void onStart() {
         super.onStart();
         isActivityStarted = true;
-        updateUI();
-        handler.postDelayed(runnable, 3000);
+        updateUI1();
+        handler1.postDelayed(runnable1, 5000);
+        updateUI2();
+        handler2.postDelayed(runnable2, 301777);
+        System.out.println("LOGG Activity started!");
+        onStart = true;
     }
 
     //when activity is stopped, don't refresh anymore
@@ -1082,67 +1116,78 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     //Create a new webservice and update the data from the app
-    private void updateUI() {
-        System.out.println("LOG updateUI");
+    private void updateUI1() {
+        System.out.println("LOG updateUI1");
 //        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
-        updateTemperatureData(webService);
+//        updateTemperatureData(webService);
         updateLamp1Data(webService);
         updateLamp2Data(webService);
         updateLamp3Data(webService);
         updateDoorData(webService);
         updateDoorLockedData(webService);
         updateWindowsData(webService);
+//        updateHumidityData(webService);
+//        updateLightData(webService);
+    }
+
+    private void updateUI2() {
+        System.out.println("LOG updateUI2");
         updateHumidityData(webService);
+        updateTemperatureData(webService);
         updateLightData(webService);
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        switch(buttonView.getId()) {
-            case R.id.chandelier_switch:
-                if (chandelierSwitch.isChecked()) {
-                    System.out.println("LOG ChandelierSwitch checked");
-                    sendToServer("1lampon");
-                } else {
-                    System.out.println("LOG ChandelierSwitch unchecked");
-                    sendToServer("1lampoff");
-                }
-                break;
-            case R.id.nightlight_switch:
-                if (nightLampSwitch.isChecked()) {
-                    System.out.println("LOG NightLightSwitch checked");
-                    sendToServer("2lampon");
-                } else {
-                    System.out.println("LOG NightLightSwitch unchecked");
-                    sendToServer("2lampoff");
-                }
-                break;
-            case R.id.vecof_switch:
-                if (veCofSwitch.isChecked()) {
-                    System.out.println("LOG VeCofSwitch checked");
-                    sendToServer("3lampon");
-                } else {
-                    System.out.println("LOG VeCofSwitch unchecked");
-                    sendToServer("3lampoff");
-                }
-                break;
-            case R.id.alarm_switch:
-                if (!alarmSwitch.isChecked()) {
-                    alarmSwitch.setText("");
-                    System.out.println("LOGG RESET alarm!");
-                    resetAlarm(webService);
-                    mondayButton.setChecked(false);
-                    tuesdayButton.setChecked(false);
-                    wednesdayButton.setChecked(false);
-                    thursdayButton.setChecked(false);
-                    fridayButton.setChecked(false);
-                    saturdayButton.setChecked(false);
-                    sundayButton.setChecked(false);
-                } else {
-                    showTimePickerDialog();
-                }
-                System.out.println("LOG " + hour + ":" + minute);
-                break;
+        if (onStart == false) {
+            switch (buttonView.getId()) {
+                case R.id.chandelier_switch:
+                    if (chandelierSwitch.isChecked()) {
+                        System.out.println("LOG ChandelierSwitch checked");
+                        sendToServer("1lampon");
+                    } else {
+                        System.out.println("LOG ChandelierSwitch unchecked");
+                        sendToServer("1lampoff");
+                    }
+                    break;
+                case R.id.nightlight_switch:
+                    if (nightLampSwitch.isChecked()) {
+                        System.out.println("LOG NightLightSwitch checked");
+                        sendToServer("2lampon");
+                    } else {
+                        System.out.println("LOG NightLightSwitch unchecked");
+                        sendToServer("2lampoff");
+                    }
+                    break;
+                case R.id.vecof_switch:
+                    if (veCofSwitch.isChecked()) {
+                        System.out.println("LOG VeCofSwitch checked");
+                        sendToServer("3lampon");
+                    } else {
+                        System.out.println("LOG VeCofSwitch unchecked");
+                        sendToServer("3lampoff");
+                    }
+                    break;
+//            case R.id.alarm_switch:
+//                if (!alarmSwitch.isChecked()) {
+//                    alarmSwitch.setText("");
+//                    System.out.println("LOGG RESET alarm!");
+//                    resetAlarm(webService);
+//                    mondayButton.setChecked(false);
+//                    tuesdayButton.setChecked(false);
+//                    wednesdayButton.setChecked(false);
+//                    thursdayButton.setChecked(false);
+//                    fridayButton.setChecked(false);
+//                    saturdayButton.setChecked(false);
+//                    sundayButton.setChecked(false);
+//                } else {
+//                    showTimePickerDialog();
+//                }
+//                System.out.println("LOG " + hour + ":" + minute);
+//                break;
+            }
+        } else {
+            onStart = false;
         }
     }
 }

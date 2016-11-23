@@ -558,7 +558,7 @@
                         android:textColor="#00ffff"
                         android:textSize="18sp" />
 
-                    <android.support.v7.widget.SwitchCompat
+                    <Switch
                         android:id="@+id/alarm_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
