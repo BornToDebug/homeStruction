@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.util.TimeUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,6 +53,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -93,8 +96,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ImageView doorOpen;
     private ImageView doorClosed;
     private TextView doorConf;
-    private Handler handler1;
-    private Handler handler2;
+    private Handler handler;
     private boolean isActivityStarted;
     private WebService webService;
     private String path;
@@ -108,7 +110,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         minute = null;
         webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
         System.out.println("Token: " + SaveSharedPreference.getToken(MainScreen.this));
-        path = "rtmp://homestruction.servebeer.com/live/";
+        path = "rtmp://homestruction.org/live/";
         //keeps the user logged in
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
             Intent intent = new Intent(MainScreen.this, LoginActivity.class);
@@ -203,8 +205,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-        handler1 = new Handler(getMainLooper());
-        handler2 = new Handler(getMainLooper());
+        handler = new Handler(getMainLooper());
 
         long startTime4 = System.currentTimeMillis();
         System.out.println("LOG first run updating : " + (startTime4 - startTime3));
@@ -308,20 +309,28 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     if (lamp1Values.get(0) != null) {
                         switch (lamp1Values.get(0).getValue()) {
                             case "1off_c":
+                                chandelierSwitch.setOnCheckedChangeListener(null);
                                 chandelierSwitch.setChecked(false);
                                 chandelierSwitch.setText("");
+                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "1off_uc":
+                                chandelierSwitch.setOnCheckedChangeListener(null);
                                 chandelierSwitch.setChecked(false);
                                 chandelierSwitch.setText("?");
+                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "1on_c":
+                                chandelierSwitch.setOnCheckedChangeListener(null);
                                 chandelierSwitch.setChecked(true);
                                 chandelierSwitch.setText("");
+                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "1on_uc":
+                                chandelierSwitch.setOnCheckedChangeListener(null);
                                 chandelierSwitch.setChecked(true);
                                 chandelierSwitch.setText("?");
+                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             default:
                                 chandelierSwitch.setText("error");
@@ -355,20 +364,28 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     if (lamp2Values.get(0) != null) {
                         switch (lamp2Values.get(0).getValue()) {
                             case "2off_c":
+                                nightLampSwitch.setOnCheckedChangeListener(null);
                                 nightLampSwitch.setChecked(false);
                                 nightLampSwitch.setText("");
+                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "2off_uc":
+                                nightLampSwitch.setOnCheckedChangeListener(null);
                                 nightLampSwitch.setChecked(false);
                                 nightLampSwitch.setText("?");
+                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "2on_c":
+                                nightLampSwitch.setOnCheckedChangeListener(null);
                                 nightLampSwitch.setChecked(true);
                                 nightLampSwitch.setText("");
+                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "2on_uc":
+                                nightLampSwitch.setOnCheckedChangeListener(null);
                                 nightLampSwitch.setChecked(true);
                                 nightLampSwitch.setText("?");
+                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             default:
                                 nightLampSwitch.setText("error");
@@ -402,20 +419,28 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     if (lamp3Values.get(0) != null) {
                         switch (lamp3Values.get(0).getValue()) {
                             case "3off_c":
+                                veCofSwitch.setOnCheckedChangeListener(null);
                                 veCofSwitch.setChecked(false);
                                 veCofSwitch.setText("");
+                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "3off_uc":
+                                veCofSwitch.setOnCheckedChangeListener(null);
                                 veCofSwitch.setChecked(false);
                                 veCofSwitch.setText("?");
+                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "3on_c":
+                                veCofSwitch.setOnCheckedChangeListener(null);
                                 veCofSwitch.setChecked(true);
                                 veCofSwitch.setText("");
+                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             case "3on_uc":
+                                veCofSwitch.setOnCheckedChangeListener(null);
                                 veCofSwitch.setChecked(true);
                                 veCofSwitch.setText("?");
+                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
                                 break;
                             default:
                                 veCofSwitch.setText("error");
@@ -568,38 +593,33 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     //Send data to the server
     private void sendToServer(String command) {
         System.out.println("LOGG sendToServer() started");
-        switch(command) {
+        switch (command) {
             case "1lampon":
                 System.out.println("LOGG 1lampon");
                 switchCompat = chandelierSwitch;
-                switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "1lampoff":
                 System.out.println("LOGG 1lampoff");
                 switchCompat = chandelierSwitch;
-                switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "2lampon":
                 System.out.println("LOGG 2lampon");
                 switchCompat = nightLampSwitch;
-                switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "2lampoff":
                 System.out.println("LOGG 2lampoff");
                 switchCompat = nightLampSwitch;
-                switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "3lampon":
                 System.out.println("LOGG 3lampon");
                 switchCompat = veCofSwitch;
-                switchCompat.setOnCheckedChangeListener(null);
                 break;
             case "3lampoff":
                 System.out.println("LOGG 3lampoff");
                 switchCompat = veCofSwitch;
-                switchCompat.setOnCheckedChangeListener(null);
                 break;
         }
+        switchCompat.setOnCheckedChangeListener(null);
         isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
@@ -620,11 +640,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     if (myCommand.equals(myResponse)) {
                         System.out.println("LOGG " + myCommand + " Success");
                         isActivityStarted = true;
-                        switchCompat.setOnCheckedChangeListener(MainScreen.this);
                         updateUI1();
-                        handler1.postDelayed(runnable1, 5000);
+                        handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
                         updateUI2();
-                        handler2.postDelayed(runnable2, 301777);
+                        handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
+                        switchCompat.setOnCheckedChangeListener(MainScreen.this);
                     } else {
                         System.out.println("LOGG " + myCommand + " Error");
                         switchCompat.setOnCheckedChangeListener(MainScreen.this);
@@ -830,63 +850,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             case R.id.windows:
                 System.out.println("LOG Windows button clicked");
                 break;
-//            case R.id.chandelier:
-//                chandelierSwitch.toggle();
-//                if (chandelierSwitch.isChecked()) {
-//                    System.out.println("LOG ChandelierSwitch checked");
-//                    sendToServer("1lampon");
-//                } else {
-//                    System.out.println("LOG ChandelierSwitch unchecked");
-//                    sendToServer("1lampoff");
-//                }
-//                break;
-//            case R.id.chandelier_switch:
-//                if (chandelierSwitch.isChecked()) {
-//                    System.out.println("LOG ChandelierSwitch checked");
-//                    sendToServer("1lampon");
-//                } else {
-//                    System.out.println("LOG ChandelierSwitch unchecked");
-//                    sendToServer("1lampoff");
-//                }
-//                break;
-//            case R.id.nightlight:
-//                nightLampSwitch.toggle();
-//                if (nightLampSwitch.isChecked()) {
-//                    System.out.println("LOG NightLightSwitch checked");
-//                    sendToServer("2lampon");
-//                } else {
-//                    System.out.println("LOG NightLightSwitch unchecked");
-//                    sendToServer("2lampoff");
-//                }
-//                break;
-//            case R.id.nightlight_switch:
-//                if (nightLampSwitch.isChecked()) {
-//                    System.out.println("LOG NightLightSwitch checked");
-//                    sendToServer("2lampon");
-//                } else {
-//                    System.out.println("LOG NightLightSwitch unchecked");
-//                    sendToServer("2lampoff");
-//                }
-//                break;
-//            case R.id.vecof:
-//                veCofSwitch.toggle();
-//                if (veCofSwitch.isChecked()) {
-//                    System.out.println("LOG VeCofSwitch checked");
-//                    sendToServer("3lampon");
-//                } else {
-//                    System.out.println("LOG VeCofSwitch unchecked");
-//                    sendToServer("3lampoff");
-//                }
-//                break;
-//            case R.id.vecof_switch:
-//                if (veCofSwitch.isChecked()) {
-//                    System.out.println("LOG VeCofSwitch checked");
-//                    sendToServer("3lampon");
-//                } else {
-//                    System.out.println("LOG VeCofSwitch unchecked");
-//                    sendToServer("3lampoff");
-//                }
-//                break;
             case R.id.alarm:
                 System.out.println("LOG Alarm button clicked");
                 if (!alarmSwitch.isChecked()) {
@@ -1070,12 +1033,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Runnable runnable1 = new Runnable() {
         @Override
         public void run() {
+            System.out.println("LOGG runnable1");
             if (isActivityStarted) {
                 System.out.println("Activity is started");
                 updateUI1();
-                handler1.postDelayed(runnable1, 5000);
-            }
-            else {
+                handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
+            } else {
                 System.out.println("Activity is not started");
             }
         }
@@ -1084,12 +1047,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Runnable runnable2 = new Runnable() {
         @Override
         public void run() {
+            System.out.println("LOGG runnable2");
             if (isActivityStarted) {
                 System.out.println("Activity is started");
                 updateUI2();
-                handler2.postDelayed(runnable2, 301777);
-            }
-            else {
+                handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
+            } else {
                 System.out.println("Activity is not started");
             }
         }
@@ -1101,9 +1064,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         super.onStart();
         isActivityStarted = true;
         updateUI1();
-        handler1.postDelayed(runnable1, 5000);
+        handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
         updateUI2();
-        handler2.postDelayed(runnable2, 301777);
+        handler.postDelayed(runnable2, (long) 5.17 * DateUtils.MINUTE_IN_MILLIS);
         System.out.println("LOGG Activity started!");
         onStart = true;
     }
