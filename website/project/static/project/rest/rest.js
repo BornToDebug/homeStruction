@@ -4,7 +4,7 @@ function getJSON(url, objectConverter, table, button,posVal,milliseconds) {
 	var json =$.getJSON(url, function(data) {
 		console.log('success');
 		generateRows(data['results'], table, objectConverter);
-		var currentTime = (new Data).getTime();
+		var currentTime = (new Date).getTime();
 		if(milliseconds!= undefined && currentTime-milliseconds >= 6000){
 			if(button != undefined) {
 				button.checked = data['results'][0].value === posVal;
@@ -59,7 +59,7 @@ function buttonJSON(url, button,posVal,milliseconds) {
 
 	var json = $.getJSON(url, function(data) {
 		console.log('success');
-		var currentTime = (new Data).getTime();
+		var currentTime = (new Date).getTime();
 		if(currentTime-milliseconds >= 6000){
 		if(button != undefined) {
 			button.checked = data['results'][0].value === posVal;

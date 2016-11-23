@@ -106,6 +106,7 @@ function stateToHTML(jsonObj) {
 	
 	var myVar = jsonObj['value'];
 	var tableState = myVar;
+	
 	if(myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c"){tableState = "ON";}
 	if(myVar == "1off_c" || myVar == "2off_c" || myVar == "3off_c"){tableState = "OFF";}
 	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_uc" || myVar == "2on_uc" || myVar == "3on_uc") {tableState = "ERR";}
@@ -118,9 +119,7 @@ function stateToHTML(jsonObj) {
     newJSON('/api/lamp/1',stateToHTML,l1status);
     newJSON('/api/lamp/2',stateToHTML,l2status);
     newJSON('/api/lamp/3',stateToHTML,l3status);
-	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
-	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);
-	setInterval(function(){newJSON('/api/lamp/3',stateToHTML,l3status)},3000);
+	
 	lamptable = document.getElementById('lamptable');
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
@@ -150,9 +149,9 @@ function stateToHTML(jsonObj) {
 	
 	}
 	
-	lock1button = document.getElementById('myonoffswitch');
-	lock2button = document.getElementById('myonoff2switch');
-	lock3button = document.getElementById('myonoff3switch');
+	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
+	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);
+	setInterval(function(){newJSON('/api/lamp/3',stateToHTML,l3status)},3000);
 	setInterval(function(){getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id,lamp1_milli)},1000);
 	setInterval(function(){getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id,lamp2_milli)},1000);
 	setInterval(function(){getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id,lamp3_milli)},1000);
