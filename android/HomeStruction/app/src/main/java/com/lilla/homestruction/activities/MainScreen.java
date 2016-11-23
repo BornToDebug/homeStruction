@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.util.TimeUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.text.format.DateUtils;
@@ -53,7 +52,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -111,17 +109,17 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
         System.out.println("Token: " + SaveSharedPreference.getToken(MainScreen.this));
         path = "rtmp://homestruction.org/live/";
-        //keeps the user logged in
+        /**keeps the user logged in**/
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
             Intent intent = new Intent(MainScreen.this, LoginActivity.class);
             startActivity(intent);
         }
 
-        //Testing the running time
+        /**Testing the running time**/
         long startTime2 = System.currentTimeMillis();
         System.out.println("LOG first run: " + (startTime2 - startTime));
 
-        //Assigning views to XML ids
+        /**Assigning views to XML ids**/
         temperatureValue = (TextView) findViewById(R.id.temperature_value);
         humidityValue = (TextView) findViewById(R.id.humidity_value);
         luminosityValue = (TextView) findViewById(R.id.luminosity_value);
@@ -153,7 +151,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         doorClosed = (ImageView) findViewById(R.id.door_closed);
         doorConf = (TextView) findViewById(R.id.ocText);
 
-        //Setting onClickListener
+        /**Setting onClickListener**/
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
         findViewById(R.id.luminosity).setOnClickListener(this);
@@ -162,11 +160,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.lock).setOnClickListener(this);
         findViewById(R.id.windows).setOnClickListener(this);
-//        findViewById(R.id.chandelier).setOnClickListener(this);
         ((SwitchCompat) findViewById(R.id.chandelier_switch)).setOnCheckedChangeListener(this);
-//        findViewById(R.id.nightlight).setOnClickListener(this);
-        ((SwitchCompat) findViewById(R.id.nightlight_switch)).setOnCheckedChangeListener(this);
-//        findViewById(R.id.vecof).setOnClickListener(this);
         ((SwitchCompat) findViewById(R.id.vecof_switch)).setOnCheckedChangeListener(this);
         findViewById(R.id.alarm).setOnClickListener(this);
         findViewById(R.id.alarm_switch).setOnClickListener(this);
@@ -192,7 +186,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             public void onStopTrackingTouch(SeekBar bar) {
-                int value = bar.getProgress(); // the value of the seekBar progress
+                int value = bar.getProgress(); /** the value of the seekBar progress**/
             }
 
             public void onStartTrackingTouch(SeekBar bar) {
@@ -201,7 +195,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
             public void onProgressChanged(SeekBar bar,
                                           int paramInt, boolean paramBoolean) {
-                volume.setText("" + paramInt + "%"); // here in textView the percent will be shown
+                volume.setText("" + paramInt + "%"); /** here in textView the percent will be shown**/
             }
         });
 
@@ -212,7 +206,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         System.out.println("LOG first run total : " + (startTime4 - startTime));
     }
 
-    //Show snackbar when there is no connection
+    /**Show snackbar when there is no connection**/
     protected void showSnackbar() {
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
@@ -230,7 +224,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     //TODO personalize your own settings in the settings menu
 
-    //Update methods to get the data from the RasPi
+    /**Update methods to get the data from the RasPi**/
     private void updateTemperatureData(WebService webService) {
         Call<TemperatureResponse> call = webService.getTemperatures();
         call.enqueue(new Callback<TemperatureResponse>() {
@@ -308,6 +302,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (lamp1Values != null) {
                     if (lamp1Values.get(0) != null) {
                         switch (lamp1Values.get(0).getValue()) {
+                            /**disable setOnCheckedChangeListener when the user changes the switch state (same on all following)**/
                             case "1off_c":
                                 chandelierSwitch.setOnCheckedChangeListener(null);
                                 chandelierSwitch.setChecked(false);
@@ -590,9 +585,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    //Send data to the server
+    /**Send data to the server**/
     private void sendToServer(String command) {
         System.out.println("LOGG sendToServer() started");
+        /**set switchCompat to a certain switch based on a command**/
         switch (command) {
             case "1lampon":
                 System.out.println("LOGG 1lampon");
@@ -619,6 +615,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 switchCompat = veCofSwitch;
                 break;
         }
+        /**unset setOnCheckedChangeListener until the user gets a response**/
         switchCompat.setOnCheckedChangeListener(null);
         isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
@@ -635,6 +632,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                /**reset setOnCheckedChangeListener in any case, so the user can get the real state of the switch**/
                 System.out.println("LOG resp: " + myResponse + " command: " + myCommand);
                 if (myResponse != null) {
                     if (myCommand.equals(myResponse)) {
@@ -662,7 +660,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    //Set the alarm and send it to the server
+    /**Set the alarm and send it to the server**/
     private void setAlarm(String hour, String minute, List<String> days, WebService webService) {
         Call<ResponseBody> call = webService.sendAlarm(hour, minute, days.get(0), days.get(1), days.get(2), days.get(3),
                 days.get(4), days.get(5), days.get(6));
@@ -695,7 +693,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    //reset the alarm
+    /**reset the alarm**/
     private void resetAlarm(WebService webService) {
         Call<ResponseBody> call = webService.resetAlarm();
         call.enqueue(new Callback<ResponseBody>() {
@@ -727,7 +725,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
-    //Create an options menu (it only has a sign out button for now)
+    /**Create an options menu (it only has a sign out button for now)**/
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
 
@@ -737,7 +735,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
+            /** Respond to the action bar's Up/Home button**/
             case R.id.sign_out:
                 System.out.println("LOG Sign out button pressed");
                 SaveSharedPreference.removeUserName(MainScreen.this);
@@ -774,7 +772,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         startActivityForResult(vlcIntent, 42);
                     }
                 }
-//                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -791,13 +788,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    //Managing the onClickListeners by id
+    /**Managing the onClickListeners by id**/
     @Override
     public void onClick(View v) {
 
         ImageButton play = (ImageButton) findViewById(R.id.play);
         ImageButton pause = (ImageButton) findViewById(R.id.pause);
-//        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
 
         switch (v.getId()) {
             case R.id.temperature:
@@ -971,14 +967,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    //show the alarm's timepicker
+    /**show the alarm's timepicker**/
     private void showTimePickerDialog() {
         TimePickerFragment newFragment = new TimePickerFragment();
         newFragment.setOnDialogCallbacksListener(this);
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
-    //if back button is pressed, go to home screen
+    /**if back button is pressed, go to home screen**/
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -986,7 +982,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         startActivity(intent);
     }
 
-    //if time is set on timepicker, set the button's text correspondingly
+    /**if time is set on timepicker, set the button's text correspondingly**/
     @Override
     public void onTimeSet(int hourOfDay, int minute) {
         System.out.println("LOG time set: " + hourOfDay + ":" + minute);
@@ -1008,7 +1004,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         alarmSwitch.setText(hour + ":" + this.minute);
     }
 
-    //If time picking is canceled, nullify the hour and minute (to fix error in older android versions)
+    /**If time picking is canceled, nullify the hour and minute (to fix error in older android versions)**/
     @Override
     public void onCancel() {
         System.out.println("LOG canceled");
@@ -1017,7 +1013,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         minute = null;
     }
 
-    //create request for the alarm
+    /**create request for the alarm**/
     private void createRequest(List<Boolean> daysChecked, WebService webService) {
         List<String> days = Arrays.asList(null, null, null, null, null, null, null);
         for (int i = 0; i < 7; i++) {
@@ -1029,7 +1025,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         setAlarm(hour, minute, days, webService);
     }
 
-    //make a new runnable which updates the ui in every 3s
+    /**make a new runnable which updates the ui in every 3s**/
     private Runnable runnable1 = new Runnable() {
         @Override
         public void run() {
@@ -1044,6 +1040,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     };
 
+    /**make another runnable which updates luminosity, temperature and humidity only in every 5 minutes,
+     * because those values are only updated every 15 minutes, and this way it sends less requests
+     */
     private Runnable runnable2 = new Runnable() {
         @Override
         public void run() {
@@ -1058,7 +1057,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     };
 
-    //when activity is started, update UI
+    /**when activity is started, update UI**/
     @Override
     protected void onStart() {
         super.onStart();
@@ -1071,28 +1070,25 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         onStart = true;
     }
 
-    //when activity is stopped, don't refresh anymore
+    /**when activity is stopped, don't refresh anymore**/
     @Override
     protected void onStop() {
         isActivityStarted = false;
         super.onStop();
     }
 
-    //Create a new webservice and update the data from the app
+    /**update the data from the app (lamps, doors, windows)**/
     private void updateUI1() {
         System.out.println("LOG updateUI1");
-//        WebService webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
-//        updateTemperatureData(webService);
         updateLamp1Data(webService);
         updateLamp2Data(webService);
         updateLamp3Data(webService);
         updateDoorData(webService);
         updateDoorLockedData(webService);
         updateWindowsData(webService);
-//        updateHumidityData(webService);
-//        updateLightData(webService);
     }
 
+    /**update the humidity, temperature and light state**/
     private void updateUI2() {
         System.out.println("LOG updateUI2");
         updateHumidityData(webService);
@@ -1131,23 +1127,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         sendToServer("3lampoff");
                     }
                     break;
-//            case R.id.alarm_switch:
-//                if (!alarmSwitch.isChecked()) {
-//                    alarmSwitch.setText("");
-//                    System.out.println("LOGG RESET alarm!");
-//                    resetAlarm(webService);
-//                    mondayButton.setChecked(false);
-//                    tuesdayButton.setChecked(false);
-//                    wednesdayButton.setChecked(false);
-//                    thursdayButton.setChecked(false);
-//                    fridayButton.setChecked(false);
-//                    saturdayButton.setChecked(false);
-//                    sundayButton.setChecked(false);
-//                } else {
-//                    showTimePickerDialog();
-//                }
-//                System.out.println("LOG " + hour + ":" + minute);
-//                break;
             }
         } else {
             onStart = false;
