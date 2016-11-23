@@ -154,6 +154,15 @@ function stateToHTML(jsonObj) {
 	lock1button = document.getElementById('myonoffswitch');
 	lock2button = document.getElementById('myonoff2switch');
 	lock3button = document.getElementById('myonoff3switch');
+	var hstatus=document.getElementById('humstat');
+	var lstatus=document.getElementById('lightstat');
+	var tstatus=document.getElementById('tempstat');
+	var l1status=document.getElementById('lamp1stat');
+	var l2status=document.getElementById('lamp2stat');
+	var l3status=document.getElementById('lamp3stat');
+	var dstatus=document.getElementById('doorstat');
+	var wstatus=document.getElementById('windstat');
+	
 	var lamp1_milli=0;
 	var lamp2_milli=0;
 	var lamp3_milli=0;
@@ -194,14 +203,7 @@ function stateToHTML(jsonObj) {
 	}
 	setInterval(function(){buttonJSON('api/lamp/d',doorlockbutton,doorId,door_milli)},1000);
 	
-	var hstatus=document.getElementById('humstat');
-	var lstatus=document.getElementById('lightstat');
-	var tstatus=document.getElementById('tempstat');
-	var l1status=document.getElementById('lamp1stat');
-	var l2status=document.getElementById('lamp2stat');
-	var l3status=document.getElementById('lamp3stat');
-	var dstatus=document.getElementById('doorstat');
-	var wstatus=document.getElementById('windstat');
+	
 	
 
 	newJSON('/api/lamp/1', stateToHTML, l1status);
