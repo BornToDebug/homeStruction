@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -96,9 +97,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private TextView doorConf;
     private Handler handler;
     private boolean isActivityStarted;
+    private long lastUserInput;
     private WebService webService;
     private String path;
     private SwitchCompat switchCompat = null;
+
+    private static long UPDATE_DELAY_FROM_USER_INPUT = 5000;
 
     protected void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
@@ -106,6 +110,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.main_screen);
         hour = null;
         minute = null;
+        lastUserInput = System.currentTimeMillis();
         webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
         System.out.println("Token: " + SaveSharedPreference.getToken(MainScreen.this));
         path = "rtmp://homestruction.org/live/";
@@ -655,9 +660,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     if (myCommand.equals(myResponse)) {
                         System.out.println("LOGG " + myCommand + " Success");
 
-                        updateUI1();
+                        //updateUI1();
                         handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
-                        updateUI2();
+                        //updateUI2();
                         handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
                         if (switchCompat != null) {
                             switchCompat.setOnCheckedChangeListener(MainScreen.this);
@@ -849,6 +854,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.doors:
                 System.out.println("LOG Clicked doors button");
+                lastUserInput = System.currentTimeMillis();
                 if (doorLocked.getVisibility() == View.VISIBLE) {
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
@@ -862,6 +868,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 }
                 break;
             case R.id.lock:
+                lastUserInput = System.currentTimeMillis();
                 if (doorLocked.getVisibility() == View.VISIBLE) {
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
@@ -1074,12 +1081,19 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         @Override
         public void run() {
             System.out.println("LOGG runnable1");
-            if (isActivityStarted) {
+            long timeDifference = System.currentTimeMillis() - lastUserInput;
+            Log.d("User input time", Long.toString(lastUserInput));
+            Log.d("current time", Long.toString(System.currentTimeMillis()));
+            Log.d("difference time", Long.toString(timeDifference));
+            if (timeDifference > UPDATE_DELAY_FROM_USER_INPUT) {
+                Log.d("test time condition", Boolean.toString(timeDifference > UPDATE_DELAY_FROM_USER_INPUT));
+                Log.d("difference time", " bigger than UPDATE DELAY... entered");
                 System.out.println("Activity is started");
                 updateUI1();
                 handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
             } else {
-                System.out.println("Activity is not started");
+                Log.d("difference time", " smaller than UPDATE DELAY...not entered");
+                System.out.println("Activity is not started --");
             }
         }
     };
@@ -1149,6 +1163,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         if (onStart == false) {
             switch (buttonView.getId()) {
                 case R.id.chandelier_switch:
+                    lastUserInput = System.currentTimeMillis();
                     if (chandelierSwitch.isChecked()) {
                         System.out.println("LOG ChandelierSwitch checked");
                         sendToServer("1lampon");
@@ -1158,6 +1173,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     }
                     break;
                 case R.id.nightlight_switch:
+                    lastUserInput = System.currentTimeMillis();
                     if (nightLampSwitch.isChecked()) {
                         System.out.println("LOG NightLightSwitch checked");
                         sendToServer("2lampon");
@@ -1167,6 +1183,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     }
                     break;
                 case R.id.vecof_switch:
+                    lastUserInput = System.currentTimeMillis();
                     if (veCofSwitch.isChecked()) {
                         System.out.println("LOG VeCofSwitch checked");
                         sendToServer("3lampon");
