@@ -113,12 +113,13 @@ function stateToHTML(jsonObj) {
 	return tableState;
 	
 }
-	l1status=document.getElementById('lamp1stat');
-	l2status=document.getElementById('lamp2stat');
-	l3status=document.getElementById('lamp3stat');
-    
-	
-	lamptable = document.getElementById('lamptable');
+	var l1status=document.getElementById('lamp1stat');
+	var l2status=document.getElementById('lamp2stat');
+	var l3status=document.getElementById('lamp3stat');
+	var lock1button = document.getElementById('myonoffswitch');
+	var lock2button = document.getElementById('myonoff2switch');
+	var lock3button = document.getElementById('myonoff3switch');
+	var lamptable = document.getElementById('lamptable');
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
 	var lamp3Id="3on_c";
@@ -150,7 +151,9 @@ function stateToHTML(jsonObj) {
 	newJSON('/api/lamp/1',stateToHTML,l1status);
     newJSON('/api/lamp/2',stateToHTML,l2status);
     newJSON('/api/lamp/3',stateToHTML,l3status);
-	
+	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id,0);
+	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id,0);
+	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id,0);
 	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
 	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);
 	setInterval(function(){newJSON('/api/lamp/3',stateToHTML,l3status)},3000);

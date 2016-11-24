@@ -203,6 +203,10 @@ function stateToHTML(jsonObj) {
 	newJSON('/api/temp/', stateToHTML, tstatus);
 	newJSON('/api/humidity/', stateToHTML, hstatus);
 	newJSON('/api/light/', stateToHTML, lstatus);
+	buttonJSON('/api/lamp/1',lock1button,lamp1Id,0);
+	buttonJSON('/api/lamp/2',lock2button,lamp2Id,0);
+	buttonJSON('/api/lamp/3',lock3button,lamp3Id,0);
+	buttonJSON('api/lamp/d',doorlockbutton,doorId,0);
 	setInterval(function(){buttonJSON('/api/lamp/1',lock1button,lamp1Id,lamp1_milli)},1000);
 	setInterval(function(){buttonJSON('/api/lamp/2',lock2button,lamp2Id,lamp2_milli)},1000);
 	setInterval(function(){buttonJSON('/api/lamp/3',lock3button,lamp3Id,lamp3_milli)},1000);

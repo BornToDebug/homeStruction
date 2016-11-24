@@ -105,13 +105,12 @@ function stateToHTML(jsonObj) {
 	return tableState;
 
 }
-var doorId="dc_c";
-	doortable = document.getElementById('doortable');
-	windowtable = document.getElementById('windowtable');
-	windowstat=document.getElementById('windstat')
-	doorlockbutton = document.getElementById('myopclswitch');
-	dstatus=document.getElementById('doorstat');
-	wstatus=document.getElementById('windstat');
+	var doorId="dc_c";
+	var	doortable = document.getElementById('doortable');
+	var windowtable = document.getElementById('windowtable');
+	var doorlockbutton = document.getElementById('myopclswitch');
+	var dstatus=document.getElementById('doorstat');
+	var wstatus=document.getElementById('windstat');
 	var milliseconds;	
 
 function myFunction(){
@@ -121,8 +120,9 @@ function myFunction(){
 }
 	newJSON('/api/door/',stateToHTML,dstatus);
 	newJSON('/api/window/',stateToHTML,wstatus);
+	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId,0);
+	getJSON('/api/window/', objectToHTML, windowtable);
     setInterval(function(){newJSON('/api/door/',stateToHTML,dstatus);},1000);
-	
 	setInterval(function(){newJSON('/api/window/',stateToHTML,wstatus)},1000);
 	setInterval(function(){getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId,milliseconds)},1000);
 	setInterval(function(){getJSON('/api/window/', objectToHTML, windowtable)},1000);
