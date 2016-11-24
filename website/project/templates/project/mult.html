@@ -116,17 +116,15 @@ function stateToHTML(jsonObj) {
 	l1status=document.getElementById('lamp1stat');
 	l2status=document.getElementById('lamp2stat');
 	l3status=document.getElementById('lamp3stat');
-    newJSON('/api/lamp/1',stateToHTML,l1status);
-    newJSON('/api/lamp/2',stateToHTML,l2status);
-    newJSON('/api/lamp/3',stateToHTML,l3status);
+    
 	
 	lamptable = document.getElementById('lamptable');
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
 	var lamp3Id="3on_c";
-	var lamp1_milli=0;
-	var lamp2_milli=0;
-	var lamp3_milli=0;
+	var lamp1_milli;
+	var lamp2_milli;
+	var lamp3_milli;
 	function lamp1Func(){
 	if(lamp1button.checked==false) {command("1lampoff")};
     if (lamp1button.checked==true) {command("1lampon");}
@@ -148,6 +146,10 @@ function stateToHTML(jsonObj) {
 
 	
 	}
+	
+	newJSON('/api/lamp/1',stateToHTML,l1status);
+    newJSON('/api/lamp/2',stateToHTML,l2status);
+    newJSON('/api/lamp/3',stateToHTML,l3status);
 	
 	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
 	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);

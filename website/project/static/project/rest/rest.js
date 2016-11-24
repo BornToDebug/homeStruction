@@ -61,6 +61,7 @@ function buttonJSON(url, button,posVal,milliseconds) {
 		console.log('success');
 		var currentTime = (new Date).getTime();
 		if(currentTime-milliseconds >= 6000){
+			
 		if(button != undefined) {
 			button.checked = data['results'][0].value === posVal;
 		}

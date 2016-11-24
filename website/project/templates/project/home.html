@@ -164,10 +164,10 @@ function stateToHTML(jsonObj) {
 	var wstatus=document.getElementById('windstat');
 	var doorlockbutton = document.getElementById('myopclswitch');
 	var doorId="dc_c";
-	var door_milli=0;
-	var lamp1_milli=0;
-	var lamp2_milli=0;
-	var lamp3_milli=0;
+	var door_milli;
+	var lamp1_milli;
+	var lamp2_milli;
+	var lamp3_milli;
 	
 	function myFunction(){
 		if(button2.checked==false) {command("opendoor")};
@@ -195,7 +195,7 @@ function stateToHTML(jsonObj) {
 
 	
 	}
-	
+	newJSON('/api/lamp/1', stateToHTML, l1status);
 	newJSON('/api/lamp/2', stateToHTML, l2status);
 	newJSON('/api/lamp/3', stateToHTML, l3status);
 	newJSON('/api/window/', stateToHTML, wstatus);
@@ -206,19 +206,8 @@ function stateToHTML(jsonObj) {
 	setInterval(function(){buttonJSON('/api/lamp/1',lock1button,lamp1Id,lamp1_milli)},1000);
 	setInterval(function(){buttonJSON('/api/lamp/2',lock2button,lamp2Id,lamp2_milli)},1000);
 	setInterval(function(){buttonJSON('/api/lamp/3',lock3button,lamp3Id,lamp3_milli)},1000);
-	
-	
-	
-	
-	
 	setInterval(function(){buttonJSON('api/lamp/d',doorlockbutton,doorId,door_milli)},1000);
-	
-	
-	
 
-	newJSON('/api/lamp/1', stateToHTML, l1status);
-	
-	
 	setInterval(function () {newJSON('/api/lamp/1', stateToHTML, l1status)}, 3000);
 	setInterval(function () {newJSON('/api/lamp/2', stateToHTML, l2status)}, 3000);
 	setInterval(function () {newJSON('/api/lamp/3', stateToHTML, l3status)}, 3000);
