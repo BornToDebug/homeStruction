@@ -93,7 +93,22 @@
 	if(myValue == "3off_c"){tableVar="Fan successfully switched off";}
 	if(myValue == "3on_uc"){tableVar="Could not switch fan on";}
 	if(myValue == "3off_uc"){tableVar="Could not switch fan off";}
-	var tableRow = '<tr> \n' +
+	
+	var tableRow;
+	
+	if(myValue == "do_c"  || myValue == "dc_c" || myValue == "do_uc" || myValue == "dc_uc" || myValue == "opened" ||"closed"){
+	
+	tableRow = '<tr> \n' +
+		'<td>' +  "nope" + '</td> \n' +
+		'<td>' + "nope" + '</td> \n' +
+		'<td>' +  "nope" + '</td> \n' +
+		'</tr> \n';
+	return tableRow;
+	
+	
+	} 
+	
+	 tableRow = '<tr> \n' +
 		'<td>' +  tableVar + '</td> \n' +
 		'<td>' + myDate + '</td> \n' +
 		'<td>' +  myTime + '</td> \n' +
@@ -151,16 +166,18 @@ function stateToHTML(jsonObj) {
 	newJSON('/api/lamp/1',stateToHTML,l1status);
     newJSON('/api/lamp/2',stateToHTML,l2status);
     newJSON('/api/lamp/3',stateToHTML,l3status);
-	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id,0);
-	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id,0);
-	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id,0);
+	buttonJSON('/api/lamp/1',lock1button,lamp1Id,0);
+	buttonJSON('/api/lamp/2',lock2button,lamp2Id,0);
+	buttonJSON('/api/lamp/3',lock3button,lamp3Id,0);
+	lampJSON('/api/lamp/',objectToHTML,lamptable);
 	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
 	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);
 	setInterval(function(){newJSON('/api/lamp/3',stateToHTML,l3status)},3000);
-	setInterval(function(){getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id,lamp1_milli)},1000);
-	setInterval(function(){getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id,lamp2_milli)},1000);
-	setInterval(function(){getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id,lamp3_milli)},1000);
-</script>
+	setInterval(function(){buttonJSON('/api/lamp/1',lock1button,lamp1Id,lamp1_milli)},1000);
+	setInterval(function(){buttonJSON('/api/lamp/2',lock2button,lamp2Id,lamp2_milli)},1000);
+	setInterval(function(){buttonJSON('/api/lamp/3',lock3button,lamp3Id,lamp3_milli)},1000);
+	setInterval(function(){lampJSON('/api/lamp/',objectToHTML,lamptable)},1000);
+	</script>
 		  
 
 {% endblock content %}

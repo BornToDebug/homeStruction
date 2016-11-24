@@ -24,6 +24,22 @@ function getJSON(url, objectConverter, table, button,posVal,milliseconds) {
 
 
 }
+function lampJSON (url, objectConverter, table){
+	// try to fetch JSON data from url and call event
+	var json =$.getJSON(url, function(data) {
+		console.log('success');
+		generateRows(data['results'], table, objectConverter);
+	})
+	.done(function() {
+		console.log('second success');
+
+	})
+	.fail(function() {
+		//TODO implement error message
+		console.log('error');
+	});
+	
+}
 
 function newJSON(url,objectConverter,_status) {
 	// try to fetch JSON data from url and call events
@@ -87,4 +103,16 @@ function generateRows(json, table, objectConverter) {
 		table.innerHTML += tableRow;
 	}
 }
-
+function generateLamp(json, table,objectConverter){
+		var tableRow;
+	table.innerHTML = '';
+	for (i=0;i<json.length;i++) {
+		tableRow = objectConverter(json[i]);
+		if (tableRow != '<tr> \n' +
+		'<td>' +  "nope" + '</td> \n' +
+		'<td>' + "nope" + '</td> \n' +
+		'<td>' +  "nope" + '</td> \n' +
+		'</tr> \n'){
+		table.innerHTML += tableRow;}
+	}
+}
