@@ -299,6 +299,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     private void updateLamp1Data(WebService webService) {
         Call<Lamp1Response> call = webService.getLamp1();
+        isActivityStarted = false;
         call.enqueue(new Callback<Lamp1Response>() {
             @Override
             public void onResponse(Call<Lamp1Response> call, Response<Lamp1Response> response) {
@@ -341,6 +342,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     } else {
                         System.out.println("LOG Chandelier off");
                     }
+                    isActivityStarted = true;
                 }
             }
 
@@ -355,6 +357,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     private void updateLamp2Data(WebService webService) {
         Call<Lamp2Response> call = webService.getLamp2();
+        isActivityStarted = false;
         call.enqueue(new Callback<Lamp2Response>() {
             @Override
             public void onResponse(Call<Lamp2Response> call, Response<Lamp2Response> response) {
@@ -396,6 +399,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     } else {
                         System.out.println("LOG Nightlamp off");
                     }
+                    isActivityStarted = true;
                 }
             }
 
@@ -403,13 +407,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp2Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 nightLampSwitch.setText("error");
-                isActivityStarted = false;
+                isActivityStarted = true;
             }
         });
     }
 
     private void updateLamp3Data(WebService webService) {
         Call<Lamp3Response> call = webService.getLamp3();
+        isActivityStarted = false;
         call.enqueue(new Callback<Lamp3Response>() {
             @Override
             public void onResponse(Call<Lamp3Response> call, Response<Lamp3Response> response) {
@@ -451,6 +456,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     } else {
                         System.out.println("LOG Ventillator/coffee machine off");
                     }
+                    isActivityStarted = true;
                 }
             }
 
@@ -458,7 +464,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp3Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 veCofSwitch.setText("error");
-                isActivityStarted = false;
+                isActivityStarted = true;
             }
         });
     }
@@ -492,13 +498,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<DoorResponse> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 doorText.setText("Door error");
-                isActivityStarted = false;
             }
         });
     }
 
     private void updateDoorLockedData(WebService webService) {
         Call<DoorLockedResponse> call = webService.getDoorLocked();
+        isActivityStarted = false;
         call.enqueue(new Callback<DoorLockedResponse>() {
             @Override
             public void onResponse(Call<DoorLockedResponse> call, Response<DoorLockedResponse> response) {
@@ -534,13 +540,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                 break;
                         }
                     }
+                    isActivityStarted = true;
                 }
             }
 
             @Override
             public void onFailure(Call<DoorLockedResponse> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
-                isActivityStarted = false;
+                isActivityStarted = true;
             }
         });
     }
@@ -584,7 +591,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 windowOpen.setVisibility(View.INVISIBLE);
                 windowClosed.setVisibility(View.INVISIBLE);
                 windowError.setVisibility(View.VISIBLE);
-                isActivityStarted = false;
             }
         });
     }
@@ -648,7 +654,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (myResponse != null) {
                     if (myCommand.equals(myResponse)) {
                         System.out.println("LOGG " + myCommand + " Success");
-                        isActivityStarted = true;
+
                         updateUI1();
                         handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
                         updateUI2();
@@ -661,6 +667,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         if (switchCompat != null) {
                             switchCompat.setOnCheckedChangeListener(MainScreen.this);
                         }
+                        isActivityStarted = true;
                     }
                 }
             }
@@ -673,6 +680,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     switchCompat.setOnCheckedChangeListener(MainScreen.this);
                 }
                 showSnackbar();
+                isActivityStarted = true;
             }
         });
     }
@@ -707,7 +715,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("LOGG Error set alarm: " + t.getMessage());
                 showSnackbar();
-                isActivityStarted = false;
             }
         });
     }
@@ -741,7 +748,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 System.out.println("LOGG Error reset alarm: " + t.getMessage());
                 showSnackbar();
-                isActivityStarted = false;
             }
         });
     }
@@ -1009,6 +1015,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        isActivityStarted = false;
     }
 
     /**
@@ -1085,13 +1092,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         @Override
         public void run() {
             System.out.println("LOGG runnable2");
-            if (isActivityStarted) {
-                System.out.println("Activity is started");
-                updateUI2();
-                handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
-            } else {
-                System.out.println("Activity is not started");
-            }
+            updateUI2();
+            handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
         }
     };
 
