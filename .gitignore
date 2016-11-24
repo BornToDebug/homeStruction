@@ -93,3 +93,4 @@ settings_secret.py
 *~
 *#
 website/static/
+website/*.jpg

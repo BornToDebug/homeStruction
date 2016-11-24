@@ -12,9 +12,10 @@ from rest_framework.response import Response
 class TestViewSet(views.APIView):
 
     def get(self, request, format=None):
-        lights = [light.value for light in Light.objects.all()]
-        temps = [temp.value for temp in Temperature.objects.all()]
-        resp = [lights, temps]
+        resp = []
+        Models = [Temperature, Light, Lamp, Door, Window, Humidity]
+        for model in Models:
+            resp.append(model.objects.last().value)
         return Response(resp)
 
 class TemperatureViewSet(viewsets.ModelViewSet):
