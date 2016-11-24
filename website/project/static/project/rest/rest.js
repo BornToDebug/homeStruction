@@ -28,7 +28,7 @@ function lampJSON (url, objectConverter, table){
 	// try to fetch JSON data from url and call event
 	var json =$.getJSON(url, function(data) {
 		console.log('success');
-		generateRows(data['results'], table, objectConverter);
+		generateLamp(data['results'], table, objectConverter);
 	})
 	.done(function() {
 		console.log('second success');
