@@ -13,7 +13,9 @@ class TestViewSet(views.APIView):
 
     def get(self, request, format=None):
         lights = [light.value for light in Light.objects.all()]
-        return Response(lights)
+        temps = [temp.value for temp in Temperature.objects.all()]
+        resp = [lights, temps]
+        return Response(resp)
 
 class TemperatureViewSet(viewsets.ModelViewSet):
 
