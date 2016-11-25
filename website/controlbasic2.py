@@ -23,6 +23,7 @@ def confirmation(todo, ser):
 	sleep(1)
 	bigchunk = ser.readline()
 	sleep(.5)
+        print bigchunk
 	words = bigchunk.split()
 	if todo == '1lampon':
 		MyInt = int(words[3])

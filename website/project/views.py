@@ -15,7 +15,13 @@ class TestViewSet(views.APIView):
         resp = []
         Models = [Temperature, Light, Lamp, Door, Window, Humidity]
         for model in Models:
-            resp.append(model.objects.last().value)
+            if model == Lamp:
+                resp.append(model.objects.filter(value__startswith='1').order_by('-time_recorded').last().value)
+                resp.append(model.objects.filter(value__startswith='2').order_by('-time_recorded').last().value)
+                resp.append(model.objects.filter(value__startswith='3').order_by('-time_recorded').last().value)
+                resp.append(model.objects.filter(value__startswith='d').order_by('-time_recorded').last().value)
+
+            resp.append(model.objects.order_by('time_recorded').last().value)
         return Response(resp)
 
 class TemperatureViewSet(viewsets.ModelViewSet):

@@ -29,7 +29,7 @@ CSRF_COOKIE_HTTPONLY = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = settings_secret.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False #always
+DEBUG = True #always
 
 ALLOWED_HOSTS = [
         '192.168.0.103','localhost','acs1.ddns.net', '127.0.0.1',
