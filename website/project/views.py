@@ -21,7 +21,8 @@ class HomeDataViewSet(views.APIView):
                 resp.append(model.objects.filter(value__startswith='3').last().value)
                 resp.append(model.objects.filter(value__startswith='d').last().value)
 
-            resp.append(model.objects.order_by('time_recorded').last().value)
+            if model != Lamp:
+                resp.append(model.objects.order_by('time_recorded').last().value)
         return Response(resp)
 
 class TemperatureViewSet(viewsets.ModelViewSet):
