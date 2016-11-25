@@ -9,17 +9,17 @@ from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
 
 # REST framework viewset
-class TestViewSet(views.APIView):
+class HomeDataViewSet(views.APIView):
 
     def get(self, request, format=None):
         resp = []
         Models = [Temperature, Light, Lamp, Door, Window, Humidity]
         for model in Models:
             if model == Lamp:
-                resp.append(model.objects.filter(value__startswith='1').order_by('-time_recorded').last().value)
-                resp.append(model.objects.filter(value__startswith='2').order_by('-time_recorded').last().value)
-                resp.append(model.objects.filter(value__startswith='3').order_by('-time_recorded').last().value)
-                resp.append(model.objects.filter(value__startswith='d').order_by('-time_recorded').last().value)
+                resp.append(model.objects.filter(value__startswith='1').last().value)
+                resp.append(model.objects.filter(value__startswith='2').last().value)
+                resp.append(model.objects.filter(value__startswith='3').last().value)
+                resp.append(model.objects.filter(value__startswith='d').last().value)
 
             resp.append(model.objects.order_by('time_recorded').last().value)
         return Response(resp)
