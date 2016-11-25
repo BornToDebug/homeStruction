@@ -19,7 +19,7 @@ script, todo = sys.argv
 def confirmation(todo, ser):
 	MyInt = -1
 	sleep(1.5)
-	ser.write('3');
+	ser.write('3')
 	sleep(1)
 	bigchunk = ser.readline()
 	sleep(.5)
@@ -117,6 +117,8 @@ try:
 			Lamp.objects.create(value='dc_c', time_recorded=timezone.now())
 		else:
 			Lamp.objects.create(value='dc_uc', time_recorded=timezone.now())
+        if todo == 'mode':
+                ser.write('10')
 	
 	ser.close()
 	

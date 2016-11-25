@@ -61,6 +61,7 @@ class Alarm(models.Model):
     friday = models.BooleanField('Friday', default=False)
     saturday = models.BooleanField('Saturday', default=False)
     sunday = models.BooleanField('Sunday', default=False)
+    coffee = models.BooleanField('Coffee', default=False)
 
     def __str__(self):
         return str(self.alarm_time)
