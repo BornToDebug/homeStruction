@@ -165,9 +165,9 @@ function stateToHTML(jsonObj) {
 	var doorlockbutton = document.getElementById('myopclswitch');
 	var doorId="dc_c";
 	var door_milli;
-	lamp1_milli = (new Date()).getTime();
-	lamp2_milli = (new Date()).getTime();
-	lamp3_milli = (new Date()).getTime();
+	var lamp1_milli;
+	var lamp2_milli;
+	var lamp3_milli;
 	
 	function myFunction(){
 		if(button2.checked==false) {command("opendoor")};
