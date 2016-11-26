@@ -136,7 +136,7 @@ function generateLamp(json, table,objectConverter){
 }
 
 
-function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, buttonNight,idNight, buttonFan,idFan, milliDoor, milliLamp, milliNight,milliFan,l1status,l2status,l3status,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status){
+function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, buttonNight,idNight, buttonFan,idFan, milliDoor, milliLamp, milliNight,milliFan,l1status,l2status,l3status,tstatus,hstatus,lstatus,wstatus,dstatus){
 	
 	var json =$.getJSON(url, function(data) {
 		console.log('success');
