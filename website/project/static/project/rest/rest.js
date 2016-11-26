@@ -134,21 +134,9 @@ function generateLamp(json, table,objectConverter){
 		table.innerHTML += tableRow;}
 	}
 }
-function generateData(data, stateConverter,_state){
-	var dataState;
 
-	_state.innerHTML = '';
 
-		dataState = stateConverter(data);
-		if(_state == tstatus) { dataState = dataState + "°C"};
-		else if(_state == lstatus) {dataState = dataState + "/1024"};
-		else if (_state == hstatus) {dataState = dataState + "%"};
-		_state.innerHTML = dataState;
-		
-	
-}
-
-function arrayJSON (url, stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, buttonNight,idNight, buttonFan,idFan, milliDoor, milliLamp, milliNight,milliFan,l1status,l2status,l3status,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status){
+function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, buttonNight,idNight, buttonFan,idFan, milliDoor, milliLamp, milliNight,milliFan,l1status,l2status,l3status,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status){
 	
 	var json =$.getJSON(url, function(data) {
 		console.log('success');

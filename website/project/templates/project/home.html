@@ -160,6 +160,7 @@ function dataToHTML (myVar){
 	return state;
 
 }   
+
 	
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
@@ -181,6 +182,20 @@ function dataToHTML (myVar){
 	var lamp1_milli;
 	var lamp2_milli;
 	var lamp3_milli;
+	
+	function generateData(data, stateConverter,_state){
+	var dataState;
+
+	_state.innerHTML = '';
+
+		dataState = stateConverter(data);
+		if(_state == tstatus) { dataState = dataState + "°C"};
+		else if(_state == lstatus) {dataState = dataState + "/1024"};
+		else if (_state == hstatus) {dataState = dataState + "%"};
+		_state.innerHTML = dataState;
+		
+	
+}
 	
 	function myFunction(){
 		if(button2.checked==false) {command("opendoor")};
@@ -209,7 +224,7 @@ function dataToHTML (myVar){
 	
 	}
 	arrayJSON('/api/latestdata/',dataToHTML,doorlockbutton,doorId,lock1button,lamp1Id,lock2button,lamp2Id,lock3button,lamp3Id,0,0,0,0,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status );
-	setInterval(function(){arrayJSON('/api/latestdata/',dataToHTML,doorlockbutton,doorId,lock1button,lamp1Id,lock2button,lamp2Id,lock3button,lamp3Id,door_milli,lamp1_milli,lamp2_milli,lamp3_milli,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status );
-	},1000);
+	setInterval(function(){arrayJSON('/api/latestdata/',dataToHTML,doorlockbutton,doorId,lock1button,lamp1Id,lock2button,lamp2Id,lock3button,lamp3Id,door_milli,lamp1_milli,lamp2_milli,lamp3_milli,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status )},1000);
+	
 </script>			
 {% endblock content %}
