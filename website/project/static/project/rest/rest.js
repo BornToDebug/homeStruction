@@ -166,8 +166,8 @@ function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, bu
 		}
 	}	
 	else {
-			console.log(currentTime);
-			console.log(milliseconds);
+			console.log("current time:"+currentTime);
+			console.log("millisecond:" +milliseconds);
 			console.log(currentTime-milliseconds);
 		var currentTime = (new Date).getTime();
 		if(currentTime-milliseconds >= 6000){
