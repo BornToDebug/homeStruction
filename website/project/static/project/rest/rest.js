@@ -152,18 +152,18 @@ function arrayJSON (url, stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, b
 	
 	var json =$.getJSON(url, function(data) {
 		console.log('success');
-		dataState(data[0],stateConverter,tsatus);
-		dataState(data[1],stateConverter,lstatus);
-		buttonState(data[2],buttonLamp,idLamp,milliLamp);
-		buttonState(data[3],buttonNight, idNight,milliNight);
-		buttonState(data[4],buttonFan,idFan,milliFan);
-		buttonState(data[5],buttonDoor,idDoor,milliDoor);
-		dataState(data[6],stateConverter,dstatus);
-		dataState(data[7],stateConverter,wstatus);
-		dataState(data[8],stateConverter,hstatus);
-		dataState(data[2],stateConverter,l1status);
-		dataState(data[3],stateConverter,l2status);
-		dataState(data[4],stateConverter,l3status);
+		dataState(data['values'][0],stateConverter,tsatus);
+		dataState(data['values'][1],stateConverter,lstatus);
+		buttonState(data['values'][2],buttonLamp,idLamp,milliLamp);
+		buttonState(data['values'][3],buttonNight, idNight,milliNight);
+		buttonState(data['values'][4],buttonFan,idFan,milliFan);
+		buttonState(data['values'][5],buttonDoor,idDoor,milliDoor);
+		dataState(data['values'][6],stateConverter,dstatus);
+		dataState(data['values'][7],stateConverter,wstatus);
+		dataState(data['values'][8],stateConverter,hstatus);
+		dataState(data['values'][2],stateConverter,l1status);
+		dataState(data['values'][3],stateConverter,l2status);
+		dataState(data['values'][4],stateConverter,l3status);
 	})
 	.done(function() {
 		console.log('second success');
