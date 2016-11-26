@@ -59,7 +59,7 @@ newJSON('/api/temp/',stateToHTML,tstatus);
 setInterval(function(){newJSON('/api/temp/',stateToHTML,tstatus)},18000);
 temptable = document.getElementById('temptable');
 getJSON('/api/temp/', objectToHTML, temptable);
-setinterval(function(){getJSON('/api/temp/', objectToHTML, temptable);},18000);
+setInterval(function(){getJSON('/api/temp/', objectToHTML, temptable);},18000);
 
 </script>
 
