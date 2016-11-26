@@ -60,7 +60,7 @@ function generateStatus(json,_status,objectConverter){
 	_status.innerHTML = '';
 
 		tableState = objectConverter(json[0]);
-		if(_status == tstatus){tableState = tableState + "%";}
+		if(_status == tstatus){tableState = tableState;}
 		_status.innerHTML = tableState;
 
 
