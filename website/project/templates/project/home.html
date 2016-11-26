@@ -198,28 +198,32 @@ function dataToHTML (myVar){
 }
 	
 	function myFunction(){
+	door_milli = (new Date).getTime();
 		if(button2.checked==false) {command("opendoor")};
 		if (button2.checked==true) {command("closedoor");}
-		door_milli = (new Date).getTime();
+		
 	}
 	function lamp1Func(){
+	 lamp1_milli = (new Date).getTime();
             if(lamp1button.checked==false) {command("1lampoff");}
             if (lamp1button.checked==true) {command("1lampon");}
-            lamp1_milli = (new Date).getTime();
+           
 	
 	}
 
 	function lamp2Func(){
+	lamp2_milli = (new Date).getTime();
 		if(lamp2button.checked==false) {command("2lampoff")};
 		if (lamp2button.checked==true) {command("2lampon");}
-		lamp2_milli = (new Date).getTime();
+		
 	
 	}
 
 	function lamp3Func(){
+	lamp3_milli = (new Date).getTime();
 		if(lamp3button.checked==false) {command("3lampoff")};
 		if (lamp3button.checked==true) {command("3lampon");}
-		lamp3_milli = (new Date).getTime();
+		
 
 	
 	}

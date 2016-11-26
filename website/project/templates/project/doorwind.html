@@ -114,9 +114,10 @@ function stateToHTML(jsonObj) {
 	var milliseconds;	
 
 function myFunction(){
+milliseconds = (new Date).getTime();
 	if(button2.checked==false) {command("opendoor")};
     if (button2.checked==true) {command("closedoor");}
-	milliseconds = (new Date).getTime();
+	
 }
 function generateStatus(json,_status,objectConverter){
 	var tableState;
