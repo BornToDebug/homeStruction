@@ -146,7 +146,20 @@ function stateToHTML(jsonObj) {
 	
 	return tableState;
 }
-    
+
+
+function dataToHTML (myVar){
+	var state = myVar;
+	if(myVar == "opened"){state="OPEN";}
+	if(myVar == "closed"){state = "CLOSED";}
+	
+	if(myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c"){state = "ON";}
+	if(myVar == "1off_c" || myVar == "2off_c" || myVar == "3off_c"){state = "OFF";}
+	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_uc" || myVar == "2on_uc" || myVar == "3on_uc") {state = "UNCONF. OP.";}
+	
+	return state;
+
+}   
 	
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
@@ -195,31 +208,8 @@ function stateToHTML(jsonObj) {
 
 	
 	}
-	newJSON('/api/lamp/1', stateToHTML, l1status);
-	newJSON('/api/lamp/2', stateToHTML, l2status);
-	newJSON('/api/lamp/3', stateToHTML, l3status);
-	newJSON('/api/window/', stateToHTML, wstatus);
-	newJSON('/api/door/', stateToHTML, dstatus);
-	newJSON('/api/temp/', stateToHTML, tstatus);
-	newJSON('/api/humidity/', stateToHTML, hstatus);
-	newJSON('/api/light/', stateToHTML, lstatus);
-	buttonJSON('/api/lamp/1',lock1button,lamp1Id,0);
-	buttonJSON('/api/lamp/2',lock2button,lamp2Id,0);
-	buttonJSON('/api/lamp/3',lock3button,lamp3Id,0);
-	buttonJSON('api/lamp/d',doorlockbutton,doorId,0);
-	setInterval(function(){buttonJSON('/api/lamp/1',lock1button,lamp1Id,lamp1_milli)},1000);
-	setInterval(function(){buttonJSON('/api/lamp/2',lock2button,lamp2Id,lamp2_milli)},1000);
-	setInterval(function(){buttonJSON('/api/lamp/3',lock3button,lamp3Id,lamp3_milli)},1000);
-	setInterval(function(){buttonJSON('api/lamp/d',doorlockbutton,doorId,door_milli)},1000);
-
-	setInterval(function () {newJSON('/api/lamp/1', stateToHTML, l1status)}, 3000);
-	setInterval(function () {newJSON('/api/lamp/2', stateToHTML, l2status)}, 3000);
-	setInterval(function () {newJSON('/api/lamp/3', stateToHTML, l3status)}, 3000);
-	setInterval(function () {newJSON('/api/window/', stateToHTML, wstatus)}, 1000);
-	setInterval(function () {newJSON('/api/door/', stateToHTML, dstatus)}, 1000);
-	setInterval(function () {newJSON('/api/temp/', stateToHTML, tstatus)}, 60000);
-	setInterval(function () {newJSON('/api/humidity/', stateToHTML, hstatus)}, 60000);
-	setInterval(function () {newJSON('/api/light/', stateToHTML, lstatus)}, 60000);
-	
+	arrayJSON('/api/latestdata/',dataToHTML,doorlockbutton,doorId,lock1button,lamp1Id,lock2button,lamp2Id,lock3button,lamp3Id,0,0,0,0,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status );
+	setInterval(function(){arrayJSON('/api/latestdata/',dataToHTML,doorlockbutton,doorId,lock1button,lamp1Id,lock2button,lamp2Id,lock3button,lamp3Id,door_milli,lamp1_milli,lamp2_milli,lamp3_milli,wstatus,dstatus,tstatus,hstatus,lstatus,l1status,l2status,l3status );
+	},1000);
 </script>			
 {% endblock content %}
