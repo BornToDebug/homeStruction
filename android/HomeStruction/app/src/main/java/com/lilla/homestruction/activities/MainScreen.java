@@ -36,12 +36,14 @@ import com.lilla.homestruction.bean.Lamp2;
 import com.lilla.homestruction.bean.Lamp2Response;
 import com.lilla.homestruction.bean.Lamp3;
 import com.lilla.homestruction.bean.Lamp3Response;
+import com.lilla.homestruction.bean.LatestData;
 import com.lilla.homestruction.bean.Light;
 import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.Temperature;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.Windows;
 import com.lilla.homestruction.bean.WindowsResponse;
+import com.lilla.homestruction.bean.LatestData;
 import com.lilla.homestruction.fragments.TimePickerFragment;
 import com.lilla.homestruction.interfaces.WebService;
 import com.lilla.homestruction.listeners.OnDialogCallbacksListener;
@@ -88,6 +90,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ToggleButton fridayButton;
     private ToggleButton saturdayButton;
     private ToggleButton sundayButton;
+    private List<String> responses;
     private String hour;
     private boolean onStart;
     private String minute;
@@ -211,7 +214,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 //        updateUI1();
 //        updateUI2();
         handler = new Handler(getMainLooper());
-
 
 
         long startTime4 = System.currentTimeMillis();
@@ -617,6 +619,32 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+    private void updateAllData() {
+        Call<LatestData> call = webService.getLatestData();
+        call.enqueue(new Callback<LatestData>() {
+            @Override
+            public void onResponse(Call<LatestData> call, Response<LatestData> response) {
+                List<String> myResponse = null;
+                if (response.body() != null) {
+                    myResponse = response.body().getValues();
+//                        responses = Arrays.asList(myResponse.split(","));
+                    if (myResponse != null) {
+                        System.out.println("LOGGG temp=" + myResponse.get(0) + " light=" + myResponse.get(1) + " lamp1=" + myResponse.get(2));
+                        System.out.println("LOGGG lamp2=" + myResponse.get(3) + " lamp3=" + myResponse.get(4) + " doorlocked=" + myResponse.get(5));
+                        System.out.println("LOGGG door=" + myResponse.get(6) + " window=" + myResponse.get(7) + " humid=" + myResponse.get(8));
+                    } else {
+                        System.out.println("LOGGG Error");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LatestData> call, Throwable t) {
+                System.out.println("LOGGG Error send to server: " + t.getMessage());
+            }
+        });
+    }
+
     /**
      * Send data to the server
      **/
@@ -684,7 +712,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
                         if (switchCompat != null) {
                             switchCompat.setOnCheckedChangeListener(MainScreen.this);
-                        }lamp1Requested = false;
+                        }
+                        lamp1Requested = false;
                         lamp2Requested = false;
                         lamp3Requested = false;
                         doorLockRequested = false;
@@ -898,7 +927,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     System.out.println("LOG Door locked");
                     sendToServer("closedoor");
                 }
-
                 break;
             case R.id.lock:
                 if (doorLocked.getVisibility() == View.VISIBLE) {
@@ -1149,7 +1177,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
         updateUI2();
         handler.postDelayed(runnable2, (long) 5.17 * DateUtils.MINUTE_IN_MILLIS);
-        onStart = true;
+//        onStart = true;
         System.out.println("LOGG onStart ends");
     }
 
@@ -1166,6 +1194,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      * update the data from the app (lamps, doors, windows)
      **/
     private void updateUI1() {
+        updateAllData();
         System.out.println("LOGG updateUI1 lamp1 " + lamp1Requested + " lamp2 " + lamp2Requested + " lamp3 " + lamp3Requested + " door " + doorLockRequested);
         if (!lamp1Requested) {
             updateLamp1Data(webService);
@@ -1196,45 +1225,49 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         System.out.println("LOGG onCheckedChanged");
-        if (onStart == false) {
-            System.out.println("LOGG onStart false");
-            switch (buttonView.getId()) {
-                case R.id.chandelier_switch:
-                    lamp1Requested = true;
-                    if (chandelierSwitch.isChecked()) {
-                        System.out.println("LOGG ChandelierSwitch checked");
-                        sendToServer("1lampon");
-                    } else {
-                        System.out.println("LOGG ChandelierSwitch unchecked");
-                        sendToServer("1lampoff");
-                    }
-                    break;
-                case R.id.nightlight_switch:
-                    lamp2Requested = true;
-                    if (nightLampSwitch.isChecked()) {
-                        System.out.println("LOGGG NightLightSwitch checked");
-                        sendToServer("2lampon");
-                    } else {
-                        System.out.println("LOGGG NightLightSwitch unchecked");
-                        sendToServer("2lampoff");
-                    }
-                    break;
-                case R.id.vecof_switch:
-                    lamp3Requested = true;
-                    if (veCofSwitch.isChecked()) {
-                        System.out.println("LOGG VeCofSwitch checked");
-                        sendToServer("3lampon");
-                    } else {
-                        System.out.println("LOGG VeCofSwitch unchecked");
-                        sendToServer("3lampoff");
-                    }
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            System.out.println("LOGG onStart true");
-            onStart = false;
+//        if (onStart == false) {
+        System.out.println("LOGG onStart false");
+        isActivityStarted = false;
+        switch (buttonView.getId()) {
+            case R.id.chandelier_switch:
+                isActivityStarted = false;
+                lamp1Requested = true;
+                if (chandelierSwitch.isChecked()) {
+                    System.out.println("LOGG ChandelierSwitch checked");
+                    sendToServer("1lampon");
+                } else {
+                    System.out.println("LOGG ChandelierSwitch unchecked");
+                    sendToServer("1lampoff");
+                }
+                break;
+            case R.id.nightlight_switch:
+                lamp2Requested = true;
+                isActivityStarted = false;
+                if (nightLampSwitch.isChecked()) {
+                    System.out.println("LOGGG NightLightSwitch checked");
+                    sendToServer("2lampon");
+                } else {
+                    System.out.println("LOGGG NightLightSwitch unchecked");
+                    sendToServer("2lampoff");
+                }
+                break;
+            case R.id.vecof_switch:
+                lamp3Requested = true;
+                isActivityStarted = false;
+                if (veCofSwitch.isChecked()) {
+                    System.out.println("LOGG VeCofSwitch checked");
+                    sendToServer("3lampon");
+                } else {
+                    System.out.println("LOGG VeCofSwitch unchecked");
+                    sendToServer("3lampoff");
+                }
+                break;
+            default:
+                break;
+//            }
+//        } else {
+//            System.out.println("LOGG onStart true");
+//            onStart = false;
         }
     }
 }
