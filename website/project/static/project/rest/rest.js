@@ -166,9 +166,10 @@ function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, bu
 		}
 	}	
 	else {
+			console.log(currentTime-milliseconds);
 		var currentTime = (new Date).getTime();
 		if(currentTime-milliseconds >= 6000){
-			console.log(currentTime-milliseconds);
+			console.log("I'm in");
 		
 			button.checked = data === posVal;
 		
