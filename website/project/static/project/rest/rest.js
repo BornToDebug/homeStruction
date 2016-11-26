@@ -164,7 +164,7 @@ function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, bu
 	
 }
  function dataState(data, stateConverter,_status){
-	 generateData(data,stateConverter,outp);
+	 generateData(data,stateConverter,_status);
 
  }
  function buttonState(data,button,posVal,milliseconds){
