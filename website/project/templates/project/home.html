@@ -190,7 +190,7 @@ function dataToHTML (myVar){
 
 		dataState = stateConverter(data);
 		if(_state == tstatus) { dataState = dataState + "°C"}
-		else if(_state == lstatus) {dataState = (dataState*100)/1024; dataState = dataState + "%";}
+		else if(_state == lstatus) {dataState = (dataState*100)/1024; dataState = dataState.toFixed(2) + "%";}
 		else if (_state == hstatus) {dataState = dataState + "%";}
 		_state.innerHTML = dataState;
 		
