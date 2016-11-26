@@ -17,8 +17,14 @@ def wekker():
     call(['killall pulseaudio'], shell=True)
     call(['python /home/projekt/homeStruction/alarm/alarmlight.py &'], shell=True)
     call(['nohup mplayer /mnt/Stick/Music/01.\ Crystals.mp3 &'], shell=True)
-    if globalCoffee:
-        controlconfirm('3lampon')
+
+    #print globalCoffee
+    #if globalCoffee:
+    #    print 'entered if'
+    #    controlbasic3.controlconfirm('3lampon')
+
+    #call(['python /home/projekt/homeStruction/alarm/alarmlight.py &'], shell=True)
+    #call(['nohup mplayer /mnt/Stick/Music/01.\ Crystals.mp3 &'], shell=True)
 
 class AlarmExecute(object):
     alarm_hour = 0
@@ -70,7 +76,11 @@ class AlarmExecute(object):
     def update(self):
         self.get_alarm_settings()
         self.set_schedule()
+        global globalCoffee
         globalCoffee = self.coffee
+        print globalCoffee
+        if self.coffee:
+            print 'coffee set to true'
 
 myAlarm = AlarmExecute()
 myAlarm.get_alarm_settings()

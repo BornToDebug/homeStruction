@@ -65,63 +65,63 @@ try:
 	if todo == '1lampon':
 		ser.write('7')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='1on_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='1on_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='1on_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='1on_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 
 	if todo == '1lampoff':
 		ser.write('8')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='1off_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='1off_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='1off_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='1off_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 
 	if todo == '2lampon':
 		ser.write('1')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='2off_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='2off_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='2off_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='2off_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 
 	if todo == '2lampoff':
 		ser.write('2')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='2on_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='2on_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='2on_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='2on_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 
 	if todo == '3lampon':
 		ser.write('6')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='3off_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='3off_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='3off_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='3off_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 
 	if todo == '3lampoff':
 		ser.write('9')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='3on_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='3on_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='3on_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='3on_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 
 	if todo == 'opendoor':
 		ser.write('5')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='do_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='do_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='do_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='do_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 
 	if todo == 'closedoor':
 		ser.write('4')
 		if confirmation(todo, ser):
-			Lamp.objects.create(value='dc_c', time_recorded=timezone.now())
+			Lamp.objects.create(value='dc_c', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 		else:
-			Lamp.objects.create(value='dc_uc', time_recorded=timezone.now())
+			Lamp.objects.create(value='dc_uc', time_recorded=timezone.now()+timezone.timedelta(hours=2))
         if todo == 'mode':
                 ser.write('10')
 	
 	ser.close()
 	
 except serial.SerialException:
-	Lamp.objects.create(value="ConnError", time_recorded=timezone.now())
+	Lamp.objects.create(value="ConnError", time_recorded=timezone.now()+timezone.timedelta(hours=2))
 

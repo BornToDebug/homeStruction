@@ -4,6 +4,7 @@ import signal
 from subprocess import call
 import string
 import alsaaudio
+from sys import exit
 
 #Wait 1 sec to be sure that logfile has been created
 sleep(1)
@@ -91,6 +92,7 @@ class SongInfo(object):
 def handler(signal, frame):
 	lcd.clear()
 	lcd.set_backlight(1)
+        exit()
 
 #Catching the signal
 signal.signal(signal.SIGTERM, handler)

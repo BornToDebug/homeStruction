@@ -38,6 +38,10 @@ class AlarmExecute(object):
         self.friday = new_alarm.friday
         self.saturday = new_alarm.saturday
         self.sunday = new_alarm.sunday
+        globalCoffee = new_alarm.coffee
+        print globalCoffee
+        if globalCoffee:
+            print 'coffee set to true'
 
     def timeToString(self):
         return str(self.alarm_hour) + ':' + str(self.alarm_minute)
