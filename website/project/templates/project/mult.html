@@ -162,6 +162,16 @@ function stateToHTML(jsonObj) {
 
 	
 	}
+	function generateStatus(json,_status,objectConverter){
+	var tableState;
+
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		_status.innerHTML = tableState;
+
+
+}
 	
 	newJSON('/api/lamp/1',stateToHTML,l1status);
     newJSON('/api/lamp/2',stateToHTML,l2status);

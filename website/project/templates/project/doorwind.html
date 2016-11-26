@@ -118,6 +118,16 @@ function myFunction(){
     if (button2.checked==true) {command("closedoor");}
 	milliseconds = (new Date).getTime();
 }
+function generateStatus(json,_status,objectConverter){
+	var tableState;
+
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		_status.innerHTML = tableState;
+
+
+}
 	newJSON('/api/door/',stateToHTML,dstatus);
 	newJSON('/api/window/',stateToHTML,wstatus);
 	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId,0);

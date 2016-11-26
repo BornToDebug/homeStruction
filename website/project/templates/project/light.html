@@ -51,6 +51,17 @@ function stateToHTML(jsonObj) {
 	return tableState;
 
 }
+function generateStatus(json,_status,objectConverter){
+	var tableState;
+
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		if(_status = lstatus){tableState = (tableState*100)/1024; tableState = tableState.toFixed(2) + "%";}
+		_status.innerHTML = tableState;
+
+
+}
 	lstatus=document.getElementById('lightstat');
 	newJSON('/api/light/',stateToHTML,lstatus);
     setInterval(function(){newJSON('/api/light/',stateToHTML,lstatus);},18000);

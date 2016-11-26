@@ -111,16 +111,7 @@ function generateRows(json, table, objectConverter) {
 		table.innerHTML += tableRow;
 	}
 }
-function generateStatus(json,_status,objectConverter){
-	var tableState;
 
-	_status.innerHTML = '';
-
-		tableState = objectConverter(json[0]);
-		_status.innerHTML = tableState;
-
-
-}
 function generateLamp(json, table,objectConverter){
 		var tableRow;
 	table.innerHTML = '';

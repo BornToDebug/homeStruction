@@ -54,6 +54,17 @@ function stateToHTML(jsonObj) {
 	return tableState;
 
 }
+function generateStatus(json,_status,objectConverter){
+	var tableState;
+
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		if(_status == tstatus){tableState = tableState + "%";}
+		_status.innerHTML = tableState;
+
+
+}
 tstatus=document.getElementById('tempstat');
 newJSON('/api/temp/',stateToHTML,tstatus);
 setInterval(function(){newJSON('/api/temp/',stateToHTML,tstatus)},18000);
