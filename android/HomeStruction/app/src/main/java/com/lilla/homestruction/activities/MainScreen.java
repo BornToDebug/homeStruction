@@ -11,7 +11,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,6 +52,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -96,24 +96,29 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ImageView doorClosed;
     private TextView doorConf;
     private Handler handler;
-    private boolean isActivityStarted;
-    private long lastUserInput;
     private WebService webService;
     private String path;
     private SwitchCompat switchCompat = null;
-
-    private static long UPDATE_DELAY_FROM_USER_INPUT = 5000;
+    private boolean lamp1Requested = false;
+    private boolean lamp2Requested = false;
+    private boolean lamp3Requested = false;
+    private boolean doorLockRequested = false;
 
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("LOGG onCreate");
+        lamp1Requested = false;
+        lamp2Requested = false;
+        lamp3Requested = false;
+        doorLockRequested = false;
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
         hour = null;
         minute = null;
-        lastUserInput = System.currentTimeMillis();
         webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(MainScreen.this));
         System.out.println("Token: " + SaveSharedPreference.getToken(MainScreen.this));
         path = "rtmp://homestruction.org/live/";
+
         /**keeps the user logged in**/
         if (SaveSharedPreference.getUserName(MainScreen.this).length() == 0) {
             Intent intent = new Intent(MainScreen.this, LoginActivity.class);
@@ -203,8 +208,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 volume.setText("" + paramInt + "%"); /** here in textView the percent will be shown**/
             }
         });
-
+//        updateUI1();
+//        updateUI2();
         handler = new Handler(getMainLooper());
+
+
 
         long startTime4 = System.currentTimeMillis();
         System.out.println("LOG first run updating : " + (startTime4 - startTime3));
@@ -223,7 +231,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         Intent refresh = getIntent();
                         finish();
                         startActivity(refresh);
-                        isActivityStarted = true;
+                        lamp1Requested = false;
+                        lamp2Requested = false;
+                        lamp3Requested = false;
+                        doorLockRequested = false;
                     }
                 });
         snackbar.show();
@@ -251,7 +262,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<TemperatureResponse> call, Throwable t) {
                 temperatureValue.setText("no data");
                 showSnackbar();
-                isActivityStarted = false;
                 System.out.println("LOG Error temperature: " + t.getMessage());
             }
         });
@@ -296,7 +306,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<LightResponse> call, Throwable t) {
                 luminosityValue.setText("no data");
-                isActivityStarted = false;
                 System.out.println("LOG Error: " + t.getMessage());
             }
         });
@@ -304,7 +313,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     private void updateLamp1Data(WebService webService) {
         Call<Lamp1Response> call = webService.getLamp1();
-        isActivityStarted = false;
         call.enqueue(new Callback<Lamp1Response>() {
             @Override
             public void onResponse(Call<Lamp1Response> call, Response<Lamp1Response> response) {
@@ -347,7 +355,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     } else {
                         System.out.println("LOG Chandelier off");
                     }
-                    isActivityStarted = true;
                 }
             }
 
@@ -355,14 +362,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp1Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 chandelierSwitch.setText("error");
-                isActivityStarted = false;
             }
         });
     }
 
     private void updateLamp2Data(WebService webService) {
+        System.out.println("LOGG updateLamp2Data");
         Call<Lamp2Response> call = webService.getLamp2();
-        isActivityStarted = false;
         call.enqueue(new Callback<Lamp2Response>() {
             @Override
             public void onResponse(Call<Lamp2Response> call, Response<Lamp2Response> response) {
@@ -400,11 +406,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         }
                     }
                     if (nightLampSwitch.isChecked()) {
-                        System.out.println("LOG Nightlamp on");
+                        System.out.println("LOGG Nightlamp on");
                     } else {
-                        System.out.println("LOG Nightlamp off");
+                        System.out.println("LOGG Nightlamp off");
                     }
-                    isActivityStarted = true;
                 }
             }
 
@@ -412,14 +417,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp2Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 nightLampSwitch.setText("error");
-                isActivityStarted = true;
             }
         });
     }
 
     private void updateLamp3Data(WebService webService) {
+        System.out.println("LOGG updateLamp3Data");
         Call<Lamp3Response> call = webService.getLamp3();
-        isActivityStarted = false;
         call.enqueue(new Callback<Lamp3Response>() {
             @Override
             public void onResponse(Call<Lamp3Response> call, Response<Lamp3Response> response) {
@@ -457,11 +461,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         }
                     }
                     if (veCofSwitch.isChecked()) {
-                        System.out.println("LOG Ventillator/coffee machine on");
+                        System.out.println("LOGG Ventillator/coffee machine on");
                     } else {
-                        System.out.println("LOG Ventillator/coffee machine off");
+                        System.out.println("LOGG Ventillator/coffee machine off");
                     }
-                    isActivityStarted = true;
                 }
             }
 
@@ -469,7 +472,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             public void onFailure(Call<Lamp3Response> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
                 veCofSwitch.setText("error");
-                isActivityStarted = true;
             }
         });
     }
@@ -509,7 +511,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     private void updateDoorLockedData(WebService webService) {
         Call<DoorLockedResponse> call = webService.getDoorLocked();
-        isActivityStarted = false;
         call.enqueue(new Callback<DoorLockedResponse>() {
             @Override
             public void onResponse(Call<DoorLockedResponse> call, Response<DoorLockedResponse> response) {
@@ -545,14 +546,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                 break;
                         }
                     }
-                    isActivityStarted = true;
                 }
             }
 
             @Override
             public void onFailure(Call<DoorLockedResponse> call, Throwable t) {
                 System.out.println("LOG Error: " + t.getMessage());
-                isActivityStarted = true;
             }
         });
     }
@@ -604,7 +603,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      * Send data to the server
      **/
     private void sendToServer(String command) {
-        System.out.println("LOGG sendToServer() started");
+        System.out.println("LOGGG sendToServer() started");
+        System.out.println("LOGGG lamp1Requested: " + lamp1Requested + "lamp2Requested: " + lamp2Requested + "lamp3Requested: " + lamp3Requested);
+        System.out.println("LOGGG doorLockRequested: " + doorLockRequested);
         switchCompat = null;
         /**set switchCompat to a certain switch based on a command**/
         switch (command) {
@@ -617,11 +618,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 switchCompat = chandelierSwitch;
                 break;
             case "2lampon":
-                System.out.println("LOGG 2lampon");
+                System.out.println("LOGGG 2lampon");
                 switchCompat = nightLampSwitch;
                 break;
             case "2lampoff":
-                System.out.println("LOGG 2lampoff");
+                System.out.println("LOGGG 2lampoff");
                 switchCompat = nightLampSwitch;
                 break;
             case "3lampon":
@@ -637,10 +638,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         if (switchCompat != null) {
             switchCompat.setOnCheckedChangeListener(null);
         }
-        isActivityStarted = false;
         Call<ResponseBody> call = webService.sendCommand(command);
         final String myCommand = command;
-        System.out.println("LOGG command: " + myCommand);
+        System.out.println("LOGGG command: " + myCommand);
         call.enqueue(new Callback<ResponseBody>() {
 
 
@@ -655,37 +655,46 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     }
                 }
                 /**reset setOnCheckedChangeListener in any case, so the user can get the real state of the switch**/
-                System.out.println("LOG resp: " + myResponse + " command: " + myCommand);
+                System.out.println("LOGGG resp: " + myResponse + " command: " + myCommand);
                 if (myResponse != null) {
                     if (myCommand.equals(myResponse)) {
-                        System.out.println("LOGG " + myCommand + " Success");
-
-                        //updateUI1();
+                        System.out.println("LOGGG " + myCommand + " Success");
+                        updateUI1();
                         handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
-                        //updateUI2();
+                        updateUI2();
                         handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
                         if (switchCompat != null) {
                             switchCompat.setOnCheckedChangeListener(MainScreen.this);
-                        }
+                        }lamp1Requested = false;
+                        lamp2Requested = false;
+                        lamp3Requested = false;
+                        doorLockRequested = false;
                     } else {
-                        System.out.println("LOGG " + myCommand + " Error");
+                        System.out.println("LOGGG " + myCommand + " Error");
                         if (switchCompat != null) {
                             switchCompat.setOnCheckedChangeListener(MainScreen.this);
                         }
-                        isActivityStarted = true;
+                        lamp1Requested = false;
+                        lamp2Requested = false;
+                        lamp3Requested = false;
+                        doorLockRequested = false;
                     }
+                    System.out.println("LOGGG myResponse is not null");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOGG onFailure from sendToServer" + "");
-                System.out.println("LOGG Error send to server: " + t.getMessage());
+                System.out.println("LOGGG onFailure from sendToServer" + "");
+                System.out.println("LOGGG Error send to server: " + t.getMessage());
                 if (switchCompat != null) {
                     switchCompat.setOnCheckedChangeListener(MainScreen.this);
                 }
                 showSnackbar();
-                isActivityStarted = true;
+                lamp1Requested = false;
+                lamp2Requested = false;
+                lamp3Requested = false;
+                doorLockRequested = false;
             }
         });
     }
@@ -854,7 +863,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.doors:
                 System.out.println("LOG Clicked doors button");
-                lastUserInput = System.currentTimeMillis();
                 if (doorLocked.getVisibility() == View.VISIBLE) {
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
@@ -866,9 +874,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     System.out.println("LOG Door locked");
                     sendToServer("closedoor");
                 }
+                doorLockRequested = true;
                 break;
             case R.id.lock:
-                lastUserInput = System.currentTimeMillis();
                 if (doorLocked.getVisibility() == View.VISIBLE) {
                     doorLocked.setVisibility(View.INVISIBLE);
                     doorUnlocked.setVisibility(View.VISIBLE);
@@ -1022,7 +1030,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        isActivityStarted = false;
+//        isActivityStarted = false;
+        lamp1Requested = false;
+        lamp2Requested = false;
+        lamp3Requested = false;
+        doorLockRequested = false;
     }
 
     /**
@@ -1081,20 +1093,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         @Override
         public void run() {
             System.out.println("LOGG runnable1");
-            long timeDifference = System.currentTimeMillis() - lastUserInput;
-            Log.d("User input time", Long.toString(lastUserInput));
-            Log.d("current time", Long.toString(System.currentTimeMillis()));
-            Log.d("difference time", Long.toString(timeDifference));
-            if (timeDifference > UPDATE_DELAY_FROM_USER_INPUT) {
-                Log.d("test time condition", Boolean.toString(timeDifference > UPDATE_DELAY_FROM_USER_INPUT));
-                Log.d("difference time", " bigger than UPDATE DELAY... entered");
-                System.out.println("Activity is started");
-                updateUI1();
-                handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
-            } else {
-                Log.d("difference time", " smaller than UPDATE DELAY...not entered");
-                System.out.println("Activity is not started --");
-            }
+            updateUI1();
+            handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
         }
     };
 
@@ -1105,7 +1105,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private Runnable runnable2 = new Runnable() {
         @Override
         public void run() {
-            System.out.println("LOGG runnable2");
+//            System.out.println("LOGG runnable2");
             updateUI2();
             handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
         }
@@ -1117,13 +1117,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onStart() {
         super.onStart();
-        isActivityStarted = true;
+        System.out.println("LOGG onStart begins");
         updateUI1();
         handler.postDelayed(runnable1, 3 * DateUtils.SECOND_IN_MILLIS);
         updateUI2();
         handler.postDelayed(runnable2, (long) 5.17 * DateUtils.MINUTE_IN_MILLIS);
-        System.out.println("LOGG Activity started!");
         onStart = true;
+        System.out.println("LOGG onStart ends");
     }
 
     /**
@@ -1131,7 +1131,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      **/
     @Override
     protected void onStop() {
-        isActivityStarted = false;
         super.onStop();
     }
 
@@ -1139,12 +1138,20 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      * update the data from the app (lamps, doors, windows)
      **/
     private void updateUI1() {
-        System.out.println("LOG updateUI1");
-        updateLamp1Data(webService);
-        updateLamp2Data(webService);
-        updateLamp3Data(webService);
+        System.out.println("LOGG updateUI1 lamp1 " + lamp1Requested + " lamp2 " + lamp2Requested + " lamp3 " + lamp3Requested + " door " + doorLockRequested);
+        if (!lamp1Requested) {
+            updateLamp1Data(webService);
+        }
+        if (!lamp2Requested) {
+            updateLamp2Data(webService);
+        }
+        if (!lamp3Requested) {
+            updateLamp3Data(webService);
+        }
+        if (!doorLockRequested) {
+            updateDoorLockedData(webService);
+        }
         updateDoorData(webService);
-        updateDoorLockedData(webService);
         updateWindowsData(webService);
     }
 
@@ -1152,7 +1159,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
      * update the humidity, temperature and light state
      **/
     private void updateUI2() {
-        System.out.println("LOG updateUI2");
+        System.out.println("LOGG updateUI2");
         updateHumidityData(webService);
         updateTemperatureData(webService);
         updateLightData(webService);
@@ -1160,40 +1167,45 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        System.out.println("LOGG onCheckedChanged");
         if (onStart == false) {
+            System.out.println("LOGG onStart false");
             switch (buttonView.getId()) {
                 case R.id.chandelier_switch:
-                    lastUserInput = System.currentTimeMillis();
+                    lamp1Requested = true;
                     if (chandelierSwitch.isChecked()) {
-                        System.out.println("LOG ChandelierSwitch checked");
+                        System.out.println("LOGG ChandelierSwitch checked");
                         sendToServer("1lampon");
                     } else {
-                        System.out.println("LOG ChandelierSwitch unchecked");
+                        System.out.println("LOGG ChandelierSwitch unchecked");
                         sendToServer("1lampoff");
                     }
                     break;
                 case R.id.nightlight_switch:
-                    lastUserInput = System.currentTimeMillis();
+                    lamp2Requested = true;
                     if (nightLampSwitch.isChecked()) {
-                        System.out.println("LOG NightLightSwitch checked");
+                        System.out.println("LOGGG NightLightSwitch checked");
                         sendToServer("2lampon");
                     } else {
-                        System.out.println("LOG NightLightSwitch unchecked");
+                        System.out.println("LOGGG NightLightSwitch unchecked");
                         sendToServer("2lampoff");
                     }
                     break;
                 case R.id.vecof_switch:
-                    lastUserInput = System.currentTimeMillis();
+                    lamp3Requested = true;
                     if (veCofSwitch.isChecked()) {
-                        System.out.println("LOG VeCofSwitch checked");
+                        System.out.println("LOGG VeCofSwitch checked");
                         sendToServer("3lampon");
                     } else {
-                        System.out.println("LOG VeCofSwitch unchecked");
+                        System.out.println("LOGG VeCofSwitch unchecked");
                         sendToServer("3lampoff");
                     }
                     break;
+                default:
+                    break;
             }
         } else {
+            System.out.println("LOGG onStart true");
             onStart = false;
         }
     }
