@@ -166,10 +166,11 @@ function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, bu
 		}
 	}	
 	else {
-			console.log("current time:"+currentTime);
+			
+		var currentTime = (new Date).getTime();
+		console.log("current time:"+currentTime);
 			console.log("millisecond:" +milliseconds);
 			console.log(currentTime-milliseconds);
-		var currentTime = (new Date).getTime();
 		if(currentTime-milliseconds >= 6000){
 			console.log("I'm in");
 		
