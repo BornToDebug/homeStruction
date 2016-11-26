@@ -189,9 +189,9 @@ function dataToHTML (myVar){
 	_state.innerHTML = '';
 
 		dataState = stateConverter(data);
-		if(_state == tstatus) { dataState = dataState + "°C";};
-		else if(_state == lstatus) {dataState = dataState + "/1024";};
-		else if (_state == hstatus) {dataState = dataState + "%";};
+		if(_state == tstatus) { dataState = dataState + "°C"}
+		else if(_state == lstatus) {dataState = dataState + "/1024"}
+		else if (_state == hstatus) {dataState = dataState + "%";}
 		_state.innerHTML = dataState;
 		
 	

@@ -6,6 +6,7 @@ import com.lilla.homestruction.bean.HumidityResponse;
 import com.lilla.homestruction.bean.Lamp1Response;
 import com.lilla.homestruction.bean.Lamp2Response;
 import com.lilla.homestruction.bean.Lamp3Response;
+import com.lilla.homestruction.bean.LatestData;
 import com.lilla.homestruction.bean.LightResponse;
 import com.lilla.homestruction.bean.TemperatureResponse;
 import com.lilla.homestruction.bean.TokenResponse;
@@ -91,4 +92,7 @@ public interface WebService {
     @Streaming  Call<ResponseBody> getImage(
             @Query("image") String command
     );
+
+    @GET("/latestdata/")
+    Call<LatestData> getLatestData();
 }

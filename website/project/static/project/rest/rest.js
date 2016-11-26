@@ -140,7 +140,7 @@ function arrayJSON (url,stateConverter, buttonDoor,idDoor, buttonLamp,idLamp, bu
 	
 	var json =$.getJSON(url, function(data) {
 		console.log('success');
-		dataState(data['values'][0],stateConverter,tsatus);
+		dataState(data['values'][0],stateConverter,tstatus);
 		dataState(data['values'][1],stateConverter,lstatus);
 		buttonState(data['values'][2],buttonLamp,idLamp,milliLamp);
 		buttonState(data['values'][3],buttonNight, idNight,milliNight);
