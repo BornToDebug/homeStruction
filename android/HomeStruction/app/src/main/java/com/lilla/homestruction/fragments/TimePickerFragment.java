@@ -24,21 +24,21 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     private Handler mainHandler;
     private boolean wasCancelled;
 
-    //gets instance of OnDialogCallbacksListener
+    /**Gets instance of OnDialogCallbacksListener**/
     public void setOnDialogCallbacksListener(OnDialogCallbacksListener onDialogCallbacksListener) {
         this.onDialogCallbacksListener = onDialogCallbacksListener;
     }
 
-    //Created a TimePickerDialog
+    /**Created a TimePickerDialog**/
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the current time as the default values for the picker
+        /** Use the current time as the default values for the picker**/
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         final int minute = c.get(Calendar.MINUTE);
 
-        //Handler is used to delay the thread for a while, because TimePicker was buggy in older Android versions
+        /**Handler is used to delay the thread for a while, because TimePicker was buggy in older Android versions**/
         mainHandler = new Handler(getContext().getMainLooper());
-        // Create a new instance of TimePickerDialog and return it
+        /** Create a new instance of TimePickerDialog and return it**/
         TimePickerDialog dialog = new TimePickerDialog(getContext(), R.style.DialogTheme, this, hour, minute,
                 DateFormat.is24HourFormat(getContext()));
         dialog.setOnCancelListener(this);
@@ -46,8 +46,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
-        //Delays the thread for 250 ms (to be sure that if the cancel button was pressed, we don't need to set the time)
+        /**Do something with the time chosen by the user**/
+        /**Delays the thread for 250 ms (to be sure that if the cancel button was pressed, we don't need to set the time)**/
         mainHandler.postDelayed(new ShouldCancelRunnable(hourOfDay, minute), 250);
     }
 
@@ -65,7 +65,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         System.out.println("LOG Clicked");
     }
 
-    //If the cancel button was not pressed, we set the time
+    /**If the cancel button was not pressed, we set the time**/
     private class ShouldCancelRunnable implements Runnable {
 
         private int hourOfDay;

@@ -71,29 +71,18 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ToggleButton fridayButton;
     private ToggleButton saturdayButton;
     private ToggleButton sundayButton;
-    private List<String> responses;
     private String hour;
-    private boolean onStart;
     private String minute;
     private ImageView doorOpen;
     private ImageView doorClosed;
-    private TextView doorConf;
     private Handler handler;
     private WebService webService;
     private String path;
     private SwitchCompat switchCompat = null;
-    private boolean lamp1Requested = false;
-    private boolean lamp2Requested = false;
-    private boolean lamp3Requested = false;
-    private boolean doorLockRequested = false;
     private boolean isActivityStarted;
 
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("LOGG onCreate");
-        lamp1Requested = false;
-        lamp2Requested = false;
-        lamp3Requested = false;
-        doorLockRequested = false;
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
@@ -143,7 +132,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         veCofSwitch = (SwitchCompat) findViewById(R.id.vecof_switch);
         doorOpen = (ImageView) findViewById(R.id.door_open);
         doorClosed = (ImageView) findViewById(R.id.door_closed);
-        doorConf = (TextView) findViewById(R.id.ocText);
 
         /**Setting onClickListener**/
         findViewById(R.id.temperature).setOnClickListener(this);
@@ -192,8 +180,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 volume.setText("" + paramInt + "%"); /** here in textView the percent will be shown**/
             }
         });
-//        updateUI1();
-//        updateUI2();
         handler = new Handler(getMainLooper());
 
 
@@ -214,10 +200,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         Intent refresh = getIntent();
                         finish();
                         startActivity(refresh);
-                        lamp1Requested = false;
-                        lamp2Requested = false;
-                        lamp3Requested = false;
-                        doorLockRequested = false;
                         isActivityStarted = true;
                     }
                 });
@@ -227,378 +209,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     //TODO personalize your own settings in the settings menu
 
     /**
-     * Update methods to get the data from the RasPi
+     * Update method to get all of the data from the RasPi
      **/
-//    private void updateTemperatureData(WebService webService) {
-//        Call<TemperatureResponse> call = webService.getTemperatures();
-//        call.enqueue(new Callback<TemperatureResponse>() {
-//            @Override
-//            public void onResponse(Call<TemperatureResponse> call, Response<TemperatureResponse> response) {
-//                List<Temperature> temperatures = response.body().getResults();
-//                if (temperatures != null) {
-//                    if (temperatures.get(0) != null) {
-//                        temperatureValue.setText("" + temperatures.get(0).getValue() + " °C");
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<TemperatureResponse> call, Throwable t) {
-//                temperatureValue.setText("no data");
-//                showSnackbar();
-//                System.out.println("LOG Error temperature: " + t.getMessage());
-//                isActivityStarted = false;
-//            }
-//        });
-//    }
-//    private void updateHumidityData(WebService webService) {
-//        Call<HumidityResponse> call = webService.getHumidity();
-//        call.enqueue(new Callback<HumidityResponse>() {
-//            @Override
-//            public void onResponse(Call<HumidityResponse> call, Response<HumidityResponse> response) {
-//                List<Humidity> humidity = response.body().getResults();
-//                if (humidity != null) {
-//                    if (humidity.get(0) != null) {
-//                        humidityValue.setText("" + humidity.get(0).getValue() + " %");
-//                    } else {
-//                        humidityValue.setText("no data");
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<HumidityResponse> call, Throwable t) {
-//                humidityValue.setText("no data");
-//                System.out.println("LOG Error: " + t.getMessage());
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
-//    private void updateLightData(WebService webService) {
-//        Call<LightResponse> call = webService.getLight();
-//        call.enqueue(new Callback<LightResponse>() {
-//            @Override
-//            public void onResponse(Call<LightResponse> call, Response<LightResponse> response) {
-//                List<Light> light = response.body().getResults();
-//                if (light != null) {
-//                    if (light.get(0) != null) {
-//                        luminosityValue.setText("" + light.get(0).getValue());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<LightResponse> call, Throwable t) {
-//                luminosityValue.setText("no data");
-//                System.out.println("LOG Error: " + t.getMessage());
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
-//    private void updateLamp1Data(WebService webService) {
-//        isActivityStarted = false;
-//        Call<Lamp1Response> call = webService.getLamp1();
-//        call.enqueue(new Callback<Lamp1Response>() {
-//            @Override
-//            public void onResponse(Call<Lamp1Response> call, Response<Lamp1Response> response) {
-//                List<Lamp1> lamp1Values = response.body().getResults();
-//                if (lamp1Values != null) {
-//                    if (lamp1Values.get(0) != null) {
-//                        switch (lamp1Values.get(0).getValue()) {
-//                            /**disable setOnCheckedChangeListener when the user changes the switch state (same on all following)**/
-//                            case "1off_c":
-//                                chandelierSwitch.setOnCheckedChangeListener(null);
-//                                chandelierSwitch.setChecked(false);
-//                                chandelierSwitch.setText("");
-//                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "1off_uc":
-//                                chandelierSwitch.setOnCheckedChangeListener(null);
-//                                chandelierSwitch.setChecked(false);
-//                                chandelierSwitch.setText("?");
-//                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "1on_c":
-//                                chandelierSwitch.setOnCheckedChangeListener(null);
-//                                chandelierSwitch.setChecked(true);
-//                                chandelierSwitch.setText("");
-//                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "1on_uc":
-//                                chandelierSwitch.setOnCheckedChangeListener(null);
-//                                chandelierSwitch.setChecked(true);
-//                                chandelierSwitch.setText("?");
-//                                chandelierSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            default:
-//                                chandelierSwitch.setText("error");
-//                                break;
-//                        }
-//                    }
-//                    if (chandelierSwitch.isChecked()) {
-//                        System.out.println("LOG Chandelier on");
-//                    } else {
-//                        System.out.println("LOG Chandelier off");
-//                    }
-//                    isActivityStarted = true;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Lamp1Response> call, Throwable t) {
-//                System.out.println("LOG Error: " + t.getMessage());
-//                chandelierSwitch.setText("error");
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
-//    private void updateLamp2Data(WebService webService) {
-//        System.out.println("LOGG updateLamp2Data");
-//        isActivityStarted = false;
-//        Call<Lamp2Response> call = webService.getLamp2();
-//        call.enqueue(new Callback<Lamp2Response>() {
-//            @Override
-//            public void onResponse(Call<Lamp2Response> call, Response<Lamp2Response> response) {
-//                List<Lamp2> lamp2Values = response.body().getResults();
-//                if (lamp2Values != null) {
-//                    if (lamp2Values.get(0) != null) {
-//                        switch (lamp2Values.get(0).getValue()) {
-//                            case "2off_c":
-//                                nightLampSwitch.setOnCheckedChangeListener(null);
-//                                nightLampSwitch.setChecked(false);
-//                                nightLampSwitch.setText("");
-//                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "2off_uc":
-//                                nightLampSwitch.setOnCheckedChangeListener(null);
-//                                nightLampSwitch.setChecked(false);
-//                                nightLampSwitch.setText("?");
-//                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "2on_c":
-//                                nightLampSwitch.setOnCheckedChangeListener(null);
-//                                nightLampSwitch.setChecked(true);
-//                                nightLampSwitch.setText("");
-//                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "2on_uc":
-//                                nightLampSwitch.setOnCheckedChangeListener(null);
-//                                nightLampSwitch.setChecked(true);
-//                                nightLampSwitch.setText("?");
-//                                nightLampSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            default:
-//                                nightLampSwitch.setText("error");
-//                                break;
-//                        }
-//                    }
-//                    if (nightLampSwitch.isChecked()) {
-//                        System.out.println("LOGG Nightlamp on");
-//                    } else {
-//                        System.out.println("LOGG Nightlamp off");
-//                    }
-//                    isActivityStarted = true;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Lamp2Response> call, Throwable t) {
-//                System.out.println("LOG Error: " + t.getMessage());
-//                nightLampSwitch.setText("error");
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
-//    private void updateLamp3Data(WebService webService) {
-//        System.out.println("LOGG updateLamp3Data");
-//        isActivityStarted = false;
-//        Call<Lamp3Response> call = webService.getLamp3();
-//        call.enqueue(new Callback<Lamp3Response>() {
-//            @Override
-//            public void onResponse(Call<Lamp3Response> call, Response<Lamp3Response> response) {
-//                List<Lamp3> lamp3Values = response.body().getResults();
-//                if (lamp3Values != null) {
-//                    if (lamp3Values.get(0) != null) {
-//                        switch (lamp3Values.get(0).getValue()) {
-//                            case "3off_c":
-//                                veCofSwitch.setOnCheckedChangeListener(null);
-//                                veCofSwitch.setChecked(false);
-//                                veCofSwitch.setText("");
-//                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "3off_uc":
-//                                veCofSwitch.setOnCheckedChangeListener(null);
-//                                veCofSwitch.setChecked(false);
-//                                veCofSwitch.setText("?");
-//                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "3on_c":
-//                                veCofSwitch.setOnCheckedChangeListener(null);
-//                                veCofSwitch.setChecked(true);
-//                                veCofSwitch.setText("");
-//                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            case "3on_uc":
-//                                veCofSwitch.setOnCheckedChangeListener(null);
-//                                veCofSwitch.setChecked(true);
-//                                veCofSwitch.setText("?");
-//                                veCofSwitch.setOnCheckedChangeListener(MainScreen.this);
-//                                break;
-//                            default:
-//                                veCofSwitch.setText("error");
-//                                break;
-//                        }
-//                    }
-//                    if (veCofSwitch.isChecked()) {
-//                        System.out.println("LOGG Ventillator/coffee machine on");
-//                    } else {
-//                        System.out.println("LOGG Ventillator/coffee machine off");
-//                    }
-//                    isActivityStarted = true;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Lamp3Response> call, Throwable t) {
-//                System.out.println("LOG Error: " + t.getMessage());
-//                veCofSwitch.setText("error");
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
-//    private void updateDoorData(WebService webService) {
-//        Call<DoorResponse> call = webService.getDoor();
-//        call.enqueue(new Callback<DoorResponse>() {
-//            @Override
-//            public void onResponse(Call<DoorResponse> call, Response<DoorResponse> response) {
-//                List<Door> doorValues = response.body().getResults();
-//                if (doorValues != null) {
-//                    if (doorValues.get(0) != null) {
-//                        switch (doorValues.get(0).getValue()) {
-//                            case "opened":
-//                                doorOpen.setVisibility(View.VISIBLE);
-//                                doorClosed.setVisibility(View.INVISIBLE);
-//                                break;
-//                            case "closed":
-//                                doorOpen.setVisibility(View.INVISIBLE);
-//                                doorClosed.setVisibility(View.VISIBLE);
-//                                break;
-//                            default:
-//                                doorConf.setText("Door error");
-//                                break;
-//                        }
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DoorResponse> call, Throwable t) {
-//                System.out.println("LOG Error: " + t.getMessage());
-//                doorText.setText("Door error");
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
-//    private void updateDoorLockedData(WebService webService) {
-//        isActivityStarted = false;
-//        Call<DoorLockedResponse> call = webService.getDoorLocked();
-//        call.enqueue(new Callback<DoorLockedResponse>() {
-//            @Override
-//            public void onResponse(Call<DoorLockedResponse> call, Response<DoorLockedResponse> response) {
-//                List<DoorLocked> doorLockValues = response.body().getResults();
-//                if (doorLockValues != null) {
-//                    if (doorLockValues.get(0) != null) {
-//                        switch (doorLockValues.get(0).getValue()) {
-//                            case "do_c":
-//                                doorUnlocked.setVisibility(View.VISIBLE);
-//                                doorLocked.setVisibility(View.INVISIBLE);
-//                                doorText.setText("Door unlocked");
-//                                confirm.setText("");
-//                                break;
-//                            case "do_uc":
-//                                doorUnlocked.setVisibility(View.VISIBLE);
-//                                doorLocked.setVisibility(View.INVISIBLE);
-//                                doorText.setText("Door unlocked");
-//                                confirm.setText("?");
-//                                break;
-//                            case "dc_c":
-//                                doorUnlocked.setVisibility(View.INVISIBLE);
-//                                doorLocked.setVisibility(View.VISIBLE);
-//                                doorText.setText("Door locked");
-//                                confirm.setText("");
-//                                break;
-//                            case "dc_uc":
-//                                doorUnlocked.setVisibility(View.INVISIBLE);
-//                                doorLocked.setVisibility(View.VISIBLE);
-//                                doorText.setText("Door locked");
-//                                confirm.setText("?");
-//                                break;
-//                            default:
-//                                break;
-//                        }
-//                    }
-//                    isActivityStarted = true;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DoorLockedResponse> call, Throwable t) {
-//                System.out.println("LOG Error: " + t.getMessage());
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
-//    private void updateWindowsData(WebService webService) {
-//        Call<WindowsResponse> call = webService.getWindows();
-//        call.enqueue(new Callback<WindowsResponse>() {
-//            @Override
-//            public void onResponse(Call<WindowsResponse> call, Response<WindowsResponse> response) {
-//                List<Windows> windowValues = response.body().getResults();
-//                if (windowValues != null) {
-//                    if (windowValues.get(0) != null) {
-//                        switch (windowValues.get(0).getValue()) {
-//                            case "opened":
-//                                windowOpen.setVisibility(View.VISIBLE);
-//                                windowClosed.setVisibility(View.INVISIBLE);
-//                                windowError.setVisibility(View.INVISIBLE);
-//                                break;
-//                            case "closed":
-//                                windowOpen.setVisibility(View.INVISIBLE);
-//                                windowClosed.setVisibility(View.VISIBLE);
-//                                windowError.setVisibility(View.INVISIBLE);
-//                                break;
-//                            default:
-//                                windowOpen.setVisibility(View.INVISIBLE);
-//                                windowClosed.setVisibility(View.INVISIBLE);
-//                                windowError.setVisibility(View.VISIBLE);
-//                                break;
-//                        }
-//                    } else {
-//                        windowOpen.setVisibility(View.INVISIBLE);
-//                        windowClosed.setVisibility(View.INVISIBLE);
-//                        windowError.setVisibility(View.VISIBLE);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<WindowsResponse> call, Throwable t) {
-//                System.out.println("LOG Error: " + t.getMessage());
-//                windowOpen.setVisibility(View.INVISIBLE);
-//                windowClosed.setVisibility(View.INVISIBLE);
-//                windowError.setVisibility(View.VISIBLE);
-//                isActivityStarted = true;
-//            }
-//        });
-//    }
-
     private void updateAllData() {
         Call<LatestData> call = webService.getLatestData();
         System.out.println("LOGGG updateAllData");
@@ -610,15 +222,19 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (response.body() != null) {
                     myResponse = response.body().getValues();
                     if (myResponse != null) {
+                        /**Get the temperature value**/
                         if (myResponse.get(0) != null) {
                             temperatureValue.setText("" + myResponse.get(0) + " °C");
                         }
+                        /**Get the luminosity value**/
                         if (myResponse.get(1) != null) {
                             luminosityValue.setText("" + myResponse.get(1) + " %");
                         }
+                        /**Get the chandelier's state**/
                         if (myResponse.get(2) != null) {
                             switch (myResponse.get(2)) {
-                                /**disable setOnCheckedChangeListener when the user changes the switch state (same on all following)**/
+                                /**disable setOnCheckedChangeListener when the user changes the switch state
+                                 * (same on all following)**/
                                 case "1off_c":
                                     chandelierSwitch.setOnCheckedChangeListener(null);
                                     chandelierSwitch.setChecked(false);
@@ -648,6 +264,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                     break;
                             }
                         }
+                        /**Get the nightlight's state**/
                         if (myResponse.get(3) != null) {
                             switch (myResponse.get(3)) {
                                 case "2off_c":
@@ -679,6 +296,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                     break;
                             }
                         }
+                        /**Get the fan/coffee machine's state**/
                         if (myResponse.get(4) != null) {
                             switch (myResponse.get(4)) {
                                 case "3off_c":
@@ -710,6 +328,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                     break;
                             }
                         }
+                        /**Get the door's state (locked or unlocked)**/
                         if (myResponse.get(5) != null) {
                             switch (myResponse.get(5)) {
                                 case "do_c":
@@ -740,6 +359,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                     break;
                             }
                         }
+                        /**Get the door's state (open or closed)**/
                         if (myResponse.get(6) != null) {
                             switch (myResponse.get(6)) {
                                 case "opened":
@@ -751,11 +371,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                     doorClosed.setVisibility(View.VISIBLE);
                                     break;
                                 default:
-//                                    doorConf.setText("Door error");
                                     System.out.println("LOGG Door error");
                                     break;
                             }
                         }
+                        /**Get the window's state (open or closed)**/
                         if (myResponse.get(7) != null) {
                             switch (myResponse.get(7)) {
                                 case "opened":
@@ -769,13 +389,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                                     windowError.setVisibility(View.INVISIBLE);
                                     break;
                                 default:
-//                                    windowOpen.setVisibility(View.INVISIBLE);
-//                                    windowClosed.setVisibility(View.INVISIBLE);
-//                                    windowError.setVisibility(View.VISIBLE);
                                     System.out.println("LOGG Window error");
                                     break;
                             }
                         }
+                        /**Get the humidity value**/
                         if (myResponse.get(8) != null) {
                             humidityValue.setText("" + myResponse.get(8));
                         }
@@ -805,7 +423,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onFailure(Call<LatestData> call, Throwable t) {
                 System.out.println("LOGGG Error: " + t.getMessage());
-                showSnackbar();
+                showSnackbar(); /**If there is an error, show the snackbar with the retry option**/
                 isActivityStarted = true;
             }
         });
@@ -818,8 +436,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         isActivityStarted = false;
         System.out.println("LOGGG sendToServer() started");
         System.out.println("LOGGG isActivityStarted " + isActivityStarted);
-//        System.out.println("LOGGG lamp1Requested: " + lamp1Requested + "lamp2Requested: " + lamp2Requested + "lamp3Requested: " + lamp3Requested);
-//        System.out.println("LOGGG doorLockRequested: " + doorLockRequested);
         switchCompat = null;
         /**set switchCompat to a certain switch based on a command**/
         switch (command) {
@@ -848,7 +464,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 switchCompat = veCofSwitch;
                 break;
         }
-        /**unset setOnCheckedChangeListener until the user gets a response**/
+        /**Unset setOnCheckedChangeListener until the user gets a response**/
         if (switchCompat != null) {
             switchCompat.setOnCheckedChangeListener(null);
         }
@@ -857,7 +473,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         final String myCommand = command;
         System.out.println("LOGGG command: " + myCommand);
         call.enqueue(new Callback<ResponseBody>() {
-
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -869,33 +484,23 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         e.printStackTrace();
                     }
                 }
-                /**reset setOnCheckedChangeListener in any case, so the user can get the real state of the switch**/
+                /**Reset setOnCheckedChangeListener in any case, so the user can get the real state of the switch**/
                 System.out.println("LOGGG resp: " + myResponse + " command: " + myCommand);
                 if (myResponse != null) {
                     if (myCommand.equals(myResponse)) {
                         System.out.println("LOGGG " + myCommand + " Success");
                         updateAllData();
                         handler.postDelayed(runnable, 3 * DateUtils.SECOND_IN_MILLIS);
-//                        updateUI2();
-//                        handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
                         if (switchCompat != null) {
                             switchCompat.setOnCheckedChangeListener(MainScreen.this);
                         }
                         chandelierSwitch.setText(".");
-//                        lamp1Requested = false;
-//                        lamp2Requested = false;
-//                        lamp3Requested = false;
-//                        doorLockRequested = false;
                         isActivityStarted = true;
                     } else {
                         System.out.println("LOGGG " + myCommand + " Error");
                         if (switchCompat != null) {
                             switchCompat.setOnCheckedChangeListener(MainScreen.this);
                         }
-//                        lamp1Requested = false;
-//                        lamp2Requested = false;
-//                        lamp3Requested = false;
-//                        doorLockRequested = false;
                         isActivityStarted = true;
                     }
                     System.out.println("LOGGG myResponse is not null");
@@ -909,11 +514,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (switchCompat != null) {
                     switchCompat.setOnCheckedChangeListener(MainScreen.this);
                 }
-                showSnackbar();
-                lamp1Requested = false;
-                lamp2Requested = false;
-                lamp3Requested = false;
-                doorLockRequested = false;
+                showSnackbar(); /**If an error occurs, show the snackbar with a retry option**/
                 isActivityStarted = true;
             }
         });
@@ -954,7 +555,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * reset the alarm
+     * Reset the alarm
      **/
     private void resetAlarm(WebService webService) {
         Call<ResponseBody> call = webService.resetAlarm();
@@ -1079,24 +680,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             case R.id.multimedia:
                 System.out.println("LOG Multimedia button clicked");
                 break;
-//            case R.id.door:
-//                break;
-//            case R.id.doors:
-//                isActivityStarted = false;
-//                doorLockRequested = true;
-//                System.out.println("LOG Clicked doors button");
-//                if (doorLocked.getVisibility() == View.VISIBLE) {
-//                    doorLocked.setVisibility(View.INVISIBLE);
-//                    doorUnlocked.setVisibility(View.VISIBLE);
-//                    System.out.println("LOG Door unlocked");
-//                    sendToServer("opendoor");
-//                } else {
-//                    doorLocked.setVisibility(View.VISIBLE);
-//                    doorUnlocked.setVisibility(View.INVISIBLE);
-//                    System.out.println("LOG Door locked");
-//                    sendToServer("closedoor");
-//                }
-//                break;
             case R.id.lock:
                 isActivityStarted = false;
                 if (doorLocked.getVisibility() == View.VISIBLE) {
@@ -1236,7 +819,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * show the alarm's timepicker
+     * Show the alarm's timepicker
      **/
     private void showTimePickerDialog() {
         TimePickerFragment newFragment = new TimePickerFragment();
@@ -1245,7 +828,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * if back button is pressed, go to home screen
+     * If back button is pressed, go to home screen
      **/
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -1253,10 +836,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         isActivityStarted = false;
-        lamp1Requested = false;
-        lamp2Requested = false;
-        lamp3Requested = false;
-        doorLockRequested = false;
     }
 
     /**
@@ -1295,7 +874,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * create request for the alarm
+     * Create request for the alarm
      **/
     private void createRequest(List<Boolean> daysChecked, WebService webService) {
         List<String> days = Arrays.asList(null, null, null, null, null, null, null);
@@ -1309,7 +888,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * make a new runnable which updates the ui in every 3s
+     * Make a new runnable which updates the UI in every 3s
      **/
     private Runnable runnable = new Runnable() {
         @Override
@@ -1322,21 +901,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         }
     };
 
-//    /**
-//     * make another runnable which updates luminosity, temperature and humidity only in every 5 minutes,
-//     * because those values are only updated every 15 minutes, and this way it sends less requests
-//     */
-//    private Runnable runnable2 = new Runnable() {
-//        @Override
-//        public void run() {
-////            System.out.println("LOGG runnable2");
-//            updateUI2();
-//            handler.postDelayed(runnable2, (long) (5.17 * DateUtils.MINUTE_IN_MILLIS));
-//        }
-//    };
 
     /**
-     * when activity is started, update UI
+     * When activity is started, update UI
      **/
     @Override
     protected void onStart() {
@@ -1345,9 +912,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         System.out.println("LOGG onStart begins");
         updateAllData();
         handler.postDelayed(runnable, 3 * DateUtils.SECOND_IN_MILLIS);
-//        updateUI2();
-//        handler.postDelayed(runnable2, (long) 5.17 * DateUtils.MINUTE_IN_MILLIS);
-//        onStart = true;
         System.out.println("LOGG onStart ends");
     }
 
@@ -1360,48 +924,15 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         isActivityStarted = false;
     }
 
-    /**
-     * update the data from the app (lamps, doors, windows)
-     **/
-//    private void updateUI1() {
-//        updateAllData();
-//        System.out.println("LOGG updateUI1 lamp1 " + lamp1Requested + " lamp2 " + lamp2Requested + " lamp3 " + lamp3Requested + " door " + doorLockRequested);
-//        if (!lamp1Requested) {
-////            updateLamp1Data(webService);
-//        }
-//        if (!lamp2Requested) {
-////            updateLamp2Data(webService);
-//        }
-//        if (!lamp3Requested) {
-////            updateLamp3Data(webService);
-//        }
-//        if (!doorLockRequested) {
-////            updateDoorLockedData(webService);
-//        }
-////        updateDoorData(webService);
-////        updateWindowsData(webService);
-//    }
-
-//    /**
-//     * update the humidity, temperature and light state
-//     **/
-//    private void updateUI2() {
-//        System.out.println("LOGG updateUI2");
-////        updateHumidityData(webService);
-////        updateTemperatureData(webService);
-////        updateLightData(webService);
-//    }
-
+    /**Detects if a switch's state has been changed or not**/
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         System.out.println("LOGG onCheckedChanged");
-//        if (onStart == false) {
         System.out.println("LOGG onStart false");
         isActivityStarted = false;
         switch (buttonView.getId()) {
             case R.id.chandelier_switch:
                 isActivityStarted = false;
-//                lamp1Requested = true;
                 if (chandelierSwitch.isChecked()) {
                     System.out.println("LOGG ChandelierSwitch checked");
                     sendToServer("1lampon");
@@ -1411,7 +942,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 }
                 break;
             case R.id.nightlight_switch:
-//                lamp2Requested = true;
                 isActivityStarted = false;
                 if (nightLampSwitch.isChecked()) {
                     System.out.println("LOGGG NightLightSwitch checked");
@@ -1422,7 +952,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 }
                 break;
             case R.id.vecof_switch:
-//                lamp3Requested = true;
                 isActivityStarted = false;
                 if (veCofSwitch.isChecked()) {
                     System.out.println("LOGG VeCofSwitch checked");
@@ -1434,10 +963,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             default:
                 break;
-//            }
-//        } else {
-//            System.out.println("LOGG onStart true");
-//            onStart = false;
         }
     }
 }

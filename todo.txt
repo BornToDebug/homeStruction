@@ -2,11 +2,11 @@ image on website ~1 week 1 hr
 neopixel ~1 day
 text to speech ~ 1/2 day
 mp3 ~ 2 day
-mail server -- reset password
 demo video -- get equipment ~ not probable
-fan temperature 
 optimize network usage ~ full day
-user screen on android + settings
+settings on android
+start stream from android
+stop alarm from android
 
 work hard play hard
 
@@ -15,4 +15,7 @@ Priorities
 neopixel, coffee machine, text-to-speech(server weather)
 image website
 fix bugs(switches)
+
+
+
 

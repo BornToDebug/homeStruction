@@ -42,25 +42,14 @@ public class TemperatureScreen extends AppCompatActivity {
         final String token = SaveSharedPreference.getToken(TemperatureScreen.this);
         imageViewTouch = (ImageViewTouch) findViewById(R.id.graph);
         String url = "https://homestruction.org/androidimage/?image=temp";
-//        Display display = getWindowManager().getDefaultDisplay();
-//        Point size = new Point();
-//        display.getSize(size);
-//        int width = size.x;
-//        int height = size.y;
-
-//        Request request = new Request.Builder().url("http://test.com/image.jpg").build();
-
-
-
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Interceptor.Chain chain) throws IOException {
                 Request original = chain.request();
-
-                // Request customization: add request headers
+                /** Request customization: add request headers**/
                 Request.Builder requestBuilder = original.newBuilder()
-                        .header("Authorization", "Token " + token); // <-- this is the important line
+                        .header("Authorization", "Token " + token);
 
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
@@ -92,18 +81,7 @@ public class TemperatureScreen extends AppCompatActivity {
                     public void onError() {
                         System.out.println("LOG Error temperature");
                     }
-                })
-        ;
-
-
-//        GlideUrl glideUrl = new GlideUrl("http://homestruction.servebeer.com/androidimage/?image=temp",
-//                new LazyHeaders.Builder()
-//                        .addHeader("Authorization", "Token " + token).build());
-//        Glide
-//                .with(this)
-//                .load(glideUrl)
-//                .placeholder(R.drawable.temperature)
-//                .into(imageViewTouch);
+                });
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;

@@ -29,8 +29,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lilla.homestruction.R;
-import com.lilla.homestruction.activities.ForgottenPassword;
-import com.lilla.homestruction.activities.MainScreen;
 import com.lilla.homestruction.bean.TokenResponse;
 import com.lilla.homestruction.interfaces.WebService;
 import com.lilla.homestruction.managers.RetrofitManager;
@@ -52,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     TextView loginView;
 
-    //This is the basic Android login screen
+    /**This is the basic Android login screen**/
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -71,7 +69,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private UserLoginTask mAuthTask = null;
 
-    // UI references.
+    /**
+     * UI references.
+     **/
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
     private View mProgressView;
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
+        /** Set up the login form.**/
 
         System.out.println(SaveSharedPreference.getUserName(LoginActivity.this));
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
@@ -176,25 +176,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return;
         }
 
-        // Reset errors.
+        /** Reset errors.**/
         mUsernameView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
+        /** Store values at the time of the login attempt.**/
         final String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
+        /** Check for a valid password, if the user entered one.**/
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
 
-        // Check for a valid email address.
+        /** Check for a valid email address.**/
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError("This field is required");
             focusView = mUsernameView;
@@ -206,13 +206,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
+            /** There was an error; don't attempt login and focus the first
+             form field with an error.**/
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            //Use retrofit for authentication
+            /** Show a progress spinner, and kick off a background task to
+             perform the user login attempt. **/
+            /**Use retrofit for authentication**/
             WebService webService = RetrofitManager.createService(WebService.class);
             Call<TokenResponse> getTokenCall = webService.getLoginToken(username, password);
             showProgress(true);
@@ -224,14 +224,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         System.out.println("Error");
                         mPasswordView.setError("Incorrect login credentials");
                         mPasswordView.requestFocus();
-
                     } else {
                         System.out.println("ddd " + response.body().getToken());
                         SaveSharedPreference.setToken(LoginActivity.this, response.body().getToken());
                         SaveSharedPreference.setUserName(LoginActivity.this, username);
                         startMainScreen();
                     }
-
                 }
 
                 @Override
@@ -264,9 +262,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
+        /** On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+         for very easy animations. If available, use these APIs to fade-in
+         the progress spinner. **/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -288,8 +286,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
+            /** The ViewPropertyAnimator APIs are not available, so simply show
+             and hide the relevant UI components.**/
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
@@ -298,17 +296,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
-                // Retrieve data rows for the device user's 'profile' contact.
+                /** Retrieve data rows for the device user's 'profile' contact.**/
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
                         ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
 
-                // Select only email addresses.
+                /** Select only email addresses.**/
                 ContactsContract.Contacts.Data.MIMETYPE +
                         " = ?", new String[]{ContactsContract.CommonDataKinds.Email
                 .CONTENT_ITEM_TYPE},
 
-                // Show primary email addresses first. Note that there won't be
-                // a primary email address if the user hasn't specified one.
+                /** Show primary email addresses first. Note that there won't be
+                 a primary email address if the user hasn't specified one.**/
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
 
@@ -320,7 +318,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             emails.add(cursor.getString(ProfileQuery.ADDRESS));
             cursor.moveToNext();
         }
-
         addEmailsToAutoComplete(emails);
     }
 
@@ -330,7 +327,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        /**Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.**/
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
@@ -367,7 +364,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                // Simulate network access.f
+                /** Simulate network access.**/
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
@@ -376,7 +373,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mUsername)) {
-                    // Account exists, return true if the password matches.
+                    /** Account exists, return true if the password matches.**/
                     return pieces[1].equals(mPassword);
                 }
             }

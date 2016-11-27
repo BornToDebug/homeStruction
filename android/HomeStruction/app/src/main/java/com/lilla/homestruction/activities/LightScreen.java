@@ -44,7 +44,7 @@ public class LightScreen extends AppCompatActivity {
             public Response intercept(Interceptor.Chain chain) throws IOException {
                 Request original = chain.request();
 
-                // Request customization: add request headers
+                /** Request customization: add request headers**/
                 Request.Builder requestBuilder = original.newBuilder()
                         .header("Authorization", "Token " + token); // <-- this is the important line
 
