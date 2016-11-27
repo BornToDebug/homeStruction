@@ -228,7 +228,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         }
                         /**Get the luminosity value**/
                         if (myResponse.get(1) != null) {
-                            luminosityValue.setText("" + myResponse.get(1) + " %");
+                            luminosityValue.setText("" + myResponse.get(1));
                         }
                         /**Get the chandelier's state**/
                         if (myResponse.get(2) != null) {
@@ -395,7 +395,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                         }
                         /**Get the humidity value**/
                         if (myResponse.get(8) != null) {
-                            humidityValue.setText("" + myResponse.get(8));
+                            humidityValue.setText("" + myResponse.get(8) + " %");
                         }
                         if (chandelierSwitch.isChecked()) {
                             System.out.println("LOGG Chandelier on");
@@ -683,14 +683,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             case R.id.lock:
                 isActivityStarted = false;
                 if (doorLocked.getVisibility() == View.VISIBLE) {
-                    doorLocked.setVisibility(View.INVISIBLE);
-                    doorUnlocked.setVisibility(View.VISIBLE);
-                    System.out.println("LOG Door unlocked");
+                    doorText.setText(doorText.getText() + ".");
                     sendToServer("opendoor");
                 } else {
-                    doorLocked.setVisibility(View.VISIBLE);
-                    doorUnlocked.setVisibility(View.INVISIBLE);
-                    System.out.println("LOG Door locked");
+                    doorText.setText(doorText.getText() + ".");
                     sendToServer("closedoor");
                 }
                 break;
