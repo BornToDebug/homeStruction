@@ -98,7 +98,7 @@ void loop()
   if(mode == 1)
   {
     closed = 0;
-    animation = random(1, 9);
+    animation = random(1, 10);
     choose(animation);
   }
   else
@@ -858,6 +858,7 @@ void rollEyes() {
     Serial.print("i = ");
     Serial.println(i);
     #endif
+    delay(100);
     for (int k = NUMPIXELS / 4 - 1; k >= 0 ; k--) {
       int j;
       int a1, a2, a3, a4;
