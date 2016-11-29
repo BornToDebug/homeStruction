@@ -121,8 +121,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         fridayButton = (ToggleButton) findViewById(R.id.friday);
         saturdayButton = (ToggleButton) findViewById(R.id.saturday);
         sundayButton = (ToggleButton) findViewById(R.id.sunday);
-        SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
-        final TextView volume = (TextView) findViewById(R.id.volume);
+//        SeekBar seekBar = (SeekBar) findViewById(R.id.seek_bar);
+//        final TextView volume = (TextView) findViewById(R.id.volume);
         doorText = (TextView) findViewById(R.id.doors_text);
         windowOpen = (ImageView) findViewById(R.id.window_open);
         windowClosed = (ImageView) findViewById(R.id.window_closed);
@@ -137,7 +137,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.temperature).setOnClickListener(this);
         findViewById(R.id.humidity).setOnClickListener(this);
         findViewById(R.id.luminosity).setOnClickListener(this);
-        findViewById(R.id.multimedia).setOnClickListener(this);
+//        findViewById(R.id.multimedia).setOnClickListener(this);
         findViewById(R.id.door).setOnClickListener(this);
         findViewById(R.id.doors).setOnClickListener(this);
         findViewById(R.id.lock).setOnClickListener(this);
@@ -153,33 +153,33 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.friday).setOnClickListener(this);
         findViewById(R.id.saturday).setOnClickListener(this);
         findViewById(R.id.sunday).setOnClickListener(this);
-        findViewById(R.id.songs).setOnClickListener(this);
-        findViewById(R.id.previous).setOnClickListener(this);
-        findViewById(R.id.play).setOnClickListener(this);
-        findViewById(R.id.pause).setOnClickListener(this);
-        findViewById(R.id.next).setOnClickListener(this);
-        findViewById(R.id.shuffle).setOnClickListener(this);
+//        findViewById(R.id.songs).setOnClickListener(this);
+//        findViewById(R.id.previous).setOnClickListener(this);
+//        findViewById(R.id.play).setOnClickListener(this);
+//        findViewById(R.id.pause).setOnClickListener(this);
+//        findViewById(R.id.next).setOnClickListener(this);
+//        findViewById(R.id.shuffle).setOnClickListener(this);
 
         long startTime3 = System.currentTimeMillis();
         System.out.println("LOG finding views run: " + (startTime3 - startTime2));
 
-        volume.setText("0%");
+//        volume.setText("0%");
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            public void onStopTrackingTouch(SeekBar bar) {
-                int value = bar.getProgress(); /** the value of the seekBar progress**/
-            }
+//            public void onStopTrackingTouch(SeekBar bar) {
+//                int value = bar.getProgress(); /** the value of the seekBar progress**/
+//            }
 
-            public void onStartTrackingTouch(SeekBar bar) {
+//            public void onStartTrackingTouch(SeekBar bar) {
 
-            }
+//            }
 
-            public void onProgressChanged(SeekBar bar,
-                                          int paramInt, boolean paramBoolean) {
-                volume.setText("" + paramInt + "%"); /** here in textView the percent will be shown**/
-            }
-        });
+//            public void onProgressChanged(SeekBar bar,
+//                                          int paramInt, boolean paramBoolean) {
+//                volume.setText("" + paramInt + "%"); /** here in textView the percent will be shown**/
+//            }
+//        });
         handler = new Handler(getMainLooper());
 
 
@@ -658,8 +658,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
 
-        ImageButton play = (ImageButton) findViewById(R.id.play);
-        ImageButton pause = (ImageButton) findViewById(R.id.pause);
+//        ImageButton play = (ImageButton) findViewById(R.id.play);
+//        ImageButton pause = (ImageButton) findViewById(R.id.pause);
 
         switch (v.getId()) {
             case R.id.temperature:
@@ -677,9 +677,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 Intent lum = new Intent(MainScreen.this, LightScreen.class);
                 startActivity(lum);
                 break;
-            case R.id.multimedia:
-                System.out.println("LOG Multimedia button clicked");
-                break;
+//            case R.id.multimedia:
+//                System.out.println("LOG Multimedia button clicked");
+//                break;
             case R.id.lock:
                 isActivityStarted = false;
                 if (doorLocked.getVisibility() == View.VISIBLE) {
@@ -789,28 +789,28 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     createRequest(daysChecked, webService);
                 }
                 break;
-            case R.id.songs:
-                System.out.println("LOG Songs button pressed");
-                break;
-            case R.id.previous:
-                System.out.println("LOG Previous button pressed");
-                break;
-            case R.id.play:
-                System.out.println("LOG Play button pressed");
-                play.setVisibility(View.INVISIBLE);
-                pause.setVisibility(View.VISIBLE);
-                break;
-            case R.id.pause:
-                System.out.println("LOG Pause button pressed");
-                play.setVisibility(View.VISIBLE);
-                pause.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.next:
-                System.out.println("LOG Next button pressed");
-                break;
-            case R.id.shuffle:
-                System.out.println("LOG Shuffle button pressed");
-                break;
+//            case R.id.songs:
+//                System.out.println("LOG Songs button pressed");
+//                break;
+//            case R.id.previous:
+//                System.out.println("LOG Previous button pressed");
+//                break;
+//            case R.id.play:
+//                System.out.println("LOG Play button pressed");
+//                play.setVisibility(View.INVISIBLE);
+//                pause.setVisibility(View.VISIBLE);
+//                break;
+//            case R.id.pause:
+//                System.out.println("LOG Pause button pressed");
+//                play.setVisibility(View.VISIBLE);
+//                pause.setVisibility(View.INVISIBLE);
+//                break;
+//            case R.id.next:
+//                System.out.println("LOG Next button pressed");
+//                break;
+//            case R.id.shuffle:
+//                System.out.println("LOG Shuffle button pressed");
+//                break;
         }
     }
 

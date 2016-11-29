@@ -110,14 +110,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button forgotPass = (Button) findViewById(R.id.forgotten_pass);
-        forgotPass.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, ForgottenPassword.class);
-                startActivity(intent);
-            }
-        });
+//        Button forgotPass = (Button) findViewById(R.id.forgotten_pass);
+//        forgotPass.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(LoginActivity.this, ForgottenPassword.class);
+//                startActivity(intent);
+//            }
+//        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
