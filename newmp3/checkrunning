@@ -1,12 +1,39 @@
 #!/bin/bash
 
+
+DIR='/home/projekt/homeStruction/newmp3'
+
+touch $DIR/proclog
+date > $DIR/proclog
 pidof mplayer >/dev/null
 
 if [[ $? -eq 0 ]]
 then 
-	echo 'mplayer running'
+	echo 'mplayer running' >> $DIR/proclog
 	pkill -f newdisplay.py
+        if [[ $? -eq 0 ]]
+        then
+            echo 'newdisplay killed' >> $DIR/proclog
+        else
+            echo 'newdisplay not killed' >> $DIR/proclog
+        fi
+
+        pkill -f alarmlight.py
+        if [[ $? -eq 0 ]]
+        then
+            echo 'alarmlight killed' >> $DIR/proclog
+        else
+            echo 'alarmlight not killed' >> $DIR/proclog
+        fi
+
 	killall mplayer
+        if [[ $? -eq 0 ]]
+        then
+            echo 'mplayer killed' >> $DIR/proclog
+        else
+            echo 'mplayer not killed' >> $DIR/proclog
+        fi
+
         pulseaudio -D
 	rm /home/projekt/homeStruction/newmp3/my_playlist
 	rm /home/projekt/homeStruction/newmp3/logfile

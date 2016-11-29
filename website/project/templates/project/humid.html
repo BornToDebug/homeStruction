@@ -5,7 +5,7 @@
 			<h6>The humidity in your room is:</h6><h5 id="humstat"></h5>
 
 			<div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+                                    <img src="/image/?image=humid">
             </div>
 			<div id="mytab" style="width:700px">
 	<section>
@@ -49,6 +49,17 @@ function stateToHTML(jsonObj) {
 	var myVar = jsonObj['value'];
 	var tableState = myVar;
 	return tableState;
+
+}
+function generateStatus(json,_status,objectConverter){
+	var tableState;
+
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		if(_status == hstatus) {tableState = tableState + "%";}
+		_status.innerHTML = tableState;
+
 
 }
 	hstatus=document.getElementById('humstat');

@@ -104,20 +104,14 @@
                             <!-- Carousel Images -->
                             <div class="carousel-inner" style="margin-top:50px;">
                                 <div class="item active">
-									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
+									<img src="/image/?image=temp">
                                 </div>
                                 <div class="item">
-									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
+									<img src="/image/?image=humid">
                                 </div>
                                 <div class="item">
-									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
+									<img src="/image/?image=light">
                                 </div>
-                                <div class="item">
-									<img src="{% static 'project/fto/assets/img/slideshow/graph.jpg' %}">
-                                </div>
-								<div class="item">
-									<img src="{% static 'project/assets/img/haz3.png' %}">
-								</div>
                             </div>
                             <!-- End Carousel Images -->
                             <!-- Carousel Controls -->
@@ -152,54 +146,89 @@ function stateToHTML(jsonObj) {
 	
 	return tableState;
 }
-l1status=document.getElementById('lamp1stat');
-	l2status=document.getElementById('lamp2stat');
-	l3status=document.getElementById('lamp3stat');
+
+
+function dataToHTML (myVar){
+	var state = myVar;
+	if(myVar == "opened"){state="OPEN";}
+	if(myVar == "closed"){state = "CLOSED";}
+	
+	if(myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c"){state = "ON";}
+	if(myVar == "1off_c" || myVar == "2off_c" || myVar == "3off_c"){state = "OFF";}
+	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_uc" || myVar == "2on_uc" || myVar == "3on_uc") {state = "UNCONF. OP.";}
+	
+	return state;
+
+}   
+
 	
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
 	var lamp3Id="3on_c";
-	lock1button = document.getElementById('myonoffswitch');
-	lock2button = document.getElementById('myonoff2switch');
-	lock3button = document.getElementById('myonoff3switch');
-	buttonJSON('/api/lamp/1',lock1button,lamp1Id);
-	buttonJSON('/api/lamp/2',lock2button,lamp2Id);
-	buttonJSON('/api/lamp/3',lock3button,lamp3Id);
-	
-	
-	dstatus=document.getElementById('doorstat');
-	wstatus=document.getElementById('windstat');
-	
+	var lock1button = document.getElementById('myonoffswitch');
+	var lock2button = document.getElementById('myonoff2switch');
+	var lock3button = document.getElementById('myonoff3switch');
+	var hstatus=document.getElementById('humstat');
+	var lstatus=document.getElementById('lightstat');
+	var tstatus=document.getElementById('tempstat');
+	var l1status=document.getElementById('lamp1stat');
+	var l2status=document.getElementById('lamp2stat');
+	var l3status=document.getElementById('lamp3stat');
+	var dstatus=document.getElementById('doorstat');
+	var wstatus=document.getElementById('windstat');
+	var doorlockbutton = document.getElementById('myopclswitch');
 	var doorId="dc_c";
-	doorlockbutton = document.getElementById('myopclswitch');
-	buttonJSON('api/lamp/d',doorlockbutton,doorId);
+	var door_milli;
+	var lamp1_milli;
+	var lamp2_milli;
+	var lamp3_milli;
 	
-	hstatus=document.getElementById('humstat');
+	function generateData(data, stateConverter,_state){
+	var dataState;
+
+	_state.innerHTML = '';
+
+		dataState = stateConverter(data);
+		if(_state == tstatus) { dataState = dataState + "°C"}
+		else if(_state == lstatus) {dataState = (dataState*100)/1024; dataState = dataState.toFixed(2) + "%";}
+		else if (_state == hstatus) {dataState = dataState + "%";}
+		_state.innerHTML = dataState;
+		
+	
+}
+	
+	function myFunction(){
+	door_milli = (new Date).getTime();
+		if(button2.checked==false) {command("opendoor")};
+		if (button2.checked==true) {command("closedoor");}
+		
+	}
+	function lamp1Func(){
+	 lamp1_milli = (new Date).getTime();
+            if(lamp1button.checked==false) {command("1lampoff");}
+            if (lamp1button.checked==true) {command("1lampon");}
+           
+	
+	}
+
+	function lamp2Func(){
+	lamp2_milli = (new Date).getTime();
+		if(lamp2button.checked==false) {command("2lampoff")};
+		if (lamp2button.checked==true) {command("2lampon");}
+		
+	
+	}
+
+	function lamp3Func(){
+	lamp3_milli = (new Date).getTime();
+		if(lamp3button.checked==false) {command("3lampoff")};
+		if (lamp3button.checked==true) {command("3lampon");}
+		
 
 	
-	
-	lstatus=document.getElementById('lightstat');
-
-	
-	
-	tstatus=document.getElementById('tempstat');
-
-	newJSON('/api/lamp/1', stateToHTML, l1status);
-	newJSON('/api/lamp/2', stateToHTML, l2status);
-	newJSON('/api/lamp/3', stateToHTML, l3status);
-	newJSON('/api/window/', stateToHTML, wstatus);
-	newJSON('/api/door/', stateToHTML, dstatus);
-	newJSON('/api/temp/', stateToHTML, tstatus);
-	newJSON('/api/humidity/', stateToHTML, hstatus);
-	newJSON('/api/light/', stateToHTML, lstatus);
-	setInterval(function () {newJSON('/api/lamp/1', stateToHTML, l1status)}, 3000);
-	setInterval(function () {newJSON('/api/lamp/2', stateToHTML, l2status)}, 3000);
-	setInterval(function () {newJSON('/api/lamp/3', stateToHTML, l3status)}, 3000);
-	setInterval(function () {newJSON('/api/window/', stateToHTML, wstatus)}, 1000);
-	setInterval(function () {newJSON('/api/door/', stateToHTML, dstatus)}, 1000);
-	setInterval(function () {newJSON('/api/temp/', stateToHTML, tstatus)}, 60000);
-	setInterval(function () {newJSON('/api/humidity/', stateToHTML, hstatus)}, 60000);
-	setInterval(function () {newJSON('/api/light/', stateToHTML, lstatus)}, 60000);
+	}
+	arrayJSON('/latestdata/',dataToHTML,doorlockbutton,doorId,lock1button,lamp1Id,lock2button,lamp2Id,lock3button,lamp3Id,0,0,0,0,l1status,l2status,l3status,tstatus,hstatus,lstatus,wstatus,dstatus);
+	setInterval(function(){arrayJSON('/latestdata/',dataToHTML,doorlockbutton,doorId,lock1button,lamp1Id,lock2button,lamp2Id,lock3button,lamp3Id,door_milli,lamp1_milli,lamp2_milli,lamp3_milli,l1status,l2status,l3status,tstatus,hstatus,lstatus,wstatus,dstatus)},1000);
 	
 </script>			
 {% endblock content %}

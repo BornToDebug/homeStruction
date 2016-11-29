@@ -4,7 +4,7 @@
  <div id="lght" style="min-height:100vh">
 			<h6>The temperature in your room is:</h6><h5 id="tempstat"></h5>
 			<div class="item">
-                                    <img src="fto/assets/img/slideshow/graph.jpg">
+                                    <img src="/image/?image=temp">
             </div>
 			<div id="mytab" style="width:700px;">
 	<section>
@@ -54,12 +54,23 @@ function stateToHTML(jsonObj) {
 	return tableState;
 
 }
+function generateStatus(json,_status,objectConverter){
+	var tableState;
+
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		if(_status == tstatus){tableState = tableState;}
+		_status.innerHTML = tableState;
+
+
+}
 tstatus=document.getElementById('tempstat');
 newJSON('/api/temp/',stateToHTML,tstatus);
 setInterval(function(){newJSON('/api/temp/',stateToHTML,tstatus)},18000);
 temptable = document.getElementById('temptable');
 getJSON('/api/temp/', objectToHTML, temptable);
-setinterval(function(){getJSON('/api/temp/', objectToHTML, temptable);},18000);
+setInterval(function(){getJSON('/api/temp/', objectToHTML, temptable);},18000);
 
 </script>
 

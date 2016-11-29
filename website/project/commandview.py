@@ -81,6 +81,7 @@ def setAlarm(request):
                 friday=(friday == 'True'),
                 saturday=(saturday == 'True'),
                 sunday=(sunday == 'True'),
+                coffee=(coffee == 'True'), 
                 alarm_time=datetime.strptime(hour + ':' + minute, '%H:%M').time())
         return HttpResponse('success')
     except ValueError:

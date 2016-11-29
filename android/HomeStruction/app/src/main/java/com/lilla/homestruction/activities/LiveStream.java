@@ -19,26 +19,18 @@ public class LiveStream extends AppCompatActivity {
 
     VideoView mVideoView;
     private String path;
-    TextView textView;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_stream);
         mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
-        path = "rtmp://homestruction.servebeer.com/live/";
+        path = "rtmp://homestruction.org/live/";
 
         if (!LibsChecker.checkVitamioLibs(this)) {
             return;
         }
 
-        /*options = new HashMap<>();
-        options.put("rtmp_playpath", "");
-        options.put("rtmp_swfurl", "");
-        options.put("rtmp_live", "1");
-        options.put("rtmp_pageurl", "");*/
         mVideoView.setVideoPath(path);
-        //mVideoView.setVideoURI(Uri.parse(path), options);
         mVideoView.setMediaController(new MediaController(this));
         mVideoView.requestFocus();
 

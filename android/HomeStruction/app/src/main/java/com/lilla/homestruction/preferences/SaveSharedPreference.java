@@ -8,8 +8,8 @@ import android.preference.PreferenceManager;
  * Created by lilla on 22/09/16.
  */
 
-//This class saves the usernames and the tokens that go with them, so the user doesn't have to log in every
-//time they open the app
+/**This class saves the usernames and the tokens that go with them, so the user doesn't have to log in every
+time they open the app**/
 public class SaveSharedPreference {
 
     static final String PREF_USER_NAME = "username";
@@ -48,5 +48,4 @@ public class SaveSharedPreference {
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         editor.remove(PREF_TOKEN).apply();
     }
-
 }

@@ -7,13 +7,28 @@ from rest_framework import viewsets, generics, response, views
 from project.serializers import TemperatureSerializer, LightSerializer, LampSerializer, DoorSerializer, WindowSerializer, HumiditySerializer
 from django.contrib.auth.decorators import login_required
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 
 # REST framework viewset
-class TestViewSet(views.APIView):
+class HomeDataViewSet(views.APIView):
+    
+    renderer_classes = (JSONRenderer, )
 
     def get(self, request, format=None):
-        lights = [light.value for light in Light.objects.all()]
-        return Response(lights)
+    
+        resp = []
+        Models = [Temperature, Light, Lamp, Door, Window, Humidity]
+        for model in Models:
+            if model == Lamp:
+                resp.append(model.objects.filter(value__startswith='1').last().value)
+                resp.append(model.objects.filter(value__startswith='2').last().value)
+                resp.append(model.objects.filter(value__startswith='3').last().value)
+                resp.append(model.objects.filter(value__startswith='d').last().value)
+
+            if model != Lamp:
+                resp.append(model.objects.order_by('time_recorded').last().value)
+        respObject = {'values': resp}
+        return Response(respObject)
 
 class TemperatureViewSet(viewsets.ModelViewSet):
 

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/home/projekt/weather-2.2/weather cluj-napoca | /home/projekt/speech/build/flite/bin/flite -voice /home/projekt/speech/build/flite/voices/cmu_us_slt.flitevox 
+
+

@@ -8,12 +8,23 @@ import schedule
 import time
 from project.models import Alarm
 from subprocess import call
+from project import controlbasic3
+
+globalCoffee = False
 
 def wekker():
     print 'AAAAALLLLLLLAAAAAARRRRRRRRMMMMM'
     call(['killall pulseaudio'], shell=True)
     call(['python /home/projekt/homeStruction/alarm/alarmlight.py &'], shell=True)
     call(['nohup mplayer /mnt/Stick/Music/01.\ Crystals.mp3 &'], shell=True)
+
+    #print globalCoffee
+    #if globalCoffee:
+    #    print 'entered if'
+    #    controlbasic3.controlconfirm('3lampon')
+
+    #call(['python /home/projekt/homeStruction/alarm/alarmlight.py &'], shell=True)
+    #call(['nohup mplayer /mnt/Stick/Music/01.\ Crystals.mp3 &'], shell=True)
 
 class AlarmExecute(object):
     alarm_hour = 0
@@ -25,6 +36,7 @@ class AlarmExecute(object):
     friday = False
     saturday = False
     sunday = False
+    coffee = False
 
 
     def get_alarm_settings(self):
@@ -38,6 +50,7 @@ class AlarmExecute(object):
         self.friday = new_alarm.friday
         self.saturday = new_alarm.saturday
         self.sunday = new_alarm.sunday
+        self.coffee = new_alarm.coffee
 
     def timeToString(self):
         return str(self.alarm_hour) + ':' + str(self.alarm_minute)
@@ -63,6 +76,11 @@ class AlarmExecute(object):
     def update(self):
         self.get_alarm_settings()
         self.set_schedule()
+        global globalCoffee
+        globalCoffee = self.coffee
+        print globalCoffee
+        if self.coffee:
+            print 'coffee set to true'
 
 myAlarm = AlarmExecute()
 myAlarm.get_alarm_settings()

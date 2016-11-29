@@ -33,7 +33,7 @@ def door(channel):
 		elif doorstatus == 'opened':
 			doorstatus = 'closed'
 			#UPDATE DATABASE
-			Door.objects.create(value='closed', time_recorded=timezone.now())
+			Door.objects.create(value='closed', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 #			print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR closed"
 	else:
 		if doorstatus == None:
@@ -41,7 +41,7 @@ def door(channel):
 		elif doorstatus == 'closed':
 			doorstatus = 'opened'
 			#UPDATE DATABASE
-			Door.objects.create(value='opened', time_recorded=timezone.now())
+			Door.objects.create(value='opened', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 #			print strftime("%a, %d %b %Y %H:%M:%S:"), "DOOR opened"
 
 def window(channel):
@@ -52,7 +52,7 @@ def window(channel):
 		elif windowstatus == 'opened':
 			windowstatus = 'closed'
 			#UPDATE DATABASE
-			Window.objects.create(value='closed', time_recorded=timezone.now())
+			Window.objects.create(value='closed', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 #			print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW closed"
 	else:
 		if windowstatus == None:
@@ -60,7 +60,7 @@ def window(channel):
 		elif windowstatus == 'closed':
 			windowstatus = 'opened'
 			#UPDATE DATABASE
-			Window.objects.create(value='opened', time_recorded=timezone.now())
+			Window.objects.create(value='opened', time_recorded=timezone.now()+timezone.timedelta(hours=2))
 #			print strftime("%a, %d %b %Y %H:%M:%S:"), "WINDOW opened"
 
 GPIO.add_event_detect(doorpin, GPIO.BOTH, callback=door, bouncetime=300)

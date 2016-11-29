@@ -93,7 +93,22 @@
 	if(myValue == "3off_c"){tableVar="Fan successfully switched off";}
 	if(myValue == "3on_uc"){tableVar="Could not switch fan on";}
 	if(myValue == "3off_uc"){tableVar="Could not switch fan off";}
-	var tableRow = '<tr> \n' +
+	
+	var tableRow;
+	
+	if(myValue == "do_c"  || myValue == "dc_c" || myValue == "do_uc" || myValue == "dc_uc" || myValue == "opened" || myValue=="closed"){
+	
+	tableRow = '<tr> \n' +
+		'<td>' +  "nope" + '</td> \n' +
+		'<td>' + "nope" + '</td> \n' +
+		'<td>' +  "nope" + '</td> \n' +
+		'</tr> \n';
+	return tableRow;
+	
+	
+	} 
+	
+	 tableRow = '<tr> \n' +
 		'<td>' +  tableVar + '</td> \n' +
 		'<td>' + myDate + '</td> \n' +
 		'<td>' +  myTime + '</td> \n' +
@@ -106,32 +121,76 @@ function stateToHTML(jsonObj) {
 	
 	var myVar = jsonObj['value'];
 	var tableState = myVar;
+	
 	if(myVar == "1on_c" || myVar == "2on_c" || myVar == "3on_c"){tableState = "ON";}
 	if(myVar == "1off_c" || myVar == "2off_c" || myVar == "3off_c"){tableState = "OFF";}
 	if (myVar == "1off_uc" || myVar == "2off_uc" || myVar == "3off_uc" || myVar == "1on_uc" || myVar == "2on_uc" || myVar == "3on_uc") {tableState = "ERR";}
 	return tableState;
 	
 }
-	l1status=document.getElementById('lamp1stat');
-	l2status=document.getElementById('lamp2stat');
-	l3status=document.getElementById('lamp3stat');
-    newJSON('/api/lamp/1',stateToHTML,l1status);
-    newJSON('/api/lamp/2',stateToHTML,l2status);
-    newJSON('/api/lamp/3',stateToHTML,l3status);
-	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
-	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);
-	setInterval(function(){newJSON('/api/lamp/3',stateToHTML,l3status)},3000);
-	lamptable = document.getElementById('lamptable');
+	var l1status=document.getElementById('lamp1stat');
+	var l2status=document.getElementById('lamp2stat');
+	var l3status=document.getElementById('lamp3stat');
+	var lock1button = document.getElementById('myonoffswitch');
+	var lock2button = document.getElementById('myonoff2switch');
+	var lock3button = document.getElementById('myonoff3switch');
+	var lamptable = document.getElementById('lamptable');
 	var lamp1Id="1on_c";
 	var lamp2Id="2on_c";
 	var lamp3Id="3on_c";
-	lock1button = document.getElementById('myonoffswitch');
-	lock2button = document.getElementById('myonoff2switch');
-	lock3button = document.getElementById('myonoff3switch');
-	getJSON('/api/lamp/1', objectToHTML, lamptable, lock1button, lamp1Id);
-	getJSON('/api/lamp/2', objectToHTML, lamptable, lock2button, lamp2Id);
-	getJSON('/api/lamp/3', objectToHTML, lamptable, lock3button, lamp3Id);
-</script>
+	var lamp1_milli;
+	var lamp2_milli;
+	var lamp3_milli;
+	function lamp1Func(){
+	lamp1_milli = (new Date).getTime();
+	if(lamp1button.checked==false) {command("1lampoff")};
+    if (lamp1button.checked==true) {command("1lampon");}
+	
+	
+	}
+
+	function lamp2Func(){
+	lamp2_milli = (new Date).getTime();
+		if(lamp2button.checked==false) {command("2lampoff")};
+		if (lamp2button.checked==true) {command("2lampon");}
+		
+	
+	}
+
+	function lamp3Func(){
+	lamp3_milli = (new Date).getTime();
+		if(lamp3button.checked==false) {command("3lampoff")};
+		if (lamp3button.checked==true) {command("3lampon");}
+		
+
+	
+	}
+	function generateStatus(json,_status,objectConverter){
+	var tableState;
+
+	_status.innerHTML = '';
+
+		tableState = objectConverter(json[0]);
+		_status.innerHTML = tableState;
+
+
+}
+	
+	newJSON('/api/lamp/1',stateToHTML,l1status);
+    newJSON('/api/lamp/2',stateToHTML,l2status);
+    newJSON('/api/lamp/3',stateToHTML,l3status);
+	buttonJSON('/api/lamp/1',lock1button,lamp1Id,0);
+	buttonJSON('/api/lamp/2',lock2button,lamp2Id,0);
+	buttonJSON('/api/lamp/3',lock3button,lamp3Id,0);
+	lampJSON('/api/lamp/',objectToHTML,lamptable);
+	setInterval(function(){newJSON('/api/lamp/1',stateToHTML,l1status)},3000);
+	setInterval(function(){newJSON('/api/lamp/2',stateToHTML,l2status)},3000);
+	setInterval(function(){newJSON('/api/lamp/3',stateToHTML,l3status)},3000);
+	setInterval(function(){buttonJSON('/api/lamp/1',lock1button,lamp1Id,lamp1_milli)},1000);
+	setInterval(function(){buttonJSON('/api/lamp/2',lock2button,lamp2Id,lamp2_milli)},1000);
+	setInterval(function(){buttonJSON('/api/lamp/3',lock3button,lamp3Id,lamp3_milli)},1000);
+	setInterval(function(){lampJSON('/api/lamp/',objectToHTML,lamptable)},1000);
+	</script>
 		  
 
 {% endblock content %}
