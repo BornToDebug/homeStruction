@@ -1,0 +1,10 @@
+-elso slide kicsi kepek, es csak keresztneveket mondjunk
+-ne legyenek a kepek kockak (lekerekitett)
+-kepeket ujracsinalni, saturation, etc
+-internet of things-et vegyuk ki
+-iconokat szoveg helyett (pl amiket hasznaltam appban)
+-software part, hardware elso, egyszeruen (max 40s)
+-remember Balint? :D
+-emphasize what's going when testing
+-text to speech
+-do something interesting!

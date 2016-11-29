@@ -28,7 +28,7 @@ void loop() {
 void choose(int choice) {
   switch (choice) {
     case 1:
-      //half circle wake up
+      //half circle wake upzaa  
       halfCircleWakeUp();
       break;
     case 2:
