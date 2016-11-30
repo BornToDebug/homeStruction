@@ -1,0 +1,12 @@
+-settelek egy alarmot az elejen
+-elinditom a lamp3-t
+-felkapcsolom a lampat(nagy) (ha van ido)
+-pl legyen bezarva az ajto es kinyitom
+-mikor felkel, kinyitja az ablakot
+-kimegy az ajton -- ezeket megmutatom az appon
+-website: becsukta az ajtot (mikor)
+-Erika bezarja az ajtot
+-lekapcsolja a lampat
+-Balint be akar jonni, kopog, kinyitja Erika az ajtot
+-felkapcsolja a nightlightot
+
