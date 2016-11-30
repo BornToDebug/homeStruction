@@ -112,13 +112,6 @@ function stateToHTML(jsonObj) {
 	var dstatus=document.getElementById('doorstat');
 	var wstatus=document.getElementById('windstat');
 	var milliseconds;	
-
-function myFunction(){
-milliseconds = (new Date).getTime();
-	if(button2.checked==false) {command("opendoor")};
-    if (button2.checked==true) {command("closedoor");}
-	
-}
 function generateStatus(json,_status,objectConverter){
 	var tableState;
 
@@ -129,13 +122,21 @@ function generateStatus(json,_status,objectConverter){
 
 
 }
+
+
+function myFunction(){
+milliseconds = (new Date).getTime();
+	if(button2.checked==false) {command("opendoor")};
+    if (button2.checked==true) {command("closedoor");}
+	
+}
 	newJSON('/api/door/',stateToHTML,dstatus);
 	newJSON('/api/window/',stateToHTML,wstatus);
 	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId,0);
 	getJSON('/api/window/', objectToHTML, windowtable);
     setInterval(function(){newJSON('/api/door/',stateToHTML,dstatus);},1000);
 	setInterval(function(){newJSON('/api/window/',stateToHTML,wstatus)},1000);
-	setInterval(function(){getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId,milliseconds)},1000);
+	setInterval(function(){getJSON('/api/door/', objectToHTML, doortable, doorlockbutton,doorId,milliseconds)},1000);
 	setInterval(function(){getJSON('/api/window/', objectToHTML, windowtable)},1000);
 </script>
 {% endblock content %}

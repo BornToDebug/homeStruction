@@ -10,7 +10,7 @@ function getJSON(url, objectConverter, table, button,posVal,milliseconds) {
 			button.checked = data['results'][0].value === posVal;
 		}
 		}	
-		else if(milliseconds != undefined){	
+		else {	
 		var currentTime = (new Date).getTime();
 		if(currentTime-milliseconds >= 6000){
 			
@@ -81,7 +81,7 @@ function buttonJSON(url, button,posVal,milliseconds) {
 			button.checked = data['results'][0].value === posVal;
 		}
 	}	
-	else if(milliseconds != undefined){	
+	else {	
 		var currentTime = (new Date).getTime();
 		if(currentTime-milliseconds >= 6000){
 			
