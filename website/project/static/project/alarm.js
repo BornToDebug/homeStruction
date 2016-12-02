@@ -8,8 +8,10 @@ function genURL(timeValue, monday, tuesday, wednesday, thursday, friday, saturda
 	console.log("hour:" + hour);
 	var minute = HourMin[1].trim().split(" ")[0];
 	if(HourMin[1].trim().split(" ")[1] === "PM") {
-		hour = (parseInt(hour) + 12).toString();
+		if( hour != 12) {
+			hour = (parseInt(hour) + 12).toString();
 		}
+	}
 
 
 
