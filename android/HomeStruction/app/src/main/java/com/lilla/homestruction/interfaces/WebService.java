@@ -1,5 +1,6 @@
 package com.lilla.homestruction.interfaces;
 
+import com.google.android.gms.appdatasearch.GetRecentContextCall;
 import com.lilla.homestruction.bean.LatestData;
 import com.lilla.homestruction.bean.TokenResponse;
 
@@ -25,6 +26,12 @@ public interface WebService {
     /**Webservice for sending commands (for the previous services)**/
     @GET("/androidcommand/")
     Call<ResponseBody> sendCommand(@Query("command") String command);
+
+    @GET("/stream/start/")
+    Call<ResponseBody> startStream();
+
+    @GET("/stream/stop/")
+    Call<ResponseBody> stopStream();
 
     /**Webservice for resetting the alarm**/
     @GET("/androidsetalarm/")

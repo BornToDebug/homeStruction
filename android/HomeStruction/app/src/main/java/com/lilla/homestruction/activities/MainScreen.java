@@ -610,6 +610,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 return true;
             case R.id.live_stream:
                 System.out.println("LOG Live Stream button pressed");
+//                webService.startStream();
                 if (!Build.VERSION.RELEASE.startsWith("6.")) {
                     Intent stream = new Intent(MainScreen.this, LiveStream.class);
                     startActivity(stream);
