@@ -13,6 +13,10 @@ import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by lilla on 17/10/16.
@@ -25,8 +29,6 @@ public class LiveStream extends AppCompatActivity {
     private String path;
 
     protected void onCreate(Bundle savedInstanceState) {
-        webService = RetrofitManager.createService(WebService.class, "Token " + SaveSharedPreference.getToken(LiveStream.this));
-        webService.startStream();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_stream);
         mVideoView = (VideoView) findViewById(R.id.vitamio_videoView);
@@ -46,20 +48,5 @@ public class LiveStream extends AppCompatActivity {
                 mediaPlayer.setPlaybackSpeed(1.0f);
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        webService.startStream();
-    }
-
-    @Override
-    public void onBackPressed() {
-        webService.stopStream();
-    }
-
-    @Override
-    protected void onStop() {
-        webService.stopStream();
     }
 }

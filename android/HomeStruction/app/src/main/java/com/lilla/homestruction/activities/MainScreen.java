@@ -82,6 +82,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private boolean isActivityStarted;
 
     protected void onCreate(Bundle savedInstanceState) {
+        streamStop();
         System.out.println("LOGG onCreate");
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
@@ -191,6 +192,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     /**
      * Show snackbar when there is no connection
      **/
+
     protected void showSnackbar() {
         Snackbar snackbar = Snackbar
                 .make(coordinatorLayout, "Failed to connect to server", Snackbar.LENGTH_INDEFINITE)
@@ -597,6 +599,42 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         return super.onCreateOptionsMenu(menu);
     }
 
+    private void streamStart() {
+        Call<ResponseBody> call = webService.startStream();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    System.out.println("LOGGG Stream started");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("LOGGG Error: " + t.getMessage());
+                showSnackbar();
+            }
+        });
+    }
+
+    private void streamStop() {
+        Call<ResponseBody> call = webService.stopStream();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    System.out.println("LOGGG Stream stopped");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("LOGGG Error: " + t.getMessage());
+                showSnackbar();
+            }
+        });
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             /** Respond to the action bar's Up/Home button**/
@@ -610,7 +648,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 return true;
             case R.id.live_stream:
                 System.out.println("LOG Live Stream button pressed");
-//                webService.startStream();
+                streamStart();
                 if (!Build.VERSION.RELEASE.startsWith("6.")) {
                     Intent stream = new Intent(MainScreen.this, LiveStream.class);
                     startActivity(stream);
