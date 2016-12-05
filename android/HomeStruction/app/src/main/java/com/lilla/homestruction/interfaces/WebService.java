@@ -27,10 +27,10 @@ public interface WebService {
     @GET("/androidcommand/")
     Call<ResponseBody> sendCommand(@Query("command") String command);
 
-    @GET("/stream/start/")
+    @GET("/stream/androidstart/")
     Call<ResponseBody> startStream();
 
-    @GET("/stream/stop/")
+    @GET("/stream/androidstop/")
     Call<ResponseBody> stopStream();
 
     /**Webservice for resetting the alarm**/

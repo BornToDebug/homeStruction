@@ -4,10 +4,16 @@
 
     <item
         android:id="@+id/live_stream"
-        android:title="Live stream" />
+        android:title="Start stream" />
+
+    <item
+    android:id="@+id/stop_stream"
+    android:title="Stop stream" />
 
     <item
         android:id="@+id/sign_out"
         android:title="@string/sign_out" />
+
+
 
 </menu>
