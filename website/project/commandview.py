@@ -98,6 +98,25 @@ def androidSetAlarmView(request):
     else:
         return HttpResponse(authcheck)
 
+        
+def androidStartstream(request):
+    authcheck = androidlogin(request)
+    if authcheck is 'auth':
+        call(['/home/projekt/homeStruction/stream/stream12 start'], shell=True)
+        return HttpResponse('started')
+    else:
+        return HttpResponse(authcheck)
+        
+        
+def androidStopstream(request):
+    authcheck = androidlogin(request)
+    if authcheck is 'auth':
+        call(['/home/projekt/homeStruction/stream/stream12 stop'], shell=True)
+        return HttpResponse('stopped')
+    else:
+        return HttpResponse(authcheck)
+        
+        
 @login_required
 def controlbasic(request):
     command = request.GET.get('command', '')
