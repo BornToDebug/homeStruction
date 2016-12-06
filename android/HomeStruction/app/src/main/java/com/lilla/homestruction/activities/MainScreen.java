@@ -15,10 +15,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -34,6 +33,7 @@ import com.lilla.homestruction.preferences.SaveSharedPreference;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -80,9 +80,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private String path;
     private SwitchCompat switchCompat = null;
     private boolean isActivityStarted;
+    private Calendar calendar;
+    private MenuItem stream;
 
     protected void onCreate(Bundle savedInstanceState) {
-        streamStop();
         System.out.println("LOGG onCreate");
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
@@ -541,16 +542,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("LOG resp: " + myResponse);
                 if (myResponse != null) {
                     if (myResponse.equals("success")) {
-                        System.out.println("LOGG Success");
+                        System.out.println("LOGGG Alarm set Success");
                     } else {
-                        System.out.println("LOGG Error");
+                        System.out.println("LOGGG Alarm set Error");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                System.out.println("LOGG Error set alarm: " + t.getMessage());
+                System.out.println("LOGGG Error set alarm: " + t.getMessage());
                 showSnackbar();
             }
         });
@@ -605,7 +606,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
-                    System.out.println("LOGGG Stream started");
+                    System.out.println("LOGGG Stream started, response: " + response.body());
                 }
             }
 
@@ -623,7 +624,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
-                    System.out.println("LOGGG Stream stopped");
+                    System.out.println("LOGGG Stream stopped, response: " + response.body());
                 }
             }
 
@@ -676,8 +677,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     }
                 }
                 return true;
+            case R.id.stop_stream:
+                streamStop();
+                return true;
         }
+
         return super.onOptionsItemSelected(item);
+
     }
 
     private boolean installed(String uri) {
@@ -687,6 +693,43 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             return true;
         } catch (PackageManager.NameNotFoundException e) {
             return false;
+        }
+    }
+
+    private void checkCurrentDay() {
+        calendar = Calendar.getInstance();
+        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+        switch (currentDay) {
+            case Calendar.MONDAY:
+                mondayButton.setChecked(true);
+                daysChecked.set(0, true);
+                break;
+            case Calendar.TUESDAY:
+                tuesdayButton.setChecked(true);
+                daysChecked.set(1, true);
+                break;
+            case Calendar.WEDNESDAY:
+                wednesdayButton.setChecked(true);
+                daysChecked.set(2, true);
+                break;
+            case Calendar.THURSDAY:
+                thursdayButton.setChecked(true);
+                daysChecked.set(3, true);
+                break;
+            case Calendar.FRIDAY:
+                fridayButton.setChecked(true);
+                daysChecked.set(4, true);
+                break;
+            case Calendar.SATURDAY:
+                saturdayButton.setChecked(true);
+                daysChecked.set(5, true);
+                break;
+            case Calendar.SUNDAY:
+                sundayButton.setChecked(true);
+                daysChecked.set(6, true);
+                break;
+            default:
+                break;
         }
     }
 
@@ -736,9 +779,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 System.out.println("LOG Alarm button clicked");
                 if (!alarmSwitch.isChecked()) {
                     alarmSwitch.toggle();
+                    checkCurrentDay();
+                    System.out.println("LOGGG alarm");
                 }
                 showTimePickerDialog();
-                System.out.println("LOG " + hour + ":" + minute);
+                if (hour != null || minute != null) {
+                    createRequest(daysChecked, webService);
+                }
+                System.out.println("LOGGGG " + hour + ":" + minute);
                 break;
             case R.id.alarm_switch:
                 if (!alarmSwitch.isChecked()) {
@@ -753,7 +801,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                     saturdayButton.setChecked(false);
                     sundayButton.setChecked(false);
                 } else {
+                    System.out.println("LOGGG set current day");
                     showTimePickerDialog();
+                    checkCurrentDay();
                 }
                 System.out.println("LOG " + hour + ":" + minute);
                 break;
@@ -874,7 +924,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     }
 
     /**
-     * if time is set on timepicker, set the button's text correspondingly
+     * If time is set on timepicker, set the button's text correspondingly
      **/
     @Override
     public void onTimeSet(int hourOfDay, int minute) {
@@ -895,6 +945,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             }
         }
         alarmSwitch.setText(hour + ":" + this.minute);
+        if (hour != null || this.minute != null) {
+            createRequest(daysChecked, webService);
+        }
     }
 
     /**
@@ -918,7 +971,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 days.set(i, "True");
             }
         }
-        System.out.println("LOG " + days);
+        System.out.println("LOGGG days: " + days);
         setAlarm(hour, minute, days, webService);
     }
 
@@ -959,7 +1012,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         isActivityStarted = false;
     }
 
-    /**Detects if a switch's state has been changed or not**/
+    /**
+     * Detects if a switch's state has been changed or not
+     **/
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         System.out.println("LOGG onCheckedChanged");
