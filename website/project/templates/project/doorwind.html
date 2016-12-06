@@ -132,11 +132,13 @@ milliseconds = (new Date).getTime();
 }
 	newJSON('/api/door/',stateToHTML,dstatus);
 	newJSON('/api/window/',stateToHTML,wstatus);
-	getJSON('/api/lamp/d', objectToHTML, doortable, doorlockbutton,doorId,0);
+	getJSON('/api/door/', objectToHTML, doortable);
 	getJSON('/api/window/', objectToHTML, windowtable);
+    buttonJSON('/api/lamp/d',doorlockbutton,doorId,0);
+    setInterval(function(){buttonJSON('/api/lamp/d',doorlockbutton,doorId,milliseconds);},1000);
     setInterval(function(){newJSON('/api/door/',stateToHTML,dstatus);},1000);
 	setInterval(function(){newJSON('/api/window/',stateToHTML,wstatus)},1000);
-	setInterval(function(){getJSON('/api/door/', objectToHTML, doortable, doorlockbutton,doorId,milliseconds)},1000);
+	setInterval(function(){getJSON('/api/door/', objectToHTML, doortable)},1000);
 	setInterval(function(){getJSON('/api/window/', objectToHTML, windowtable)},1000);
 </script>
 {% endblock content %}
