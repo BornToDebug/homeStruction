@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -82,6 +81,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private boolean isActivityStarted;
     private Calendar calendar;
     private MenuItem stream;
+    private int alarmHour;
+    private int alarmMinute;
+    private boolean alarmSet;
 
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("LOGG onCreate");
@@ -543,6 +545,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 if (myResponse != null) {
                     if (myResponse.equals("success")) {
                         System.out.println("LOGGG Alarm set Success");
+                        alarmSet = true;
                     } else {
                         System.out.println("LOGGG Alarm set Error");
                     }
@@ -931,6 +934,8 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         System.out.println("LOG time set: " + hourOfDay + ":" + minute);
         hour = Integer.toString(hourOfDay);
         this.minute = Integer.toString(minute);
+        alarmHour = hourOfDay;
+        alarmMinute = minute;
         if (hourOfDay < 10) {
             if (minute < 10) {
                 hour = "0" + hour;
@@ -985,6 +990,23 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             if (isActivityStarted) {
                 updateAllData();
                 handler.postDelayed(runnable, 3 * DateUtils.SECOND_IN_MILLIS);
+                calendar = Calendar.getInstance();
+                System.out.println("LOGGG Alarm hour: " + alarmHour + " alarm minute: " + alarmMinute);
+                System.out.println("LOGGG current hour: " + calendar.getTime().getHours());
+                System.out.println("LOGGG current minutes: " + calendar.getTime().getMinutes());
+                if (alarmHour == calendar.getTime().getHours() && alarmMinute == calendar.getTime().getMinutes() && alarmSet) {
+                    alarmSwitch.toggle();
+                    alarmSwitch.setText("");
+                    resetAlarm(webService);
+                    mondayButton.setChecked(false);
+                    tuesdayButton.setChecked(false);
+                    wednesdayButton.setChecked(false);
+                    thursdayButton.setChecked(false);
+                    fridayButton.setChecked(false);
+                    saturdayButton.setChecked(false);
+                    sundayButton.setChecked(false);
+                    alarmSet = false;
+                }
             }
         }
     };
