@@ -22,7 +22,10 @@ def generateImage(Model, ytext):
     valueArray = []
     for item in modelArray:
         dateArray.append(item.time_recorded)
-        valueArray.append(item.value)
+        if Model is Light:
+            valueArray.append(item.value/10)
+        else:
+            valueArray.append(item.value)
 
     formating = DateFormatter('%H:%M')
 
