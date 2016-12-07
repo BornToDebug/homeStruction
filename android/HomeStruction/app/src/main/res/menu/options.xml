@@ -11,6 +11,10 @@
     android:title="Stop stream" />
 
     <item
+        android:id="@+id/refresh"
+        android:title="Refresh" />
+
+    <item
         android:id="@+id/sign_out"
         android:title="@string/sign_out" />
 

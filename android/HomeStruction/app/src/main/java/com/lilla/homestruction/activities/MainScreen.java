@@ -86,6 +86,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private boolean alarmSet;
 
     protected void onCreate(Bundle savedInstanceState) {
+
+        //TODO alarm doesn't have to necessarily reset itself after it went off, fix it
+        //TODO make a hidden reset app button (ok it's probably gonna be in the menu but nobody's gonna see it anyways)
         System.out.println("LOGG onCreate");
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
@@ -210,8 +213,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 });
         snackbar.show();
     }
-
-    //TODO personalize your own settings in the settings menu
 
     /**
      * Update method to get all of the data from the RasPi
@@ -682,6 +683,9 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 return true;
             case R.id.stop_stream:
                 streamStop();
+                return true;
+            case R.id.refresh:
+                MainScreen.this.recreate();
                 return true;
         }
 
